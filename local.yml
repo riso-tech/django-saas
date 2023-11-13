@@ -1,16 +1,16 @@
 version: '3'
 
 volumes:
-  one_local_postgres_data: {}
-  one_local_postgres_data_backups: {}
+  one_saas_postgres_data: {}
+  one_saas_postgres_data_backups: {}
 
 services:
   django: &django
     build:
       context: .
       dockerfile: ./compose/local/django/Dockerfile
-    image: one_local_django
-    container_name: one_local_django
+    image: one_saas_django
+    container_name: one_saas_django
     depends_on:
       - postgres
       - redis
@@ -29,16 +29,16 @@ services:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
     image: one_production_postgres
-    container_name: one_local_postgres
+    container_name: one_saas_postgres
     volumes:
-      - one_local_postgres_data:/var/lib/postgresql/data
-      - one_local_postgres_data_backups:/backups
+      - one_saas_postgres_data:/var/lib/postgresql/data
+      - one_saas_postgres_data_backups:/backups
     env_file:
       - ./.envs/.local/.postgres
 
   docs:
-    image: one_local_docs
-    container_name: one_local_docs
+    image: one_saas_docs
+    container_name: one_saas_docs
     build:
       context: .
       dockerfile: ./compose/local/docs/Dockerfile
@@ -54,18 +54,18 @@ services:
 
   mailpit:
     image: axllent/mailpit:v1.8
-    container_name: one_local_mailpit
+    container_name: one_saas_mailpit
     ports:
       - '8025:8025'
 
   redis:
     image: redis:6
-    container_name: one_local_redis
+    container_name: one_saas_redis
 
   celeryworker:
     <<: *django
-    image: one_local_celeryworker
-    container_name: one_local_celeryworker
+    image: one_saas_celeryworker
+    container_name: one_saas_celeryworker
     depends_on:
       - redis
       - postgres
@@ -75,8 +75,8 @@ services:
 
   celerybeat:
     <<: *django
-    image: one_local_celerybeat
-    container_name: one_local_celerybeat
+    image: one_saas_celerybeat
+    container_name: one_saas_celerybeat
     depends_on:
       - redis
       - postgres
@@ -86,8 +86,8 @@ services:
 
   flower:
     <<: *django
-    image: one_local_flower
-    container_name: one_local_flower
+    image: one_saas_flower
+    container_name: one_saas_flower
     ports:
       - '5555:5555'
     command: /start-flower
@@ -96,8 +96,8 @@ services:
     build:
       context: .
       dockerfile: ./compose/local/node/Dockerfile
-    image: one_local_node
-    container_name: one_local_node
+    image: one_saas_node
+    container_name: one_saas_node
     depends_on:
       - django
     volumes:
