@@ -310,6 +310,8 @@ ACCOUNT_FORMS = {"signup": "one.users.forms.UserSignupForm"}
 SOCIALACCOUNT_ADAPTER = "one.users.adapters.SocialAccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
 SOCIALACCOUNT_FORMS = {"signup": "one.users.forms.UserSocialSignupForm"}
+# https://django-allauth.readthedocs.io/en/stable/advanced.html#admin
+DJANGO_ADMIN_FORCE_ALLAUTH = True
 
 # django-rest-framework
 # -------------------------------------------------------------------------------
