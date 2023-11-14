@@ -32,6 +32,11 @@ TEMPLATES[0]["OPTIONS"]["debug"] = True  # type: ignore # noqa: F405
 # MEDIA
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-url
-MEDIA_URL = "http://media.testserver"
+MEDIA_URL = "http://media.testserver/"
+
+# Test App
+# ------------------------------------------------------------------------------
+INSTALLED_APPS += ["one.tests"]  # noqa: F405
+
 # Your stuff...
 # ------------------------------------------------------------------------------
