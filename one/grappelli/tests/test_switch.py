@@ -36,7 +36,7 @@ class SwitchTests(TestCase):
         # add permissions for editor001
         content_type = ContentType.objects.get_for_model(Category)
         permissions = Permission.objects.filter(content_type=content_type)
-        assert permissions.count() > 0
+        assert permissions.exists()
         self.editor_1.user_permissions.set(permissions)
 
         # add categories
