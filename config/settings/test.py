@@ -44,10 +44,5 @@ MEDIA_URL = "http://media.testserver/"
 # ------------------------------------------------------------------------------
 INSTALLED_APPS += ["one.tests"]  # noqa: F405
 
-# MIGRATIONS
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
-MIGRATION_MODULES = {}
-
 # Your stuff...
 # ------------------------------------------------------------------------------
