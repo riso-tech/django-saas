@@ -5,6 +5,9 @@ With these settings, tests run faster.
 from .base import *  # noqa
 from .base import env
 
+INSTALLED_APPS.remove("django_tenants")  # noqa
+MIDDLEWARE.remove("django_tenants.middleware.main.TenantMainMiddleware")  # noqa
+
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
@@ -44,10 +47,10 @@ MEDIA_URL = "http://media.testserver/"
 # ------------------------------------------------------------------------------
 INSTALLED_APPS += ["one.tests"]  # noqa: F405
 
-# MIGRATIONS
+# Django Tenants
 # ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
-MIGRATION_MODULES = {}
+# https://docs.djangoproject.com/en/4.2/ref/settings/#std-setting-DATABASE_ROUTERS
+DATABASE_ROUTERS = []
 
 # Your stuff...
 # ------------------------------------------------------------------------------
