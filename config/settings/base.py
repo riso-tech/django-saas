@@ -67,6 +67,7 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # "django.contrib.humanize", # Handy template tags
+    "one.grappelli",
     "django.contrib.admin",
     "django.forms",
 ]
@@ -310,6 +311,8 @@ ACCOUNT_FORMS = {"signup": "one.users.forms.UserSignupForm"}
 SOCIALACCOUNT_ADAPTER = "one.users.adapters.SocialAccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
 SOCIALACCOUNT_FORMS = {"signup": "one.users.forms.UserSocialSignupForm"}
+# https://django-allauth.readthedocs.io/en/stable/advanced.html#admin
+DJANGO_ADMIN_FORCE_ALLAUTH = True
 
 # django-rest-framework
 # -------------------------------------------------------------------------------
