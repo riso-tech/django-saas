@@ -35,6 +35,8 @@ services:
       - one_saas_postgres_data_backups:/backups
     env_file:
       - ./.envs/.local/.postgres
+    ports:
+      - '5432:5432'
 
   docs:
     image: one_saas_docs

@@ -15,6 +15,12 @@ SECRET_KEY = env(
 # https://docs.djangoproject.com/en/dev/ref/settings/#test-runner
 TEST_RUNNER = "django.test.runner.DiscoverRunner"
 
+# DATABASES
+# ------------------------------------------------------------------------------
+DATABASES = {
+    "default": {"ENGINE": "django.db.backends.sqlite3"},
+}
+
 # PASSWORDS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#password-hashers
@@ -37,6 +43,11 @@ MEDIA_URL = "http://media.testserver/"
 # Test App
 # ------------------------------------------------------------------------------
 INSTALLED_APPS += ["one.tests"]  # noqa: F405
+
+# MIGRATIONS
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
+MIGRATION_MODULES = {}
 
 # Your stuff...
 # ------------------------------------------------------------------------------

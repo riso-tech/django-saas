@@ -1,7 +1,7 @@
 # ==== pytest ====
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "--ds=config.settings.test --reuse-db --migrations --disable-warnings"
+addopts = "--ds=config.settings.test --create-db --migrations --disable-warnings"
 python_files = [
     "tests.py",
     "test_*.py",
