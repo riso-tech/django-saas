@@ -45,10 +45,21 @@ LOCALE_PATHS = [str(BASE_DIR / "locale")]
 # DATABASES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
-DATABASES = {"default": env.db("DATABASE_URL")}
-DATABASES["default"]["ATOMIC_REQUESTS"] = True
+DATABASES = {
+    "default": {
+        "ENGINE": "django_tenants.postgresql_backend",
+        "NAME": env("POSTGRES_DB"),
+        "USER": env("POSTGRES_USER"),
+        "PASSWORD": env("POSTGRES_PASSWORD"),
+        "HOST": env("POSTGRES_HOST"),
+        "PORT": env("POSTGRES_PORT"),
+        "ATOMIC_REQUESTS": True,
+    }
+}
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+# https://docs.djangoproject.com/en/4.2/ref/settings/#std-setting-DATABASE_ROUTERS
+DATABASE_ROUTERS = ("django_tenants.routers.TenantSyncRouter",)
 
 # URLS
 # ------------------------------------------------------------------------------
@@ -59,41 +70,36 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 # APPS
 # ------------------------------------------------------------------------------
-DJANGO_APPS = [
+SHARED_APPS = [
+    "django_tenants",
+    "one.business",
+]
+
+TENANT_APPS = [
+    # Django apps
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
-    "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # "django.contrib.humanize", # Handy template tags
+    "django.contrib.humanize",  # Handy template tags
     "django.contrib.admin",
     "django.forms",
-]
-THIRD_PARTY_APPS = [
+    # Third party apps
     "crispy_forms",
     "crispy_bootstrap5",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "django_celery_beat",
     "rest_framework",
     "rest_framework.authtoken",
     "corsheaders",
     "drf_spectacular",
-]
-
-LOCAL_APPS = [
     "one.users",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
-
-# MIGRATIONS
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
-MIGRATION_MODULES = {"sites": "one.contrib.sites.migrations"}
+INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
 
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
@@ -131,6 +137,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#middleware
 MIDDLEWARE = [
+    "django_tenants.middleware.main.TenantMainMiddleware",  # Must be first
     "django.middleware.security.SecurityMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -288,7 +295,7 @@ CELERY_TASK_TIME_LIMIT = 5 * 60
 # TODO: set to whatever value is adequate in your circumstances
 CELERY_TASK_SOFT_TIME_LIMIT = 60
 # https://docs.celeryq.dev/en/stable/userguide/configuration.html#beat-scheduler
-CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
+CELERY_BEAT_SCHEDULER = "tenant_schemas_celery.scheduler.TenantAwareScheduler"
 # https://docs.celeryq.dev/en/stable/userguide/configuration.html#worker-send-task-events
 CELERY_WORKER_SEND_TASK_EVENTS = True
 # https://docs.celeryq.dev/en/stable/userguide/configuration.html#std-setting-task_send_sent_event
@@ -310,6 +317,8 @@ ACCOUNT_FORMS = {"signup": "one.users.forms.UserSignupForm"}
 SOCIALACCOUNT_ADAPTER = "one.users.adapters.SocialAccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
 SOCIALACCOUNT_FORMS = {"signup": "one.users.forms.UserSocialSignupForm"}
+# https://django-allauth.readthedocs.io/en/stable/advanced.html#admin
+DJANGO_ADMIN_FORCE_ALLAUTH = True
 
 # django-rest-framework
 # -------------------------------------------------------------------------------
@@ -334,5 +343,10 @@ SPECTACULAR_SETTINGS = {
     "VERSION": "1.0.0",
     "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
 }
+# Django Tenants
+# ------------------------------------------------------------------------------
+TENANT_MODEL = "business.Client"
+TENANT_DOMAIN_MODEL = "business.Domain"
+
 # Your stuff...
 # ------------------------------------------------------------------------------

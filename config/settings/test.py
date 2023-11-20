@@ -15,6 +15,11 @@ SECRET_KEY = env(
 # https://docs.djangoproject.com/en/dev/ref/settings/#test-runner
 TEST_RUNNER = "django.test.runner.DiscoverRunner"
 
+# DATABASES
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#databases
+DATABASES["default"]["ATOMIC_REQUESTS"] = False  # noqa
+
 # PASSWORDS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#password-hashers
@@ -32,6 +37,12 @@ TEMPLATES[0]["OPTIONS"]["debug"] = True  # type: ignore # noqa: F405
 # MEDIA
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-url
-MEDIA_URL = "http://media.testserver"
+MEDIA_URL = "http://media.testserver/"
+
+# Test App
+# ------------------------------------------------------------------------------
+INSTALLED_APPS += ["one.tests"]  # noqa: F405
+TENANT_APPS += ["one.tests"]  # noqa: F405
+
 # Your stuff...
 # ------------------------------------------------------------------------------
