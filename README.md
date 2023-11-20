@@ -2,7 +2,10 @@
 
 Django Software as a Service
 
-[![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter-django/)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/riso-tech/django-saas/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/riso-tech/django-saas/?branch=main)
+[![Code Coverage](https://scrutinizer-ci.com/g/riso-tech/django-saas/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/riso-tech/django-saas/?branch=main)
+[![Build Status](https://scrutinizer-ci.com/g/riso-tech/django-saas/badges/build.png?b=main)](https://scrutinizer-ci.com/g/riso-tech/django-saas/build-status/main)
+[![Code Intelligence Status](https://scrutinizer-ci.com/g/riso-tech/django-saas/badges/code-intelligence.svg?b=main)](https://scrutinizer-ci.com/code-intelligence)
 [![Black code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
 License: MIT
