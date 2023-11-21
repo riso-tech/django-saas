@@ -181,7 +181,7 @@
                 }
             }
         });
-        $('body').on('change', '.related-widget-wrapper select', function(e) {
+        $('body').on('change', '.related-widget-wrapper select', function() {
             var event = $.Event('django:update-related');
             $(this).trigger(event);
             if (!event.isDefaultPrevented()) {
