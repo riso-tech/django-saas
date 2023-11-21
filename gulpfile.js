@@ -56,8 +56,34 @@ const paths = pathsConfig();
 // Tasks
 ////////////////////////////////
 
-// Styles autoprefixing and minification
+// Project Styles auto prefixing and minification
 function styles() {
+  const processCss = [
+    autoprefixer(), // adds vendor prefixes
+    pixrem(), // add fallbacks for rem units
+  ];
+
+  const minifyCss = [
+    cssnano({ preset: 'default' }), // minify result
+  ];
+
+  return src(`${paths.sass}/project.scss`)
+    .pipe(
+      sass({
+        importer: tildeImporter,
+        includePaths: [paths.sass],
+      }).on('error', sass.logError),
+    )
+    .pipe(plumber()) // Checks for errors
+    .pipe(postcss(processCss))
+    .pipe(dest(paths.css))
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(postcss(minifyCss)) // Minifies the result
+    .pipe(dest(paths.css));
+}
+
+// Vendor Styles auto prefixing and minification
+function vendorStyles() {
     const processCss = [
         autoprefixer(), // adds vendor prefixes
         pixrem(), // add fallbacks for rem units
@@ -67,23 +93,16 @@ function styles() {
         cssnano({preset: 'default'}), // minify result
     ];
 
-    paths.vendorsCss.unshift(`${paths.css}/project.css`)
-
     return src(paths.vendorsCss, {sourcemaps: true})
-        .pipe(
-            sass({
-                importer: tildeImporter,
-                includePaths: [paths.sass],
-            }).on('error', sass.logError),
-        )
         .pipe(plumber()) // Checks for errors
         .pipe(postcss(processCss))
-        .pipe(concat('project.css'))
+        .pipe(concat('vendors.css'))
         .pipe(dest(paths.css))
         .pipe(rename({suffix: '.min'}))
         .pipe(postcss(minifyCss)) // Minifies the result
         .pipe(dest(paths.css));
 }
+
 
 // Javascript minification
 function scripts() {
@@ -154,7 +173,7 @@ function watchPaths() {
 }
 
 // Generate all assets
-const generateAssets = parallel(styles, scripts, vendorScripts, imgCompression);
+const generateAssets = parallel(styles, vendorStyles, scripts, vendorScripts, imgCompression);
 
 // Set up dev environment
 const dev = parallel(initBrowserSync, watchPaths);
