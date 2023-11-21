@@ -315,6 +315,8 @@ one/media/
 .ipython/
 project.css
 project.min.css
+vendors.css
+vendors.min.css
 vendors.js
 *.min.js
 *.min.js.map
