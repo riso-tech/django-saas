@@ -29,8 +29,9 @@ function pathsConfig(appName) {
 
   return {
     vendorsJs: [
-      `${vendorsRoot}/@popperjs/core/dist/umd/popper.js`,
-      `${vendorsRoot}/bootstrap/dist/js/bootstrap.js`,
+      `${vendorsRoot}/jquery/dist/jquery.js`,
+      `${vendorsRoot}/toastr/toastr.js`,
+      `${vendorsRoot}/sweetalert2/dist/sweetalert2.all.js`,
     ],
     app: this.app,
     templates: `${this.app}/templates`,

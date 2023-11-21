@@ -1,6 +1,11 @@
 {
   "name": "one",
   "version": "0.1.0",
+  "dependencies": {
+    "jquery": "3.7.1",
+    "toastr": "^2.1.4",
+    "sweetalert2": "11.4.8"
+  },
   "devDependencies": {
     "@popperjs/core": "^2.10.2",
     "autoprefixer": "^10.4.0",
