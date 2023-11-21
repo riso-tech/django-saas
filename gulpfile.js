@@ -32,6 +32,8 @@ function pathsConfig(appName) {
       `${vendorsRoot}/jquery/dist/jquery.js`,
       `${vendorsRoot}/jquery-ui/dist/jquery-ui.js`,
       `${vendorsRoot}/jquery-migrate/dist/jquery-migrate.js`,
+        `${vendorsRoot}/toastr/toastr.js`,
+      `${vendorsRoot}/sweetalert2/dist/sweetalert2.all.js`,
     ],
     app: this.app,
     templates: `${this.app}/templates`,
