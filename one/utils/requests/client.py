@@ -12,6 +12,9 @@ class ServiceClient:
         self.timeout = timeout
         self.session = requests.session()
 
+    def set_headers(self, headers):
+        self.session.headers.update(headers)
+
     def _request_loop(self, http_method, endpoint, data=None, params=None, files=None, json=None, retries=None):
         retry: int = 0
         retries = self.retries if retries is None else retries
@@ -27,7 +30,15 @@ class ServiceClient:
                     raise err
 
     def request(self, http_method, endpoint, data=None, params=None, files=None, json=None):
-        request = Request(method=http_method, url=endpoint, data=data, params=params, files=files, json=json)
+        request = Request(
+            method=http_method,
+            url=endpoint,
+            data=data,
+            params=params,
+            files=files,
+            json=json,
+            headers=self.session.headers,
+        )
         prepared_request = request.prepare()
         try:
             return self.session.send(request=prepared_request, timeout=self.timeout)
