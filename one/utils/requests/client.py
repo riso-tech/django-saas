@@ -27,7 +27,15 @@ class ServiceClient:
                     raise err
 
     def request(self, http_method, endpoint, data=None, params=None, files=None, json=None):
-        request = Request(method=http_method, url=endpoint, data=data, params=params, files=files, json=json)
+        request = Request(
+            method=http_method,
+            url=endpoint,
+            data=data,
+            params=params,
+            files=files,
+            json=json,
+            headers=self.session.headers,
+        )
         prepared_request = request.prepare()
         try:
             return self.session.send(request=prepared_request, timeout=self.timeout)
