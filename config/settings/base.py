@@ -99,6 +99,7 @@ TENANT_APPS = [
     "corsheaders",
     "drf_spectacular",
     "one.users",
+    "one.gateways.payments",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
