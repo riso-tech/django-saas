@@ -98,6 +98,7 @@ TENANT_APPS = [
     "rest_framework.authtoken",
     "corsheaders",
     "drf_spectacular",
+    # Custom Apps
     "one.users",
     "one.gateways.payments",
     # Your stuff: custom apps go here
