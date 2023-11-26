@@ -15,10 +15,11 @@ def update_business_forward(apps, schema_editor):
     )
     tenant.save()
 
-    domain = Domain()
-    domain.domain = 'public.localhost'
-    domain.tenant = tenant
-    domain.is_primary = True
+    domain = Domain(
+        domain='public.localhost',
+        tenant=tenant,
+        is_primary=True
+    )
     domain.save()
 
 
