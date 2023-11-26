@@ -90,7 +90,7 @@ class PaypalProvider(Provider):
             from ...adapters import get_adapter
 
             adapter = get_adapter()
-            adapter.update_token(self.app, {"token": access_token, "token_type": token_type, "expired_at": expired_at})
+            adapter.populate_app(self.app, {"token": access_token, "token_type": token_type, "expired_at": expired_at})
 
         self._DEFAULT_HEADERS["Authorization"] = self.encode_access_token(token_type, access_token)
         self.set_header(self._DEFAULT_HEADERS)

@@ -8,7 +8,7 @@ from .models import PaymentGatewayApp
 class PaymentGatewayAppAdmin(admin.ModelAdmin):
     add_form = PaymentGatewayAppCreationForm
 
-    list_display = ("name", "provider", "live_mode", "is_authenticated", "truncated_token", "qq")
+    list_display = ("name", "provider", "live_mode", "is_authenticated", "truncated_token")
 
     def get_form(self, request, obj=None, **kwargs):
         """
@@ -31,9 +31,3 @@ class PaymentGatewayAppAdmin(admin.ModelAdmin):
         if len(ret) > max_chars:
             ret = ret[0:max_chars] + "...(truncated)"
         return ret
-
-    @admin.display(description="QQ")
-    def qq(self, obj):
-        provider = obj.get_provider()
-        provider.get_access_token()
-        return provider.get_header()
