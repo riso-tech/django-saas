@@ -3,15 +3,15 @@ from django.db import migrations
 
 def update_business_forward(apps, schema_editor):
     """Set site domain and name."""
-    Client = apps.get_model("business", "Client")
-    Domain = apps.get_model("business", "Domain")
+    Client = apps.get_model("business", "Client")  # noqa
+    Domain = apps.get_model("business", "Domain")  # noqa
 
     # create your public tenant
     tenant = Client(
         schema_name='public',
+        code='PUBLIC_SHARED_APP',
+        is_active=True,
         name='Public Shared App',
-        paid_until='2099-12-31',
-        on_trial=False
     )
     tenant.save()
 
