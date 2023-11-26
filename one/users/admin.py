@@ -13,6 +13,16 @@ if settings.DJANGO_ADMIN_FORCE_ALLAUTH:
     # https://django-allauth.readthedocs.io/en/stable/advanced.html#admin
     admin.site.login = decorators.login_required(admin.site.login)  # type: ignore[method-assign]
 
+if "allauth.account" in settings.INSTALLED_APPS:
+    from allauth.account.models import EmailAddress
+
+    admin.site.unregister(EmailAddress)
+
+if "rest_framework.authtoken" in settings.INSTALLED_APPS:
+    from rest_framework.authtoken.models import TokenProxy
+
+    admin.site.unregister(TokenProxy)
+
 
 @admin.register(User)
 class UserAdmin(auth_admin.UserAdmin):
