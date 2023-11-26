@@ -1,6 +1,8 @@
 import importlib
 from collections import OrderedDict
 
+from ..app_settings import PROVIDERS
+
 
 class ProviderRegistry:
     def __init__(self):
@@ -24,7 +26,7 @@ class ProviderRegistry:
 
     def load(self):
         if not self.loaded:
-            providers = ["one.gateways.payments.providers.paypal.provider"]
+            providers = PROVIDERS
             for provider_path in providers:
                 try:
                     provider_module = importlib.import_module(provider_path)
