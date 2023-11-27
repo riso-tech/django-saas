@@ -7,8 +7,10 @@ from django.views.generic import TemplateView
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework.authtoken.views import obtain_auth_token
 
+from one.cms.pages import views as flatpage_views
+
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
+    path("", flatpage_views.flatpage, {"url": "/"}, name="home"),
     path("about/", TemplateView.as_view(template_name="pages/about.html"), name="about"),
     # Django Admin, use {% url 'admin:index' %}
     path("grappelli/", include("one.grappelli.urls")),
@@ -58,3 +60,9 @@ if settings.DEBUG:
         import debug_toolbar
 
         urlpatterns = [path("__debug__/", include(debug_toolbar.urls))] + urlpatterns
+
+# Always include flatpages before the catch-all
+if "django.contrib.flatpages" in settings.INSTALLED_APPS:
+    urlpatterns += [
+        path("<path:url>", flatpage_views.flatpage, name="django.contrib.flatpages.views.flatpage"),
+    ]

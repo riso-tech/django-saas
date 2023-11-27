@@ -83,11 +83,13 @@ TENANT_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
+    "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",  # Handy template tags
     "django.contrib.admin",
     "django.forms",
+    "django.contrib.flatpages",
     # Third party apps
     "crispy_forms",
     "crispy_bootstrap5",
@@ -98,8 +100,13 @@ TENANT_APPS = [
     "rest_framework.authtoken",
     "corsheaders",
     "drf_spectacular",
+    "meta",
+    # Custom Apps
     "one.users",
     "one.gateways.payments",
+    "one.cms",
+    "one.cms.ui",
+    "one.cms.pages",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -153,6 +160,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
+    "django.contrib.flatpages.middleware.FlatpageFallbackMiddleware",
 ]
 
 # STATIC

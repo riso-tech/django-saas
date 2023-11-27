@@ -1,8 +1,8 @@
 import tempfile
 
+from cases import TenantTestCase as TestCase
 from django.core.management import call_command
 from django.test import override_settings
-from django_tenants.test.cases import TenantTestCase as TestCase
 
 
 class TestCollectstatic(TestCase):
