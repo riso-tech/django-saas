@@ -100,9 +100,12 @@ TENANT_APPS = [
     "rest_framework.authtoken",
     "corsheaders",
     "drf_spectacular",
+    "meta",
     # Custom Apps
     "one.users",
     "one.gateways.payments",
+    "one.cms",
+    "one.cms.ui",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
