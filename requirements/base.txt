@@ -25,3 +25,6 @@ drf-spectacular==0.26.5  # https://github.com/tfranzel/drf-spectacular
 # Django tenants
 django-tenants==3.5.0  # https://github.com/django-tenants/django-tenants
 tenant-schemas-celery==2.2.0  # https://github.com/maciej-gol/tenant-schemas-celery
+
+# Django CMS
+django-meta==2.4.0  # https://github.com/nephila/django-meta
