@@ -42,10 +42,6 @@ class Migration(migrations.Migration):
                 ("is_active", models.BooleanField(default=True, verbose_name="Is Active")),
                 ("name", models.CharField(max_length=100, verbose_name="Name")),
                 ("description", models.CharField(blank=True, max_length=255, null=True, verbose_name="Description")),
-                (
-                    "is_super_business",
-                    models.BooleanField(default=False, editable=False, verbose_name="Is Super Business"),
-                ),
             ],
             options={
                 "verbose_name": "Client",
