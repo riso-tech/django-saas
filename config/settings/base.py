@@ -72,7 +72,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 # ------------------------------------------------------------------------------
 SHARED_APPS = [
     # Override django.contrib.admin
-    "one.grappelli",
+    "one.libraries.grappelli",
     # Shared apps
     "django_tenants",
     "one.business",
@@ -148,7 +148,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#middleware
 MIDDLEWARE = [
-    "django_tenants.middleware.main.TenantMainMiddleware",  # Must be first
+    "one.business.middlewares.TenantMainMiddleware",  # Must be first
     "django.middleware.security.SecurityMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -160,7 +160,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
-    "django.contrib.flatpages.middleware.FlatpageFallbackMiddleware",
+    "django.contrib.flatpages.middleware.FlatpageFallbackMiddleware",  # Must be last
 ]
 
 # STATIC

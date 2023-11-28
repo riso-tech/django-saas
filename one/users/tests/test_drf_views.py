@@ -1,8 +1,8 @@
-from django_tenants.test.cases import FastTenantTestCase as TestCase
 from rest_framework.test import APIRequestFactory
 
 from one.users.api.views import UserViewSet
 from one.users.models import User
+from tests.cases import FastTenantTestCase as TestCase
 
 
 class TestUserViewSet(TestCase):

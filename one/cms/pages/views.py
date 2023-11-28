@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib.sites.models import Site
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import Http404, HttpResponse, HttpResponsePermanentRedirect
 from django.shortcuts import get_object_or_404
@@ -9,6 +10,7 @@ from django.views.decorators.csrf import csrf_protect
 from .models import Page as FlatPage
 
 DEFAULT_TEMPLATE = "flatpages/default.html"
+
 
 # This view is called from FlatpageFallbackMiddleware.process_response
 # when a 404 is raised, which often means CsrfViewMiddleware.process_view
@@ -31,9 +33,12 @@ def flatpage(request, url):
         flatpage
             `flatpages.flatpages` object
     """
+    Site.objects.clear_cache()
     if not url.startswith("/"):
         url = "/" + url
+
     site_id = get_current_site(request).id
+
     try:
         f = get_object_or_404(FlatPage, url=url, sites=site_id)
     except Http404:

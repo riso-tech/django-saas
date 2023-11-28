@@ -8,11 +8,11 @@ from django.http import HttpRequest, HttpResponseRedirect
 from django.test import RequestFactory
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from django_tenants.test.cases import FastTenantTestCase as TestCase
 
 from one.users.forms import UserAdminChangeForm
 from one.users.models import User
 from one.users.views import UserRedirectView, UserUpdateView, user_detail_view
+from tests.cases import FastTenantTestCase as TestCase
 
 pytestmark = pytest.mark.django_db
 
