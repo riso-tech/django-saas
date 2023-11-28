@@ -160,7 +160,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
-    "django.contrib.flatpages.middleware.FlatpageFallbackMiddleware",  # Must be last
 ]
 
 # STATIC
