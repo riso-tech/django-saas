@@ -8,9 +8,8 @@ from one.business.forms import CreateTenantForm
 @requires_csrf_token
 def business_not_found(request):
     template_name = "business_required.html"
-    context = {}
     create_tenant_form = CreateTenantForm()
-    context["form"] = create_tenant_form
+    context = {"form": create_tenant_form}
     return render(request, template_name, context)
 
 
