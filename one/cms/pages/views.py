@@ -2,10 +2,11 @@ from django.conf import settings
 from django.contrib.sites.models import Site
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import Http404, HttpResponse, HttpResponsePermanentRedirect
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.template import loader
 from django.utils.safestring import mark_safe
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_protect, requires_csrf_token
+from django.views.generic import CreateView
 
 from .models import Page as FlatPage
 
@@ -47,7 +48,7 @@ def flatpage(request, url):
             f = get_object_or_404(FlatPage, url=url, sites=site_id)
             return HttpResponsePermanentRedirect("%s/" % request.path)
         else:
-            raise
+            return homepage_not_found(request)
     return render_flatpage(request, f)
 
 
@@ -74,3 +75,16 @@ def render_flatpage(request, f):
     f.content = mark_safe(f.content)
 
     return HttpResponse(template.render({"flatpage": f, "meta": f.as_meta(request)}, request))
+
+
+@requires_csrf_token
+def homepage_not_found(request):
+    template_name = "cms/homepage_missing.html"
+    return render(request, template_name, {})
+
+
+class HomePageAddView(CreateView):
+    template_name = "cms/homepage_missing.html"
+
+
+homepage_add_view = HomePageAddView.as_view()

@@ -17,7 +17,9 @@ urlpatterns = [
     path("users/", include("one.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     # Business
-    path("business/", include("one.business.urls", namespace="business"))
+    path("business/", include("one.business.urls", namespace="business")),
+    # PlatPage
+    path("flatpages/", include("one.cms.pages.urls", namespace="flatpages"))
     # Your stuff: custom urls includes go here
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
@@ -64,5 +66,5 @@ if settings.DEBUG:
 # Always include flatpages before the catch-all
 if "django.contrib.flatpages" in settings.INSTALLED_APPS:
     urlpatterns += [
-        path("<path:url>", flatpage_views.flatpage, name="django.contrib.flatpages.views.flatpage"),
+        path("<path:url>/", flatpage_views.flatpage, name="django.contrib.flatpages.views.flatpage"),
     ]

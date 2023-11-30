@@ -5,13 +5,13 @@
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
   <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta http-equiv="x-ua-compatible" content="ie=edge"/>
   <title>
     {% block title %}
       Django Software as a Service
     {% endblock title %}
   </title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Django Software as a Service"/>
   <meta name="author" content="Bin Nguyen"/>
   <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}"/>
@@ -32,12 +32,72 @@
   {% endblock javascript %}
 </head>
 <body>
-<div class="container">
-  {% block content %}
-    <p>Use this document as a way to quick start any new project.</p>
-  {% endblock content %}
+
+
+<div class="container-scroller">
+  <!--begin:: Navbar -->
+  <div class="horizontal-menu">
+    <!--begin:: Top Navbar -->
+    <nav class="navbar top-navbar col-lg-12 col-12 p-0">
+      <div class="container-fluid">
+        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-between">
+          <ul class="navbar-nav navbar-nav-left">
+          </ul>
+          <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+            <a class="navbar-brand brand-logo" href="/"><img src="{% static 'images/logo.svg' %}" alt="logo"/></a>
+            <a class="navbar-brand brand-logo-mini" href=""><img src="{% static 'images/logo-mini.svg' %}" alt="logo"/></a>
+          </div>
+          <ul class="navbar-nav navbar-nav-right">
+
+            {% if request.user.is_authenticated %}
+              <li class="nav-item nav-profile dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
+                  <span class="nav-profile-name">Johnson</span>
+                  <span class="online-status"></span>
+                  <img src="{% static 'images/faces/face28.png' %}" alt="profile"/>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                  <a class="dropdown-item" href="#">
+                    <i class="mdi mdi-settings text-primary"></i>
+                    Settings
+                  </a>
+                  <a class="dropdown-item" href="#">
+                    <i class="mdi mdi-logout text-primary"></i>
+                    Logout
+                  </a>
+                </div>
+              </li>
+            {% else %}
+              <li class="nav-item dropdown d-lg-flex">
+                <a href="{% url 'account_signup' %}" class="btn btn-inverse-primary btn-sm">Sign Up</a>
+              </li>
+              <li class="nav-item dropdown d-lg-flex">
+                <a href="{% url 'account_login' %}" class="btn btn-inverse-primary btn-sm">Login</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!--end:: Top Navbar -->
+  </div>
+  <!--end:: Navbar -->
+
+  <div class="container-fluid page-body-wrapper">
+    <div class="main-panel">
+      <div class="content-wrapper">
+        <!--begin:: Content -->
+        {% block content %}
+          <p>Use this document as a way to quick start any new project.</p>
+        {% endblock content %}
+        <!--end:: Content -->
+      </div>
+    </div>
+  </div>
+
 </div>
-<!-- /container -->
+
+
 {% block modal %}
 {% endblock modal %}
 

@@ -1,1 +1,134 @@
-{{ form }}
+{% load static i18n %}
+
+<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>
+    {% block title %}
+      Django Software as a Service
+    {% endblock title %}
+  </title>
+  <meta name="description" content="Django Software as a Service"/>
+  <meta name="author" content="Bin Nguyen"/>
+  <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}"/>
+  {% block css %}
+    <!-- This file stores project-specific CSS -->
+    <link href="{% static 'css/project.min.css' %}" rel="stylesheet"/>
+    <!-- Your stuff: Third-party CSS libraries go here -->
+    <link href="{% static 'css/vendors.min.css' %}" rel="stylesheet"/>
+  {% endblock css %}
+  <!-- Le javascript ================================================== -->
+  {# Placed at the top of the document so pages load faster with defer #}
+  {% block javascript %}
+    <!-- Vendor dependencies bundled as one file -->
+    <script defer src="{% static 'js/vendors.min.js' %}"></script>
+    <!-- place project specific Javascript in this file -->
+    <script defer src="{% static 'js/project.min.js' %}"></script>
+  {% endblock javascript %}
+</head>
+<body>
+
+<div class="container-scroller">
+  <div class="container-fluid page-body-wrapper full-page-wrapper">
+    <div class="content-wrapper d-flex align-items-stretch auth auth-img-bg">
+        <div class="row flex-grow">
+          <div class="col-lg-6 d-flex align-items-center justify-content-center">
+            <div class="auth-form-transparent text-left p-3">
+
+            </div>
+          </div>
+          <div class="col-lg-6 login-half-bg d-flex flex-row">
+            <p class="text-white font-weight-medium text-center flex-grow align-self-end">
+              Copyright &copy; 2023 All rights reserved.
+            </p>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+{% block modal %}
+{% endblock modal %}
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    toastr.options = {
+      "closeButton": true,
+      "debug": false,
+      "newestOnTop": true,
+      "progressBar": true,
+      "positionClass": "toast-top-center",
+      "preventDuplicates": false,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    };
+
+    $(function () {
+      $(document).ajaxError(function (event, jqXHR, settings, errorThrown) {
+        toastr.error(`${jqXHR.status}`, `${errorThrown}`);
+      });
+    });
+  });
+</script>
+
+{% if messages %}
+  {% for message in messages %}
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        {% if message.tags == "success" %}
+          toastr.success("{{ message }}", "{% trans 'Success' %}");
+        {% elif message.tags == "info" %}
+          toastr.info("{{ message }}", "{% trans 'Info' %}");
+        {% elif message.tags == "warning" %}
+          toastr.warning("{{ message }}", "{% trans 'Warning' %}");
+        {% else %}
+          toastr.error("{{ message }}", "{% trans 'Error' %}");
+        {% endif %}
+      });
+    </script>
+  {% endfor %}
+{% endif %}
+
+{% if form.errors %}
+  <script id="id_form_error" type="application/json">
+    {{ form.errors.as_json }}
+  </script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const form_errors = JSON.parse(document.getElementById('id_form_error').textContent.replaceAll('&quot;', '"'));
+      $.each(form_errors, function (key, value) {
+        $.each(value, function (index, _value) {
+          if (key === "__all__") {
+            toastr.error(_value.message, "{% translate 'Error' %}");
+          } else {
+            toastr.error(_value.message, key);
+          }
+        });
+      });
+    });
+  </script>
+{% endif %}
+
+{% block inline_javascript %}
+  {% comment %}
+    Script tags with only code, no src (defer by default). To run
+    with a "defer" so that you run inline code:
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        /* Run whatever you want */
+      });
+    </script>
+      {% endcomment %}
+{% endblock inline_javascript %}
+</body>
+</html>

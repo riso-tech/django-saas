@@ -1,5 +1,7 @@
-@import 'custom_bootstrap_vars';
-@import '~bootstrap/scss/bootstrap';
+@import "custom_bootstrap_vars";
+@import "common";
+@import "horizontal-wrappers";
+@import "horizontal-menu";
 // project specific CSS goes here
 
 ///////////////

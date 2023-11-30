@@ -30,15 +30,20 @@ function pathsConfig(appName) {
     return {
         vendorsJs: [
             `${vendorsRoot}/jquery/dist/jquery.js`,
+            `${vendorsRoot}/bootstrap/dist/js/bootstrap.bundle.min.js`,
             `${vendorsRoot}/jquery-ui/dist/jquery-ui.js`,
             `${vendorsRoot}/jquery-migrate/dist/jquery-migrate.js`,
             `${vendorsRoot}/toastr/toastr.js`,
             `${vendorsRoot}/sweetalert2/dist/sweetalert2.all.js`,
+            `${vendorsRoot}/perfect-scrollbar/dist/perfect-scrollbar.min.js`,
+            `${vendorsRoot}/js-cookie/dist/js.cookie.min.js`,
         ],
         vendorsCss: [
             `${vendorsRoot}/jquery-ui/dist/themes/base/jquery-ui.css`,
+            `${vendorsRoot}/@mdi/font/css/materialdesignicons.css`,
             `${vendorsRoot}/toastr/build/toastr.css`,
             `${vendorsRoot}/sweetalert2/dist/sweetalert2.css`,
+            `${vendorsRoot}/perfect-scrollbar/css/perfect-scrollbar.css`,
         ],
         app: this.app,
         templates: `${this.app}/templates`,
@@ -71,7 +76,7 @@ function styles() {
     .pipe(
       sass({
         importer: tildeImporter,
-        includePaths: [paths.sass],
+        includePaths: [paths.sass,],
       }).on('error', sass.logError),
     )
     .pipe(plumber()) // Checks for errors

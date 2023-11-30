@@ -38,21 +38,21 @@ services:
     ports:
       - '15432:5432'
 
-  docs:
-    image: one_saas_docs
-    container_name: one_saas_docs
-    build:
-      context: .
-      dockerfile: ./compose/local/docs/Dockerfile
-    env_file:
-      - ./.envs/.local/.django
-    volumes:
-      - ./docs:/docs:z
-      - ./config:/app/config:z
-      - ./one:/app/one:z
-    ports:
-      - '9000:9000'
-    command: /start-docs
+#  docs:
+#    image: one_saas_docs
+#    container_name: one_saas_docs
+#    build:
+#      context: .
+#      dockerfile: ./compose/local/docs/Dockerfile
+#    env_file:
+#      - ./.envs/.local/.django
+#    volumes:
+#      - ./docs:/docs:z
+#      - ./config:/app/config:z
+#      - ./one:/app/one:z
+#    ports:
+#      - '9000:9000'
+#    command: /start-docs
 
   mailpit:
     image: axllent/mailpit:v1.8

@@ -366,6 +366,11 @@ SPECTACULAR_SETTINGS = {
 # ------------------------------------------------------------------------------
 TENANT_MODEL = "business.Client"
 TENANT_DOMAIN_MODEL = "business.Domain"
+SHOW_PUBLIC_IF_NO_TENANT_FOUND = True
+
+# Flatpage
+# ------------------------------------------------------------------------------
+APPEND_SLASH = True
 
 # Your stuff...
 # ------------------------------------------------------------------------------
