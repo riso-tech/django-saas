@@ -62,5 +62,5 @@ if settings.DEBUG:
 # Always include flatpages before the catch-all
 if "django.contrib.flatpages" in settings.INSTALLED_APPS:
     urlpatterns += [
-        path("<path:url>", flatpage_views.flatpage, name="django.contrib.flatpages.views.flatpage"),
+        path("<path:url>/", flatpage_views.flatpage, name="django.contrib.flatpages.views.flatpage"),
     ]

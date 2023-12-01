@@ -160,7 +160,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
-    "django.contrib.flatpages.middleware.FlatpageFallbackMiddleware",
 ]
 
 # STATIC
@@ -367,6 +366,10 @@ SPECTACULAR_SETTINGS = {
 # ------------------------------------------------------------------------------
 TENANT_MODEL = "business.Client"
 TENANT_DOMAIN_MODEL = "business.Domain"
+
+# Flatpage
+# ------------------------------------------------------------------------------
+APPEND_SLASH = True
 
 # Your stuff...
 # ------------------------------------------------------------------------------
