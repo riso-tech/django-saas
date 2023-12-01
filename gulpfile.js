@@ -29,6 +29,7 @@ function pathsConfig(appName) {
 
     return {
         vendorsJs: [
+            `${vendorsRoot}/bootstrap/dist/js/bootstrap.bundle.min.js`,
             `${vendorsRoot}/jquery/dist/jquery.js`,
             `${vendorsRoot}/jquery-ui/dist/jquery-ui.js`,
             `${vendorsRoot}/jquery-migrate/dist/jquery-migrate.js`,

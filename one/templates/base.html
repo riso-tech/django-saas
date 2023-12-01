@@ -5,13 +5,13 @@
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
   <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta http-equiv="x-ua-compatible" content="ie=edge"/>
   <title>
     {% block title %}
       Django Software as a Service
     {% endblock title %}
   </title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Django Software as a Service"/>
   <meta name="author" content="Bin Nguyen"/>
   <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}"/>
@@ -32,59 +32,11 @@
   {% endblock javascript %}
 </head>
 <body>
-<div class="mb-1">
-  <nav class="navbar navbar-expand-md navbar-light bg-light">
-    <div class="container-fluid">
-      <button class="navbar-toggler navbar-toggler-right"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <a class="navbar-brand" href="{% url 'home' %}">Django Software as a Service</a>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'home' %}">Home <span class="visually-hidden">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'about' %}">About</a>
-          </li>
-          {% if request.user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link"
-                 href="{% url 'users:detail' request.user.username %}">{% translate "My Profile" %}</a>
-            </li>
-            <li class="nav-item">
-              {# URL provided by django-allauth/account/urls.py #}
-              <a class="nav-link" href="{% url 'account_logout' %}">{% translate "Sign Out" %}</a>
-            </li>
-          {% else %}
-            {% if ACCOUNT_ALLOW_REGISTRATION %}
-              <li class="nav-item">
-                {# URL provided by django-allauth/account/urls.py #}
-                <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% translate "Sign Up" %}</a>
-              </li>
-            {% endif %}
-            <li class="nav-item">
-              {# URL provided by django-allauth/account/urls.py #}
-              <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% translate "Sign In" %}</a>
-            </li>
-          {% endif %}
-        </ul>
-      </div>
-    </div>
-  </nav>
-</div>
-<div class="container">
-  {% block content %}
-    <p>Use this document as a way to quick start any new project.</p>
-  {% endblock content %}
-</div>
-<!-- /container -->
+
+
+{% block content %}
+{% endblock content %}
+
 {% block modal %}
 {% endblock modal %}
 
@@ -120,18 +72,19 @@
     <script>
       window.addEventListener('DOMContentLoaded', () => {
         {% if message.tags == "success" %}
-          toastr.success("{{ message }}", "{% trans 'Success' %}");
+          toastr.success('{{ message|safe }}', "{% trans 'Success' %}");
         {% elif message.tags == "info" %}
-          toastr.info("{{ message }}", "{% trans 'Info' %}");
+          toastr.info('{{ message|safe }}', "{% trans 'Info' %}");
         {% elif message.tags == "warning" %}
-          toastr.warning("{{ message }}", "{% trans 'Warning' %}");
+          toastr.warning('{{ message|safe }}', "{% trans 'Warning' %}");
         {% else %}
-          toastr.error("{{ message }}", "{% trans 'Error' %}");
+          toastr.error('{{ message|safe }}', "{% trans 'Error' %}");
         {% endif %}
       });
     </script>
   {% endfor %}
 {% endif %}
+
 {% if form.errors %}
   <script id="id_form_error" type="application/json">
     {{ form.errors.as_json }}
@@ -151,7 +104,6 @@
     });
   </script>
 {% endif %}
-
 
 {% block inline_javascript %}
   {% comment %}
