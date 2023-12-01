@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class GrappelliConfig(AppConfig):
-    name = "one.grappelli"
+    name = "one.libraries.grappelli"
     verbose_name = _("Grappelli")
 
     def ready(self):

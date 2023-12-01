@@ -13,7 +13,7 @@ urlpatterns = [
     path("", flatpage_views.flatpage, {"url": "/"}, name="home"),
     path("about/", TemplateView.as_view(template_name="pages/about.html"), name="about"),
     # Django Admin, use {% url 'admin:index' %}
-    path("grappelli/", include("one.grappelli.urls")),
+    path("grappelli/", include("one.libraries.grappelli.urls")),
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
     path("users/", include("one.users.urls", namespace="users")),

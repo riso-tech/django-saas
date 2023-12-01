@@ -8,10 +8,10 @@ from django.utils import timezone, translation
 from django.utils.html import escape
 from django.utils.http import urlencode
 from django.utils.translation import gettext_lazy as _
-from django_tenants.test.cases import FastTenantTestCase as TestCase
 from django_tenants.test.client import TenantClient as Client
 
 from one.tests.models import Category, Entry
+from tests.cases import FastTenantTestCase as TestCase
 
 from ..templatetags.grp_tags import switch_user_dropdown
 

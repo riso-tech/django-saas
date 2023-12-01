@@ -26,7 +26,7 @@
                 <tbody>
                     {% for deletion in deleted %}
                         <tr>
-                            <th scope="grp-row"><a href="{{ deletion.pk|unlocalize }}/">{{ deletion.revision.date_created }}</a></th>
+                            <th scope="grp-row"><a href="{{ deletion.pk|unlocalize }}/one/libraries/grappelli/static">{{ deletion.revision.date_created }}</a></th>
                             <td>{{ deletion.object_repr }}</td>
                         </tr>
                     {% endfor %}

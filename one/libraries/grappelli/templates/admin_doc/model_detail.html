@@ -17,9 +17,9 @@
 {% block content-class %}{% endblock %}
 {% block breadcrumbs %}
     <ul>
-        <li><a href="../../../">{% trans "Home" %}</a></li>
-        <li><a href="../../">Documentation</a></li>
-        <li><a href="../">Models</a></li>
+        <li><a href="../../../..">{% trans "Home" %}</a></li>
+        <li><a href="../..">Documentation</a></li>
+        <li><a href="..">Models</a></li>
         <li>{{ name }}</li>
     </ul>
 {% endblock %}
@@ -50,6 +50,6 @@
                 {% endfor %}
             </tbody>
         </table>
-        <p><a href="../" class="grp-back-link grp-icon-text">Back to Models Documentation</a></p>
+        <p><a href=".." class="grp-back-link grp-icon-text">Back to Models Documentation</a></p>
     </div>
 {% endblock %}

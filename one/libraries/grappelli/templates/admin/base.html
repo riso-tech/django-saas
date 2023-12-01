@@ -211,18 +211,19 @@
     <script>
       window.addEventListener('DOMContentLoaded', () => {
         {% if message.tags == "success" %}
-          toastr.success("{{ message }}", "{% trans 'Success' %}");
+          toastr.success('{{ message|safe }}', "{% trans 'Success' %}");
         {% elif message.tags == "info" %}
-          toastr.info("{{ message }}", "{% trans 'Info' %}");
+          toastr.info('{{ message|safe }}', "{% trans 'Info' %}");
         {% elif message.tags == "warning" %}
-          toastr.warning("{{ message }}", "{% trans 'Warning' %}");
+          toastr.warning('{{ message|safe }}', "{% trans 'Warning' %}");
         {% else %}
-          toastr.error("{{ message }}", "{% trans 'Error' %}");
+          toastr.error('{{ message|safe }}', "{% trans 'Error' %}");
         {% endif %}
       });
     </script>
   {% endfor %}
 {% endif %}
+
 {% if form.errors %}
   <script id="id_form_error" type="application/json">
     {{ form.errors.as_json }}

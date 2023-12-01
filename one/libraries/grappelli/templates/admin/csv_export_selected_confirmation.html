@@ -6,9 +6,9 @@
 <!-- BREADCRUMBS -->
 {% block breadcrumbs %}
     <ul class="grp-horizontal-list">
-        <li><a href="../../">{% trans "Home" %}</a></li>
-        <li><a href="../">{% trans app_label|capfirst|escape %}</a></li>
-        <li><a href="./">{{ opts.verbose_name_plural|capfirst }}</a></li>
+        <li><a href="../..">{% trans "Home" %}</a></li>
+        <li><a href="..">{% trans app_label|capfirst|escape %}</a></li>
+        <li><a href="">{{ opts.verbose_name_plural|capfirst }}</a></li>
         <li>{% trans 'Export selection as CSV' %}</li>
     </ul>
 {% endblock %}
@@ -51,7 +51,7 @@
                 <input type="hidden" name="action" value="csv_export_selected" />
                 <input type="hidden" name="post" value="yes" />
                 <ul class="grp-horizontal-list-right grp-submit-row">
-                    <li class="grp-float-left grp-submit-button-container"><a href="../" class="grp-cancel-link">{% trans "Back" %}</a></li>
+                    <li class="grp-float-left grp-submit-button-container"><a href=".." class="grp-cancel-link">{% trans "Back" %}</a></li>
                     <li class="grp-submit-button-container"><input type="submit" value="{% trans "Export" %}" class="grp-default" /></li>
                 </ul>
             </div>

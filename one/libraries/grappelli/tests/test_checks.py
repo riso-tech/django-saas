@@ -1,6 +1,5 @@
-from django_tenants.test.cases import TenantTestCase as TestCase
-
 from one.tests.models import Entry
+from tests.cases import FastTenantTestCase as TestCase
 
 from ..checks import check_model
 

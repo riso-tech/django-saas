@@ -1,5 +1,6 @@
 {% extends "admin/base_site.html" %}
 {% load i18n %}
+
 {% block javascripts %}
     {{ block.super }}
     <script type="text/javascript" charset="utf-8">
@@ -20,48 +21,48 @@
 
 {% block bodyclass %}grp-docutils{% endblock %}
 {% block content-class %}{% endblock %}
+{% block title %}Template tags{% endblock %}
 {% block breadcrumbs %}
     <ul>
-        <li><a href="../../">{% trans "Home" %}</a></li>
-        <li><a href="../">Documentation</a></li>
-        <li>Filters</li>
+        <li><a href="../..">{% trans "Home" %}</a></li>
+        <li><a href="..">Documentation</a></li>
+        <li>Tags</li>
     </ul>
 {% endblock %}
-{% block title %}Template filters{% endblock %}
 
 {% block content %}
-    <h1>Template filter documentation</h1>
+    <h1>Template tag documentation</h1>
     <div class="g-d-c">
         <div class="g-d-6">
-            {% regroup filters|dictsort:"library" by library as filter_libraries %}
-            {% for library in filter_libraries %}
+            {% regroup tags|dictsort:"library" by library as tag_libraries %}
+            {% for library in tag_libraries %}
                 <div class="grp-module">
-                    <h2>{% firstof library.grouper "Built-in filters" %}</h2>
+                    <h2>{% firstof library.grouper "Built-in tags" %}</h2>
                     <ul class="grp-listing-small">
-                        {% for filter in library.list|dictsort:"name" %}
-                            <li class="grp-row"><a href="#{{ filter.name }}"><strong>{{ filter.name }}</strong></a></li>
+                        {% for tag in library.list|dictsort:"name" %}
+                            <li class="grp-row"><a href="#{{ tag.name }}"><strong>{{ tag.name }}</strong></a></li>
                         {% endfor %}
                     </ul>
                 </div>
             {% endfor %}
         </div>
         <div class="g-d-18 g-d-l grp-rte" id="grp-docutils-content">
-            {% regroup filters|dictsort:"library" by library as filter_libraries %}
-            {% for library in filter_libraries %}
+            {% regroup tags|dictsort:"library" by library as tag_libraries %}
+            {% for library in tag_libraries %}
                 <div class="grp-group grp-collapse grp-open">
-                    <h2 class="grp-collapse-handler">{% firstof library.grouper "Built-in filters" %}</h2>
+                    <h2 class="grp-collapse-handler">{% firstof library.grouper "Built-in tags" %}</h2>
                     {% if library.grouper %}
                         <div class="grp-row" style="border: 0">
-                            <p>To use these filters, put <code>{% templatetag openblock %} load {{ library.grouper }} {% templatetag closeblock %}</code> in your template before using the filter.</p>
+                            <p>To use these tags, put <code>{% templatetag openblock %} load {{ library.grouper }} {% templatetag closeblock %}</code> in your template before using the tag.</p>
                         </div>
                     {% endif %}
-                    {% for filter in library.list|dictsort:"name" %}
+                    {% for tag in library.list|dictsort:"name" %}
                         <div class="grp-module">
-                            <h3 id="{{ filter.name }}">{{ filter.name }}</h3>
-                            {% if filter.title or filter.body %}
+                            <h3 id="{{ tag.name }}">{{ tag.name }}</h3>
+                            {% if tag.title or tag.body %}
                                 <div class="grp-row">
-                                    {% if filter.title %}<h4>{{ filter.title }}</h4>{% endif %}
-                                    {% if filter.body %}<p>{{ filter.body }}</p>{% endif %}
+                                    {% if tag.title %}<h4>{{ tag.title }}</h4>{% endif %}
+                                    {% if tag.body %}<p>{{ tag.body }}</p>{% endif %}
                                 </div>
                             {% endif %}
                         </div>
