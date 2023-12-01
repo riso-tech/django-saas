@@ -1,45 +1,345 @@
 {% load static i18n %}
-
 <!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE }}">
+<!--begin::Head-->
 <head>
+  <title>{% block title %}Django Software as a Service{% endblock title %}</title>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-  <title>
-    {% block title %}
-      Django Software as a Service
-    {% endblock title %}
-  </title>
-  <meta name="description" content="Django Software as a Service"/>
-  <meta name="author" content="Bin Nguyen"/>
-  <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}"/>
+
+  <link rel="shortcut icon" href="{% static 'media/logos/favicon.ico' %}"/>
+  <!--begin::Fonts(mandatory for all pages)-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"/>
+  <!--end::Fonts-->
+
+  <!--begin::Stylesheet-->
+  <!--begin::Vendor Stylesheets(used for this page only)-->
   {% block css %}
-    <!-- This file stores project-specific CSS -->
-    <link href="{% static 'css/project.min.css' %}" rel="stylesheet"/>
-    <!-- Your stuff: Third-party CSS libraries go here -->
-    <link href="{% static 'css/vendors.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/vendors.bundle.min.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/theme.bundle.min.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/project.min.css' %}" rel="stylesheet" type="text/css"/>
   {% endblock css %}
-  <!-- Le javascript
-  ================================================== -->
-  {# Placed at the top of the document so pages load faster with defer #}
-  {% block javascript %}
-    <!-- Vendor dependencies bundled as one file -->
-    <script defer src="{% static 'js/vendors.min.js' %}"></script>
-    <!-- place project specific Javascript in this file -->
-    <script defer src="{% static 'js/project.min.js' %}"></script>
-  {% endblock javascript %}
+  <!--end::Vendor Stylesheets-->
+
+  <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+  <!--end::Global Stylesheets Bundle-->
+  <!--end::Stylesheet-->
+
+  <script>
+    // Frame-busting to prevent site from being loaded within a frame without permission (click-jacking)
+    if (window.top !== window.self) {
+      window.top.location.replace(window.self.location.href);
+    }
+  </script>
 </head>
-<body>
+<!--end::Head-->
+<!--begin::Body-->
+<body id="kt_body"
+      data-kt-app-header-stacked="true"
+      data-kt-app-header-primary-enabled="true"
+      data-kt-app-header-secondary-enabled="false"
+      data-kt-app-toolbar-enabled="true"
+      class="app-default">
+<!--layout-partial:partials/theme-mode/_init.html-->
+<!--begin::Theme mode setup on page load-->
+<script>
+  var defaultThemeMode = "light";
+  var themeMode;
+  if (document.documentElement) {
+    if (document.documentElement.hasAttribute("data-bs-theme-mode")) {
+      themeMode = document.documentElement.getAttribute("data-bs-theme-mode");
+    } else {
+      if (localStorage.getItem("data-bs-theme") !== null) {
+        themeMode = localStorage.getItem("data-bs-theme");
+      } else {
+        themeMode = defaultThemeMode;
+      }
+    }
+    if (themeMode === "system") {
+      themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    document.documentElement.setAttribute("data-bs-theme", themeMode);
+  }
+</script>
+<!--end::Theme mode setup on page load-->
 
+<!--layout-partial:layout/_default.html-->
+<!--begin::App-->
+<div class="d-flex flex-column flex-root app-root" id="kt_app_root">
+  <!--begin::Page-->
+  <div class="app-page  flex-column flex-column-fluid " id="kt_app_page">
+    <!--begin::Header-->
+    <div id="kt_app_header" class="app-header ">
+      <!--begin::Header primary-->
+      <div class="app-header-primary "
+           data-kt-sticky="true" data-kt-sticky-name="app-header-primary-sticky"
+           data-kt-sticky-offset="{default: 'false', lg: '300px'}"
+      >
+        <!--begin::Header primary container-->
+        <div class="app-container  container-xxl d-flex align-items-stretch justify-content-between "
+             id="kt_app_header_primary_container">
+          <!--begin::Logo and search-->
+          <div class="d-flex flex-grow-1 flex-lg-grow-0">
+            <!--begin::Logo wrapper-->
+            <div class="d-flex align-items-center" id="kt_app_header_logo_wrapper">
+              <!--begin::Header toggle-->
+              <button class="d-lg-none btn btn-icon btn-color-white btn-active-color-primary ms-n4 me-sm-2"
+                      id="kt_app_header_menu_toggle">
+                <i class="ki-duotone ki-abstract-14 fs-1"><span class="path1"></span><span class="path2"></span></i>
+              </button>
+              <!--end::Header toggle-->
+              <!--begin::Logo-->
+              <a href="{% url 'home' %}" class="d-flex align-items-center mb-1 mb-lg-0 pt-lg-1">
+                <img alt="Logo" src="{% static 'media/logos/default-small.svg' %}" class="d-block d-sm-none"/>
+                <img alt="Logo" src="{% static 'media/logos/default.svg' %}" class="d-none d-sm-block"/>
+              </a>
+              <!--end::Logo-->
+            </div>
+            <!--end::Logo wrapper-->
+          </div>
+          <!--end::Logo and search-->
+          <!--layout-partial:layout/partials/header/__topbar.html-->
+        </div>
+        <!--end::Header primary container-->
+      </div>
+      <!--end::Header primary-->
+      <!--begin::Header secondary-->
+      {#      <div class="app-header-secondary ">#}
+      {#        <!--begin::Header secondary container-->#}
+      {#        <div class="app-container  container-xxl d-flex align-items-stretch " id="kt_app_header_secondary_container">#}
+      {#          <!--layout-partial:layout/partials/header/menu/_main.html-->#}
+      {#          <!--begin::Search-->#}
+      {#          <div class="d-flex align-items-center w-100 w-lg-225px pt-5 pt-lg-0">#}
+      {#            <!--layout-partial:partials/search/_inline.html-->#}
+      {#          </div>#}
+      {#          <!--end::Search-->#}
+      {#        </div>#}
+      {#        <!--end::Header secondary container-->#}
+      {#      </div>#}
+      <!--end::Header secondary-->
+    </div>
+    <!--end::Header-->
+    <!--begin::Wrapper-->
+    <div class="app-wrapper  flex-column flex-row-fluid " id="kt_app_wrapper">
+      <!--begin::Wrapper container-->
+      <div class="app-container  container-xxl d-flex flex-row flex-column-fluid ">
+        <!--begin::Main-->
+        <div class="app-main flex-column flex-row-fluid " id="kt_app_main">
+          <!--begin::Content wrapper-->
+          <div class="d-flex flex-column flex-column-fluid">
+            <!--layout-partial:layout/partials/_toolbar.html-->
+            <!--begin::Toolbar-->
+            <div id="kt_app_toolbar" class="app-toolbar  pt-lg-9 pt-6 ">
+              <!--begin::Toolbar container-->
+              <div id="kt_app_toolbar_container" class="app-container  container-fluid d-flex flex-stack flex-wrap ">
+                <!--begin::Toolbar wrapper-->
+                <div class="d-flex flex-stack flex-wrap gap-4 w-100">
+                  <!--layout-partial:layout/partials/_page-title.html-->
+                  <!--begin::Page title-->
+                  <div class="page-title d-flex flex-column gap-3 me-3">
+                    <!--begin::Title-->
+                    <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bolder fs-2x my-0">
+                      Dashboard
+                    </h1>
+                    <!--end::Title-->
+                    <!--begin::Breadcrumb-->
+                    <ul class="breadcrumb breadcrumb-separatorless fw-semibold">
+                      <!--begin::Item-->
+                      <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
+                        <a href="?page=index" class="text-gray-500 text-hover-primary">
+                          <i class="ki-duotone ki-home fs-3 text-gray-400 me-n1"></i>
+                        </a>
+                      </li>
+                      <!--end::Item-->
+                      <!--begin::Item-->
+                      <li class="breadcrumb-item">
+                        <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1"></i></li>
+                      <!--end::Item-->
+                      <!--begin::Item-->
+                      <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
+                        Dashboards
+                      </li>
+                      <!--end::Item-->
+                      <!--begin::Item-->
+                      <li class="breadcrumb-item">
+                        <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1"></i></li>
+                      <!--end::Item-->
+                      <!--begin::Item-->
+                      <li class="breadcrumb-item text-gray-500">
+                        Default
+                      </li>
+                      <!--end::Item-->
+                    </ul>
+                    <!--end::Breadcrumb-->
+                  </div>
+                  <!--end::Page title-->
+                  <!--begin::Actions-->
+                  <div class="d-flex align-items-center gap-3 gap-lg-5">
+                    <!--begin::Secondary button-->
+                    <div class="m-0">
+                      <a href="#" class="btn btn-flex btn-sm btn-color-gray-700 bg-body fw-bold px-4"
+                         data-bs-toggle="modal"
+                         data-bs-target="#kt_modal_create_project">
+                        New Project
+                      </a>
+                    </div>
+                    <!--end::Secondary button-->
+                    <!--begin::Primary button-->
+                    <a href="#" class="btn btn-flex btn-center btn-dark btn-sm px-4" data-bs-toggle="modal"
+                       data-bs-target="#kt_modal_invite_friends">
+                      Reports
+                    </a>
+                    <!--end::Primary button-->
+                  </div>
+                  <!--end::Actions-->
+                </div>
+                <!--end::Toolbar wrapper-->
+              </div>
+              <!--end::Toolbar container-->
+            </div>
+            <!--end::Toolbar-->
+            <!--layout-partial:layout/partials/_content.html-->
+            <!--begin::Content-->
+            <div id="kt_app_content" class="app-content  pb-0 ">
+              <!--begin::Row-->
+              <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
+                <!--begin::Col-->
+                <div class="col-xl-4">
+                  <!--layout-partial:partials/widgets/charts/_widget-35.html-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-8">
+                  <!--layout-partial:partials/widgets/tables/_widget-14.html-->
+                </div>
+                <!--end::Col-->
+              </div>
+              <!--end::Row-->
+              <!--begin::Row-->
+              <div class="row gx-5 gx-xl-10 mb-5 mb-xl-10">
+                <!--begin::Col-->
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                  <!--layout-partial:partials/widgets/charts/_widget-27.html-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                  <!--layout-partial:partials/widgets/charts/_widget-28.html-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-lg-4">
+                  <!--layout-partial:partials/widgets/lists/_widget-9.html-->
+                </div>
+                <!--end::Col-->
+              </div>
+              <!--end::Row-->
+              <!--begin::Row-->
+              <div class="row gy-5 g-xl-10">
+                <!--begin::Col-->
+                <div class="col-xl-6 mb-xl-10">
+                  <!--layout-partial:partials/widgets/tables/_widget-2.html-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-6 mb-5 mb-xl-10">
+                  <!--layout-partial:partials/widgets/charts/_widget-4.html-->
+                </div>
+                <!--end::Col-->
+              </div>
+              <!--end::Row-->
+              <!--begin::Row-->
+              <div class="row gy-5 g-xl-10 mb-5 mb-xl-10">
+                <!--begin::Col-->
+                <div class="col-xl-4">
+                  <!--layout-partial:partials/widgets/lists/_widget-5.html-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-8">
+                  <!--layout-partial:partials/widgets/tables/_widget-5.html-->
+                </div>
+                <!--end::Col-->
+              </div>
+              <!--end::Row-->
+              <!--begin::Row-->
+              <div class="row g-5 g-xl-10">
+                <!--begin::Col-->
+                <div class="col-xl-8">
+                  <!--layout-partial:partials/widgets/tables/_widget-13.html-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-4">
+                  <!--layout-partial:partials/widgets/lists/_widget-23.html-->
+                </div>
+                <!--end::Col-->
+              </div>
+              <!--end::Row-->
+            </div>
+            <!--end::Content-->
+          </div>
+          <!--end::Content wrapper-->
+          <!--layout-partial:layout/partials/_footer.html-->
+          <!--begin::Footer-->
+          <div id="kt_app_footer"
+               class="app-footer  align-items-center justify-content-center justify-content-md-between flex-column flex-md-row py-3 py-lg-6 ">
+            <!--begin::Copyright-->
+            <div class="text-dark order-2 order-md-1">
+              <span class="text-muted fw-semibold me-1">2023 &copy;</span>
+              <a href="https://keenthemes.com" target="_blank" class="text-gray-800 text-hover-primary">Keenthemes</a>
+            </div>
+            <!--end::Copyright-->
+            <!--begin::Menu-->
+            <ul class="menu menu-gray-600 menu-hover-primary fw-semibold order-1">
+              <li class="menu-item">
+                <a href="https://keenthemes.com" target="_blank" class="menu-link px-2">About</a>
+              </li>
+              <li class="menu-item">
+                <a href="https://devs.keenthemes.com" target="_blank" class="menu-link px-2">Support</a>
+              </li>
+              <li class="menu-item">
+                <a href="https://keenthemes.com/products/oswald-html-pro" target="_blank" class="menu-link px-2">Purchase</a>
+              </li>
+            </ul>
+            <!--end::Menu-->
+          </div>
+          <!--end::Footer-->
+        </div>
+        <!--end:::Main-->
+      </div>
+      <!--end::Wrapper container-->
+    </div>
+    <!--end::Wrapper-->
+  </div>
+  <!--end::Page-->
+</div>
+<!--end::App-->
 
-{% block content %}
-{% endblock content %}
+<!--layout-partial:partials/_drawers.html-->
 
+<!--begin::Modals-->
 {% block modal %}
+  <!--layout-partial:partials/modals/_upgrade-plan.html-->
+  <!--layout-partial:partials/modals/_invite-friends.html-->
+  <!--layout-partial:partials/modals/create-project/_main.html-->
+  <!--layout-partial:partials/modals/users-search/_main.html-->
 {% endblock modal %}
+<!--end::Modals-->
 
+<!--begin::Javascript-->
+<!--begin::Global Javascript Bundle(mandatory for all pages)-->
+{% block javascript %}
+  <script src="{% static 'js/vendors.bundle.min.js' %}"></script>
+  <script src="{% static 'js/theme.bundle.min.js' %}"></script>
+  <script src="{% static 'js/project.min.js' %}"></script>
+{% endblock javascript %}
+<!--end::Global Javascript Bundle-->
+
+<!--begin::Vendors Javascript(used for this page only)-->
+<!--end::Vendors Javascript-->
+
+<!--begin::Global Custom Javascript Bundle(mandatory for all pages)-->
 <script>
   window.addEventListener('DOMContentLoaded', () => {
     toastr.options = {
@@ -87,8 +387,8 @@
 
 {% if form.errors %}
   <script id="id_form_error" type="application/json">
-    {{ form.errors.as_json }}
-  </script>
+      {{ form.errors.as_json }}
+    </script>
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       const form_errors = JSON.parse(document.getElementById('id_form_error').textContent.replaceAll('&quot;', '"'));
@@ -104,17 +404,22 @@
     });
   </script>
 {% endif %}
+<!--end::Global Javascript Bundle-->
 
+<!--begin::Custom Javascript(used for this page only)-->
 {% block inline_javascript %}
   {% comment %}
     Script tags with only code, no src (defer by default). To run
     with a "defer" so that you run inline code:
     <script>
-      window.addEventListener('DOMContentLoaded', () => {
-        /* Run whatever you want */
-      });
+        window.addEventListener('DOMContentLoaded', () => {
+            /* Run whatever you want */
+        });
     </script>
-      {% endcomment %}
+    {% endcomment %}
 {% endblock inline_javascript %}
+<!--end::Custom Javascript-->
+<!--end::Javascript-->
 </body>
+<!--end::Body-->
 </html>

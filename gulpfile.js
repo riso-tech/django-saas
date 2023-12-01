@@ -134,6 +134,27 @@ function styles() {
     .pipe(dest(paths.css));
 }
 
+// Keenthemes Styles auto prefixing and minification
+function themeStyles() {
+  const processCss = [
+    autoprefixer(), // adds vendor prefixes
+    pixrem(), // add fallbacks for rem units
+  ];
+
+  const minifyCss = [
+    cssnano({ preset: 'default' }), // minify result
+  ];
+
+  return src(`${paths.css}/theme.bundle.css`)
+    .pipe(plumber()) // Checks for errors
+    .pipe(postcss(processCss))
+    .pipe(dest(paths.css))
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(postcss(minifyCss)) // Minifies the result
+    .pipe(dest(paths.css));
+}
+
+
 // Vendor Styles auto prefixing and minification
 function vendorStyles() {
     const processCss = [
@@ -159,6 +180,15 @@ function vendorStyles() {
 // Javascript minification
 function scripts() {
     return src(`${paths.js}/project.js`)
+        .pipe(plumber()) // Checks for errors
+        .pipe(uglify()) // Minifies the js
+        .pipe(rename({suffix: '.min'}))
+        .pipe(dest(paths.js));
+}
+
+// Keenthemes Javascript minification
+function themeScripts() {
+    return src(`${paths.js}/theme.bundle.js`)
         .pipe(plumber()) // Checks for errors
         .pipe(uglify()) // Minifies the js
         .pipe(rename({suffix: '.min'}))
@@ -225,7 +255,7 @@ function watchPaths() {
 }
 
 // Generate all assets
-const generateAssets = parallel(styles, vendorStyles, scripts, vendorScripts, imgCompression);
+const generateAssets = parallel(styles, vendorStyles, scripts, vendorScripts, imgCompression, themeStyles, themeScripts);
 
 // Set up dev environment
 const dev = parallel(initBrowserSync, watchPaths);
