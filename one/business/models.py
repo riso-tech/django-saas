@@ -5,13 +5,13 @@ from model_utils.models import TimeStampedModel
 from one.utils.db.models import MasterModel
 
 
-class Client(TimeStampedModel, MasterModel, TenantMixin):
+class Business(TimeStampedModel, MasterModel, TenantMixin):
     # default true, schema will be automatically created and synced when it is saved
     auto_create_schema = True
 
     class Meta:
-        verbose_name = _("Client")
-        verbose_name_plural = _("Clients")
+        verbose_name = _("Business")
+        verbose_name_plural = _("Businesses")
 
 
 class Domain(DomainMixin):
