@@ -29,17 +29,68 @@ function pathsConfig(appName) {
 
     return {
         vendorsJs: [
-            `${vendorsRoot}/bootstrap/dist/js/bootstrap.bundle.min.js`,
-            `${vendorsRoot}/jquery/dist/jquery.js`,
+            `${vendorsRoot}/jquery/dist/jquery.js`,  // Must be first Item
+            `${vendorsRoot}/@popperjs/core/dist/umd/popper.js`,
+            `${vendorsRoot}/bootstrap/dist/js/bootstrap.min.js`,
+            `${vendorsRoot}/moment/min/moment-with-locales.min.js`,
+            `${vendorsRoot}/wnumb/wNumb.js`,
             `${vendorsRoot}/jquery-ui/dist/jquery-ui.js`,
             `${vendorsRoot}/jquery-migrate/dist/jquery-migrate.js`,
-            `${vendorsRoot}/toastr/toastr.js`,
-            `${vendorsRoot}/sweetalert2/dist/sweetalert2.all.js`,
+            `${vendorsRoot}/axios/dist/axios.min.js`,
+            `${vendorsRoot}/lozad/dist/lozad.min.js`,
+            `${vendorsRoot}/select2/dist/js/select2.full.js`,
+            `${this.app}/static/js/vendors/plugins/select2.init.js`,
+            `${vendorsRoot}/@eonasdan/tempus-dominus/dist/js/tempus-dominus.min.js`,
+            `${this.app}/static/js/vendors/plugins/tempus-dominus.init.js`,
+            `${vendorsRoot}/@eonasdan/tempus-dominus/dist/locales/de.js`,
+            `${vendorsRoot}/@eonasdan/tempus-dominus/dist/plugins/customDateFormat.js`,
+            `${vendorsRoot}/flatpickr/dist/flatpickr.js`,
+            `${vendorsRoot}/flatpickr/dist/l10n/ar.js`,
+            `${vendorsRoot}/es6-shim/es6-shim.js`,
+            `${this.app}/static/plugins/@form-validation/umd/bundle/popular.min.js`,
+            `${this.app}/static/plugins/@form-validation/umd/bundle/full.min.js`,
+            `${this.app}/static/plugins/@form-validation/umd/plugin-bootstrap5/index.min.js`,
+            `${vendorsRoot}/bootstrap-maxlength/src/bootstrap-maxlength.js`,
+            `${vendorsRoot}/bootstrap-daterangepicker/daterangepicker.js`,
+            `${vendorsRoot}/inputmask/dist/inputmask.js`,
+            `${vendorsRoot}/inputmask/dist/bindings/inputmask.binding.js`,
+            `${vendorsRoot}/tiny-slider/dist/min/tiny-slider.js`,
+            `${vendorsRoot}/nouislider/dist/nouislider.js`,
+            `${vendorsRoot}/autosize/dist/autosize.js`,
+            `${vendorsRoot}/clipboard/dist/clipboard.min.js`,
+            `${vendorsRoot}/bootstrap-multiselectsplitter/bootstrap-multiselectsplitter.js`,
+            `${vendorsRoot}/smooth-scroll/dist/smooth-scroll.js`,
+            `${vendorsRoot}/dropzone/dist/dropzone.js`,
+            `${this.app}/static/js/vendors/plugins/dropzone.init.js`,
+            `${vendorsRoot}/quill/dist/quill.js`,
+            `${vendorsRoot}/@yaireo/tagify/dist/tagify.polyfills.min.js`,
+            `${vendorsRoot}/@yaireo/tagify/dist/tagify.min.js`,
+            `${vendorsRoot}/toastr/build/toastr.min.js`,
+            `${vendorsRoot}/apexcharts/dist/apexcharts.min.js`,
+            `${vendorsRoot}/chart.js/dist/chart.js`,
+            `${vendorsRoot}/countup.js/dist/countUp.umd.js`,
+            `${vendorsRoot}/es6-promise-polyfill/promise.min.js`,
+            `${vendorsRoot}/sweetalert2/dist/sweetalert2.min.js`,
+            `${this.app}/static/js/vendors/plugins/sweetalert2.init.js`,
         ],
         vendorsCss: [
             `${vendorsRoot}/jquery-ui/dist/themes/base/jquery-ui.css`,
+            `${vendorsRoot}/select2/dist/css/select2.css`,
+            `${vendorsRoot}/@eonasdan/tempus-dominus/dist/css/tempus-dominus.min.css`,
+            `${vendorsRoot}/flatpickr/dist/flatpickr.css`,
+            `${this.app}/static/plugins/@form-validation/umd/styles/index.css`,
+            `${vendorsRoot}/bootstrap-daterangepicker/daterangepicker.css`,
+            `${vendorsRoot}/tiny-slider/dist/tiny-slider.css`,
+            `${vendorsRoot}/nouislider/dist/nouislider.css`,
+            `${vendorsRoot}/dropzone/dist/dropzone.css`,
+            `${vendorsRoot}/quill/dist/quill.snow.css`,
+            `${vendorsRoot}/@yaireo/tagify/dist/tagify.css`,
             `${vendorsRoot}/toastr/build/toastr.css`,
+            `${vendorsRoot}/apexcharts/dist/apexcharts.css`,
             `${vendorsRoot}/sweetalert2/dist/sweetalert2.css`,
+            `${vendorsRoot}/line-awesome/dist/line-awesome/css/line-awesome.css`,
+            `${vendorsRoot}/bootstrap-icons/font/bootstrap-icons.css`,
+            `${vendorsRoot}/@fortawesome/fontawesome-free/css/all.min.css`,
         ],
         app: this.app,
         templates: `${this.app}/templates`,
@@ -97,7 +148,7 @@ function vendorStyles() {
     return src(paths.vendorsCss, {sourcemaps: true})
         .pipe(plumber()) // Checks for errors
         .pipe(postcss(processCss))
-        .pipe(concat('vendors.css'))
+        .pipe(concat('vendors.bundle.css'))
         .pipe(dest(paths.css))
         .pipe(rename({suffix: '.min'}))
         .pipe(postcss(minifyCss)) // Minifies the result
@@ -117,7 +168,7 @@ function scripts() {
 // Vendor Javascript minification
 function vendorScripts() {
     return src(paths.vendorsJs, {sourcemaps: true})
-        .pipe(concat('vendors.js'))
+        .pipe(concat('vendors.bundle.js'))
         .pipe(dest(paths.js))
         .pipe(plumber()) // Checks for errors
         .pipe(uglify()) // Minifies the js
