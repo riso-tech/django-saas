@@ -148,7 +148,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#middleware
 MIDDLEWARE = [
-    "django_tenants.middleware.main.TenantMainMiddleware",  # Must be first
+    "one.business.middlewares.TenantMainMiddleware",  # Must be first
     "django.middleware.security.SecurityMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -364,8 +364,9 @@ SPECTACULAR_SETTINGS = {
 }
 # Django Tenants
 # ------------------------------------------------------------------------------
-TENANT_MODEL = "business.Client"
+TENANT_MODEL = "business.Business"
 TENANT_DOMAIN_MODEL = "business.Domain"
+SHOW_PUBLIC_IF_NO_TENANT_FOUND = True
 
 # Flatpage
 # ------------------------------------------------------------------------------
