@@ -72,7 +72,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 # ------------------------------------------------------------------------------
 SHARED_APPS = [
     # Override django.contrib.admin
-    "one.grappelli",
+    "one.libraries.grappelli",
     # Shared apps
     "django_tenants",
     "one.business",
