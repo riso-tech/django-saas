@@ -1,14 +1,15 @@
 import pytest
 from django.urls import reverse
-from django_tenants.test.cases import FastTenantTestCase as TestCase
 from django_tenants.test.client import TenantClient as Client
 
 from one.users.models import User
+from tests.cases import FastTenantTestCase as TestCase
 
 
 class TestSwagger(TestCase):
     def setUp(self):
         super().setUp()  # required
+
         self.admin_user = User.objects.create_superuser("Superuser001", "superuser001@example.com", "superuser001")
         self.user = User.objects.create_user("admin", "admin@example.com", "admin")
         self.admin_client = Client(self.tenant)

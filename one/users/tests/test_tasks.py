@@ -1,10 +1,10 @@
 import pytest
 from celery.result import EagerResult
 from django.test.utils import override_settings
-from django_tenants.test.cases import FastTenantTestCase as TestCase
 
 from one.users.models import User
 from one.users.tasks import get_users_count
+from tests.cases import FastTenantTestCase as TestCase
 
 pytestmark = pytest.mark.django_db
 
