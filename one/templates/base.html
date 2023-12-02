@@ -42,25 +42,7 @@
       class="app-default">
 <!--layout-partial:partials/theme-mode/_init.html-->
 <!--begin::Theme mode setup on page load-->
-<script>
-  var defaultThemeMode = "light";
-  var themeMode;
-  if (document.documentElement) {
-    if (document.documentElement.hasAttribute("data-bs-theme-mode")) {
-      themeMode = document.documentElement.getAttribute("data-bs-theme-mode");
-    } else {
-      if (localStorage.getItem("data-bs-theme") !== null) {
-        themeMode = localStorage.getItem("data-bs-theme");
-      } else {
-        themeMode = defaultThemeMode;
-      }
-    }
-    if (themeMode === "system") {
-      themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    }
-    document.documentElement.setAttribute("data-bs-theme", themeMode);
-  }
-</script>
+{% include 'partials/theme-mode/_init.html' %}
 <!--end::Theme mode setup on page load-->
 
 <!--layout-partial:layout/_default.html-->
@@ -99,6 +81,7 @@
           </div>
           <!--end::Logo and search-->
           <!--layout-partial:layout/partials/header/__topbar.html-->
+          {% include 'layout/partials/header/__topbar.html' %}
         </div>
         <!--end::Header primary container-->
       </div>
@@ -347,7 +330,7 @@
       "debug": false,
       "newestOnTop": true,
       "progressBar": true,
-      "positionClass": "toast-top-center",
+      "positionClass": "toastr-top-center",
       "preventDuplicates": false,
       "showDuration": "300",
       "hideDuration": "1000",

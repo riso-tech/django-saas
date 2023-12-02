@@ -1,3 +1,4 @@
+{% load static %}
 <!--begin::Navbar-->
 <div class="app-navbar">
   <!--begin::Notifications-->
@@ -24,8 +25,12 @@
       data-kt-menu-attach="parent"
       data-kt-menu-placement="bottom-end"
     >
-      <i class="ki-duotone ki-notification-status fs-1"><span class="path1"></span><span class="path2"></span><span
-        class="path3"></span><span class="path4"></span></i>
+      <i class="ki-duotone ki-notification-status fs-1">
+        <span class="path1"></span>
+        <span class="path2"></span>
+        <span class="path3"></span>
+        <span class="path4"></span>
+      </i>
     </div>
     <!--layout-partial:partials/menus/_quick-links-menu.html-->
     <!--end::Menu wrapper-->
@@ -48,7 +53,7 @@
          data-kt-menu-attach="parent"
          data-kt-menu-placement="bottom-end"
     >
-      <img class="symbol symbol-35px" src="assets/media/avatars/300-3.jpg" alt="user"/>
+      <img class="symbol symbol-35px" src="{% static 'media/avatars/300-3.jpg' %}" alt="user"/>
     </div>
     <!--layout-partial:partials/menus/_user-account-menu.html-->
     <!--end::Menu wrapper-->
@@ -57,8 +62,12 @@
   <!--begin::Primary button-->
   <a href="#" class="btn btn-flex btn-center btn-success btn-sm align-self-center p-3 px-lg-4 h-35px"
      data-bs-toggle="modal" data-bs-target="#kt_modal_invite_friends">
-    <i class="ki-duotone ki-plus-square fs-2 p-0 m-0"><span class="path1"></span><span class="path2"></span><span
-      class="path3"></span></i> <span class="ms-2 d-none d-lg-block">Invite</span>
+    <i class="ki-duotone ki-plus-square fs-2 p-0 m-0">
+      <span class="path1"></span>
+      <span class="path2"></span>
+      <span class="path3"></span>
+    </i>
+    <span class="ms-2 d-none d-lg-block">Invite</span>
   </a>
   <!--end::Primary button-->
   <!--begin::Header menu toggle-->
