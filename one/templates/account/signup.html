@@ -1,27 +1,96 @@
 {% extends "account/base.html" %}
 
 {% load i18n %}
-{% load crispy_forms_tags %}
 
 {% block head_title %}
   {% translate "Signup" %}
 {% endblock head_title %}
+
 {% block inner %}
-  <h1>{% translate "Sign Up" %}</h1>
-  <p>
-    {% blocktranslate %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktranslate %}
-  </p>
-  <form class="signup"
-        id="signup_form"
-        method="post"
-        action="{% url 'account_signup' %}">
-    {% csrf_token %}
-    {{ form|crispy }}
-    {% if redirect_field_value %}
-      <input type="hidden"
-             name="{{ redirect_field_name }}"
-             value="{{ redirect_field_value }}" />
-    {% endif %}
-    <button class="btn btn-primary" type="submit">{% translate "Sign Up" %} »</button>
-  </form>
+  <div class="d-flex flex-center flex-column flex-column-fluid">
+    <!--begin::Wrapper-->
+    <div class="w-lg-500px p-10 p-lg-15 mx-auto">
+      <!--begin::Form-->
+      <form class="form w-100" method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        <!--begin::Heading-->
+        <div class="text-center mb-10">
+          <!--begin::Title-->
+          <h1 class="text-dark mb-3">{% translate "Sign Up" %}</h1>
+          <!--end::Title-->
+          <!--begin::Link-->
+          <div class="text-gray-400 fw-semibold fs-4">
+            {% blocktranslate %}
+              Already have an account? Then please <a href="{{ login_url }}">sign in</a>.
+            {% endblocktranslate %}
+          </div>
+          <!--end::Link-->
+        </div>
+        <!--begin::Heading-->
+
+        <!--begin::Input group-->
+        {% if redirect_field_value %}
+          <input type="hidden"
+                 name="{{ redirect_field_name }}"
+                 value="{{ redirect_field_value }}"/>
+        {% endif %}
+        <!--end::Input group-->
+
+        {{ form }}
+
+        <!--begin::Input group-->
+        <div class="fv-row mb-10">
+          <!--begin::Label-->
+          <label class="form-label fs-6 fw-bold text-dark">Email</label>
+          <!--end::Label-->
+          <!--begin::Input-->
+          <input class="form-control form-control-lg form-control-solid" type="text" name="email" autocomplete="off"/>
+          <!--end::Input-->
+        </div>
+        <!--end::Input group-->
+        <!--begin::Input group-->
+        <div class="fv-row mb-10">
+          <!--begin::Wrapper-->
+          <div class="d-flex flex-stack mb-2">
+            <!--begin::Label-->
+            <label class="form-label fw-bold text-dark fs-6 mb-0">Password</label>
+            <!--end::Label-->
+            <!--begin::Link-->
+            <a href="{% url 'account_reset_password' %}" class="link-primary fs-6 fw-bold">Forgot Password ?</a>
+            <!--end::Link-->
+          </div>
+          <!--end::Wrapper-->
+          <!--begin::Input-->
+          <input class="form-control form-control-lg form-control-solid" type="password" name="password"
+                 autocomplete="off"/>
+          <!--end::Input-->
+        </div>
+        <!--end::Input group-->
+        <!--begin::Input group=-->
+        <div class="fv-row mb-10">
+          <div class="form-check form-check-custom form-check-solid form-check-inline">
+            <input class="form-check-input" type="checkbox" name="toc" value="1"/>
+            <label class="form-check-label fw-semibold text-gray-700 fs-6">I Agree &
+              <a href="#" class="ms-1 link-primary">Terms and conditions</a>.</label>
+          </div>
+        </div>
+        <!--end::Input group=-->
+
+        <!--begin::Actions-->
+        <div class="text-center">
+          <!--begin::Submit button-->
+          <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
+            <span class="indicator-label">{% translate "Sign Up" %}</span>
+            <span class="indicator-progress">{% translate "Please wait" %}...
+              <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </span>
+          </button>
+          <!--end::Submit button-->
+        </div>
+        <!--end::Actions-->
+      </form>
+      <!--end::Form-->
+    </div>
+    <!--end::Wrapper-->
+  </div>
 {% endblock inner %}

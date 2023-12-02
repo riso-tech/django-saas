@@ -17,8 +17,8 @@
   <!--begin::Stylesheet-->
   <!--begin::Vendor Stylesheets(used for this page only)-->
   {% block css %}
-    <link href="{% static 'css/vendors.bundle.css' %}" rel="stylesheet" type="text/css"/>
-    <link href="{% static 'css/theme.bundle.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/vendors.bundle.min.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/theme.bundle.min.css' %}" rel="stylesheet" type="text/css"/>
   {% endblock css %}
   <!--end::Vendor Stylesheets-->
 
@@ -45,7 +45,7 @@
     {% block content %}
 
       <!--begin::Aside-->
-      <div class="d-flex flex-column flex-lg-row-auto bg-primary w-xl-600px positon-xl-relative">
+      <div class="d-flex flex-column flex-lg-row-auto bg-primary w-xl-600px position-xl-relative">
         <!--begin::Wrapper-->
         <div class="d-flex flex-column position-xl-fixed top-0 bottom-0 w-xl-600px scroll-y">
           <!--begin::Header-->
@@ -56,11 +56,12 @@
             </a>
             <!--end::Logo-->
             <!--begin::Title-->
-            <h1 class="d-none d-lg-block fw-bold text-white fs-2qx pb-5 pb-md-10">Welcome to Oswald HTML Free</h1>
+            <h1 class="d-none d-lg-block fw-bold text-white fs-2qx pb-5 pb-md-10">{% trans 'Welcome to Django-SaaS' %}</h1>
             <!--end::Title-->
             <!--begin::Description-->
-            <p class="d-none d-lg-block fw-semibold fs-2 text-white">Plan your blog post by choosing a topic creating
-              <br/>an outline and checking facts</p>
+            <p class="d-none d-lg-block fw-semibold fs-2 text-white">
+              {% blocktrans %}Plan your blog post by choosing a topic creating <br/>an outline and checking facts{% endblocktrans %}
+            </p>
             <!--end::Description-->
           </div>
           <!--end::Header-->
@@ -85,13 +86,13 @@
           <!--begin::Links-->
           <div class="d-flex flex-center fw-semibold fs-6">
             <a class="text-muted text-hover-primary px-2" target="_blank" href="#">
-              About
+              {% trans 'About' %}
             </a>
             <a class="text-muted text-hover-primary px-2" target="_blank" href="#">
-              Support
+              {% trans 'Support' %}
             </a>
             <a class="text-muted text-hover-primary px-2" target="_blank" href="#">
-              Purchase
+              {% trans 'Purchase' %}
             </a>
           </div>
           <!--end::Links-->
@@ -108,8 +109,8 @@
 <!--begin::Javascript-->
 <!--begin::Global Javascript Bundle(mandatory for all pages)-->
 {% block javascript %}
-  <script src="{% static 'js/vendors.bundle.js' %}"></script>
-  <script src="{% static 'js/theme.bundle.js' %}"></script>
+  <script src="{% static 'js/vendors.bundle.min.js' %}"></script>
+  <script src="{% static 'js/theme.bundle.min.js' %}"></script>
 {% endblock javascript %}
 <!--end::Global Javascript Bundle-->
 
