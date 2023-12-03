@@ -220,11 +220,17 @@
           }
         }
       );
-      $(form.querySelector('[name="email"]')).on('change', function () {
-        validator.revalidateField('email');
-      });
+
     }
     initValidation();
 
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      validator.validate().then(function (status) {
+        if (status === 'Valid') {
+          form.submit();
+        }
+      });
+    })
   </script>
 {% endblock inline_javascript %}
