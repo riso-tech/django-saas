@@ -1,14 +1,199 @@
-{% extends "base.html" %}
+{% load static i18n %}
+<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
+<!--begin::Head-->
+<head>
+  <title>
+    {% block title %}{% block head_title %}{% endblock head_title %} - Django SaaS{% endblock title %}
+  </title>
+  <meta charset="utf-8"/>
 
-{% block title %}
-  {% block head_title %}
-  {% endblock head_title %}
-{% endblock title %}
-{% block content %}
-  <div class="row">
-    <div class="col-md-6 offset-md-3">
-      {% block inner %}
-      {% endblock inner %}
-    </div>
+  <link rel="shortcut icon" href="{% static 'media/logos/favicon.ico' %}"/>
+  <!--begin::Fonts(mandatory for all pages)-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"/>
+  <!--end::Fonts-->
+
+  <!--begin::Stylesheet-->
+  <!--begin::Vendor Stylesheets(used for this page only)-->
+  {% block css %}
+    <link href="{% static 'css/vendors.bundle.min.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/theme.bundle.min.css' %}" rel="stylesheet" type="text/css"/>
+  {% endblock css %}
+  <!--end::Vendor Stylesheets-->
+
+  <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+  <!--end::Global Stylesheets Bundle-->
+  <!--end::Stylesheet-->
+
+  <script>
+    // Frame-busting to prevent site from being loaded within a frame without permission (click-jacking)
+    if (window.top !== window.self) {
+      window.top.location.replace(window.self.location.href);
+    }
+  </script>
+</head>
+<!--end::Head-->
+<!--begin::Body-->
+<body id="kt_body" class="app-blank">
+{% include 'partials/theme-mode/_init.html' %}
+
+<!--begin::Root-->
+<div class="d-flex flex-column flex-root" id="kt_app_root">
+  <!--begin::Authentication -->
+  <div class="d-flex flex-column flex-lg-row flex-column-fluid">
+    {% block content %}
+      <!--begin::Aside-->
+      <div class="d-flex flex-column flex-lg-row-auto bg-primary w-xl-600px position-xl-relative">
+        <!--begin::Wrapper-->
+        <div class="d-flex flex-column position-xl-fixed top-0 bottom-0 w-xl-600px scroll-y">
+          <!--begin::Header-->
+          <div class="d-flex flex-row-fluid flex-column text-center p-5 p-lg-10 pt-lg-20">
+            <!--begin::Logo-->
+            <a href="{% url 'home' %}" class="py-2 py-lg-20">
+              <img alt="Logo" src="{% static 'media/logos/default.svg' %}" class="h-40px h-lg-50px"/>
+            </a>
+            <!--end::Logo-->
+            <!--begin::Title-->
+            <h1 class="d-none d-lg-block fw-bold text-white fs-2qx pb-5 pb-md-10">{% trans 'Welcome to Django-SaaS' %}</h1>
+            <!--end::Title-->
+            <!--begin::Description-->
+            <p class="d-none d-lg-block fw-semibold fs-2 text-white">
+              {% blocktrans %}Plan your blog post by choosing a topic creating <br/>an outline and checking facts{% endblocktrans %}
+            </p>
+            <!--end::Description-->
+          </div>
+          <!--end::Header-->
+          <!--begin::Illustration-->
+          <div
+            class="d-none d-lg-block d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-100px min-h-lg-350px"
+            style="background-image: url({% static 'media/illustrations/sketchy-1/17.png' %})">
+          </div>
+          <!--end::Illustration-->
+        </div>
+        <!--end::Wrapper-->
+      </div>
+      <!--begin::Aside-->
+      <!--begin::Body-->
+      <div class="d-flex flex-column flex-lg-row-fluid py-10">
+        <!--begin::Content-->
+        {% block inner %}
+
+        {% endblock inner %}
+        <!--end::Content-->
+        <!--begin::Footer-->
+        <div class="d-flex flex-center flex-wrap fs-6 p-5 pb-0">
+          <!--begin::Links-->
+          <div class="d-flex flex-center fw-semibold fs-6">
+            <a class="text-muted text-hover-primary px-2" target="_blank" href="#">
+              {% trans 'About' %}
+            </a>
+            <a class="text-muted text-hover-primary px-2" target="_blank" href="#">
+              {% trans 'Support' %}
+            </a>
+            <a class="text-muted text-hover-primary px-2" target="_blank" href="#">
+              {% trans 'Purchase' %}
+            </a>
+          </div>
+          <!--end::Links-->
+        </div>
+        <!--end::Footer-->
+      </div>
+      <!--end::Body-->
+    {% endblock content %}
   </div>
-{% endblock content %}
+  <!--end::Authentication-->
+</div>
+<!--end::Root-->
+
+<!--begin::Javascript-->
+<!--begin::Global Javascript Bundle(mandatory for all pages)-->
+{% block javascript %}
+  <script src="{% static 'js/vendors.bundle.min.js' %}"></script>
+  <script src="{% static 'js/theme.bundle.min.js' %}"></script>
+{% endblock javascript %}
+<!--end::Global Javascript Bundle-->
+
+<!--begin::Vendors Javascript(used for this page only)-->
+<!--end::Vendors Javascript-->
+
+<!--begin::Global Custom Javascript Bundle(mandatory for all pages)-->
+<script>
+  toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": true,
+    "progressBar": true,
+    "positionClass": "toastr-top-center",
+    "preventDuplicates": false,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  };
+
+  $(function () {
+    $(document).ajaxError(function (event, jqXHR, settings, errorThrown) {
+      toastr.error(`${jqXHR.status}`, `${errorThrown}`);
+    });
+  });
+</script>
+
+{% if messages %}
+  {% for message in messages %}
+    <script>
+      {% if message.tags == "success" %}
+        toastr.success('{{ message|safe }}', "{% trans 'Success' %}");
+      {% elif message.tags == "info" %}
+        toastr.info('{{ message|safe }}', "{% trans 'Info' %}");
+      {% elif message.tags == "warning" %}
+        toastr.warning('{{ message|safe }}', "{% trans 'Warning' %}");
+      {% else %}
+        toastr.error('{{ message|safe }}', "{% trans 'Error' %}");
+      {% endif %}
+    </script>
+  {% endfor %}
+{% endif %}
+
+{% if form.errors %}
+  <script id="id_form_error" type="application/json">
+      {{ form.errors.as_json }}
+    </script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const form_errors = JSON.parse(document.getElementById('id_form_error').textContent.replaceAll('&quot;', '"'));
+      $.each(form_errors, function (key, value) {
+        $.each(value, function (index, _value) {
+          if (key === "__all__") {
+            toastr.error(_value.message, "{% translate 'Error' %}");
+          } else {
+            toastr.error(_value.message, key);
+          }
+        });
+      });
+    });
+  </script>
+{% endif %}
+<!--end::Global Javascript Bundle-->
+
+<!--begin::Custom Javascript(used for this page only)-->
+{% block inline_javascript %}
+  {% comment %}
+    Script tags with only code, no src (defer by default). To run
+    with a "defer" so that you run inline code:
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            /* Run whatever you want */
+        });
+    </script>
+    {% endcomment %}
+{% endblock inline_javascript %}
+<!--end::Custom Javascript-->
+<!--end::Javascript-->
+</body>
+<!--end::Body-->
+</html>

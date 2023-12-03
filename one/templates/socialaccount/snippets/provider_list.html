@@ -1,0 +1,37 @@
+{% load static allauth socialaccount %}
+{% get_providers as socialaccount_providers %}
+{% if socialaccount_providers %}
+  {% element provider_list %}
+    {% for provider in socialaccount_providers %}
+      {% if provider.id == "openid" %}
+        {% for brand in provider.get_brands %}
+          {% provider_login_url provider openid=brand.openid_url process=process as href %}
+          {% element provider name=brand.name provider_id=provider.id href=href %}
+          {% endelement %}
+        {% endfor %}
+      {% endif %}
+      {% provider_login_url provider process=process scope=scope auth_params=auth_params as href %}
+      {% element provider name=provider.name provider_id=provider.id href=href %}
+      {% endelement %}
+    {% endfor %}
+    <!--begin::Google link-->
+    <a href="#" class="btn btn-flex flex-center btn-light btn-lg w-100 mb-5">
+      <img alt="Logo" src="{% static 'media/svg/brand-logos/google-icon.svg' %}" class="h-20px me-3"/>
+      Continue with Google
+    </a>
+    <!--end::Google link-->
+    <!--begin::Google link-->
+    <a href="#" class="btn btn-flex flex-center btn-light btn-lg w-100 mb-5">
+      <img alt="Logo" src="{% static 'media/svg/brand-logos/facebook-4.svg' %}" class="h-20px me-3"/>
+      Continue with Facebook
+    </a>
+    <!--end::Google link-->
+    <!--begin::Google link-->
+    <a href="#" class="btn btn-flex flex-center btn-light btn-lg w-100">
+      <img alt="Logo" src="{% static 'media/svg/brand-logos/apple-black.svg' %}"
+           class="theme-light-show h-20px me-3"/>
+      <img alt="Logo" src="{% static 'media/svg/brand-logos/apple-black-dark.svg' %}"
+           class="theme-dark-show h-20px me-3"/>Continue with Apple</a>
+    <!--end::Google link-->
+  {% endelement %}
+{% endif %}

@@ -1,0 +1,76 @@
+{% load static %}
+<!--begin::Navbar-->
+<div class="app-navbar">
+  <!--begin::Notifications-->
+  <div class="app-navbar-item ms-1">
+    <!--begin::Menu- wrapper-->
+    <div
+      class="btn btn-icon btn-color-white btn-active-color-primary"
+      data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
+      data-kt-menu-attach="parent"
+      data-kt-menu-placement="bottom-end"
+    >
+      <i class="ki-duotone ki-graph-3 fs-1"><span class="path1"></span><span class="path2"></span></i>
+    </div>
+    <!--layout-partial:partials/menus/_notifications-menu.html-->
+    <!--end::Menu wrapper-->
+  </div>
+  <!--end::Notifications-->
+  <!--begin::Quick links-->
+  <div class="app-navbar-item ms-1">
+    <!--begin::Menu-wrapper-->
+    <div
+      class="btn btn-icon btn-color-white btn-active-color-primary"
+      data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
+      data-kt-menu-attach="parent"
+      data-kt-menu-placement="bottom-end"
+    >
+      <i class="ki-duotone ki-notification-status fs-1">
+        <span class="path1"></span>
+        <span class="path2"></span>
+        <span class="path3"></span>
+        <span class="path4"></span>
+      </i>
+    </div>
+    <!--layout-partial:partials/menus/_quick-links-menu.html-->
+    <!--end::Menu wrapper-->
+  </div>
+  <!--end::Quick links-->
+  <!--begin::Chat-->
+  <div class="app-navbar-item ms-1">
+    <!--begin::Menu wrapper-->
+    <div class="btn btn-icon btn-color-white btn-active-color-primary" id="kt_drawer_chat_toggle">
+      <i class="ki-duotone ki-abstract-36 fs-1"><span class="path1"></span><span class="path2"></span></i>
+    </div>
+    <!--end::Menu wrapper-->
+  </div>
+  <!--end::Chat-->
+  <!--begin::User menu-->
+  <div class="app-navbar-item ms-3 me-6" id="kt_header_user_menu_toggle">
+    <!--begin::Menu wrapper-->
+    <div class="cursor-pointer symbol symbol-35px"
+         data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
+         data-kt-menu-attach="parent"
+         data-kt-menu-placement="bottom-end"
+    >
+      <img class="symbol symbol-35px" src="{% static 'media/avatars/300-3.jpg' %}" alt="user"/>
+    </div>
+    <!--layout-partial:partials/menus/_user-account-menu.html-->
+    <!--end::Menu wrapper-->
+  </div>
+  <!--end::User menu-->
+  <!--begin::Primary button-->
+  <a href="#" class="btn btn-flex btn-center btn-success btn-sm align-self-center p-3 px-lg-4 h-35px"
+     data-bs-toggle="modal" data-bs-target="#kt_modal_invite_friends">
+    <i class="ki-duotone ki-plus-square fs-2 p-0 m-0">
+      <span class="path1"></span>
+      <span class="path2"></span>
+      <span class="path3"></span>
+    </i>
+    <span class="ms-2 d-none d-lg-block">Invite</span>
+  </a>
+  <!--end::Primary button-->
+  <!--begin::Header menu toggle-->
+  <!--end::Header menu toggle-->
+</div>
+<!--end::Navbar-->

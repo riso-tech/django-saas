@@ -1,0 +1,19 @@
+{% load i18n %}
+{% load account %}
+{% load allauth %}
+
+
+<!--begin::Alert-->
+<div class="alert alert-warning d-flex align-items-center p-5">
+  <!--begin::Wrapper-->
+  <div class="d-flex flex-column">
+    <!--begin::Content-->
+    <span class="text-gray-600">
+      {% user_display user as user_display %}
+      {% blocktranslate %}You are already logged in as {{ user_display }}.{% endblocktranslate %}
+    </span>
+    <!--end::Content-->
+  </div>
+  <!--end::Wrapper-->
+</div>
+<!--end::Alert-->
