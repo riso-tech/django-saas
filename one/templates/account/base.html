@@ -43,7 +43,6 @@
   <!--begin::Authentication -->
   <div class="d-flex flex-column flex-lg-row flex-column-fluid">
     {% block content %}
-
       <!--begin::Aside-->
       <div class="d-flex flex-column flex-lg-row-auto bg-primary w-xl-600px position-xl-relative">
         <!--begin::Wrapper-->
@@ -68,7 +67,8 @@
           <!--begin::Illustration-->
           <div
             class="d-none d-lg-block d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-100px min-h-lg-350px"
-            style="background-image: url({% static 'media/illustrations/sketchy-1/17.png' %})"></div>
+            style="background-image: url({% static 'media/illustrations/sketchy-1/17.png' %})">
+          </div>
           <!--end::Illustration-->
         </div>
         <!--end::Wrapper-->
@@ -158,7 +158,6 @@
     </script>
   {% endfor %}
 {% endif %}
-
 
 {% if form.errors %}
   <script id="id_form_error" type="application/json">
