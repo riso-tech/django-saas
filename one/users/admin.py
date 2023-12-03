@@ -23,6 +23,11 @@ if "rest_framework.authtoken" in settings.INSTALLED_APPS:
 
     admin.site.unregister(TokenProxy)
 
+if "django.contrib.sites" in settings.INSTALLED_APPS:
+    from django.contrib.sites.models import Site
+
+    admin.site.unregister(Site)
+
 
 @admin.register(User)
 class UserAdmin(auth_admin.UserAdmin):
