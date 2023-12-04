@@ -10,6 +10,12 @@ from one.utils.call_command import call_command
 
 
 @requires_csrf_token
+def first_business_not_found(request, context):
+    template_name = "first_business_not_found.html"
+    return render(request, template_name, context)
+
+
+@requires_csrf_token
 def business_not_found(request, context):
     template_name = "business_not_found.html"
     return render(request, template_name, context)
@@ -21,9 +27,9 @@ class TenantMainMiddleware(BaseTenantMainMiddleware):
     def process_request(self, request):
         if settings.STATIC_URL not in request.path:
             tenant_model = get_tenant_model()
-            if not tenant_model.objects.exclude(schema_name=get_public_schema_name()).exists():
-                context = {}
-
+            context = {}
+            qs = tenant_model.objects.exclude(schema_name=get_public_schema_name())
+            if not qs.exists():
                 if request.method == "POST":
                     params = request.POST
                     schema_name = params["schema_name"]
@@ -69,6 +75,14 @@ class TenantMainMiddleware(BaseTenantMainMiddleware):
 
                         return redirect(reverse("home"))
 
+                return first_business_not_found(request, context)
+            elif not qs.filter(domains__domain=self.hostname_from_request(request)).exists():
+                try:
+                    default_tenant = tenant_model.objects.get(schema_name="default")
+                    context["default_url"] = default_tenant.domains.filter(is_primary=True).first().domain
+                    context["default_name"] = default_tenant.name.title()
+                except Exception as e:  # noqa
+                    context["exception"] = str(e)
                 return business_not_found(request, context)
 
-            super().process_request(request)
+        super().process_request(request)
