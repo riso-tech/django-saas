@@ -42,7 +42,7 @@
       class="app-default">
 <!--layout-partial:partials/theme-mode/_init.html-->
 <!--begin::Theme mode setup on page load-->
-{% include 'partials/theme-mode/_init.html' %}
+{% include 'partials/theme-mode/init.html' %}
 <!--end::Theme mode setup on page load-->
 
 <!--layout-partial:layout/_default.html-->
@@ -81,7 +81,7 @@
           </div>
           <!--end::Logo and search-->
           <!--layout-partial:layout/partials/header/__topbar.html-->
-          {% include 'layout/partials/header/__topbar.html' %}
+          {% include 'layout/partials/header/topbar.html' %}
         </div>
         <!--end::Header primary container-->
       </div>
@@ -110,157 +110,159 @@
         <div class="app-main flex-column flex-row-fluid " id="kt_app_main">
           <!--begin::Content wrapper-->
           <div class="d-flex flex-column flex-column-fluid">
-            <!--layout-partial:layout/partials/_toolbar.html-->
-            <!--begin::Toolbar-->
-            <div id="kt_app_toolbar" class="app-toolbar  pt-lg-9 pt-6 ">
-              <!--begin::Toolbar container-->
-              <div id="kt_app_toolbar_container" class="app-container  container-fluid d-flex flex-stack flex-wrap ">
-                <!--begin::Toolbar wrapper-->
-                <div class="d-flex flex-stack flex-wrap gap-4 w-100">
-                  <!--layout-partial:layout/partials/_page-title.html-->
-                  <!--begin::Page title-->
-                  <div class="page-title d-flex flex-column gap-3 me-3">
-                    <!--begin::Title-->
-                    <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bolder fs-2x my-0">
-                      Dashboard
-                    </h1>
-                    <!--end::Title-->
-                    <!--begin::Breadcrumb-->
-                    <ul class="breadcrumb breadcrumb-separatorless fw-semibold">
-                      <!--begin::Item-->
-                      <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
-                        <a href="?page=index" class="text-gray-500 text-hover-primary">
-                          <i class="ki-duotone ki-home fs-3 text-gray-400 me-n1"></i>
-                        </a>
-                      </li>
-                      <!--end::Item-->
-                      <!--begin::Item-->
-                      <li class="breadcrumb-item">
-                        <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1"></i></li>
-                      <!--end::Item-->
-                      <!--begin::Item-->
-                      <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
-                        Dashboards
-                      </li>
-                      <!--end::Item-->
-                      <!--begin::Item-->
-                      <li class="breadcrumb-item">
-                        <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1"></i></li>
-                      <!--end::Item-->
-                      <!--begin::Item-->
-                      <li class="breadcrumb-item text-gray-500">
-                        Default
-                      </li>
-                      <!--end::Item-->
-                    </ul>
-                    <!--end::Breadcrumb-->
-                  </div>
-                  <!--end::Page title-->
-                  <!--begin::Actions-->
-                  <div class="d-flex align-items-center gap-3 gap-lg-5">
-                    <!--begin::Secondary button-->
-                    <div class="m-0">
-                      <a href="#" class="btn btn-flex btn-sm btn-color-gray-700 bg-body fw-bold px-4"
-                         data-bs-toggle="modal"
-                         data-bs-target="#kt_modal_create_project">
-                        New Project
-                      </a>
+            {% block wrapper %}
+              <!--layout-partial:layout/partials/_toolbar.html-->
+              <!--begin::Toolbar-->
+              <div id="kt_app_toolbar" class="app-toolbar  pt-lg-9 pt-6 ">
+                <!--begin::Toolbar container-->
+                <div id="kt_app_toolbar_container" class="app-container  container-fluid d-flex flex-stack flex-wrap ">
+                  <!--begin::Toolbar wrapper-->
+                  <div class="d-flex flex-stack flex-wrap gap-4 w-100">
+                    <!--layout-partial:layout/partials/_page-title.html-->
+                    <!--begin::Page title-->
+                    <div class="page-title d-flex flex-column gap-3 me-3">
+                      <!--begin::Title-->
+                      <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bolder fs-2x my-0">
+                        Dashboard
+                      </h1>
+                      <!--end::Title-->
+                      <!--begin::Breadcrumb-->
+                      <ul class="breadcrumb breadcrumb-separatorless fw-semibold">
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
+                          <a href="?page=index" class="text-gray-500 text-hover-primary">
+                            <i class="ki-duotone ki-home fs-3 text-gray-400 me-n1"></i>
+                          </a>
+                        </li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item">
+                          <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1"></i></li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
+                          Dashboards
+                        </li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item">
+                          <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1"></i></li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item text-gray-500">
+                          Default
+                        </li>
+                        <!--end::Item-->
+                      </ul>
+                      <!--end::Breadcrumb-->
                     </div>
-                    <!--end::Secondary button-->
-                    <!--begin::Primary button-->
-                    <a href="#" class="btn btn-flex btn-center btn-dark btn-sm px-4" data-bs-toggle="modal"
-                       data-bs-target="#kt_modal_invite_friends">
-                      Reports
-                    </a>
-                    <!--end::Primary button-->
+                    <!--end::Page title-->
+                    <!--begin::Actions-->
+                    <div class="d-flex align-items-center gap-3 gap-lg-5">
+                      <!--begin::Secondary button-->
+                      <div class="m-0">
+                        <a href="#" class="btn btn-flex btn-sm btn-color-gray-700 bg-body fw-bold px-4"
+                           data-bs-toggle="modal"
+                           data-bs-target="#kt_modal_create_project">
+                          New Project
+                        </a>
+                      </div>
+                      <!--end::Secondary button-->
+                      <!--begin::Primary button-->
+                      <a href="#" class="btn btn-flex btn-center btn-dark btn-sm px-4" data-bs-toggle="modal"
+                         data-bs-target="#kt_modal_invite_friends">
+                        Reports
+                      </a>
+                      <!--end::Primary button-->
+                    </div>
+                    <!--end::Actions-->
                   </div>
-                  <!--end::Actions-->
+                  <!--end::Toolbar wrapper-->
                 </div>
-                <!--end::Toolbar wrapper-->
+                <!--end::Toolbar container-->
               </div>
-              <!--end::Toolbar container-->
-            </div>
-            <!--end::Toolbar-->
-            <!--layout-partial:layout/partials/_content.html-->
-            <!--begin::Content-->
-            <div id="kt_app_content" class="app-content  pb-0 ">
-              <!--begin::Row-->
-              <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
-                <!--begin::Col-->
-                <div class="col-xl-4">
-                  <!--layout-partial:partials/widgets/charts/_widget-35.html-->
+              <!--end::Toolbar-->
+              <!--layout-partial:layout/partials/_content.html-->
+              <!--begin::Content-->
+              <div id="kt_app_content" class="app-content  pb-0 ">
+                <!--begin::Row-->
+                <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
+                  <!--begin::Col-->
+                  <div class="col-xl-4">
+                    <!--layout-partial:partials/widgets/charts/_widget-35.html-->
+                  </div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-xl-8">
+                    <!--layout-partial:partials/widgets/tables/_widget-14.html-->
+                  </div>
+                  <!--end::Col-->
                 </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-xl-8">
-                  <!--layout-partial:partials/widgets/tables/_widget-14.html-->
+                <!--end::Row-->
+                <!--begin::Row-->
+                <div class="row gx-5 gx-xl-10 mb-5 mb-xl-10">
+                  <!--begin::Col-->
+                  <div class="col-lg-4 mb-5 mb-lg-0">
+                    <!--layout-partial:partials/widgets/charts/_widget-27.html-->
+                  </div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-lg-4 mb-5 mb-lg-0">
+                    <!--layout-partial:partials/widgets/charts/_widget-28.html-->
+                  </div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-lg-4">
+                    <!--layout-partial:partials/widgets/lists/_widget-9.html-->
+                  </div>
+                  <!--end::Col-->
                 </div>
-                <!--end::Col-->
+                <!--end::Row-->
+                <!--begin::Row-->
+                <div class="row gy-5 g-xl-10">
+                  <!--begin::Col-->
+                  <div class="col-xl-6 mb-xl-10">
+                    <!--layout-partial:partials/widgets/tables/_widget-2.html-->
+                  </div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-xl-6 mb-5 mb-xl-10">
+                    <!--layout-partial:partials/widgets/charts/_widget-4.html-->
+                  </div>
+                  <!--end::Col-->
+                </div>
+                <!--end::Row-->
+                <!--begin::Row-->
+                <div class="row gy-5 g-xl-10 mb-5 mb-xl-10">
+                  <!--begin::Col-->
+                  <div class="col-xl-4">
+                    <!--layout-partial:partials/widgets/lists/_widget-5.html-->
+                  </div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-xl-8">
+                    <!--layout-partial:partials/widgets/tables/_widget-5.html-->
+                  </div>
+                  <!--end::Col-->
+                </div>
+                <!--end::Row-->
+                <!--begin::Row-->
+                <div class="row g-5 g-xl-10">
+                  <!--begin::Col-->
+                  <div class="col-xl-8">
+                    <!--layout-partial:partials/widgets/tables/_widget-13.html-->
+                  </div>
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-xl-4">
+                    <!--layout-partial:partials/widgets/lists/_widget-23.html-->
+                  </div>
+                  <!--end::Col-->
+                </div>
+                <!--end::Row-->
               </div>
-              <!--end::Row-->
-              <!--begin::Row-->
-              <div class="row gx-5 gx-xl-10 mb-5 mb-xl-10">
-                <!--begin::Col-->
-                <div class="col-lg-4 mb-5 mb-lg-0">
-                  <!--layout-partial:partials/widgets/charts/_widget-27.html-->
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-lg-4 mb-5 mb-lg-0">
-                  <!--layout-partial:partials/widgets/charts/_widget-28.html-->
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-lg-4">
-                  <!--layout-partial:partials/widgets/lists/_widget-9.html-->
-                </div>
-                <!--end::Col-->
-              </div>
-              <!--end::Row-->
-              <!--begin::Row-->
-              <div class="row gy-5 g-xl-10">
-                <!--begin::Col-->
-                <div class="col-xl-6 mb-xl-10">
-                  <!--layout-partial:partials/widgets/tables/_widget-2.html-->
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-xl-6 mb-5 mb-xl-10">
-                  <!--layout-partial:partials/widgets/charts/_widget-4.html-->
-                </div>
-                <!--end::Col-->
-              </div>
-              <!--end::Row-->
-              <!--begin::Row-->
-              <div class="row gy-5 g-xl-10 mb-5 mb-xl-10">
-                <!--begin::Col-->
-                <div class="col-xl-4">
-                  <!--layout-partial:partials/widgets/lists/_widget-5.html-->
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-xl-8">
-                  <!--layout-partial:partials/widgets/tables/_widget-5.html-->
-                </div>
-                <!--end::Col-->
-              </div>
-              <!--end::Row-->
-              <!--begin::Row-->
-              <div class="row g-5 g-xl-10">
-                <!--begin::Col-->
-                <div class="col-xl-8">
-                  <!--layout-partial:partials/widgets/tables/_widget-13.html-->
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-xl-4">
-                  <!--layout-partial:partials/widgets/lists/_widget-23.html-->
-                </div>
-                <!--end::Col-->
-              </div>
-              <!--end::Row-->
-            </div>
-            <!--end::Content-->
+              <!--end::Content-->
+            {% endblock wrapper %}
           </div>
           <!--end::Content wrapper-->
           <!--layout-partial:layout/partials/_footer.html-->
