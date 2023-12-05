@@ -5,8 +5,9 @@ from celery.signals import before_task_publish, task_postrun, task_prerun
 
 from one.libraries.guid import clear_guid, get_guid, set_guid
 from one.libraries.guid.config import settings
-from one.libraries.guid.integrations.celery.context import celery_current, celery_parent
 from one.libraries.guid.utils import generate_guid
+
+from .context import celery_current, celery_parent
 
 if TYPE_CHECKING:
     from celery import Task

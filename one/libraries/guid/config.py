@@ -1,6 +1,4 @@
-# flake8: noqa: D102
 from collections import defaultdict
-from typing import Dict, List, Union
 
 from django.conf import settings as django_settings
 from django.core.exceptions import ImproperlyConfigured

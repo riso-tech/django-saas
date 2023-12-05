@@ -1,7 +1,7 @@
 from logging import Filter
 from typing import TYPE_CHECKING
 
-from one.libraries.guid.integrations.celery.context import celery_current, celery_parent
+from .context import celery_current, celery_parent
 
 if TYPE_CHECKING:
     from logging import LogRecord

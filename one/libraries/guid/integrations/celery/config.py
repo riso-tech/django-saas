@@ -5,7 +5,7 @@ from django.core.exceptions import ImproperlyConfigured
 from one.libraries.guid.integrations import SentryIntegration
 
 if TYPE_CHECKING:
-    from one.libraries.guid.integrations.celery import CeleryIntegration  # pragma: no cover
+    from one.libraries.guid.integrations import CeleryIntegration  # pragma: no cover
 
 
 class CeleryIntegrationSettings:
