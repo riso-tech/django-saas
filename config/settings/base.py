@@ -5,6 +5,8 @@ from pathlib import Path
 
 import environ
 
+from one.libraries.guid.integrations import CeleryIntegration as CorrelationCeleryIntegration
+
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 # one/
 APPS_DIR = BASE_DIR / "one"
@@ -102,6 +104,7 @@ TENANT_APPS = [
     "drf_spectacular",
     "meta",
     # Custom Apps
+    "one.libraries.guid",
     "one.users",
     "one.gateways.payments",
     "one.cms",
@@ -149,6 +152,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/dev/ref/settings/#middleware
 MIDDLEWARE = [
     "one.business.middlewares.TenantMainMiddleware",  # Must be first
+    "one.libraries.guid.middleware.guid_middleware",  # noqa
     "django.middleware.security.SecurityMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -371,6 +375,17 @@ SHOW_PUBLIC_IF_NO_TENANT_FOUND = True
 # Flatpage
 # ------------------------------------------------------------------------------
 APPEND_SLASH = True
+
+# GUID
+# ------------------------------------------------------------------------------
+DJANGO_GUID = {
+    "INTEGRATIONS": [
+        CorrelationCeleryIntegration(
+            log_parent=True,
+        )
+    ],
+}
+
 
 # Your stuff...
 # ------------------------------------------------------------------------------

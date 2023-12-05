@@ -2,7 +2,7 @@
 
 Django Software as a Service
 
-[![Saved You](https://wakatime.com/badge/user/f07344dc-de4b-4109-8a90-987620a12e92/project/018c2d61-58da-4c64-833c-1fc27cf9658f.svg)](https://wakatime.com/badge/user/f07344dc-de4b-4109-8a90-987620a12e92/project/018c2d61-58da-4c64-833c-1fc27cf9658f)
+[![Saved You](https://wakatime.com/badge/user/f07344dc-de4b-4109-8a90-987620a12e92/project/018c2d61-58da-4c64-833c-1fc27cf9658f.svg)](https://wakatime.com/@f07344dc-de4b-4109-8a90-987620a12e92/projects/hlymsfmvmo)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/riso-tech/django-saas/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/riso-tech/django-saas/?branch=main)
 [![Code Coverage](https://scrutinizer-ci.com/g/riso-tech/django-saas/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/riso-tech/django-saas/?branch=main)
 [![Build Status](https://scrutinizer-ci.com/g/riso-tech/django-saas/badges/build.png?b=main)](https://scrutinizer-ci.com/g/riso-tech/django-saas/build-status/main)
