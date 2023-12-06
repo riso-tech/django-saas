@@ -2,7 +2,6 @@
 
 Django Software as a Service
 
-[![Saved You](https://wakatime.com/badge/user/f07344dc-de4b-4109-8a90-987620a12e92/project/018c2d61-58da-4c64-833c-1fc27cf9658f.svg)](https://wakatime.com/badge/user/f07344dc-de4b-4109-8a90-987620a12e92/project/018c2d61-58da-4c64-833c-1fc27cf9658f)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/riso-tech/django-saas/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/riso-tech/django-saas/?branch=main)
 [![Code Coverage](https://scrutinizer-ci.com/g/riso-tech/django-saas/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/riso-tech/django-saas/?branch=main)
 [![Build Status](https://scrutinizer-ci.com/g/riso-tech/django-saas/badges/build.png?b=main)](https://scrutinizer-ci.com/g/riso-tech/django-saas/build-status/main)
@@ -13,6 +12,22 @@ License: MIT
 
 ## Features
 
+##### SaaS Multi Tenant
+
+ - [x] Initial first business process
+ - [ ] New business tenant registration
+
+##### Drag-Drop CMS
+
+ - [x] Theme management
+ - [ ] GrapeJS
+
+##### Custom Grappelli Admin
+
+ - [ ] Admin UI with Oswald
+ - [x] Grappelli: Related Lookups, Autocomplete Lookups
+ - [ ] Custom Actions
+
 
 ## Support this Project!
 
@@ -22,8 +37,10 @@ Bin Nguyễn, Project Lead ([GitHub](https://github.com/riso-tech)): expertise i
 
 ## Special Thanks!
 
-
-#### [Keen Themes Team](https://keenthemes.com/): [Template Oswald](https://keenthemes.com/products/oswald-html-free)
+##### [Django Cookiecutter](https://github.com/cookiecutter/cookiecutter-django)
+##### [GrapeJS](https://grapesjs.com/)
+##### [Django Tenants](https://django-tenants.readthedocs.io/en/latest/)
+##### [Keen Themes Team](https://keenthemes.com/): [Template Oswald](https://keenthemes.com/products/oswald-html-free)
 
     Thank you to KeenThemes for granting us a custom license to use their amazing Template Oswald for Django-SaaS UI
 
