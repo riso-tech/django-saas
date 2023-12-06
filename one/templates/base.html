@@ -35,11 +35,14 @@
 <!--end::Head-->
 <!--begin::Body-->
 <body id="kt_body"
+      {% block body-config %}
       data-kt-app-header-stacked="true"
       data-kt-app-header-primary-enabled="true"
       data-kt-app-header-secondary-enabled="false"
       data-kt-app-toolbar-enabled="true"
-      class="app-default">
+      {% endblock body-config %}
+      class="app-default"
+>
 <!--layout-partial:partials/theme-mode/_init.html-->
 <!--begin::Theme mode setup on page load-->
 {% include 'partials/theme-mode/init.html' %}
@@ -86,19 +89,10 @@
         <!--end::Header primary container-->
       </div>
       <!--end::Header primary-->
+
       <!--begin::Header secondary-->
-      {#      <div class="app-header-secondary ">#}
-      {#        <!--begin::Header secondary container-->#}
-      {#        <div class="app-container  container-xxl d-flex align-items-stretch " id="kt_app_header_secondary_container">#}
-      {#          <!--layout-partial:layout/partials/header/menu/_main.html-->#}
-      {#          <!--begin::Search-->#}
-      {#          <div class="d-flex align-items-center w-100 w-lg-225px pt-5 pt-lg-0">#}
-      {#            <!--layout-partial:partials/search/_inline.html-->#}
-      {#          </div>#}
-      {#          <!--end::Search-->#}
-      {#        </div>#}
-      {#        <!--end::Header secondary container-->#}
-      {#      </div>#}
+      {% block secondary-header %}
+      {% endblock secondary-header %}
       <!--end::Header secondary-->
     </div>
     <!--end::Header-->
