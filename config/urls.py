@@ -3,6 +3,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 from django.views import defaults as default_views
+from django.views.generic import TemplateView
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework.authtoken.views import obtain_auth_token
 
@@ -10,6 +11,7 @@ from one.cms.pages import views as flatpage_views
 
 urlpatterns = [
     path("", flatpage_views.flatpage, {"url": "/"}, name="home"),
+    path("applications/", TemplateView.as_view(template_name="app_list.html"), name="saas-app-list"),
     # Django Admin, use {% url 'admin:index' %}
     path("grappelli/", include("one.libraries.grappelli.urls")),
     path(settings.ADMIN_URL, admin.site.urls),
