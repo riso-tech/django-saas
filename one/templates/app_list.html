@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block body-config %}
+  data-kt-app-header-stacked="true"
+  data-kt-app-header-primary-enabled="true"
+  data-kt-app-header-secondary-enabled="true"
+  data-kt-app-toolbar-enabled="true"
+{% endblock body-config %}
+
+
+{% block secondary-header %}
+  <div class="app-header-secondary ">
+    <!--begin::Header secondary container-->
+    <div class="app-container  container-xxl d-flex align-items-stretch " id="kt_app_header_secondary_container">
+      <!--layout-partial:layout/partials/header/menu/_main.html-->
+    </div>
+    <!--end::Header secondary container-->
+  </div>
+{% endblock secondary-header %}
+
+{% block wrapper %}
+{% endblock wrapper %}
