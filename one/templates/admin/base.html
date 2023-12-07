@@ -53,10 +53,12 @@
 {% endblock javascripts %}
 
 {% block userlinks %}
-  <!--begin::Menu separator-->
-  <div class="separator my-2"></div>
-  <!--end::Menu separator-->
-  {% switch_user_dropdown %}
+  {% if user.is_authenticated and user.is_staff %}
+    <!--begin::Menu separator-->
+    <div class="separator my-2"></div>
+    <!--end::Menu separator-->
+    {% switch_user_dropdown %}
+  {% endif %}
 {% endblock userlinks %}
 
 {% block wrapper %}
