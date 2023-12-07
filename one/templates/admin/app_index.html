@@ -1,0 +1,56 @@
+{% extends "admin/index.html" %}
+{% load i18n grp_tags %}
+
+{% if not is_popup %}
+  {% block breadcrumbs %}
+
+    {% for app in app_list %}
+      <!--begin::Item-->
+      <li class="breadcrumb-item">
+        <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1"></i>
+      </li>
+      <!--end::Item-->
+      {% if forloop.last %}
+        <!--begin::Item-->
+        <li class="breadcrumb-item text-gray-500">
+          {% blocktrans with app.name as name %}{{ name }}{% endblocktrans %}
+        </li>
+        <!--end::Item-->
+      {% else %}
+        <!--begin::Item-->
+        <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
+          {% blocktrans with app.name as name %}{{ name }}{% endblocktrans %}
+        </li>
+        <!--end::Item-->
+      {% endif %}
+    {% endfor %}
+
+  {% endblock breadcrumbs %}
+{% endif %}
+
+{% block content %}
+  <div class="g-d-c">
+    <div class="g-d-12" id="apps_init">
+      {% for app in app_list %}
+        <div class="grp-module" id="app_{{ app.name|lower }}">
+          <h2>{% trans app.name %}</h2>
+          {% for model in app.models %}
+            <div class="grp-row">
+              {% if model.admin_url %}<a href="{{ model.admin_url }}"><strong>{{ model.name }}</strong></a>{% else %}
+                <span><strong>{{ model.name }}</strong></span>{% endif %}
+              {% if model.perms.add %}
+                <ul class="grp-actions">
+                  {% if model.perms.add %}
+                    <li class="grp-icon grp-add-link"><a href="{{ model.add_url }}" title="{% trans 'Add' %}">&nbsp;</a>
+                    </li>{% endif %}
+                </ul>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      {% empty %}
+        <p>{% trans "You don´t have permission to edit anything." %}</p>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
