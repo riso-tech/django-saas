@@ -530,8 +530,8 @@ class GrappelliTests(TestCase):
         t_cmp_6 = "Editor002"
         self.assertIn(t_cmp_1, t)
         self.assertIn(t_cmp_2, t)
-        self.assertIn(t_cmp_3, t)
-        self.assertIn(t_cmp_4, t)
+        self.assertNotIn(t_cmp_3, t)
+        self.assertNotIn(t_cmp_4, t)
         self.assertIn(t_cmp_5, t)
         self.assertIn(t_cmp_6, t)
 
