@@ -2,11 +2,12 @@ from django.conf import settings
 from django.contrib.sites.models import Site
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import Http404, HttpResponse, HttpResponsePermanentRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.template import loader
 from django.utils.safestring import mark_safe
 from django.views.decorators.csrf import csrf_protect, requires_csrf_token
 
+from ..settings import ADMIN_URL, CMS_ENABLED
 from .models import Page as FlatPage
 
 DEFAULT_TEMPLATE = "flatpages/default.html"
@@ -29,6 +30,9 @@ def flatpage(request, url):
         flatpage
             `flatpages.flatpages` object
     """
+    if not CMS_ENABLED:
+        return redirect(ADMIN_URL)
+
     Site.objects.clear_cache()
     if not url.startswith("/"):
         url = "/" + url
