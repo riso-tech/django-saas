@@ -311,6 +311,8 @@ dump.rdb
 ### Project template
 one/media/
 
+certs/
+
 .pytest_cache/
 .ipython/
 .env

@@ -12,7 +12,8 @@ SECRET_KEY = env(
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ["*"]
-
+# https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-trusted-origins
+CSRF_TRUSTED_ORIGINS = ["https://django.localhost:3000"]
 # CACHES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#caches
@@ -70,5 +71,6 @@ INSTALLED_APPS += ["django_extensions"]  # noqa: F405
 
 # https://docs.celeryq.dev/en/stable/userguide/configuration.html#task-eager-propagates
 CELERY_TASK_EAGER_PROPAGATES = True
+
 # Your stuff...
 # ------------------------------------------------------------------------------

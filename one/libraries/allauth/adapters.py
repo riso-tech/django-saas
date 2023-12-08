@@ -36,3 +36,8 @@ class SocialAccountAdapter(DefaultSocialAccountAdapter):
             if last_name := data.get("last_name"):
                 user.name += f" {last_name}"
         return super().populate_user(request, sociallogin, data)
+
+    def pre_social_login(self, request, sociallogin):
+        user = sociallogin.user
+        if not user.id:
+            sociallogin.connect(request, request.user)
