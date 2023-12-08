@@ -29,28 +29,77 @@
 {% endif %}
 
 {% block content %}
-  <div class="g-d-c">
-    <div class="g-d-12" id="apps_init">
-      {% for app in app_list %}
-        <div class="grp-module" id="app_{{ app.name|lower }}">
-          <h2>{% trans app.name %}</h2>
-          {% for model in app.models %}
-            <div class="grp-row">
-              {% if model.admin_url %}<a href="{{ model.admin_url }}"><strong>{{ model.name }}</strong></a>{% else %}
-                <span><strong>{{ model.name }}</strong></span>{% endif %}
-              {% if model.perms.add %}
-                <ul class="grp-actions">
-                  {% if model.perms.add %}
-                    <li class="grp-icon grp-add-link"><a href="{{ model.add_url }}" title="{% trans 'Add' %}">&nbsp;</a>
-                    </li>{% endif %}
-                </ul>
-              {% endif %}
+  <!--begin::Row-->
+  <div class="row g-5 g-xl-10" id="apps_init">
+    {% for app in app_list %}
+      <!--begin::Col-->
+      <div class="col-xl-4 {% if False %}grp-module{% endif %}" id="app_{{ app.name|lower }}">
+        <!--begin::{{ app.name|upper }}-->
+        <div class="card card-flush {% if not forloop.first %}mt-5{% endif %}">
+          <!--begin::Header-->
+          <div class="card-header min-h-50px">
+            <!--begin::Title-->
+            <h3 class="card-title align-items-start flex-column m-0 h-50px">
+              <span class="card-label fw-bold text-gray-800">
+                  {% trans app.name %}
+              </span>
+            </h3>
+            <!--end::Title-->
+          </div>
+          <!--end::Header-->
+
+          <!--begin::Body-->
+          <div class="card-body pt-0 pb-0">
+            <!--begin::Table container-->
+            <div class="table-responsive">
+              <!--begin::Table-->
+              <table class="table table-row-dashed align-middle gs-0 gy-4 my-0">
+                <!--begin::Table body-->
+                <tbody>
+                {% for model in app.models %}
+                  <tr class="grp-row" id="model-{{ model.object_name|lower }}">
+                    <td>
+                      {% if model.admin_url %}
+                        <a href="{{ model.admin_url }}" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">
+                          {{ model.name }}
+                        </a>
+                      {% else %}
+                        <span class="text-gray-400 fw-semibold d-block fs-7">{{ model.name }}</span>
+                      {% endif %}
+                    </td>
+                    <td class="text-end">
+                      {% if model.add_url %}
+                        <a class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary w-25px h-25px"
+                           href="{{ model.add_url }}">
+                          <i class="ki-duotone ki-plus fs-2 text-gray-500"></i>
+                        </a>
+                      {% endif %}
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+                <!--end::Table body-->
+              </table>
+              <!--end::Table-->
             </div>
-          {% endfor %}
+            <!--end::Table container-->
+          </div>
+          <!--end::Body-->
+
         </div>
-      {% empty %}
-        <p>{% trans "You don´t have permission to edit anything." %}</p>
-      {% endfor %}
-    </div>
+        <!--end::{{ app.name|upper }}-->
+      </div>
+      <!--end::Col-->
+    {% empty %}
+      <p>{% trans "You don´t have permission to edit anything." %}</p>
+    {% endfor %}
   </div>
+  <!--end::Row-->
+
+
+
+
+
+
+
 {% endblock %}

@@ -170,6 +170,15 @@
                           <!--begin::Menu separator-->
                           <div class="separator my-2"></div>
                           <!--end::Menu separator-->
+                          {% if request.user.is_staff %}
+                            <!--begin::Admin item-->
+                            <div class="menu-item px-5">
+                              <a href="{% url 'admin:index' %}" class="menu-link px-5">
+                                {% trans 'Admin Dashboard' %}
+                              </a>
+                            </div>
+                            <!--end::Admin item-->
+                          {% endif %}
                           <!--begin::Sign Out-->
                           <div class="menu-item px-5">
                             <a href="{% url 'account_logout' %}" class="menu-link px-5">

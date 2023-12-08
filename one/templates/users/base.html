@@ -24,7 +24,9 @@
             <div class="d-flex flex-column">
               <!--begin::Name-->
               <div class="d-flex align-items-center mb-2">
-                <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">Max Smith</a>
+                <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">
+                  {% if user.name %}{{ user.name|title }}{% else %}{{ user.username|title }}{% endif %}
+                </a>
                 <a href="#">
                   <i class="ki-duotone ki-verify fs-1 text-primary">
                     <span class="path1"></span>
@@ -259,23 +261,28 @@
       <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold">
         <!--begin::Nav item-->
         <li class="nav-item mt-2">
-
-          <a class="nav-link text-active-primary ms-0 me-10 py-5"
-             href="{% url 'users:detail' request.user.username %}">
+          {% url 'users:detail' request.user.username as user_profile_path %}
+          <a
+            class="nav-link text-active-primary ms-0 me-10 py-5 {% if request.path == user_profile_path %}active{% endif %}"
+            href="{{ user_profile_path }}">
             {% trans 'Overview' %}
           </a>
         </li>
         <!--end::Nav item-->
         <!--begin::Nav item-->
         <li class="nav-item mt-2">
-          <a class="nav-link text-active-primary ms-0 me-10 py-5"
-             href="{% url 'users:update' %}">{% trans 'Update Infor' %}</a>
+          {% url 'users:update' as user_update_path %}
+          <a
+            class="nav-link text-active-primary ms-0 me-10 py-5 {% if request.path == user_update_path %}active{% endif %}"
+            href="{{ user_update_path }}">{% trans 'Profile Update' %}</a>
         </li>
         <!--end::Nav item-->
         <!--begin::Nav item-->
         <li class="nav-item mt-2">
-          <a class="nav-link text-active-primary ms-0 me-10 py-5"
-             href="{% url 'account_email' %}">{% trans 'Email' %}</a>
+          {% url 'account_email' as account_email_path %}
+          <a
+            class="nav-link text-active-primary ms-0 me-10 py-5 {% if request.path == account_email_path %}active{% endif %}"
+            href="{{ account_email_path }}">{% trans 'Email' %}</a>
         </li>
         <!--end::Nav item-->
       </ul>

@@ -260,7 +260,8 @@
     {% endif %}
     <!-- SUBMIT ROW -->
     {% if cl.formset or action_form %}
-      <footer id="submit" class="grp-module grp-submit-row grp-fixed-footer">
+      <div class="app-header ">
+        <footer id="submit" class="app-header-primary grp-module grp-submit-row grp-fixed-footer h-50px">
         <header style="display:none"><h1>Submit Options</h1></header>
         <ul>
           {% if action_form %}
@@ -270,6 +271,7 @@
             </li>{% endif %}
         </ul>
       </footer>
+      </div>
     {% endif %}
   </form>
 {% endblock %}
