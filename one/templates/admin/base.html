@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static i18n grp_tags %}
+
+{% block stylesheets %}
+  <link href="{% static 'css/vendors.bundle.min.css' %}" rel="stylesheet" type="text/css"/>
+  <link href="{% static "grappelli/stylesheets/screen.css" %}" rel="stylesheet" type="text/css" media="all"/>
+  <link href="{% static 'css/theme.bundle.min.css' %}" rel="stylesheet" type="text/css"/>
+  {% if LANGUAGE_BIDI %}
+    <link href="{% block stylesheet_rtl %}{% static "grappelli/stylesheets/rtl.css" %}{% endblock %}" rel="stylesheet"
+          type="text/css" media="screen"/>
+  {% endif %}
+{% endblock stylesheets %}
+
+{% block javascripts %}
+  <script type="text/javascript">
+    window.__admin_media_prefix__ = "{% filter escapejs %}{% static "grappelli/" %}{% endfilter %}";
+  </script>
+  <script type="text/javascript">
+    window.__admin_utc_offset__ = "{% filter escapejs %}{% now "Z" %}{% endfilter %}";
+  </script>
+  <script type="text/javascript" charset="utf-8">
+    let grappelli = {},
+      ADMIN_URL = "{% url 'admin:index' %}",
+      MODEL_URL_ARRAY = {% if user.is_staff %}{% get_content_types %}{% else %}[]{% endif %},
+      DATE_FORMAT = "{% get_date_format %}",
+      TIME_FORMAT = "{% get_time_format %}",
+      DATETIME_FORMAT = "{% get_datetime_format %}";
+  </script>
+  {% if debug %}
+    <!-- Vendors -->
+    <script src="{% static "js/vendors.bundle.js" %}" type="text/javascript"></script>
+    <script src="{% static 'js/theme.bundle.js' %}"></script>
+    <!-- Grappelli Main JS -->
+    <script src="{% static "grappelli/js/grappelli.js" %}" type="text/javascript"></script>
+    <!-- Grappelli jQuery Plugins, Widgets -->
+    <script src="{% static "grappelli/js/jquery.grp_collapsible.js" %}" type="text/javascript"></script>
+    <script src="{% static "grappelli/js/jquery.grp_collapsible_group.js" %}" type="text/javascript"></script>
+    <script src="{% static "grappelli/js/jquery.grp_timepicker.js" %}" type="text/javascript"></script>
+    <script src="{% static "grappelli/js/jquery.grp_related_fk.js" %}" type="text/javascript"></script>
+    <script src="{% static "grappelli/js/jquery.grp_related_m2m.js" %}" type="text/javascript"></script>
+    <script src="{% static "grappelli/js/jquery.grp_related_generic.js" %}" type="text/javascript"></script>
+    <script src="{% static "grappelli/js/jquery.grp_autocomplete_fk.js" %}" type="text/javascript"></script>
+    <script src="{% static "grappelli/js/jquery.grp_autocomplete_m2m.js" %}" type="text/javascript"></script>
+    <script src="{% static "grappelli/js/jquery.grp_autocomplete_generic.js" %}" type="text/javascript"></script>
+    <script src="{% static "grappelli/js/jquery.grp_inline.js" %}" type="text/javascript"></script>
+  {% else %}
+    <!-- Vendors Minified -->
+    <script src="{% static "js/vendors.bundle.min.js" %}" type="text/javascript"></script>
+    <script src="{% static 'js/theme.bundle.min.js' %}"></script>
+    <!-- Grappelli Minified -->
+    <script src="{% static "grappelli/js/grappelli.min.js" %}" type="text/javascript"></script>
+  {% endif %}
+{% endblock javascripts %}
+
+{% block userlinks %}
+  {% if user.is_authenticated and user.is_staff %}
+    <!--begin::Menu separator-->
+    <div class="separator my-2"></div>
+    <!--end::Menu separator-->
+    {% switch_user_dropdown %}
+  {% endif %}
+{% endblock userlinks %}
+
+{% block wrapper %}
+  {% block context-navigation %}
+    <!--layout-partial:layout/partials/_toolbar.html-->
+    <!--begin::Toolbar-->
+    <div id="kt_app_toolbar" class="app-toolbar pt-lg-6 pt-3">
+      <!--begin::Toolbar container-->
+      <div id="kt_app_toolbar_container"
+           class="app-container container-fluid d-flex flex-stack flex-wrap ">
+        <!--begin::Toolbar wrapper-->
+        <div class="d-flex flex-stack flex-wrap gap-4 w-100">
+          <!--layout-partial:layout/partials/_page-title.html-->
+          <!--begin::Page title-->
+          <div class="page-title d-flex flex-column gap-3 me-3">
+            <!--begin::Title-->
+            <h2 class="page-heading justify-content-center text-dark fw-bolder fs-2x my-0">
+              {% block content_title %}{% if title %}{{ title }}{% endif %}{% endblock content_title %}
+              <span class="fs-6 text-gray-400 ms-1">{% block pretitle %}{% endblock pretitle %}</span>
+            </h2>
+            <!--end::Title-->
+
+            <!--begin::Breadcrumb-->
+            <ul class="breadcrumb breadcrumb-separatorless fw-semibold">
+              <!--begin::Item-->
+              <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
+                <a href="{% url 'admin:index' %}" class="text-gray-500 text-hover-primary">
+                  <i class="ki-duotone ki-home fs-3 text-gray-400 me-n1"></i>
+                </a>
+              </li>
+              <!--end::Item-->
+              {% block breadcrumbs %}
+                {% if title %}
+                  <!--begin::Item-->
+                  <li class="breadcrumb-item">
+                    <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1">
+                    </i>
+                  </li>
+                  <!--end::Item-->
+                  <!--begin::Item-->
+                  <li class="breadcrumb-item text-gray-500">
+                    {{ title }}
+                  </li>
+                  <!--end::Item-->
+                {% endif %}
+              {% endblock breadcrumbs %}
+            </ul>
+            <!--end::Breadcrumb-->
+          </div>
+          <!--end::Page title-->
+
+          <!--begin::Actions-->
+          <div class="d-flex align-items-center gap-3 gap-lg-5">
+            {% block page-tools %}{% endblock %}
+            {% block object-tools %}{% endblock object-tools %}
+          </div>
+          <!--end::Actions-->
+        </div>
+        <!--end::Toolbar wrapper-->
+      </div>
+      <!--end::Toolbar container-->
+    </div>
+    <!--end::Toolbar-->
+  {% endblock context-navigation %}
+
+  <!--begin::Content-->
+  <div id="kt_app_content" class="app-content pb-0">
+    {% block content %}
+      {{ content }}
+      {% block filters %}{% endblock %}
+    {% endblock content %}
+  </div>
+  <!--end::Content-->
+{% endblock wrapper %}

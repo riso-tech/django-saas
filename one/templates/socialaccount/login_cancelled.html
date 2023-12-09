@@ -1,0 +1,33 @@
+{% extends "account/base.html" %}
+{% load i18n allauth %}
+
+{% block head_title %}
+  {% trans "Login Cancelled" %}
+{% endblock head_title %}
+
+{% block inner %}
+  <div class="d-flex flex-center flex-column flex-column-fluid">
+    <!--begin::Wrapper-->
+    <div class="w-lg-500px p-10 p-lg-15 mx-auto">
+      <!--begin::Form-->
+      <form class="form w-100" method="post" action>
+        <!--begin::Heading-->
+        <div class="text-center mb-10">
+          <!--begin::Title-->
+          <h1 class="text-dark mb-3">{% trans "Login Cancelled" %}</h1>
+          <!--end::Title-->
+          <!--begin::Link-->
+          <div class="text-gray-400 fw-semibold fs-4">
+            {% url 'account_login' as login_url %}
+            {% blocktrans %}You decided to cancel logging in to our site using one of your existing accounts. If this
+              was a mistake, please proceed to <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}
+          </div>
+          <!--end::Link-->
+        </div>
+        <!--begin::Heading-->
+      </form>
+      <!--end::Form-->
+    </div>
+    <!--end::Wrapper-->
+  </div>
+{% endblock inner %}

@@ -5,7 +5,7 @@
 
 // grp jQuery namespace
 var grp = {
-    jQuery: jQuery.noConflict(true)
+    jQuery: jQuery
 };
 
 // django jQuery namespace

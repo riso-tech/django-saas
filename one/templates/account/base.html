@@ -16,10 +16,8 @@
 
   <!--begin::Stylesheet-->
   <!--begin::Vendor Stylesheets(used for this page only)-->
-  {% block css %}
-    <link href="{% static 'css/vendors.bundle.min.css' %}" rel="stylesheet" type="text/css"/>
-    <link href="{% static 'css/theme.bundle.min.css' %}" rel="stylesheet" type="text/css"/>
-  {% endblock css %}
+  <link href="{% static 'css/vendors.bundle.min.css' %}" rel="stylesheet" type="text/css"/>
+  <link href="{% static 'css/theme.bundle.min.css' %}" rel="stylesheet" type="text/css"/>
   <!--end::Vendor Stylesheets-->
 
   <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
@@ -55,11 +53,13 @@
             </a>
             <!--end::Logo-->
             <!--begin::Title-->
-            <h1 class="d-none d-lg-block fw-bold text-white fs-2qx pb-5 pb-md-10">{% trans 'Welcome to Django-SaaS' %}</h1>
+            <h1
+              class="d-none d-lg-block fw-bold text-white fs-2qx pb-5 pb-md-10">{% trans 'Welcome to Django-SaaS' %}</h1>
             <!--end::Title-->
             <!--begin::Description-->
             <p class="d-none d-lg-block fw-semibold fs-2 text-white">
-              {% blocktrans %}Plan your blog post by choosing a topic creating <br/>an outline and checking facts{% endblocktrans %}
+              {% blocktrans %}Plan your blog post by choosing a topic creating <br/>an outline and checking
+                facts{% endblocktrans %}
             </p>
             <!--end::Description-->
           </div>
@@ -108,10 +108,8 @@
 
 <!--begin::Javascript-->
 <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-{% block javascript %}
-  <script src="{% static 'js/vendors.bundle.min.js' %}"></script>
-  <script src="{% static 'js/theme.bundle.min.js' %}"></script>
-{% endblock javascript %}
+<script src="{% static 'js/vendors.bundle.min.js' %}"></script>
+<script src="{% static 'js/theme.bundle.min.js' %}"></script>
 <!--end::Global Javascript Bundle-->
 
 <!--begin::Vendors Javascript(used for this page only)-->

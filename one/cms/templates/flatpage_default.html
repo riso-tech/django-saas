@@ -1,0 +1,15 @@
+{% load cms %}
+<html>
+<head>
+
+  {{ get_seo_meta }}
+
+  {{ get_media_css }}
+</head>
+{% if user.superuser %}
+	{{ controller }}
+{% endif %}
+{{ content }}
+
+{{ get_media_js }}
+</html>

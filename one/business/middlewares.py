@@ -28,8 +28,9 @@ class TenantMainMiddleware(BaseTenantMainMiddleware):
         if settings.STATIC_URL not in request.path:
             tenant_model = get_tenant_model()
             context = {}
-            qs = tenant_model.objects.exclude(schema_name=get_public_schema_name())
-            if not qs.exists():
+
+            # Case Empty Tenant
+            if not tenant_model.objects.exclude(schema_name=get_public_schema_name()).exists():
                 if request.method == "POST":
                     params = request.POST
                     schema_name = params["schema_name"]
@@ -76,7 +77,9 @@ class TenantMainMiddleware(BaseTenantMainMiddleware):
                         return redirect(reverse("home"))
 
                 return first_business_not_found(request, context)
-            elif not qs.filter(domains__domain=self.hostname_from_request(request)).exists():
+
+            # Case request domain not found
+            if not tenant_model.objects.filter(domains__domain=self.hostname_from_request(request)).exists():
                 try:
                     default_tenant = tenant_model.objects.get(schema_name="default")
                     context["default_url"] = default_tenant.domains.filter(is_primary=True).first().domain
