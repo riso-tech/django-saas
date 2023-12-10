@@ -165,6 +165,15 @@
 
 {% block object-tools %}
   {% block object-tools-items %}
+    {% for tool in objectactions %}
+      {% url tools_view_name tool=tool.name as action_url %}
+      <a href="{% add_preserved_filters action_url %}" title="{{ tool.standard_attrs.title }}"
+         class="btn btn-flex btn-center btn-dark btn-sm px-4 grp-add-link grp-state-focus {{ tool.standard_attrs.class }}"
+      {% for k, v in tool.custom_attrs.items %} {{ k }}="{{ v }}" {% endfor %}>
+      {{ tool.label|capfirst }}
+      </a>
+    {% endfor %}
+
     {% if has_add_permission %}
       {% url cl.opts|admin_urlname:'add' as add_url %}
       <!--begin::Add button-->
@@ -262,15 +271,15 @@
     {% if cl.formset or action_form %}
       <div class="app-header ">
         <footer id="submit" class="app-header-primary grp-module grp-submit-row grp-fixed-footer h-50px">
-        <header style="display:none"><h1>Submit Options</h1></header>
-        <ul>
-          {% if action_form %}
-            <li class="grp-float-left grp-changelist-actions">{% admin_actions %}</li>{% endif %}
-          {% if cl.formset %}
-            <li><input type="submit" class="grp-button grp-default" name="_save" value="{% trans "Save" %}"/>
-            </li>{% endif %}
-        </ul>
-      </footer>
+          <header style="display:none"><h1>Submit Options</h1></header>
+          <ul>
+            {% if action_form %}
+              <li class="grp-float-left grp-changelist-actions">{% admin_actions %}</li>{% endif %}
+            {% if cl.formset %}
+              <li><input type="submit" class="grp-button grp-default" name="_save" value="{% trans "Save" %}"/>
+              </li>{% endif %}
+          </ul>
+        </footer>
       </div>
     {% endif %}
   </form>

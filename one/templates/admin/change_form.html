@@ -155,7 +155,8 @@
     <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
       {% if has_view_permission %}
         {% url opts|admin_urlname:'changelist' as changelist_url %}
-        <a href="{% add_preserved_filters changelist_url %}" class="text-gray-500 text-hover-primary">{{ opts.verbose_name_plural|capfirst }}</a>
+        <a href="{% add_preserved_filters changelist_url %}"
+           class="text-gray-500 text-hover-primary">{{ opts.verbose_name_plural|capfirst }}</a>
       {% else %}
         {{ opts.verbose_name_plural|capfirst }}
       {% endif %}
@@ -184,6 +185,15 @@
   {% if change %}
     {% if not is_popup %}
       {% block object-tools-items %}
+        {% for tool in objectactions %}
+          {% url tools_view_name pk=object_id tool=tool.name as action_url %}
+          <a href="{% add_preserved_filters action_url %}" title="{{ tool.standard_attrs.title }}"
+             class="btn btn-flex btn-center btn-dark btn-sm px-4 grp-add-link grp-state-focus {{ tool.standard_attrs.class }}"
+             {% for k, v in tool.custom_attrs.items %} {{ k }}="{{ v }}" {% endfor %}>
+          {{ tool.label|capfirst }}
+          </a>
+        {% endfor %}
+
         <!--begin::History button-->
         {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
         <a href="{% add_preserved_filters history_url %}"
