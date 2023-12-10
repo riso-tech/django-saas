@@ -3,9 +3,9 @@ Module for all Form Tests.
 """
 from django.utils.translation import gettext_lazy as _
 
+from one.tests.tests.cases import FastTenantTestCase as TestCase
 from one.users.forms import UserAdminCreationForm
 from one.users.models import User
-from tests.cases import FastTenantTestCase as TestCase
 
 
 class TestUserAdminCreationForm(TestCase):

@@ -7,8 +7,8 @@ from django.urls import reverse
 from django_tenants.test.client import TenantClient as Client
 
 from one.tests.models import Choice, Comment, Poll, RelatedData
+from one.tests.tests.cases import FastTenantTestCase as TestCase
 from one.utils.contrib.admin import BaseActionView, BaseDjangoObjectActions, action, takes_instance_or_queryset
-from tests.cases import FastTenantTestCase as TestCase
 
 User = get_user_model()
 

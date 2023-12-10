@@ -11,7 +11,7 @@ from django.utils.translation import gettext_lazy as _
 from django_tenants.test.client import TenantClient as Client
 
 from one.tests.models import Category, Entry
-from tests.cases import FastTenantTestCase as TestCase
+from one.tests.tests.cases import FastTenantTestCase as TestCase
 
 from ..templatetags.grp_tags import switch_user_dropdown
 
