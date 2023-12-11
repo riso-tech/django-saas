@@ -64,7 +64,12 @@ class ChoiceAdmin(DjangoObjectActions, admin.ModelAdmin):
     changelist_actions = ("delete_all",)
 
 
-class ChoiceInline(admin.StackedInline):
+class ChoiceStackedInline(admin.StackedInline):
+    model = Choice
+    extra = 3
+
+
+class ChoiceTabularInline(admin.TabularInline):
     model = Choice
     extra = 3
 
@@ -88,9 +93,9 @@ class PollAdmin(DjangoObjectActions, admin.ModelAdmin):
 
     fieldsets = [
         (None, {"fields": ["question"]}),
-        ("Date information", {"fields": ["pub_date"], "classes": ["collapse"]}),
+        ("Date information", {"fields": ["pub_date"], "classes": ["grp-collapse grp-closed"]}),
     ]
-    inlines = [ChoiceInline]
+    inlines = [ChoiceStackedInline]
 
     def change_view(self, request, object_id, form_url="", extra_context=None):
         extra = {"foo": "change_view"}
@@ -180,6 +185,10 @@ class EntryOptions(admin.ModelAdmin):
         "user",
     )
     list_display_links = ("title",)
+    raw_id_fields = ("category",)
+    autocomplete_lookup_fields = {
+        "fk": ["category"],
+    }
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
