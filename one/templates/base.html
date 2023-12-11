@@ -48,7 +48,6 @@
   {% endblock extrahead %}
   <!--end::Vendors Javascript-->
   <!--end::Javascript-->
-
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -59,8 +58,7 @@
       data-kt-app-header-secondary-enabled="false"
       data-kt-app-toolbar-enabled="true"
   {% endblock body-config %}
-      class="app-default"
->
+      class="app-default {% if is_popup %}grp-popup {% endif %}{% block bodyclass %}{% endblock bodyclass %}">
 <!--layout-partial:partials/theme-mode/_init.html-->
 {% include 'partials/theme-mode/init.html' %}
 
@@ -72,7 +70,7 @@
     {% block header %}
       {% if not is_popup %}
         <!--begin::Header-->
-        <div id="kt_app_header" class="app-header ">
+        <div id="kt_app_header" class="app-header">
           <!--begin::Header primary-->
           <div class="app-header-primary "
                data-kt-sticky="true" data-kt-sticky-name="app-header-primary-sticky"
