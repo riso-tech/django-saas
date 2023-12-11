@@ -1,8 +1,9 @@
 import tempfile
 
-from cases import FastTenantTestCase as TestCase
 from django.core.management import call_command
 from django.test import override_settings
+
+from .cases import FastTenantTestCase as TestCase
 
 
 class TestCollectstatic(TestCase):

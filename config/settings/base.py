@@ -98,6 +98,8 @@ TENANT_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+    "allauth.socialaccount.providers.facebook",
     "rest_framework",
     "rest_framework.authtoken",
     "corsheaders",
@@ -337,6 +339,73 @@ SOCIALACCOUNT_ADAPTER = "one.libraries.allauth.adapters.SocialAccountAdapter"
 SOCIALACCOUNT_FORMS = {"signup": "one.libraries.allauth.forms.UserSocialSignupForm"}
 # https://django-allauth.readthedocs.io/en/stable/advanced.html#admin
 DJANGO_ADMIN_FORCE_ALLAUTH = True
+# https://docs.allauth.org/en/latest/socialaccount/providers/index.html
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
+
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "SCOPE": [
+            "profile",
+            "email",
+            "https://www.googleapis.com/auth/adwords",
+        ],
+        "AUTH_PARAMS": {
+            "access_type": "offline",
+        },
+    },
+    "facebook": {
+        "METHOD": "oauth2",
+        "SDK_URL": "//connect.facebook.net/{locale}/sdk.js",
+        "SCOPE": [
+            "user_birthday",
+            "user_hometown",
+            "user_location",
+            "user_likes",
+            "user_events",
+            "user_photos",
+            "user_videos",
+            "user_friends",
+            "user_status",
+            "user_tagged_places",
+            "user_posts",
+            "user_gender",
+            "user_link",
+            "user_age_range",
+            "email",
+            "read_insights",
+            "publish_video",
+            "catalog_management",
+            "manage_pages",
+            "pages_manage_cta",
+            "pages_manage_instant_articles",
+            "pages_show_list",
+            "publish_pages",
+            "read_page_mailboxes",
+            "ads_management",
+            "ads_read",
+            "business_management",
+            "pages_messaging",
+            "pages_messaging_phone_number",
+            "pages_messaging_subscriptions",
+            "instagram_basic",
+            "instagram_manage_comments",
+            "instagram_manage_insights",
+            "publish_to_groups",
+            "groups_access_member_info",
+            "leads_retrieval",
+            "whatsapp_business_management",
+            "attribution_read",
+            "public_profile",
+        ],
+        "AUTH_PARAMS": {"auth_type": "reauthenticate"},
+        "INIT_PARAMS": {"cookie": True},
+        "FIELDS": ["id", "first_name", "last_name", "middle_name", "name", "name_format", "picture", "short_name"],
+        "EXCHANGE_TOKEN": True,
+        "LOCALE_FUNC": lambda request: "en_US",
+        "VERIFIED_EMAIL": False,
+        "VERSION": "v18.0",
+    },
+}
 
 # django-rest-framework
 # -------------------------------------------------------------------------------
@@ -375,6 +444,7 @@ SHOW_PUBLIC_IF_NO_TENANT_FOUND = True
 # Flatpage
 # ------------------------------------------------------------------------------
 APPEND_SLASH = True
+CMS_ENABLED = False
 
 # GUID
 # ------------------------------------------------------------------------------

@@ -1,5 +1,6 @@
-from cases import FastTenantTestCase as TestCase
 from django.core.management import call_command
+
+from .cases import FastTenantTestCase as TestCase
 
 
 class ChecksTests(TestCase):

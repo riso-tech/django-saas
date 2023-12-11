@@ -3,7 +3,7 @@ from django.urls import reverse
 from django_tenants.test.client import TenantClient as Client
 
 from one.cms.pages.models import Page
-from tests.cases import FastTenantTestCase as TestCase
+from one.tests.tests.cases import FastTenantTestCase as TestCase
 
 User = get_user_model()
 

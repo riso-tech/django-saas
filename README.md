@@ -28,6 +28,12 @@ License: MIT
  - [x] Grappelli: Related Lookups, Autocomplete Lookups
  - [ ] Custom Actions
 
+##### User Profile
+
+ - [ ] Overview Page
+ - [ ] Profile Update
+ - [ ] Email management
+
 
 ## Support this Project!
 

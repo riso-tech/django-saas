@@ -5,7 +5,7 @@ from django.test import RequestFactory
 from django_tenants.test.client import TenantClient as Client
 from django_tenants.utils import get_tenant_model
 
-from tests.cases import FastTenantTestCase as TestCase
+from one.tests.tests.cases import FastTenantTestCase as TestCase
 
 from ..middlewares import TenantMainMiddleware
 

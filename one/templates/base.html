@@ -6,6 +6,9 @@
 <head>
   <title>{% block title %}Django Software as a Service{% endblock title %}</title>
   <meta charset="utf-8"/>
+  {% block blockbots %}
+    <meta name="robots" content="NONE,NOARCHIVE"/>
+  {% endblock blockbots %}
 
   <link rel="shortcut icon" href="{% static 'media/logos/favicon.ico' %}"/>
   <!--begin::Fonts(mandatory for all pages)-->
@@ -14,90 +17,255 @@
 
   <!--begin::Stylesheet-->
   <!--begin::Vendor Stylesheets(used for this page only)-->
-  {% block css %}
+  {% block stylesheets %}
     <link href="{% static 'css/vendors.bundle.min.css' %}" rel="stylesheet" type="text/css"/>
     <link href="{% static 'css/theme.bundle.min.css' %}" rel="stylesheet" type="text/css"/>
     <link href="{% static 'css/project.min.css' %}" rel="stylesheet" type="text/css"/>
-  {% endblock css %}
+  {% endblock stylesheets %}
   <!--end::Vendor Stylesheets-->
 
   <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+  {% block extrastyle %}{% endblock extrastyle %}
   <!--end::Global Stylesheets Bundle-->
   <!--end::Stylesheet-->
 
-  <script>
-    // Frame-busting to prevent site from being loaded within a frame without permission (click-jacking)
-    if (window.top !== window.self) {
-      window.top.location.replace(window.self.location.href);
-    }
-  </script>
+  <!--begin::Javascript-->
+  <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+  {% block javascripts %}
+    <script src="{% static 'js/vendors.bundle.min.js' %}"></script>
+    <script src="{% static 'js/theme.bundle.min.js' %}"></script>
+    <script src="{% static 'js/project.min.js' %}"></script>
+  {% endblock javascripts %}
+  <!--end::Global Javascript Bundle-->
+  <!--begin::Vendors Javascript(used for this page only)-->
+  {% block extrahead %}
+    <script>
+      // Frame-busting to prevent site from being loaded within a frame without permission (click-jacking)
+      if (window.top !== window.self) {
+        window.top.location.replace(window.self.location.href);
+      }
+    </script>
+  {% endblock extrahead %}
+  <!--end::Vendors Javascript-->
+  <!--end::Javascript-->
+
 </head>
 <!--end::Head-->
 <!--begin::Body-->
 <body id="kt_body"
-      {% block body-config %}
+  {% block body-config %}
       data-kt-app-header-stacked="true"
       data-kt-app-header-primary-enabled="true"
       data-kt-app-header-secondary-enabled="false"
       data-kt-app-toolbar-enabled="true"
-      {% endblock body-config %}
+  {% endblock body-config %}
       class="app-default"
 >
 <!--layout-partial:partials/theme-mode/_init.html-->
-<!--begin::Theme mode setup on page load-->
 {% include 'partials/theme-mode/init.html' %}
-<!--end::Theme mode setup on page load-->
 
 <!--layout-partial:layout/_default.html-->
 <!--begin::App-->
 <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
   <!--begin::Page-->
-  <div class="app-page  flex-column flex-column-fluid " id="kt_app_page">
-    <!--begin::Header-->
-    <div id="kt_app_header" class="app-header ">
-      <!--begin::Header primary-->
-      <div class="app-header-primary "
-           data-kt-sticky="true" data-kt-sticky-name="app-header-primary-sticky"
-           data-kt-sticky-offset="{default: 'false', lg: '300px'}"
-      >
-        <!--begin::Header primary container-->
-        <div class="app-container  container-xxl d-flex align-items-stretch justify-content-between "
-             id="kt_app_header_primary_container">
-          <!--begin::Logo and search-->
-          <div class="d-flex flex-grow-1 flex-lg-grow-0">
-            <!--begin::Logo wrapper-->
-            <div class="d-flex align-items-center" id="kt_app_header_logo_wrapper">
-              <!--begin::Header toggle-->
-              <button class="d-lg-none btn btn-icon btn-color-white btn-active-color-primary ms-n4 me-sm-2"
-                      id="kt_app_header_menu_toggle">
-                <i class="ki-duotone ki-abstract-14 fs-1"><span class="path1"></span><span class="path2"></span></i>
-              </button>
-              <!--end::Header toggle-->
-              <!--begin::Logo-->
-              <a href="{% url 'home' %}" class="d-flex align-items-center mb-1 mb-lg-0 pt-lg-1">
-                <img alt="Logo" src="{% static 'media/logos/default-small.svg' %}" class="d-block d-sm-none"/>
-                <img alt="Logo" src="{% static 'media/logos/default.svg' %}" class="d-none d-sm-block"/>
-              </a>
-              <!--end::Logo-->
-            </div>
-            <!--end::Logo wrapper-->
-          </div>
-          <!--end::Logo and search-->
-          <!--layout-partial:layout/partials/header/__topbar.html-->
-          {% include 'layout/partials/header/topbar.html' %}
-        </div>
-        <!--end::Header primary container-->
-      </div>
-      <!--end::Header primary-->
+  <div class="app-page flex-column flex-column-fluid " id="kt_app_page">
+    {% block header %}
+      {% if not is_popup %}
+        <!--begin::Header-->
+        <div id="kt_app_header" class="app-header ">
+          <!--begin::Header primary-->
+          <div class="app-header-primary "
+               data-kt-sticky="true" data-kt-sticky-name="app-header-primary-sticky"
+               data-kt-sticky-offset="{default: 'false', lg: '300px'}"
+          >
+            {% block navigation %}
+              <!--begin::Header primary container-->
+              <div class="app-container  container-xxl d-flex align-items-stretch justify-content-between "
+                   id="kt_app_header_primary_container">
+                {% block branding %}
+                  <!--begin::Logo and search-->
+                  <div class="d-flex flex-grow-1 flex-lg-grow-0">
+                    <!--begin::Logo wrapper-->
+                    <div class="d-flex align-items-center" id="kt_app_header_logo_wrapper">
+                      <!--begin::Header toggle-->
+                      <button class="d-lg-none btn btn-icon btn-color-white btn-active-color-primary ms-n4 me-sm-2"
+                              id="kt_app_header_menu_toggle">
+                        <i class="ki-duotone ki-abstract-14 fs-1"><span class="path1"></span><span class="path2"></span></i>
+                      </button>
+                      <!--end::Header toggle-->
+                      <!--begin::Logo-->
+                      <a href="{% url 'home' %}" class="d-flex align-items-center mb-1 mb-lg-0 pt-lg-1">
+                        <img alt="Logo" src="{% static 'media/logos/default-small.svg' %}" class="d-block d-sm-none"/>
+                        <img alt="Logo" src="{% static 'media/logos/default.svg' %}" class="d-none d-sm-block"/>
+                      </a>
+                      <!--end::Logo-->
+                    </div>
+                    <!--end::Logo wrapper-->
+                  </div>
+                  <!--end::Logo and search-->
+                {% endblock branding %}
 
-      <!--begin::Header secondary-->
-      {% block secondary-header %}
-      {% endblock secondary-header %}
-      <!--end::Header secondary-->
-    </div>
-    <!--end::Header-->
+                {% block admin_title %}
+                {% endblock admin_title %}
+
+                <!--begin::Navbar-->
+                <div class="app-navbar">
+                  {% block user-tools %}
+                    {% if request.user.is_authenticated %}
+                      <!--begin::User menu-->
+                      <div class="app-navbar-item ms-3" id="kt_header_user_menu_toggle">
+                        <!--begin::Menu wrapper-->
+                        <div class="cursor-pointer symbol symbol-35px"
+                             data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
+                             data-kt-menu-attach="parent"
+                             data-kt-menu-placement="bottom-end"
+                        >
+                          <img class="symbol symbol-35px" src="{% static 'media/avatars/300-3.jpg' %}" alt="user"/>
+                        </div>
+                        <!--begin::User account menu-->
+                        <div
+                          class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px"
+                          data-kt-menu="true">
+                          <!--begin::Menu item-->
+                          <div class="menu-item px-3">
+                            <div class="menu-content d-flex align-items-center px-3">
+                              <!--begin::Avatar-->
+                              <div class="symbol symbol-50px me-5">
+                                <img alt="Logo" src="{% static 'media/avatars/300-3.jpg' %}"/>
+                              </div>
+                              <!--end::Avatar-->
+                              <!--begin::Username-->
+                              <div class="d-flex flex-column">
+                                <div
+                                  class="fw-bold d-flex align-items-center fs-5">
+                                  {% if request.session.original_user %}
+                                    {% if request.session.original_user.name %}
+                                      {{ request.session.original_user.name|title }}{% else %}
+                                      {{ request.session.original_user.username|title }}{% endif %}
+                                  {% else %}
+                                    {% if user.name %}{{ user.name|title }}{% else %}
+                                      {{ user.username|title }}{% endif %}
+                                  {% endif %}
+                                  <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">
+                                    {% trans 'USER TYPE' %}
+                                  </span>
+                                </div>
+                                <a href="#"
+                                   class="fw-semibold text-muted text-hover-primary fs-7"> {{ user.email }} </a>
+                              </div>
+                              <!--end::Username-->
+                            </div>
+                          </div>
+                          <!--end::Menu item-->
+
+                          <!--begin::Personal separator-->
+                          <div class="separator my-2"></div>
+                          <!--end::Personal separator-->
+                          <!--begin::Profile item-->
+                          <div class="menu-item px-5">
+                            <a href="{% url 'users:detail' request.user.username %}" class="menu-link px-5">
+                              {% trans 'My Profile' %}
+                            </a>
+                          </div>
+                          <!--end::Profile item-->
+                          <!--begin::Change Password item-->
+                          <div class="menu-item px-5">
+                            <a href="{% url 'account_change_password' %}" class="menu-link px-5">
+                              {% trans 'Change password' %}
+                            </a>
+                          </div>
+                          <!--end::Change Password item-->
+
+                          {% include 'partials/theme-mode/menu.html' %}
+
+                          {% block userlinks %}
+                          {% endblock userlinks %}
+
+                          <!--begin::Menu separator-->
+                          <div class="separator my-2"></div>
+                          <!--end::Menu separator-->
+                          {% if request.user.is_staff %}
+                            <!--begin::Admin item-->
+                            <div class="menu-item px-5">
+                              <a href="{% url 'admin:index' %}" class="menu-link px-5">
+                                {% trans 'Admin Dashboard' %}
+                              </a>
+                            </div>
+                            <!--end::Admin item-->
+                          {% endif %}
+
+                          <!--begin::Sign Out-->
+                          <div class="menu-item px-5">
+                            <a href="{% url 'account_logout' %}" class="menu-link px-5">
+                              {% trans 'Sign Out' %}
+                            </a>
+                          </div>
+                          <!--end::Sign Out-->
+                        </div>
+                        <!--end::User account menu-->
+
+                        <!--end::Menu wrapper-->
+                      </div>
+                      <!--end::User menu-->
+                    {% else %}
+                      {% if ACCOUNT_ALLOW_REGISTRATION %}
+                        <!--begin::Sign Up button-->
+                        <a href="{% url 'account_signup' %}"
+                           class="btn btn-flex btn-center btn-success btn-sm align-self-center p-3 px-lg-4 h-35px">
+                          <span class="d-none d-lg-block">{% trans 'Sign Up' %}</span>
+                        </a>
+                        <!--end::Sign Up button-->
+                      {% endif %}
+
+                      <!--begin::Login button-->
+                      <a href="{% url 'account_login' %}"
+                         class="btn btn-flex btn-center btn-success btn-sm align-self-center p-3 px-lg-4 h-35px ms-3">
+                        <span class="d-none d-lg-block">{% trans 'Login' %}</span>
+                      </a>
+                      <!--end::Login button-->
+                    {% endif %}
+                  {% endblock user-tools %}
+                  <!--begin::Header menu toggle-->
+                  {% block nav-global %}
+                    {% if site_url %}
+                      <!--begin::View Site-->
+                      <div class="app-navbar-item ms-1">
+                        <!--begin::Menu wrapper-->
+                        <a href="{{ site_url }}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                           title="{% trans 'View site' %}">
+                          <div class="btn btn-icon btn-color-white btn-active-color-primary">
+                            <i class="ki-duotone ki-exit-right-corner fs-1">
+                              <span class="path1"></span>
+                              <span class="path2"></span>
+                            </i>
+                          </div>
+                        </a>
+                        <!--end::Menu wrapper-->
+                      </div>
+                      <!--end::View Site-->
+                    {% endif %}
+                  {% endblock nav-global %}
+                  <!--end::Header menu toggle-->
+                </div>
+                <!--end::Navbar-->
+
+              </div>
+              <!--end::Header primary container-->
+            {% endblock navigation %}
+          </div>
+          <!--end::Header primary-->
+
+          <!--begin::Header secondary-->
+          {% block secondary-header %}
+          {% endblock secondary-header %}
+          <!--end::Header secondary-->
+        </div>
+        <!--end::Header-->
+      {% endif %}
+    {% endblock header %}
+
     <!--begin::Wrapper-->
-    <div class="app-wrapper  flex-column flex-row-fluid " id="kt_app_wrapper">
+    <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
       <!--begin::Wrapper container-->
       <div class="app-container  container-xxl d-flex flex-row flex-column-fluid ">
         <!--begin::Main-->
@@ -106,79 +274,8 @@
           <div class="d-flex flex-column flex-column-fluid">
             {% block wrapper %}
               <!--layout-partial:layout/partials/_toolbar.html-->
-              <!--begin::Toolbar-->
-              <div id="kt_app_toolbar" class="app-toolbar  pt-lg-9 pt-6 ">
-                <!--begin::Toolbar container-->
-                <div id="kt_app_toolbar_container" class="app-container  container-fluid d-flex flex-stack flex-wrap ">
-                  <!--begin::Toolbar wrapper-->
-                  <div class="d-flex flex-stack flex-wrap gap-4 w-100">
-                    <!--layout-partial:layout/partials/_page-title.html-->
-                    <!--begin::Page title-->
-                    <div class="page-title d-flex flex-column gap-3 me-3">
-                      <!--begin::Title-->
-                      <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bolder fs-2x my-0">
-                        Dashboard
-                      </h1>
-                      <!--end::Title-->
-                      <!--begin::Breadcrumb-->
-                      <ul class="breadcrumb breadcrumb-separatorless fw-semibold">
-                        <!--begin::Item-->
-                        <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
-                          <a href="?page=index" class="text-gray-500 text-hover-primary">
-                            <i class="ki-duotone ki-home fs-3 text-gray-400 me-n1"></i>
-                          </a>
-                        </li>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <li class="breadcrumb-item">
-                          <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1"></i></li>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
-                          Dashboards
-                        </li>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <li class="breadcrumb-item">
-                          <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1"></i></li>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <li class="breadcrumb-item text-gray-500">
-                          Default
-                        </li>
-                        <!--end::Item-->
-                      </ul>
-                      <!--end::Breadcrumb-->
-                    </div>
-                    <!--end::Page title-->
-                    <!--begin::Actions-->
-                    <div class="d-flex align-items-center gap-3 gap-lg-5">
-                      <!--begin::Secondary button-->
-                      <div class="m-0">
-                        <a href="#" class="btn btn-flex btn-sm btn-color-gray-700 bg-body fw-bold px-4"
-                           data-bs-toggle="modal"
-                           data-bs-target="#kt_modal_create_project">
-                          New Project
-                        </a>
-                      </div>
-                      <!--end::Secondary button-->
-                      <!--begin::Primary button-->
-                      <a href="#" class="btn btn-flex btn-center btn-dark btn-sm px-4" data-bs-toggle="modal"
-                         data-bs-target="#kt_modal_invite_friends">
-                        Reports
-                      </a>
-                      <!--end::Primary button-->
-                    </div>
-                    <!--end::Actions-->
-                  </div>
-                  <!--end::Toolbar wrapper-->
-                </div>
-                <!--end::Toolbar container-->
-              </div>
-              <!--end::Toolbar-->
-              <!--layout-partial:layout/partials/_content.html-->
               <!--begin::Content-->
-              <div id="kt_app_content" class="app-content  pb-0 ">
+              <div id="kt_app_content" class="app-content pb-0">
                 {% block content %}
                 {% endblock content %}
               </div>
@@ -186,31 +283,11 @@
             {% endblock wrapper %}
           </div>
           <!--end::Content wrapper-->
-          <!--layout-partial:layout/partials/_footer.html-->
-          <!--begin::Footer-->
-          <div id="kt_app_footer"
-               class="app-footer  align-items-center justify-content-center justify-content-md-between flex-column flex-md-row py-3 py-lg-6 ">
-            <!--begin::Copyright-->
-            <div class="text-dark order-2 order-md-1">
-              <span class="text-muted fw-semibold me-1">2023 &copy;</span>
-              <a href="https://keenthemes.com" target="_blank" class="text-gray-800 text-hover-primary">Keenthemes</a>
-            </div>
-            <!--end::Copyright-->
-            <!--begin::Menu-->
-            <ul class="menu menu-gray-600 menu-hover-primary fw-semibold order-1">
-              <li class="menu-item">
-                <a href="https://keenthemes.com" target="_blank" class="menu-link px-2">About</a>
-              </li>
-              <li class="menu-item">
-                <a href="https://devs.keenthemes.com" target="_blank" class="menu-link px-2">Support</a>
-              </li>
-              <li class="menu-item">
-                <a href="https://keenthemes.com/products/oswald-html-pro" target="_blank" class="menu-link px-2">Purchase</a>
-              </li>
-            </ul>
-            <!--end::Menu-->
-          </div>
-          <!--end::Footer-->
+
+          {% block footer %}
+            <!--layout-partial:layout/partials/_footer.html-->
+            {% include 'layout/partials/footer.html' %}
+          {% endblock footer %}
         </div>
         <!--end:::Main-->
       </div>
@@ -234,82 +311,74 @@
 <!--end::Modals-->
 
 <!--begin::Javascript-->
-<!--begin::Global Javascript Bundle(mandatory for all pages)-->
-{% block javascript %}
-  <script src="{% static 'js/vendors.bundle.min.js' %}"></script>
-  <script src="{% static 'js/theme.bundle.min.js' %}"></script>
-  <script src="{% static 'js/project.min.js' %}"></script>
-{% endblock javascript %}
-<!--end::Global Javascript Bundle-->
-
-<!--begin::Vendors Javascript(used for this page only)-->
-<!--end::Vendors Javascript-->
 
 <!--begin::Global Custom Javascript Bundle(mandatory for all pages)-->
-<script>
-  window.addEventListener('DOMContentLoaded', () => {
-    toastr.options = {
-      "closeButton": true,
-      "debug": false,
-      "newestOnTop": true,
-      "progressBar": true,
-      "positionClass": "toastr-top-center",
-      "preventDuplicates": false,
-      "showDuration": "300",
-      "hideDuration": "1000",
-      "timeOut": "5000",
-      "extendedTimeOut": "1000",
-      "showEasing": "swing",
-      "hideEasing": "linear",
-      "showMethod": "fadeIn",
-      "hideMethod": "fadeOut"
-    };
-
-    $(function () {
-      $(document).ajaxError(function (event, jqXHR, settings, errorThrown) {
-        toastr.error(`${jqXHR.status}`, `${errorThrown}`);
-      });
-    });
-  });
-</script>
-
-{% if messages %}
-  {% for message in messages %}
-    <script>
-      window.addEventListener('DOMContentLoaded', () => {
-        {% if message.tags == "success" %}
-          toastr.success('{{ message|safe }}', "{% trans 'Success' %}");
-        {% elif message.tags == "info" %}
-          toastr.info('{{ message|safe }}', "{% trans 'Info' %}");
-        {% elif message.tags == "warning" %}
-          toastr.warning('{{ message|safe }}', "{% trans 'Warning' %}");
-        {% else %}
-          toastr.error('{{ message|safe }}', "{% trans 'Error' %}");
-        {% endif %}
-      });
-    </script>
-  {% endfor %}
-{% endif %}
-
-{% if form.errors %}
-  <script id="id_form_error" type="application/json">
-      {{ form.errors.as_json }}
-    </script>
+{% block global_javascript %}
   <script>
     window.addEventListener('DOMContentLoaded', () => {
-      const form_errors = JSON.parse(document.getElementById('id_form_error').textContent.replaceAll('&quot;', '"'));
-      $.each(form_errors, function (key, value) {
-        $.each(value, function (index, _value) {
-          if (key === "__all__") {
-            toastr.error(_value.message, "{% translate 'Error' %}");
-          } else {
-            toastr.error(_value.message, key);
-          }
+      toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toastr-top-center",
+        "preventDuplicates": false,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+      };
+
+      $(function () {
+        $(document).ajaxError(function (event, jqXHR, settings, errorThrown) {
+          toastr.error(`${jqXHR.status}`, `${errorThrown}`);
         });
       });
     });
   </script>
-{% endif %}
+
+  {% if messages %}
+    {% for message in messages %}
+      <script>
+        window.addEventListener('DOMContentLoaded', () => {
+          {% if message.tags == "success" %}
+            toastr.success('{{ message|safe }}', "{% trans 'Success' %}");
+          {% elif message.tags == "info" %}
+            toastr.info('{{ message|safe }}', "{% trans 'Info' %}");
+          {% elif message.tags == "warning" %}
+            toastr.warning('{{ message|safe }}', "{% trans 'Warning' %}");
+          {% else %}
+            toastr.error('{{ message|safe }}', "{% trans 'Error' %}");
+          {% endif %}
+        });
+      </script>
+    {% endfor %}
+  {% endif %}
+
+  {% if form.errors %}
+    <script id="id_form_error" type="application/json">
+      {{ form.errors.as_json }}
+    </script>
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        const form_errors = JSON.parse(document.getElementById('id_form_error').textContent.replaceAll('&quot;', '"'));
+        $.each(form_errors, function (key, value) {
+          $.each(value, function (index, _value) {
+            if (key === "__all__") {
+              toastr.error(_value.message, "{% translate 'Error' %}");
+            } else {
+              toastr.error(_value.message, key);
+            }
+          });
+        });
+      });
+    </script>
+  {% endif %}
+{% endblock global_javascript %}
 <!--end::Global Javascript Bundle-->
 
 <!--begin::Custom Javascript(used for this page only)-->

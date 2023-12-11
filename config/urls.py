@@ -61,6 +61,14 @@ if settings.DEBUG:
 
         urlpatterns = [path("__debug__/", include(debug_toolbar.urls))] + urlpatterns
 
+
+if "one.tests" in settings.INSTALLED_APPS:
+    from one.tests.admin import support_admin
+
+    urlpatterns += [
+        path("support/", support_admin.urls),
+    ]
+
 # Always include flatpages before the catch-all
 if "django.contrib.flatpages" in settings.INSTALLED_APPS:
     urlpatterns += [
