@@ -1,5 +1,0 @@
-<!--begin::Drawers-->
-<!--layout-partial:partials/drawers/_activity-drawer.html-->
-<!--layout-partial:partials/drawers/_chat-messenger.html-->
-<!--layout-partial:partials/drawers/_shopping-cart.html-->
-<!--end::Drawers-->
