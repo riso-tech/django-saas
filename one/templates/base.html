@@ -51,14 +51,17 @@
 </head>
 <!--end::Head-->
 <!--begin::Body-->
-<body id="kt_body"
-  {% block body-config %}
-      data-kt-app-header-stacked="true"
-      data-kt-app-header-primary-enabled="true"
-      data-kt-app-header-secondary-enabled="false"
-      data-kt-app-toolbar-enabled="true"
-  {% endblock body-config %}
-      class="app-default {% if is_popup %}grp-popup {% endif %}{% block bodyclass %}{% endblock bodyclass %}">
+<body
+  {% block body-attrs %}
+    id="kt_body"
+    data-kt-app-header-stacked="true"
+    data-kt-app-header-primary-enabled="true"
+    data-kt-app-header-secondary-enabled="false"
+    data-kt-app-toolbar-enabled="true"
+    class="app-default"
+  {% endblock body-attrs %}
+>
+{% block body-wrapper %}
 <!--layout-partial:partials/theme-mode/_init.html-->
 {% include 'partials/theme-mode/init.html' %}
 
@@ -298,6 +301,7 @@
 <!--end::App-->
 
 <!--layout-partial:partials/_drawers.html-->
+{% endblock body-wrapper %}
 
 <!--begin::Modals-->
 {% block modal %}

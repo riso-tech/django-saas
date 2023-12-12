@@ -2,13 +2,12 @@
 {% load static i18n grp_tags %}
 
 {% block stylesheets %}
-  <link href="{% static 'css/vendors.bundle.min.css' %}" rel="stylesheet" type="text/css"/>
   <link href="{% static "grappelli/stylesheets/screen.css" %}" rel="stylesheet" type="text/css" media="all"/>
-  <link href="{% static 'css/theme.bundle.min.css' %}" rel="stylesheet" type="text/css"/>
   {% if LANGUAGE_BIDI %}
     <link href="{% block stylesheet_rtl %}{% static "grappelli/stylesheets/rtl.css" %}{% endblock %}" rel="stylesheet"
           type="text/css" media="screen"/>
   {% endif %}
+  {{ block.super }}
 {% endblock stylesheets %}
 
 {% block javascripts %}

@@ -1,97 +1,37 @@
 {% load static i18n %}
-<!DOCTYPE html>
-{% get_current_language as LANGUAGE_CODE %}
-<html lang="{{ LANGUAGE_CODE }}">
-<!--begin::Head-->
-<head>
-  <title>
-    {% block title %}
-      {% block head_title %}Business not Found{% endblock head_title %} - Django SaaS
-    {% endblock title %}
-  </title>
-  <meta charset="utf-8"/>
 
-  <link rel="shortcut icon" href="{% static 'media/logos/favicon.ico' %}"/>
-  <!--begin::Fonts(mandatory for all pages)-->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"/>
-  <!--end::Fonts-->
 
-  <!--begin::Stylesheet-->
-  <!--begin::Vendor Stylesheets(used for this page only)-->
-  {% block css %}
-    <link href="{% static 'css/vendors.bundle.min.css' %}" rel="stylesheet" type="text/css"/>
-    <link href="{% static 'css/theme.bundle.min.css' %}" rel="stylesheet" type="text/css"/>
-  {% endblock css %}
-  <!--end::Vendor Stylesheets-->
-  <!--end::Stylesheet-->
+{% block body-attrs %}
+  id="kt_body" class="app-blank"
+{% endblock body-attrs %}
 
-  <script>
-    // Frame-busting to prevent site from being loaded within a frame without permission (click-jacking)
-    if (window.top !== window.self) {
-      window.top.location.replace(window.self.location.href);
-    }
-  </script>
-</head>
-<!--end::Head-->
-<body id="kt_body" class="app-default">
-<!--begin::Theme mode setup on page load-->
-<script>
-  let defaultThemeMode = "light";
-  let themeMode;
-  if (document.documentElement) {
-    if (document.documentElement.hasAttribute("data-bs-theme-mode")) {
-      themeMode = document.documentElement.getAttribute("data-bs-theme-mode");
-    } else {
-      if (localStorage.getItem("data-bs-theme") !== null) {
-        themeMode = localStorage.getItem("data-bs-theme");
-      } else {
-        themeMode = defaultThemeMode;
-      }
-    }
-    if (themeMode === "system") {
-      themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    }
-    document.documentElement.setAttribute("data-bs-theme", themeMode);
-  }</script>
-<!--end::Theme mode setup on page load-->
-<!--begin::App-->
-<div class="d-flex flex-column flex-root bg-primary">
-  <div class="d-flex flex-column flex-center flex-column-fluid p-10">
-    <!--begin::Header-->
-    <div class="d-flex flex-row-fluid flex-column text-center p-5 p-lg-10 pt-lg-20">
-      <!--begin::Title-->
-      <h1
-        class="d-none d-lg-block fw-bold text-white fs-2qx pb-5 pb-md-10">{% blocktrans %}Welcome to {{ default_name }}{% endblocktrans %}</h1>
-      <!--end::Title-->
-      <!--begin::Description-->
-      <p class="d-none d-lg-block fw-semibold fs-2 text-white">
-        {% if exception %}
-          {{ exception }}
-        {% else %}
-          {% blocktrans %}Your domain does not exist in our system please contact us via
-            <a href="https://{{ default_url }}" class="text-warning">{{ default_name }}</a>{% endblocktrans %}
-        {% endif %}
-      </p>
-      <!--end::Description-->
+{% block body-wrapper %}
+  <!--begin::App-->
+  <div class="d-flex flex-column flex-root bg-primary">
+    <div class="d-flex flex-column flex-center flex-column-fluid p-10">
+      <!--begin::Header-->
+      <div class="d-flex flex-row-fluid flex-column text-center p-5 p-lg-10 pt-lg-20">
+        <!--begin::Title-->
+        <h1
+          class="d-none d-lg-block fw-bold text-white fs-2qx pb-5 pb-md-10">{% blocktrans %}Welcome to
+          {{ default_name }}{% endblocktrans %}</h1>
+        <!--end::Title-->
+        <!--begin::Description-->
+        <p class="d-none d-lg-block fw-semibold fs-2 text-white">
+          {% if exception %}
+            {{ exception }}
+          {% else %}
+            {% blocktrans %}Your domain does not exist in our system please contact us via
+              <a href="https://{{ default_url }}" class="text-warning">{{ default_name }}</a>{% endblocktrans %}
+          {% endif %}
+        </p>
+        <!--end::Description-->
+      </div>
+      <!--end::Header-->
+      <!--begin::Illustration-->
+      <img src="{% static 'media/illustrations/sketchy-1/18.png' %}" alt="" class="mw-100 mb-10 h-lg-450px">
+      <!--end::Illustration-->
     </div>
-    <!--end::Header-->
-    <!--begin::Illustration-->
-    <img src="{% static 'media/illustrations/sketchy-1/18.png' %}" alt="" class="mw-100 mb-10 h-lg-450px">
-    <!--end::Illustration-->
   </div>
-</div>
-<!--end::App-->
-<!--begin::Javascript-->
-<!--begin::Global Javascript Bundle(mandatory for all pages)-->
-{% block javascript %}
-{% endblock javascript %}
-<!--end::Global Javascript Bundle-->
-
-<!--begin::Custom Javascript(used for this page only)-->
-{% block inline_javascript %}
-{% endblock inline_javascript %}
-<!--end::Custom Javascript-->
-<!--end::Javascript-->
-</body>
-<!--end::Body-->
-</html>
+  <!--end::App-->
+{% endblock body-wrapper %}
