@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static i18n grp_tags %}
 
+
 {% block stylesheets %}
   <link href="{% static "grappelli/stylesheets/screen.css" %}" rel="stylesheet" type="text/css" media="all"/>
   {% if LANGUAGE_BIDI %}
@@ -51,84 +52,117 @@
   {% endif %}
 {% endblock javascripts %}
 
-{% block userlinks %}
-  {% if user.is_authenticated and user.is_staff %}
-    <!--begin::Menu separator-->
-    <div class="separator my-2"></div>
-    <!--end::Menu separator-->
-    {% switch_user_dropdown %}
-  {% endif %}
-{% endblock userlinks %}
+{% block body-attrs %}
+class="{% if is_popup %}grp-popup {% endif %}{% if LANGUAGE_BIDI %}rtl {% endif %}{% block bodyclass %}{% endblock %}"
+{% endblock body-attrs %}
 
-{% block wrapper %}
-  {% block context-navigation %}
-    <!--layout-partial:layout/partials/_toolbar.html-->
-    <!--begin::Toolbar-->
-    <div id="kt_app_toolbar" class="app-toolbar pt-lg-6 pt-3">
-      <!--begin::Toolbar container-->
-      <div id="kt_app_toolbar_container"
-           class="app-container container-fluid d-flex flex-stack flex-wrap ">
-        <!--begin::Toolbar wrapper-->
-        <div class="d-flex flex-stack flex-wrap gap-4 w-100">
-          <!--layout-partial:layout/partials/_page-title.html-->
-          <!--begin::Page title-->
-          <div class="page-title d-flex flex-column gap-3 me-3">
-            <!--begin::Title-->
-            <h2 class="page-heading justify-content-center text-dark fw-bolder fs-2x my-0">
-              {% block content_title %}{% if title %}{{ title }}{% endif %}{% endblock content_title %}
-              <span class="fs-6 text-gray-400 ms-1">{% block pretitle %}{% endblock pretitle %}</span>
-            </h2>
-            <!--end::Title-->
+{% block body-wrapper %}
+  <div id="container" class="grp-container">
 
-            <!--begin::Breadcrumb-->
-            <ul class="breadcrumb breadcrumb-separatorless fw-semibold">
-              <!--begin::Item-->
-              <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
-                <a href="{% url 'admin:index' %}" class="text-gray-500 text-hover-primary">
-                  <i class="ki-duotone ki-home fs-3 text-gray-400 me-n1"></i>
-                </a>
-              </li>
-              <!--end::Item-->
-              {% block breadcrumbs %}
-                {% if title %}
-                  <!--begin::Item-->
-                  <li class="breadcrumb-item">
-                    <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1">
-                    </i>
-                  </li>
-                  <!--end::Item-->
-                  <!--begin::Item-->
-                  <li class="breadcrumb-item text-gray-500">
-                    {{ title }}
-                  </li>
-                  <!--end::Item-->
+        {% block header %}
+            <!-- HEADER -->
+            <header id="grp-header" class="{% block header-class %}{% endblock %}">
+                {% if not is_popup %}
+
+                    {% block navigation %}
+                        <!-- NAVIGATION -->
+                        <div id="grp-navigation">
+                            {% block branding %}{% endblock %}
+                            {% block admin_title %}
+                                <h1 id="grp-admin-title">
+                                    {% trans "Django administration" as vanilla_site_header %}
+                                    {% if site_header and site_header != vanilla_site_header %}
+                                        {{ site_header|safe }}
+                                    {% elif grappelli_admin_title %}
+                                        {{ grappelli_admin_title }}
+                                    {% else %}
+                                        {% get_admin_title %}
+                                    {% endif %}
+                                </h1>
+                            {% endblock %}
+                            {% block user-tools %}
+                                {% if user.is_authenticated and user.is_staff %}
+                                    <ul id="grp-user-tools">
+                                        <!-- Userlinks -->
+                                        {% block userlinks %}
+                                            <!-- Username -->
+                                            <li class="grp-user-options-container grp-collapse grp-closed {% if request.session.original_user %}grp-switch-user-is-target{% endif %}">
+                                                <a href="javascript://" class="user-options-handler grp-collapse-handler {% if request.session.original_user %}grp-switch-user-is-target{% else %}grp-switch-user-is-original{% endif %}">{% firstof user.get_short_name user.get_username %}</a>
+                                                <ul class="grp-user-options">
+                                                    <!-- Change Password -->
+                                                    {% if user.has_usable_password %}
+                                                        <li><a href="{% url 'admin:password_change' %}" class="grp-change-password">{% trans 'Change password' %}</a></li>
+                                                    {% endif %}
+                                                    <!-- Logout -->
+                                                    <li><a href="{% url 'admin:logout' %}" class="grp-logout">{% trans 'Log out' %}</a></li>
+                                                    <!-- Switch -->
+                                                    {% switch_user_dropdown %}
+                                                </ul>
+                                            </li>
+                                            <!-- Site URL -->
+                                            {% if site_url %}
+                                                <li><a href="{{ site_url }}">{% trans 'View site' %}</a></li>
+                                            {% endif %}
+                                            <!-- Documentation -->
+                                            {% url 'django-admindocs-docroot' as docsroot %}
+                                            {% if docsroot %}
+                                                <li><a href="{{ docsroot }}">{% trans 'Documentation' %}</a></li>
+                                            {% endif %}
+                                        {% endblock %}
+                                    </ul>
+                                {% endif %}
+                            {% endblock %}
+                            <!-- Nav-Global -->
+                            {% block nav-global %}{% endblock %}
+                        </div>
+                    {% endblock %}
+
+                    {% block context-navigation %}
+                        <!-- CONTEXT NAVIGATION -->
+                        <div id="grp-context-navigation">
+                            <nav id="grp-breadcrumbs" class="{% block breadcrumbs-class %}{% endblock %}">
+                                <header style="display:none"><h1>Breadcrumbs</h1></header>
+                                {% block breadcrumbs %}
+                                    <ul>
+                                        <li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a></li>
+                                        {% if title %}
+                                            <li> &rsaquo; {{ title }}</li>
+                                        {% endif %}
+                                    </ul>
+                                {% endblock %}
+                            </nav>
+                            <nav id="grp-page-tools">
+                                <header style="display:none"><h1>Page Tools</h1></header>
+                                {% block page-tools %}{% endblock %}
+                            </nav>
+                        </div>
+                    {% endblock %}
+
                 {% endif %}
-              {% endblock breadcrumbs %}
-            </ul>
-            <!--end::Breadcrumb-->
-          </div>
-          <!--end::Page title-->
+            </header>
+        {% endblock %}
 
-          <!--begin::Actions-->
-          <div class="d-flex align-items-center gap-3 gap-lg-5">
-            {% block page-tools %}{% endblock %}
-            {% block object-tools %}{% endblock object-tools %}
-          </div>
-          <!--end::Actions-->
-        </div>
-        <!--end::Toolbar wrapper-->
-      </div>
-      <!--end::Toolbar container-->
+        <!-- CONTENT -->
+        <article id="grp-content" class="{% block content-class %}{% endblock %}">
+            <!-- CONTENT TITLE -->
+            <header id="grp-content-title">
+                {% block pretitle %}{% endblock %}
+                {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
+                {% block object-tools %}{% endblock %}
+            </header>
+
+            <!-- CONTENT-CONTAINER -->
+            <div id="grp-content-container">
+                {% block content %}
+                    {{ content }}
+                    {% block filters %}{% endblock %}
+                {% endblock %}
+            </div>
+
+        </article>
+
+        <!-- FOOTER -->
+        {% block footer %}{% endblock %}
+
     </div>
-    <!--end::Toolbar-->
-  {% endblock context-navigation %}
-
-  <!--begin::Content-->
-  <div id="kt_app_content" class="app-content pb-0">
-    {% block content %}
-      {{ content }}
-      {% block filters %}{% endblock %}
-    {% endblock content %}
-  </div>
-  <!--end::Content-->
-{% endblock wrapper %}
+{% endblock body-wrapper %}

@@ -1,3 +1,4 @@
+{% extends 'base.html' %}
 {% load static i18n %}
 
 
@@ -12,9 +13,9 @@
       <!--begin::Header-->
       <div class="d-flex flex-row-fluid flex-column text-center p-5 p-lg-10 pt-lg-20">
         <!--begin::Title-->
-        <h1
-          class="d-none d-lg-block fw-bold text-white fs-2qx pb-5 pb-md-10">{% blocktrans %}Welcome to
-          {{ default_name }}{% endblocktrans %}</h1>
+        <h1 class="d-none d-lg-block fw-bold text-white fs-2qx pb-5 pb-md-10">
+          {% blocktrans %}Welcome to {{ default_name }}{% endblocktrans %}
+        </h1>
         <!--end::Title-->
         <!--begin::Description-->
         <p class="d-none d-lg-block fw-semibold fs-2 text-white">
