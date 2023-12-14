@@ -5,13 +5,16 @@ from model_utils.models import TimeStampedModel
 from one.utils.db.models import MasterModel
 
 
-class Client(TimeStampedModel, MasterModel, TenantMixin):
+class Business(TimeStampedModel, MasterModel, TenantMixin):
     # default true, schema will be automatically created and synced when it is saved
     auto_create_schema = True
 
+    # TODO: In case you wanna add more field to business model
+    #  you have to update flow create first business in middleware
+
     class Meta:
-        verbose_name = _("Client")
-        verbose_name_plural = _("Clients")
+        verbose_name = _("Business")
+        verbose_name_plural = _("Businesses")
 
 
 class Domain(DomainMixin):

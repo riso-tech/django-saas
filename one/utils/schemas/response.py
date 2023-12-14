@@ -39,8 +39,11 @@ class DefaultResponse:
     pagination: Pagination | None = None
 
     def data_validator(self):
-        if self.data and "serializer" in self.data.__dict__:
-            self.data = json.loads(json.dumps(self.data))
+        try:
+            if self.data and isinstance(self.data, dict) and "serializer" in self.data.__dict__:
+                self.data = json.loads(json.dumps(self.data))
+        except AttributeError as e:
+            print(str(e))
 
     def to_dict(self) -> dict[str, Any]:
         self.data_validator()

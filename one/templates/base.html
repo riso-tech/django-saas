@@ -1,181 +1,401 @@
 {% load static i18n %}
-
 <!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE }}">
+<!--begin::Head-->
 <head>
+  <title>{% block title %}Django Software as a Service{% endblock title %}</title>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-  <title>
-    {% block title %}
-      Django Software as a Service
-    {% endblock title %}
-  </title>
-  <meta name="description" content="Django Software as a Service"/>
-  <meta name="author" content="Bin Nguyen"/>
-  <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}"/>
-  {% block css %}
-    <!-- This file stores project-specific CSS -->
-    <link href="{% static 'css/project.min.css' %}" rel="stylesheet"/>
-    <!-- Your stuff: Third-party CSS libraries go here -->
-    <link href="{% static 'css/vendors.min.css' %}" rel="stylesheet"/>
-  {% endblock css %}
-  <!-- Le javascript
-  ================================================== -->
-  {# Placed at the top of the document so pages load faster with defer #}
-  {% block javascript %}
-    <!-- Vendor dependencies bundled as one file -->
-    <script defer src="{% static 'js/vendors.min.js' %}"></script>
-    <!-- place project specific Javascript in this file -->
-    <script defer src="{% static 'js/project.min.js' %}"></script>
-  {% endblock javascript %}
-</head>
-<body>
+  {% block blockbots %}
+    <meta name="robots" content="NONE,NOARCHIVE"/>
+  {% endblock blockbots %}
 
+  <link rel="shortcut icon" href="{% static 'media/logos/favicon.ico' %}"/>
+  <!--begin::Fonts(mandatory for all pages)-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"/>
+  <!--end::Fonts-->
 
-<div class="container-scroller">
-  <!--begin:: Navbar -->
-  <div class="horizontal-menu">
-    <!--begin:: Top Navbar -->
-    <nav class="navbar top-navbar col-lg-12 col-12 p-0">
-      <div class="container-fluid">
-        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-between">
-          <ul class="navbar-nav navbar-nav-left">
-          </ul>
-          <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-            <a class="navbar-brand brand-logo" href="/"><img src="{% static 'images/logo.svg' %}" alt="logo"/></a>
-            <a class="navbar-brand brand-logo-mini" href=""><img src="{% static 'images/logo-mini.svg' %}" alt="logo"/></a>
-          </div>
-          <ul class="navbar-nav navbar-nav-right">
+  <!--begin::Stylesheet-->
+  <!--begin::Vendor Stylesheets(used for this page only)-->
+  {% block stylesheets %}
+    <link href="{% static 'css/vendors.bundle.min.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/theme.bundle.min.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/project.min.css' %}" rel="stylesheet" type="text/css"/>
+  {% endblock stylesheets %}
+  <!--end::Vendor Stylesheets-->
+  <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+  {% block extrastyle %}{% endblock extrastyle %}
+  <!--end::Global Stylesheets Bundle-->
+  <!--end::Stylesheet-->
 
-            {% if request.user.is_authenticated %}
-              <li class="nav-item nav-profile dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
-                  <span class="nav-profile-name">Johnson</span>
-                  <span class="online-status"></span>
-                  <img src="{% static 'images/faces/face28.png' %}" alt="profile"/>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                  <a class="dropdown-item" href="#">
-                    <i class="mdi mdi-settings text-primary"></i>
-                    Settings
-                  </a>
-                  <a class="dropdown-item" href="#">
-                    <i class="mdi mdi-logout text-primary"></i>
-                    Logout
-                  </a>
-                </div>
-              </li>
-            {% else %}
-              <li class="nav-item dropdown d-lg-flex">
-                <a href="{% url 'account_signup' %}" class="btn btn-inverse-primary btn-sm">Sign Up</a>
-              </li>
-              <li class="nav-item dropdown d-lg-flex">
-                <a href="{% url 'account_login' %}" class="btn btn-inverse-primary btn-sm">Login</a>
-              </li>
-            {% endif %}
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!--end:: Top Navbar -->
-  </div>
-  <!--end:: Navbar -->
-
-  <div class="container-fluid page-body-wrapper">
-    <div class="main-panel">
-      <div class="content-wrapper">
-        <!--begin:: Content -->
-        {% block content %}
-          <p>Use this document as a way to quick start any new project.</p>
-        {% endblock content %}
-        <!--end:: Content -->
-      </div>
-    </div>
-  </div>
-
-</div>
-
-
-{% block modal %}
-{% endblock modal %}
-
-<script>
-  window.addEventListener('DOMContentLoaded', () => {
-    toastr.options = {
-      "closeButton": true,
-      "debug": false,
-      "newestOnTop": true,
-      "progressBar": true,
-      "positionClass": "toast-top-center",
-      "preventDuplicates": false,
-      "showDuration": "300",
-      "hideDuration": "1000",
-      "timeOut": "5000",
-      "extendedTimeOut": "1000",
-      "showEasing": "swing",
-      "hideEasing": "linear",
-      "showMethod": "fadeIn",
-      "hideMethod": "fadeOut"
-    };
-
-    $(function () {
-      $(document).ajaxError(function (event, jqXHR, settings, errorThrown) {
-        toastr.error(`${jqXHR.status}`, `${errorThrown}`);
-      });
-    });
-  });
-</script>
-
-{% if messages %}
-  {% for message in messages %}
+  <!--begin::Javascript-->
+  <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+  {% block javascripts %}
+    <script src="{% static 'js/vendors.bundle.min.js' %}"></script>
+    <script src="{% static 'js/theme.bundle.min.js' %}"></script>
+    <script src="{% static 'js/project.min.js' %}"></script>
+  {% endblock javascripts %}
+  <!--end::Global Javascript Bundle-->
+  <!--begin::Vendors Javascript(used for this page only)-->
+  {% block extrahead %}
     <script>
-      window.addEventListener('DOMContentLoaded', () => {
-        {% if message.tags == "success" %}
-          toastr.success("{{ message }}", "{% trans 'Success' %}");
-        {% elif message.tags == "info" %}
-          toastr.info("{{ message }}", "{% trans 'Info' %}");
-        {% elif message.tags == "warning" %}
-          toastr.warning("{{ message }}", "{% trans 'Warning' %}");
-        {% else %}
-          toastr.error("{{ message }}", "{% trans 'Error' %}");
-        {% endif %}
-      });
+      // Frame-busting to prevent site from being loaded within a frame without permission (click-jacking)
+      if (window.top !== window.self) {
+        window.top.location.replace(window.self.location.href);
+      }
     </script>
-  {% endfor %}
-{% endif %}
-{% if form.errors %}
-  <script id="id_form_error" type="application/json">
-    {{ form.errors.as_json }}
-  </script>
+  {% endblock extrahead %}
+  <!--end::Vendors Javascript-->
+  <!--end::Javascript-->
+</head>
+<!--end::Head-->
+<!--begin::Body-->
+<body
+  {% block body-attrs %}
+    id="kt_body"
+    data-kt-app-header-stacked="true"
+    data-kt-app-header-primary-enabled="true"
+    data-kt-app-header-secondary-enabled="false"
+    data-kt-app-toolbar-enabled="true"
+    class="app-default"
+  {% endblock body-attrs %}
+>
+{% block body-wrapper %}
+<!--layout-partial:partials/theme-mode/_init.html-->
+{% include 'partials/theme-mode/init.html' %}
+
+<!--layout-partial:layout/_default.html-->
+<!--begin::App-->
+<div class="d-flex flex-column flex-root app-root" id="kt_app_root">
+  <!--begin::Page-->
+  <div class="app-page flex-column flex-column-fluid " id="kt_app_page">
+    {% block header %}
+      {% if not is_popup %}
+        <!--begin::Header-->
+        <div id="kt_app_header" class="app-header">
+          <!--begin::Header primary-->
+          <div class="app-header-primary "
+               data-kt-sticky="true" data-kt-sticky-name="app-header-primary-sticky"
+               data-kt-sticky-offset="{default: 'false', lg: '300px'}"
+          >
+            {% block navigation %}
+              <!--begin::Header primary container-->
+              <div class="app-container  container-xxl d-flex align-items-stretch justify-content-between "
+                   id="kt_app_header_primary_container">
+                {% block branding %}
+                  <!--begin::Logo and search-->
+                  <div class="d-flex flex-grow-1 flex-lg-grow-0">
+                    <!--begin::Logo wrapper-->
+                    <div class="d-flex align-items-center" id="kt_app_header_logo_wrapper">
+                      <!--begin::Header toggle-->
+                      <button class="d-lg-none btn btn-icon btn-color-white btn-active-color-primary ms-n4 me-sm-2"
+                              id="kt_app_header_menu_toggle">
+                        <i class="ki-duotone ki-abstract-14 fs-1"><span class="path1"></span><span class="path2"></span></i>
+                      </button>
+                      <!--end::Header toggle-->
+                      <!--begin::Logo-->
+                      <a href="{% url 'home' %}" class="d-flex align-items-center mb-1 mb-lg-0 pt-lg-1">
+                        <img alt="Logo" src="{% static 'media/logos/default-small.svg' %}" class="d-block d-sm-none"/>
+                        <img alt="Logo" src="{% static 'media/logos/default.svg' %}" class="d-none d-sm-block"/>
+                      </a>
+                      <!--end::Logo-->
+                    </div>
+                    <!--end::Logo wrapper-->
+                  </div>
+                  <!--end::Logo and search-->
+                {% endblock branding %}
+
+                {% block admin_title %}
+                {% endblock admin_title %}
+
+                <!--begin::Navbar-->
+                <div class="app-navbar">
+                  {% block user-tools %}
+                    {% if request.user.is_authenticated %}
+                      <!--begin::User menu-->
+                      <div class="app-navbar-item ms-3" id="kt_header_user_menu_toggle">
+                        <!--begin::Menu wrapper-->
+                        <div class="cursor-pointer symbol symbol-35px"
+                             data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
+                             data-kt-menu-attach="parent"
+                             data-kt-menu-placement="bottom-end"
+                        >
+                          <img class="symbol symbol-35px" src="{% static 'media/avatars/300-3.jpg' %}" alt="user"/>
+                        </div>
+                        <!--begin::User account menu-->
+                        <div
+                          class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px"
+                          data-kt-menu="true">
+                          <!--begin::Menu item-->
+                          <div class="menu-item px-3">
+                            <div class="menu-content d-flex align-items-center px-3">
+                              <!--begin::Avatar-->
+                              <div class="symbol symbol-50px me-5">
+                                <img alt="Logo" src="{% static 'media/avatars/300-3.jpg' %}"/>
+                              </div>
+                              <!--end::Avatar-->
+                              <!--begin::Username-->
+                              <div class="d-flex flex-column">
+                                <div
+                                  class="fw-bold d-flex align-items-center fs-5">
+                                  {% if request.session.original_user %}
+                                    {% if request.session.original_user.name %}
+                                      {{ request.session.original_user.name|title }}{% else %}
+                                      {{ request.session.original_user.username|title }}{% endif %}
+                                  {% else %}
+                                    {% if user.name %}{{ user.name|title }}{% else %}
+                                      {{ user.username|title }}{% endif %}
+                                  {% endif %}
+                                  <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">
+                                    {% trans 'USER TYPE' %}
+                                  </span>
+                                </div>
+                                <a href="#"
+                                   class="fw-semibold text-muted text-hover-primary fs-7"> {{ user.email }} </a>
+                              </div>
+                              <!--end::Username-->
+                            </div>
+                          </div>
+                          <!--end::Menu item-->
+
+                          <!--begin::Personal separator-->
+                          <div class="separator my-2"></div>
+                          <!--end::Personal separator-->
+                          <!--begin::Profile item-->
+                          <div class="menu-item px-5">
+                            <a href="{% url 'users:detail' request.user.username %}" class="menu-link px-5">
+                              {% trans 'My Profile' %}
+                            </a>
+                          </div>
+                          <!--end::Profile item-->
+                          <!--begin::Change Password item-->
+                          <div class="menu-item px-5">
+                            <a href="{% url 'account_change_password' %}" class="menu-link px-5">
+                              {% trans 'Change password' %}
+                            </a>
+                          </div>
+                          <!--end::Change Password item-->
+
+                          {% include 'partials/theme-mode/menu.html' %}
+
+                          {% block userlinks %}
+                          {% endblock userlinks %}
+
+                          <!--begin::Menu separator-->
+                          <div class="separator my-2"></div>
+                          <!--end::Menu separator-->
+                          {% if request.user.is_staff %}
+                            <!--begin::Admin item-->
+                            <div class="menu-item px-5">
+                              <a href="{% url 'admin:index' %}" class="menu-link px-5">
+                                {% trans 'Admin Dashboard' %}
+                              </a>
+                            </div>
+                            <!--end::Admin item-->
+                          {% endif %}
+
+                          <!--begin::Sign Out-->
+                          <div class="menu-item px-5">
+                            <a href="{% url 'account_logout' %}" class="menu-link px-5">
+                              {% trans 'Sign Out' %}
+                            </a>
+                          </div>
+                          <!--end::Sign Out-->
+                        </div>
+                        <!--end::User account menu-->
+
+                        <!--end::Menu wrapper-->
+                      </div>
+                      <!--end::User menu-->
+                    {% else %}
+                      {% if ACCOUNT_ALLOW_REGISTRATION %}
+                        <!--begin::Sign Up button-->
+                        <a href="{% url 'account_signup' %}"
+                           class="btn btn-flex btn-center btn-success btn-sm align-self-center p-3 px-lg-4 h-35px">
+                          <span class="d-none d-lg-block">{% trans 'Sign Up' %}</span>
+                        </a>
+                        <!--end::Sign Up button-->
+                      {% endif %}
+
+                      <!--begin::Login button-->
+                      <a href="{% url 'account_login' %}"
+                         class="btn btn-flex btn-center btn-success btn-sm align-self-center p-3 px-lg-4 h-35px ms-3">
+                        <span class="d-none d-lg-block">{% trans 'Login' %}</span>
+                      </a>
+                      <!--end::Login button-->
+                    {% endif %}
+                  {% endblock user-tools %}
+                  <!--begin::Header menu toggle-->
+                  {% block nav-global %}
+                    {% if site_url %}
+                      <!--begin::View Site-->
+                      <div class="app-navbar-item ms-1">
+                        <!--begin::Menu wrapper-->
+                        <a href="{{ site_url }}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                           title="{% trans 'View site' %}">
+                          <div class="btn btn-icon btn-color-white btn-active-color-primary">
+                            <i class="ki-duotone ki-exit-right-corner fs-1">
+                              <span class="path1"></span>
+                              <span class="path2"></span>
+                            </i>
+                          </div>
+                        </a>
+                        <!--end::Menu wrapper-->
+                      </div>
+                      <!--end::View Site-->
+                    {% endif %}
+                  {% endblock nav-global %}
+                  <!--end::Header menu toggle-->
+                </div>
+                <!--end::Navbar-->
+
+              </div>
+              <!--end::Header primary container-->
+            {% endblock navigation %}
+          </div>
+          <!--end::Header primary-->
+
+          <!--begin::Header secondary-->
+          {% block secondary-header %}
+          {% endblock secondary-header %}
+          <!--end::Header secondary-->
+        </div>
+        <!--end::Header-->
+      {% endif %}
+    {% endblock header %}
+
+    <!--begin::Wrapper-->
+    <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+      <!--begin::Wrapper container-->
+      <div class="app-container  container-xxl d-flex flex-row flex-column-fluid ">
+        <!--begin::Main-->
+        <div class="app-main flex-column flex-row-fluid " id="kt_app_main">
+          <!--begin::Content wrapper-->
+          <div class="d-flex flex-column flex-column-fluid">
+            {% block wrapper %}
+              <!--layout-partial:layout/partials/_toolbar.html-->
+              <!--begin::Content-->
+              <div id="kt_app_content" class="app-content pb-0">
+                {% block content %}
+                {% endblock content %}
+              </div>
+              <!--end::Content-->
+            {% endblock wrapper %}
+          </div>
+          <!--end::Content wrapper-->
+
+          {% block footer %}
+            <!--layout-partial:layout/partials/_footer.html-->
+            {% include 'layout/partials/footer.html' %}
+          {% endblock footer %}
+        </div>
+        <!--end:::Main-->
+      </div>
+      <!--end::Wrapper container-->
+    </div>
+    <!--end::Wrapper-->
+  </div>
+  <!--end::Page-->
+</div>
+<!--end::App-->
+
+<!--layout-partial:partials/_drawers.html-->
+{% endblock body-wrapper %}
+
+<!--begin::Modals-->
+{% block modal %}
+  <!--layout-partial:partials/modals/_upgrade-plan.html-->
+  <!--layout-partial:partials/modals/_invite-friends.html-->
+  <!--layout-partial:partials/modals/create-project/_main.html-->
+  <!--layout-partial:partials/modals/users-search/_main.html-->
+{% endblock modal %}
+<!--end::Modals-->
+
+<!--begin::Javascript-->
+
+<!--begin::Global Custom Javascript Bundle(mandatory for all pages)-->
+{% block global_javascript %}
   <script>
     window.addEventListener('DOMContentLoaded', () => {
-      const form_errors = JSON.parse(document.getElementById('id_form_error').textContent.replaceAll('&quot;', '"'));
-      $.each(form_errors, function (key, value) {
-        $.each(value, function (index, _value) {
-          if (key === "__all__") {
-            toastr.error(_value.message, "{% translate 'Error' %}");
-          } else {
-            toastr.error(_value.message, key);
-          }
+      toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toastr-top-center",
+        "preventDuplicates": false,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+      };
+
+      $(function () {
+        $(document).ajaxError(function (event, jqXHR, settings, errorThrown) {
+          toastr.error(`${jqXHR.status}`, `${errorThrown}`);
         });
       });
     });
   </script>
-{% endif %}
 
+  {% if messages %}
+    {% for message in messages %}
+      <script>
+        window.addEventListener('DOMContentLoaded', () => {
+          {% if message.tags == "success" %}
+            toastr.success('{{ message|safe }}', "{% trans 'Success' %}");
+          {% elif message.tags == "info" %}
+            toastr.info('{{ message|safe }}', "{% trans 'Info' %}");
+          {% elif message.tags == "warning" %}
+            toastr.warning('{{ message|safe }}', "{% trans 'Warning' %}");
+          {% else %}
+            toastr.error('{{ message|safe }}', "{% trans 'Error' %}");
+          {% endif %}
+        });
+      </script>
+    {% endfor %}
+  {% endif %}
 
+  {% if form.errors %}
+    <script id="id_form_error" type="application/json">
+      {{ form.errors.as_json }}
+    </script>
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        const form_errors = JSON.parse(document.getElementById('id_form_error').textContent.replaceAll('&quot;', '"'));
+        $.each(form_errors, function (key, value) {
+          $.each(value, function (index, _value) {
+            if (key === "__all__") {
+              toastr.error(_value.message, "{% translate 'Error' %}");
+            } else {
+              toastr.error(_value.message, key);
+            }
+          });
+        });
+      });
+    </script>
+  {% endif %}
+{% endblock global_javascript %}
+<!--end::Global Javascript Bundle-->
+
+<!--begin::Custom Javascript(used for this page only)-->
 {% block inline_javascript %}
   {% comment %}
     Script tags with only code, no src (defer by default). To run
     with a "defer" so that you run inline code:
     <script>
-      window.addEventListener('DOMContentLoaded', () => {
-        /* Run whatever you want */
-      });
+        window.addEventListener('DOMContentLoaded', () => {
+            /* Run whatever you want */
+        });
     </script>
-      {% endcomment %}
+    {% endcomment %}
 {% endblock inline_javascript %}
+<!--end::Custom Javascript-->
+<!--end::Javascript-->
 </body>
+<!--end::Body-->
 </html>

@@ -2,25 +2,21 @@ from django.conf import settings
 from django.contrib.sites.models import Site
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import Http404, HttpResponse, HttpResponsePermanentRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.template import loader
 from django.utils.safestring import mark_safe
 from django.views.decorators.csrf import csrf_protect, requires_csrf_token
-from django.views.generic import CreateView
 
+from ..settings import ADMIN_URL, CMS_ENABLED
 from .models import Page as FlatPage
 
 DEFAULT_TEMPLATE = "flatpages/default.html"
 
 
-# This view is called from FlatpageFallbackMiddleware.process_response
-# when a 404 is raised, which often means CsrfViewMiddleware.process_view
-# has not been called even if CsrfViewMiddleware is installed. So we need
-# to use @csrf_protect, in case the template needs {% csrf_token %}.
-# However, we can't just wrap this view; if no matching flatpage exists,
-# or a redirect is required for authentication, the 404 needs to be returned
-# without any CSRF checks. Therefore, we only
-# CSRF protect the internal implementation.
+@requires_csrf_token
+def homepage_not_found(request):
+    template_name = "cms/homepage_not_found.html"
+    return render(request, template_name, {})
 
 
 def flatpage(request, url):
@@ -34,6 +30,9 @@ def flatpage(request, url):
         flatpage
             `flatpages.flatpages` object
     """
+    if not CMS_ENABLED:
+        return redirect(ADMIN_URL)
+
     Site.objects.clear_cache()
     if not url.startswith("/"):
         url = "/" + url
@@ -75,16 +74,3 @@ def render_flatpage(request, f):
     f.content = mark_safe(f.content)
 
     return HttpResponse(template.render({"flatpage": f, "meta": f.as_meta(request)}, request))
-
-
-@requires_csrf_token
-def homepage_not_found(request):
-    template_name = "cms/homepage_missing.html"
-    return render(request, template_name, {})
-
-
-class HomePageAddView(CreateView):
-    template_name = "cms/homepage_missing.html"
-
-
-homepage_add_view = HomePageAddView.as_view()

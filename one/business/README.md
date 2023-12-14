@@ -30,24 +30,4 @@ MIDDLEWARE = (
     #...
 )
 
-TEMPLATES = [
-    {
-        "OPTIONS": {
-            "context_processors": [
-                #...
-                "one.business.context_processors.tenant_constants",
-            ]
-        }
-    }
-]
-```
-
-
-```html
-404.html
-
-{% if exception == BUSINESS_TENANT_REQUIRED_ERROR %}
-// Redirect to create business
-{% endif %}
-
 ```

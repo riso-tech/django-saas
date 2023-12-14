@@ -2,6 +2,7 @@ import pytest
 from django.urls import reverse
 from django_tenants.test.client import TenantClient as Client
 
+from one.tests.tests.cases import FastTenantTestCase as TestCase
 from one.users.models import User
 from tests.cases import FastTenantTestCase as TestCase
 

@@ -11,7 +11,7 @@ from django.utils.translation import gettext_lazy as _
 from django_tenants.test.client import TenantClient as Client
 
 from one.tests.models import Category, Entry
-from tests.cases import FastTenantTestCase as TestCase
+from one.tests.tests.cases import FastTenantTestCase as TestCase
 
 from ..templatetags.grp_tags import switch_user_dropdown
 
@@ -530,8 +530,8 @@ class GrappelliTests(TestCase):
         t_cmp_6 = "Editor002"
         self.assertIn(t_cmp_1, t)
         self.assertIn(t_cmp_2, t)
-        self.assertIn(t_cmp_3, t)
-        self.assertIn(t_cmp_4, t)
+        self.assertNotIn(t_cmp_3, t)
+        self.assertNotIn(t_cmp_4, t)
         self.assertIn(t_cmp_5, t)
         self.assertIn(t_cmp_6, t)
 

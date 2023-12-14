@@ -1,190 +1,78 @@
+{% extends 'base.html' %}
 {% load static i18n %}
 
-<!DOCTYPE html>
-{% get_current_language as LANGUAGE_CODE %}
-<html lang="{{ LANGUAGE_CODE }}">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-  <title>
-    {% block title %}
-      Django Software as a Service
-    {% endblock title %}
-  </title>
-  <meta name="description" content="Django Software as a Service"/>
-  <meta name="author" content="Bin Nguyen"/>
-  <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}"/>
-  {% block css %}
-    <!-- This file stores project-specific CSS -->
-    <link href="{% static 'css/project.min.css' %}" rel="stylesheet"/>
-    <!-- Your stuff: Third-party CSS libraries go here -->
-    <link href="{% static 'css/vendors.min.css' %}" rel="stylesheet"/>
-  {% endblock css %}
-  <!-- Le javascript
-  ================================================== -->
-  {# Placed at the top of the document so pages load faster with defer #}
-  {% block javascript %}
-    <!-- Vendor dependencies bundled as one file -->
-    <script defer src="{% static 'js/vendors.min.js' %}"></script>
-    <!-- place project specific Javascript in this file -->
-    <script defer src="{% static 'js/project.min.js' %}"></script>
-  {% endblock javascript %}
-</head>
-<body>
+{% block body-attrs %}
+  id="kt_body" class="app-blank"
+{% endblock body-attrs %}
 
-<div class="container-scroller">
-  <div class="container-fluid page-body-wrapper full-page-wrapper">
-    <div class="content-wrapper d-flex align-items-stretch auth auth-img-bg">
+{% block body-wrapper %}
+  <!--begin::Root-->
+  <div class="d-flex flex-column flex-root" id="kt_app_root">
+    <!--begin::Authentication -->
+    <div class="d-flex flex-column flex-lg-row flex-column-fluid">
       {% block content %}
-        <div class="row flex-grow">
-          <div class="col-lg-6 d-flex align-items-center justify-content-center">
-            <div class="auth-form-transparent text-left p-3">
-              <div class="brand-logo">
-                <img src="../../images/logo.svg" alt="logo">
-              </div>
-              <h4>Welcome back!</h4>
-              <h6 class="font-weight-light">Happy to see you again!</h6>
-              <form class="pt-3">
-                <div class="form-group">
-                  <label for="exampleInputEmail">Username</label>
-                  <div class="input-group">
-                    <div class="input-group-prepend bg-transparent">
-                      <span class="input-group-text bg-transparent border-right-0">
-                        <i class="mdi mdi-account-outline text-primary"></i>
-                      </span>
-                    </div>
-                    <input type="text" class="form-control form-control-lg border-left-0" id="exampleInputEmail"
-                           placeholder="Username">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword">Password</label>
-                  <div class="input-group">
-                    <div class="input-group-prepend bg-transparent">
-                      <span class="input-group-text bg-transparent border-right-0">
-                        <i class="mdi mdi-lock-outline text-primary"></i>
-                      </span>
-                    </div>
-                    <input type="password" class="form-control form-control-lg border-left-0" id="exampleInputPassword"
-                           placeholder="Password">
-                  </div>
-                </div>
-                <div class="my-2 d-flex justify-content-between align-items-center">
-                  <div class="form-check">
-                    <label class="form-check-label text-muted">
-                      <input type="checkbox" class="form-check-input">
-                      Keep me signed in
-                    </label>
-                  </div>
-                  <a href="#" class="auth-link text-black">Forgot password?</a>
-                </div>
-                <div class="my-3">
-                  <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="../../index.html">LOGIN</a>
-                </div>
-                <div class="mb-2 d-flex">
-                  <button type="button" class="btn btn-facebook auth-form-btn flex-grow me-1">
-                    <i class="mdi mdi-facebook me-2"></i>Facebook
-                  </button>
-                  <button type="button" class="btn btn-google auth-form-btn flex-grow ms-1">
-                    <i class="mdi mdi-google me-2"></i>Google
-                  </button>
-                </div>
-                <div class="text-center mt-4 font-weight-light">
-                  Don't have an account? <a href="register-2.html" class="text-primary">Create</a>
-                </div>
-              </form>
+        <!--begin::Aside-->
+        <div class="d-flex flex-column flex-lg-row-auto bg-primary w-xl-600px position-xl-relative">
+          <!--begin::Wrapper-->
+          <div class="d-flex flex-column position-xl-fixed top-0 bottom-0 w-xl-600px scroll-y">
+            <!--begin::Header-->
+            <div class="d-flex flex-row-fluid flex-column text-center p-5 p-lg-10 pt-lg-20">
+              <!--begin::Logo-->
+              <a href="{% url 'home' %}" class="py-2 py-lg-20">
+                <img alt="Logo" src="{% static 'media/logos/default.svg' %}" class="h-40px h-lg-50px"/>
+              </a>
+              <!--end::Logo-->
+              <!--begin::Title-->
+              <h1
+                class="d-none d-lg-block fw-bold text-white fs-2qx pb-5 pb-md-10">{% trans 'Welcome to Django-SaaS' %}</h1>
+              <!--end::Title-->
+              <!--begin::Description-->
+              <p class="d-none d-lg-block fw-semibold fs-2 text-white">
+                {% blocktrans %}Plan your blog post by choosing a topic creating <br/>an outline and checking
+                  facts{% endblocktrans %}
+              </p>
+              <!--end::Description-->
             </div>
+            <!--end::Header-->
+            <!--begin::Illustration-->
+            <div
+              class="d-none d-lg-block d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-100px min-h-lg-350px"
+              style="background-image: url({% static 'media/illustrations/sketchy-1/17.png' %})">
+            </div>
+            <!--end::Illustration-->
           </div>
-          <div class="col-lg-6 login-half-bg d-flex flex-row">
-            <p class="text-white font-weight-medium text-center flex-grow align-self-end">Copyright &copy; 2021 All
-              rights reserved.</p>
-          </div>
+          <!--end::Wrapper-->
         </div>
+        <!--begin::Aside-->
+        <!--begin::Body-->
+        <div class="d-flex flex-column flex-lg-row-fluid py-10">
+          <!--begin::Content-->
+          {% block inner %}
+
+          {% endblock inner %}
+          <!--end::Content-->
+          <!--begin::Footer-->
+          <div class="d-flex flex-center flex-wrap fs-6 p-5 pb-0">
+            <!--begin::Links-->
+            <div class="d-flex flex-center fw-semibold fs-6">
+              <a class="text-muted text-hover-primary px-2" target="_blank" href="#">
+                {% trans 'About' %}
+              </a>
+              <a class="text-muted text-hover-primary px-2" target="_blank" href="#">
+                {% trans 'Support' %}
+              </a>
+              <a class="text-muted text-hover-primary px-2" target="_blank" href="#">
+                {% trans 'Purchase' %}
+              </a>
+            </div>
+            <!--end::Links-->
+          </div>
+          <!--end::Footer-->
+        </div>
+        <!--end::Body-->
       {% endblock content %}
     </div>
+    <!--end::Authentication-->
   </div>
-</div>
-
-{% block modal %}
-{% endblock modal %}
-
-<script>
-  window.addEventListener('DOMContentLoaded', () => {
-    toastr.options = {
-      "closeButton": true,
-      "debug": false,
-      "newestOnTop": true,
-      "progressBar": true,
-      "positionClass": "toast-top-center",
-      "preventDuplicates": false,
-      "showDuration": "300",
-      "hideDuration": "1000",
-      "timeOut": "5000",
-      "extendedTimeOut": "1000",
-      "showEasing": "swing",
-      "hideEasing": "linear",
-      "showMethod": "fadeIn",
-      "hideMethod": "fadeOut"
-    };
-
-    $(function () {
-      $(document).ajaxError(function (event, jqXHR, settings, errorThrown) {
-        toastr.error(`${jqXHR.status}`, `${errorThrown}`);
-      });
-    });
-  });
-</script>
-
-{% if messages %}
-  {% for message in messages %}
-    <script>
-      window.addEventListener('DOMContentLoaded', () => {
-        {% if message.tags == "success" %}
-          toastr.success("{{ message }}", "{% trans 'Success' %}");
-        {% elif message.tags == "info" %}
-          toastr.info("{{ message }}", "{% trans 'Info' %}");
-        {% elif message.tags == "warning" %}
-          toastr.warning("{{ message }}", "{% trans 'Warning' %}");
-        {% else %}
-          toastr.error("{{ message }}", "{% trans 'Error' %}");
-        {% endif %}
-      });
-    </script>
-  {% endfor %}
-{% endif %}
-
-{% if form.errors %}
-  <script id="id_form_error" type="application/json">
-    {{ form.errors.as_json }}
-  </script>
-  <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      const form_errors = JSON.parse(document.getElementById('id_form_error').textContent.replaceAll('&quot;', '"'));
-      $.each(form_errors, function (key, value) {
-        $.each(value, function (index, _value) {
-          if (key === "__all__") {
-            toastr.error(_value.message, "{% translate 'Error' %}");
-          } else {
-            toastr.error(_value.message, key);
-          }
-        });
-      });
-    });
-  </script>
-{% endif %}
-
-
-{% block inline_javascript %}
-  {% comment %}
-    Script tags with only code, no src (defer by default). To run
-    with a "defer" so that you run inline code:
-    <script>
-      window.addEventListener('DOMContentLoaded', () => {
-        /* Run whatever you want */
-      });
-    </script>
-      {% endcomment %}
-{% endblock inline_javascript %}
-</body>
-</html>
+  <!--end::Root-->
+{% endblock body-wrapper %}

@@ -1,8 +1,8 @@
 from django.conf import settings
 
 # Admin Site Title
-ADMIN_HEADLINE = getattr(settings, "GRAPPELLI_ADMIN_HEADLINE", "Grappelli")
-ADMIN_TITLE = getattr(settings, "GRAPPELLI_ADMIN_TITLE", "Grappelli")
+ADMIN_HEADLINE = getattr(settings, "GRAPPELLI_ADMIN_HEADLINE", "Django SaaS")
+ADMIN_TITLE = getattr(settings, "GRAPPELLI_ADMIN_TITLE", "Django SaaS")
 
 # Link to your Main Admin Site (no slashes at start and end)
 # not needed anymore

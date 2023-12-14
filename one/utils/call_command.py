@@ -10,6 +10,6 @@ def call_command(message, data={}):  # noqa
         sys.stdout = output_buffer
         base_call_command(message, **data)
         sys.stdout = sys.__stdout__
-        return output_buffer.getvalue().splitlines()
+        return output_buffer.getvalue().splitlines(), True
     except EOFError as e:
-        return [str(e)]
+        return [str(e)], False

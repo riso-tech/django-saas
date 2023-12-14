@@ -3,6 +3,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 from django.views import defaults as default_views
+from django.views.generic import TemplateView
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework.authtoken.views import obtain_auth_token
 
@@ -10,16 +11,13 @@ from one.cms.pages import views as flatpage_views
 
 urlpatterns = [
     path("", flatpage_views.flatpage, {"url": "/"}, name="home"),
+    path("applications/", TemplateView.as_view(template_name="app_list.html"), name="saas-app-list"),
     # Django Admin, use {% url 'admin:index' %}
     path("grappelli/", include("one.libraries.grappelli.urls")),
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
     path("users/", include("one.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
-    # Business
-    path("business/", include("one.business.urls", namespace="business")),
-    # PlatPage
-    path("flatpages/", include("one.cms.pages.urls", namespace="flatpages"))
     # Your stuff: custom urls includes go here
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
@@ -62,6 +60,14 @@ if settings.DEBUG:
         import debug_toolbar
 
         urlpatterns = [path("__debug__/", include(debug_toolbar.urls))] + urlpatterns
+
+
+if "one.tests" in settings.INSTALLED_APPS:
+    from one.tests.admin import support_admin
+
+    urlpatterns += [
+        path("support/", support_admin.urls),
+    ]
 
 # Always include flatpages before the catch-all
 if "django.contrib.flatpages" in settings.INSTALLED_APPS:

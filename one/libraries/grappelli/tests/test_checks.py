@@ -1,5 +1,5 @@
 from one.tests.models import Entry
-from tests.cases import FastTenantTestCase as TestCase
+from one.tests.tests.cases import FastTenantTestCase as TestCase
 
 from ..checks import check_model
 

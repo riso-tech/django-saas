@@ -1,5 +1,6 @@
 from rest_framework.test import APIRequestFactory
 
+from one.tests.tests.cases import FastTenantTestCase as TestCase
 from one.users.api.views import UserViewSet
 from one.users.models import User
 from tests.cases import FastTenantTestCase as TestCase
