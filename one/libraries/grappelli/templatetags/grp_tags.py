@@ -248,3 +248,12 @@ def switch_user_dropdown(context):
             ]
             return tpl.render({"request": request, "object_list": object_list})
     return ""
+
+
+@register.filter
+def custom_attrs_to_html(attrs={}):  # noqa
+    attributes = ""
+    for key, value in attrs.items():
+        attributes += f'{key}="{value}" '
+
+    return mark_safe(attributes.strip())

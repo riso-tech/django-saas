@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 
-{% block body-config %}
+{% block body-attrs %}
+  id="kt_body"
   data-kt-app-header-stacked="true"
   data-kt-app-header-primary-enabled="true"
   data-kt-app-header-secondary-enabled="true"
   data-kt-app-toolbar-enabled="true"
-{% endblock body-config %}
-
+  class="app-default"
+{% endblock body-attrs %}
 
 {% block secondary-header %}
   <div class="app-header-secondary ">
