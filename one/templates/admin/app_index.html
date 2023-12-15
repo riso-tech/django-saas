@@ -1,9 +1,15 @@
 {% extends "admin/index.html" %}
 {% load i18n grp_tags %}
 
-{% if not is_popup %}
-  {% block breadcrumbs %}
-
+{% block breadcrumbs %}
+  <ul class="breadcrumb breadcrumb-separatorless fw-semibold">
+    <!--begin::Item-->
+    <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
+      <a href="{% url 'admin:index' %}" class="text-gray-500 text-hover-primary">
+        <i class="ki-duotone ki-home fs-3 text-gray-400 me-n1"></i>
+      </a>
+    </li>
+    <!--end::Item-->
     {% for app in app_list %}
       <!--begin::Item-->
       <li class="breadcrumb-item">
@@ -24,9 +30,8 @@
         <!--end::Item-->
       {% endif %}
     {% endfor %}
-
-  {% endblock breadcrumbs %}
-{% endif %}
+  </ul>
+{% endblock breadcrumbs %}
 
 {% block content %}
   <!--begin::Row-->
@@ -95,11 +100,4 @@
     {% endfor %}
   </div>
   <!--end::Row-->
-
-
-
-
-
-
-
-{% endblock %}
+{% endblock content %}

@@ -1,128 +1,27 @@
 {% extends "admin/base_site.html" %}
-{% load i18n static grp_tags log %}
+{% load i18n grp_tags log %}
 
-{% if not is_popup %}
-  {% block breadcrumbs %}
-    {% if title %}
-      <!--begin::Item-->
-      <li class="breadcrumb-item">
-        <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1"></i></li>
-      <!--end::Item-->
-      <!--begin::Item-->
-      <li class="breadcrumb-item text-gray-500">
-        {{ title }}
-      </li>
-      <!--end::Item-->
-    {% endif %}
-  {% endblock breadcrumbs %}
-{% endif %}
 
-{% block content_title %}
-  {% if title %}{{ title }}{% endif %}
-{% endblock content_title %}
+{% block bodyclass %}dashboard{% endblock bodyclass %}
+{% block content-class %}content-grid{% endblock content-class %}
 
-{% block admin_title %}
-  <h1 id="grp-admin-title">
-    {% trans "Django administration" as vanilla_site_header %}
-    {% if site_header and site_header != vanilla_site_header %}
-      {{ site_header|safe }}
-    {% elif grappelli_admin_title %}
-      {{ grappelli_admin_title }}
-    {% else %}
-      {% get_admin_title %}
-    {% endif %}
-  </h1>
-{% endblock admin_title %}
+{% block breadcrumbs %}
+  <ul class="breadcrumb breadcrumb-separatorless fw-semibold">
+    <!--begin::Item-->
+    <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
+      <a href="{% url 'admin:index' %}" class="text-gray-500 text-hover-primary">
+        <i class="ki-duotone ki-home fs-3 text-gray-400 me-n1"></i>
+      </a>
+    </li>
+    <!--end::Item-->
+  </ul>
+{% endblock breadcrumbs %}
 
 {% block content %}
-  <!--begin::Row-->
-  <div class="row g-5 g-xl-10">
-    <!--begin::Col-->
-    <div class="col-xl-4">
-      {% for app in app_list %}
-        <!--begin::{{ app.name|upper }}-->
-        <div class="card card-flush {% if not forloop.first %}mt-5{% endif %}" id="app_{{ app.name|lower }}">
-          <!--begin::Header-->
-          <div class="card-header min-h-50px">
-            <!--begin::Title-->
-            <h3 class="card-title align-items-start flex-column m-0 h-50px">
-              <span class="card-label fw-bold text-gray-800 {% if False %}grp-module{% endif %}">
-                <a href="{{ app.app_url }}"
-                   class="text-gray-500 text-hover-primary {% if False %}grp-section{% endif %}">
-                  {% trans app.name %}
-                </a>
-              </span>
-            </h3>
-            <!--end::Title-->
-          </div>
-          <!--end::Header-->
-
-          <!--begin::Body-->
-          <div class="card-body pt-0 pb-0">
-            <!--begin::Table container-->
-            <div class="table-responsive">
-              <!--begin::Table-->
-              <table class="table table-row-dashed align-middle gs-0 gy-4 my-0">
-                <!--begin::Table body-->
-                <tbody>
-                {% for model in app.models %}
-                  <tr class="grp-row" id="model-{{ model.object_name|lower }}">
-                    <td>
-                      {% if model.admin_url %}
-                        <a href="{{ model.admin_url }}" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">
-                          {{ model.name }}
-                        </a>
-                      {% else %}
-                        <span class="text-gray-400 fw-semibold d-block fs-7">{{ model.name }}</span>
-                      {% endif %}
-                    </td>
-                    <td class="text-end">
-                      {% if model.add_url %}
-                        <a class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary w-25px h-25px"
-                           href="{{ model.add_url }}">
-                          <i class="ki-duotone ki-plus fs-2 text-gray-500"></i>
-                        </a>
-                      {% endif %}
-                    </td>
-                  </tr>
-                {% endfor %}
-                </tbody>
-                <!--end::Table body-->
-              </table>
-              <!--end::Table-->
-            </div>
-            <!--end::Table container-->
-          </div>
-          <!--end::Body-->
-
-        </div>
-        <!--end::{{ app.name|upper }}-->
-
-      {% empty %}
-        <p>{% trans "You don´t have permission to edit anything." %}</p>
-      {% endfor %}
-    </div>
-    <!--end::Col-->
-
-    <!--begin::Col-->
-    <div class="col-xl-4">
-      {% block custom_views %}
-        {% if custom_list %}
-          <div class="grp-module" id="custom_views">
-            <h2>{% trans 'Custom Views' %}</h2>
-            {% for path, name in custom_list %}
-              <div class="grp-row">
-                <a href="{{ path }}"><strong>{{ name }}</strong></a>
-              </div>
-            {% endfor %}
-          </div>
-        {% endif %}
-      {% endblock custom_views %}
-    </div>
-    <!--end::Col-->
-
-    <!--begin::Col-->
-    <div class="col-xl-4">
+  <!--begin::Layout-->
+  <div class="d-flex flex-column flex-xl-row">
+    <!--begin::Sidebar-->
+    <div class="flex-column flex-lg-row-auto w-100 w-xl-350px mb-10">
       <!--begin::List widget 23-->
       <div class="card card-flush">
         <!--begin::Header-->
@@ -186,7 +85,121 @@
       </div>
       <!--end::List widget 23-->
     </div>
-    <!--end::Col-->
+    <!--end::Sidebar-->
+
+    <!--begin::Content-->
+    <div class="flex-lg-row-fluid ms-lg-15">
+      <!--begin:::Tabs-->
+      <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-8">
+        <!--begin:::Tab item-->
+        <li class="nav-item">
+          <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab"
+             href="#kt_applications_tab">{% trans 'Applications' %}</a>
+        </li>
+        <!--end:::Tab item-->
+      </ul>
+      <!--end:::Tabs-->
+
+      <!--begin:::Tab content-->
+      <div class="tab-content">
+        <!--begin:::Tab pane-->
+        <div class="tab-pane fade show active" id="kt_applications_tab" role="tabpanel">
+          <!--begin::Row-->
+          <div class="row g-6 g-xl-9">
+            <!--begin::Col-->
+            {% for app in app_list %}
+              <div class="col-md-6 col-xl-6">
+                <!--begin::{{ app.name|upper }}-->
+                <div class="card card-flush" id="app_{{ app.name|lower }}">
+                  <!--begin::Header-->
+                  <div class="card-header min-h-50px">
+                    <!--begin::Title-->
+                    <h3 class="card-title align-items-start flex-column m-0 h-50px">
+                    <span class="card-label fw-bold text-gray-800 {% if False %}grp-module{% endif %}">
+                      <a href="{{ app.app_url }}"
+                         class="text-gray-500 text-hover-primary {% if False %}grp-section{% endif %}">
+                        {% trans app.name %}
+                      </a>
+                    </span>
+                    </h3>
+                    <!--end::Title-->
+                  </div>
+                  <!--end::Header-->
+
+                  <!--begin::Body-->
+                  <div class="card-body pt-0 pb-0">
+                    <!--begin::Table container-->
+                    <div class="table-responsive">
+                      <!--begin::Table-->
+                      <table class="table table-row-dashed align-middle gs-0 gy-4 my-0">
+                        <!--begin::Table body-->
+                        <tbody>
+                        {% for model in app.models %}
+                          <tr class="grp-row" id="model-{{ model.object_name|lower }}">
+                            <td>
+                              {% if model.admin_url %}
+                                <a href="{{ model.admin_url }}"
+                                   class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">
+                                  {{ model.name }}
+                                </a>
+                              {% else %}
+                                <span class="text-gray-400 fw-semibold d-block fs-7">{{ model.name }}</span>
+                              {% endif %}
+                            </td>
+                            <td class="text-end">
+                              {% if model.add_url %}
+                                <a class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary w-25px h-25px"
+                                   href="{{ model.add_url }}">
+                                  <i class="ki-duotone ki-plus fs-2 text-gray-500"></i>
+                                </a>
+                              {% endif %}
+                            </td>
+                          </tr>
+                        {% endfor %}
+                        </tbody>
+                        <!--end::Table body-->
+                      </table>
+                      <!--end::Table-->
+                    </div>
+                    <!--end::Table container-->
+                  </div>
+                  <!--end::Body-->
+
+                </div>
+                <!--end::{{ app.name|upper }}-->
+              </div>
+            {% empty %}
+              <p>{% trans "You don´t have permission to edit anything." %}</p>
+            {% endfor %}
+            <!--end::Col-->
+          </div>
+          <!--end::Row-->
+        </div>
+        <!--end:::Tab pane-->
+        <!--begin:::Tab pane-->
+        <div class="tab-pane fade show active" id="kt__tab" role="tabpanel">
+          {#  <!--begin::Col-->#}
+          {#  <div class="col-xl-4">#}
+          {#    {% block custom_views %}#}
+          {#      {% if custom_list %}#}
+          {#        <div class="grp-module" id="custom_views">#}
+          {#          <h2>{% trans 'Custom Views' %}</h2>#}
+          {#          {% for path, name in custom_list %}#}
+          {#            <div class="grp-row">#}
+          {#              <a href="{{ path }}"><strong>{{ name }}</strong></a>#}
+          {#            </div>#}
+          {#          {% endfor %}#}
+          {#        </div>#}
+          {#      {% endif %}#}
+          {#    {% endblock custom_views %}#}
+          {#  </div>#}
+          {#  <!--end::Col-->#}
+        </div>
+        <!--end:::Tab pane-->
+      </div>
+      <!--end:::Tab content-->
+    </div>
+    <!--end::Content-->
   </div>
-  <!--end::Row-->
-{% endblock %}
+  <!--end::Layout-->
+{% endblock content %}
