@@ -2,10 +2,12 @@ import json
 from functools import wraps
 
 from django import template
+from django.contrib.admin.views.main import PAGE_VAR
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 from django.template.loader import get_template
 from django.utils.formats import get_format
+from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
@@ -203,8 +205,8 @@ def prettylabel(value):
     return mark_safe(value.replace(":</label>", "</label>"))
 
 
-# CUSTOM ADMIN LIST FILTER
-# WITH TEMPLATE DEFINITION
+# CUSTOM ADMIN
+# LIST FILTER WITH TEMPLATE DEFINITION
 @register.simple_tag
 def admin_list_filter(cl, spec):
     field_name = getattr(spec, "field", None)
@@ -225,6 +227,24 @@ def admin_list_filter(cl, spec):
             "spec": spec,
         }
     )
+
+
+@register.simple_tag
+def paginator_number(cl, i):
+    """
+    Generate an individual page index link in a paginated list.
+    """
+    if i == cl.paginator.ELLIPSIS:
+        return format_html("{} ", cl.paginator.ELLIPSIS)
+    elif i == cl.page_num:
+        return format_html('<li class="page-item active"><a href="#" class="page-link">{}</a></li>', i)
+    else:
+        return format_html(
+            '<li class="page-item"><a href="{}"{}>{}</a></li> ',
+            cl.get_query_string({PAGE_VAR: i}),
+            mark_safe(' class="page-link end"' if i == cl.paginator.num_pages else ' class="page-link"'),
+            i,
+        )
 
 
 @register.simple_tag(takes_context=True)
@@ -248,3 +268,12 @@ def switch_user_dropdown(context):
             ]
             return tpl.render({"request": request, "object_list": object_list})
     return ""
+
+
+@register.filter
+def custom_attrs_to_html(attrs={}):  # noqa
+    attributes = ""
+    for key, value in attrs.items():
+        attributes += f'{key}="{value}" '
+
+    return mark_safe(attributes.strip())

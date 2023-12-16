@@ -1,0 +1,19 @@
+{% load i18n %}
+<!--begin::Menu item-->
+<div class="menu-item px-3 grp-module">
+  <div class="d-flex align-items-center fw-bold menu-content grp-row">
+    <label class="text-muted fs-7 me-2 min-w-150px">
+      {% blocktrans with title|capfirst as filter_title %}{{ filter_title }}{% endblocktrans %}
+    </label>
+    <select data-control="select2" data-hide-search="true"
+            data-placeholder="{% trans 'Select an option' %}" data-field-name="{{ field_name }}"
+            class="form-select form-select-transparent text-gray-900 fs-7 lh-1 fw-bold py-0 ps-3 w-auto grp-filter-choice">
+      {% for choice in choices %}
+        <option value="{{ choice.query_string|iriencode }}" {% if choice.selected %}selected='selected'{% endif %}>
+          {{ choice.display }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+<!--end::Menu item-->

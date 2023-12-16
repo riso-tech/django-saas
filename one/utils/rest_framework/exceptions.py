@@ -80,6 +80,6 @@ def drf_exception_handler(exc, context):
             validation_errors={},
             data=None,
         )
-        response.data = default_data
+        response = default_data
 
     return response
