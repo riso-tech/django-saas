@@ -1,0 +1,61 @@
+{% load admin_list i18n grp_tags %}
+{% spaceless %}
+  <nav class="grp-pagination">
+    <header style="display:none"><h1>Pagination</h1></header>
+    <ul class="pagination">
+      {% if cl.show_full_result_count %}
+
+        {% if cl.result_count != cl.full_result_count %}
+          <li class="page-item grp-results">
+            <span class="page-link page-text">
+              {% blocktrans count cl.result_count as counter %}{{ counter }} result{% plural %}{{ counter }}
+                results{% endblocktrans %}
+            </span>
+          </li>
+        {% endif %}
+
+        <li class="page-item grp-results">
+          {% if cl.result_count != cl.full_result_count or cl.show_all %}
+            <a href="?{% if cl.is_popup %}_popup=1{% endif %}" class="page-link page-text total">
+              {% blocktrans with cl.full_result_count as full_result_count %}{{ full_result_count }}
+                total{% endblocktrans %}
+            </a>
+          {% else %}
+            <span class="page-link page-text">
+              {% blocktrans with cl.full_result_count as full_result_count %}{{ full_result_count }}
+                total{% endblocktrans %}
+            </span>
+          {% endif %}
+        </li>
+
+      {% else %}
+        <li class="page-item grp-results">
+          <span class="page-link page-text">
+              {% blocktrans count cl.result_count as counter %}{{ counter }} result{% plural %}{{ counter }}
+                results{% endblocktrans %}
+          </span>
+        </li>
+        <li class="page-item next grp-results">
+          <a href="?{% if cl.is_popup %}_popup=1{% endif %}" class="page-link page-text total">{% trans "Show all" %}</a>
+        </li>
+      {% endif %}
+
+      {% if pagination_required %}
+        {% for i in page_range %}
+          {% if not i|floatformat %}
+            <li class="page-item grp-separator"><a href="#" class="page-link">...</a></li>
+          {% else %}
+            {% paginator_number cl i %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      {% if show_all_url %}
+        <li class="page-item next grp-showall">
+          <a href="{{ show_all_url }}" class="page-link page-text">{% trans 'Show all' %}</a>
+        </li>
+      {% endif %}
+
+    </ul>
+  </nav>
+{% endspaceless %}

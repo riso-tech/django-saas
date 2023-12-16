@@ -190,7 +190,7 @@ Twitter: @rich_clark
 /*  TYPOGRAPHY
 ------------------------------------------------------------------------------------------------------ */
 /*  Font Family ............................................................ */
-.keep-grp .grp-font-family, .keep-grp body, .keep-grp .ui-autocomplete, .keep-grp #ui-timepicker, .keep-grp .ui-datepicker, .keep-grp a.grp-button, .keep-grp button.grp-button, .keep-grp input[type=button].grp-button, .keep-grp input[type=submit], .keep-grp .grp-button {
+.keep-grp .grp-font-family, .keep-grp body, .keep-grp .ui-autocomplete, .keep-grp #ui-timepicker, .keep-grp .ui-datepicker, .keep-grp a.grp-button, .keep-grp button.grp-button, .keep-grp input[type=button].grp-button,  .keep-grp .grp-button {
   font-family: Arial, sans-serif;
 }
 
@@ -681,7 +681,7 @@ Twitter: @rich_clark
   font-size: 12px;
 }
 
-.keep-grp .grp-font-size, .keep-grp body, .keep-grp a.grp-button, .keep-grp button.grp-button, .keep-grp input[type=button].grp-button, .keep-grp input[type=submit], .keep-grp .grp-button, .keep-grp h4 {
+.keep-grp .grp-font-size, .keep-grp body, .keep-grp a.grp-button, .keep-grp button.grp-button, .keep-grp input[type=button].grp-button,  .keep-grp .grp-button, .keep-grp h4 {
   font-size: 12px;
 }
 
@@ -705,7 +705,7 @@ Twitter: @rich_clark
   line-height: 16px;
 }
 
-.keep-grp .grp-line-height, .keep-grp body, .keep-grp a.grp-button, .keep-grp button.grp-button, .keep-grp input[type=button].grp-button, .keep-grp input[type=submit], .keep-grp .grp-button, .keep-grp .grp-actions, .keep-grp h4 {
+.keep-grp .grp-line-height, .keep-grp body, .keep-grp a.grp-button, .keep-grp button.grp-button, .keep-grp input[type=button].grp-button,  .keep-grp .grp-button, .keep-grp .grp-actions, .keep-grp h4 {
   line-height: 16px;
 }
 
@@ -1157,7 +1157,7 @@ Twitter: @rich_clark
 .keep-grp input[type=url],
 .keep-grp input[type=email],
 .keep-grp input[type=number],
-.keep-grp input[type=submit],
+
 .keep-grp input[type=reset],
 .keep-grp textarea,
 .keep-grp select {
@@ -2926,128 +2926,6 @@ Twitter: @rich_clark
   .keep-grp .grp-button {
     padding: 5px 10px;
   }
-}
-
-/*  SUBMIT BUTTON & BUTTONS IN SUBMIT-ROW
------------------------------------------------------------------------------------------------------- */
-.keep-grp input[type=submit] {
-  position: relative;
-  display: inline-block;
-  margin: 0;
-  padding: 5px;
-  height: 28px;
-  font-weight: bold;
-  border-radius: 5px !important;
-  box-sizing: border-box;
-  cursor: pointer;
-  overflow: hidden;
-  vertical-align: top;
-  color: #fff;
-  border: 1px solid #2b8aab;
-  background-image: linear-gradient(#4fb2d3, #309bbf);
-}
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-  .keep-grp input[type=submit] {
-    padding: 5px 10px;
-  }
-}
-.keep-grp input[type=submit]:hover, .keep-grp input[type=submit]:focus {
-  color: #fff;
-  border: 1px solid #373737;
-  background-image: linear-gradient(#5e5e5e, #444);
-}
-.keep-grp .grp-fixed-footer input[type=submit]:hover, .keep-grp .grp-fixed-footer input[type=submit]:focus {
-  color: #444;
-  border: 1px solid #c8c8c8;
-  background-image: linear-gradient(white, #eee);
-}
-
-.keep-grp a.grp-button,
-.keep-grp button.grp-button,
-.keep-grp input[type=button].grp-button {
-  position: relative;
-  display: inline-block;
-  margin: 0;
-  padding: 5px;
-  height: 28px;
-  font-weight: bold;
-  border-radius: 5px !important;
-  box-sizing: border-box;
-  cursor: pointer;
-  overflow: hidden;
-  vertical-align: top;
-  color: #fff;
-  border: 1px solid #2b8aab;
-  background-image: linear-gradient(#4fb2d3, #309bbf);
-  padding: 5px 10px;
-}
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-  .keep-grp a.grp-button,
-.keep-grp button.grp-button,
-.keep-grp input[type=button].grp-button {
-    padding: 5px 10px;
-  }
-}
-.keep-grp a.grp-button:hover, .keep-grp a.grp-button:focus, .keep-grp button.grp-button:hover, .keep-grp button.grp-button:focus, .keep-grp input[type=button].grp-button:hover, .keep-grp input[type=button].grp-button:focus {
-  color: #fff;
-  border: 1px solid #373737;
-  background-image: linear-gradient(#5e5e5e, #444);
-}
-.keep-grp .grp-fixed-footer a.grp-button:hover, .keep-grp .grp-fixed-footer a.grp-button:focus, .keep-grp .grp-fixed-footer button.grp-button:hover, .keep-grp .grp-fixed-footer button.grp-button:focus, .keep-grp .grp-fixed-footer input[type=button].grp-button:hover, .keep-grp .grp-fixed-footer input[type=button].grp-button:focus {
-  color: #444;
-  border: 1px solid #c8c8c8;
-  background-image: linear-gradient(white, #eee);
-}
-.keep-grp a.grp-button.grp-delete-link,
-.keep-grp button.grp-button.grp-delete-link,
-.keep-grp input[type=button].grp-button.grp-delete-link {
-  color: #fff;
-  border: 1px solid #ab2b2b;
-  background-image: linear-gradient(#d34f4f, #bf3030);
-}
-.keep-grp a.grp-button.grp-delete-link:hover, .keep-grp a.grp-button.grp-delete-link:focus, .keep-grp button.grp-button.grp-delete-link:hover, .keep-grp button.grp-button.grp-delete-link:focus, .keep-grp input[type=button].grp-button.grp-delete-link:hover, .keep-grp input[type=button].grp-button.grp-delete-link:focus {
-  color: #fff;
-  border: 1px solid #373737;
-  background-image: linear-gradient(#5e5e5e, #444);
-}
-.keep-grp .grp-fixed-footer a.grp-button.grp-delete-link:hover, .keep-grp .grp-fixed-footer a.grp-button.grp-delete-link:focus, .keep-grp .grp-fixed-footer button.grp-button.grp-delete-link:hover, .keep-grp .grp-fixed-footer button.grp-button.grp-delete-link:focus, .keep-grp .grp-fixed-footer input[type=button].grp-button.grp-delete-link:hover, .keep-grp .grp-fixed-footer input[type=button].grp-button.grp-delete-link:focus {
-  color: #444;
-  border: 1px solid #c8c8c8;
-  background-image: linear-gradient(white, #eee);
-}
-.keep-grp a.grp-button.grp-cancel-link,
-.keep-grp button.grp-button.grp-cancel-link,
-.keep-grp input[type=button].grp-button.grp-cancel-link {
-  color: #fff;
-  border: 1px solid #7b7b7b;
-  background-image: linear-gradient(#a2a2a2, #888);
-}
-.keep-grp a.grp-button.grp-cancel-link:hover, .keep-grp a.grp-button.grp-cancel-link:focus, .keep-grp button.grp-button.grp-cancel-link:hover, .keep-grp button.grp-button.grp-cancel-link:focus, .keep-grp input[type=button].grp-button.grp-cancel-link:hover, .keep-grp input[type=button].grp-button.grp-cancel-link:focus {
-  color: #fff;
-  border: 1px solid #373737;
-  background-image: linear-gradient(#5e5e5e, #444);
-}
-.keep-grp .grp-fixed-footer a.grp-button.grp-cancel-link:hover, .keep-grp .grp-fixed-footer a.grp-button.grp-cancel-link:focus, .keep-grp .grp-fixed-footer button.grp-button.grp-cancel-link:hover, .keep-grp .grp-fixed-footer button.grp-button.grp-cancel-link:focus, .keep-grp .grp-fixed-footer input[type=button].grp-button.grp-cancel-link:hover, .keep-grp .grp-fixed-footer input[type=button].grp-button.grp-cancel-link:focus {
-  color: #444;
-  border: 1px solid #c8c8c8;
-  background-image: linear-gradient(white, #eee);
-}
-.keep-grp a.grp-button.grp-reset-link,
-.keep-grp button.grp-button.grp-reset-link,
-.keep-grp input[type=button].grp-button.grp-reset-link {
-  color: #fff;
-  border: 1px solid #7b7b7b;
-  background-image: linear-gradient(#a2a2a2, #888);
-}
-.keep-grp a.grp-button.grp-reset-link:hover, .keep-grp a.grp-button.grp-reset-link:focus, .keep-grp button.grp-button.grp-reset-link:hover, .keep-grp button.grp-button.grp-reset-link:focus, .keep-grp input[type=button].grp-button.grp-reset-link:hover, .keep-grp input[type=button].grp-button.grp-reset-link:focus {
-  color: #fff;
-  border: 1px solid #373737;
-  background-image: linear-gradient(#5e5e5e, #444);
-}
-.keep-grp .grp-fixed-footer a.grp-button.grp-reset-link:hover, .keep-grp .grp-fixed-footer a.grp-button.grp-reset-link:focus, .keep-grp .grp-fixed-footer button.grp-button.grp-reset-link:hover, .keep-grp .grp-fixed-footer button.grp-button.grp-reset-link:focus, .keep-grp .grp-fixed-footer input[type=button].grp-button.grp-reset-link:hover, .keep-grp .grp-fixed-footer input[type=button].grp-button.grp-reset-link:focus {
-  color: #444;
-  border: 1px solid #c8c8c8;
-  background-image: linear-gradient(white, #eee);
 }
 
 /*  BUTTONS WITH/AS ICONS

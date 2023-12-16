@@ -1,0 +1,16 @@
+{% load i18n grp_tags %}
+{% if cl.search_fields %}
+  <form id="grp-changelist-search-form" action="" method="get" novalidate>
+    <div class="d-flex align-items-center position-relative my-1">
+      <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-4">
+        <span class="path1"></span><span class="path2"></span>
+      </i>
+      <input type="text" name="{{ search_var }}" id="grp-changelist-search" value="{{ cl.query }}"
+             class="form-control form-control-solid w-250px ps-12 grp-search-field"/>
+    </div>
+    <button type="submit" value="" class="d-none grp-search-button"></button>
+    {% for pair in cl.params.items %}
+      {% if pair.0 != search_var %}<input type="hidden" name="{{ pair.0 }}" value="{{ pair.1 }}"/>{% endif %}
+    {% endfor %}
+  </form>
+{% endif %}
