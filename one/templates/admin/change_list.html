@@ -1,6 +1,7 @@
 {% extends "admin/base_site.html" %}
 {% load i18n grp_tags admin_urls static admin_list %}
 
+
 {% block stylesheets %}
   {{ block.super }}
   {{ media.css }}
@@ -111,18 +112,25 @@
     </script>
   {% endif %}
   <script type="text/javascript" charset="utf-8">
-    grappelli.initSearchbar();
-    grappelli.initFilter();
-    $('.add-another').on("click", function (e) {
-      e.preventDefault();
-      showAddAnotherPopup(this);
-    });
-    $('.related-lookup').on("click", function (e) {
-      e.preventDefault();
-      showRelatedObjectLookupPopup(this);
+    $(document).ready(function () {
+      grappelli.initSearchbar();
+      grappelli.initFilter();
+      $('.add-another').on("click", function (e) {
+        e.preventDefault();
+        showAddAnotherPopup(this);
+      });
+      $('.related-lookup').on("click", function (e) {
+        e.preventDefault();
+        showRelatedObjectLookupPopup(this);
+      });
     });
   </script>
 {% endblock %}
+
+{% block body-attrs %}
+  {{ block.super }}
+  data-kt-app-footer-fixed="true"
+{% endblock body-attrs %}
 
 {% block bodyclass %}grp-change-list{% endblock bodyclass %}
 
@@ -191,101 +199,163 @@
 {% endblock object-tools %}
 
 {% block content %}
-  <div class="keep-grp">
-    <div class="grp-module">
-      <div class="grp-row">
-        <div class="l-2cr-fluid {% if cl.has_filters and cl.search_fields %}l-d-12
-        {% else %}{% if cl.has_filters or cl.search_fields %}l-d-6{% endif %}{% endif %}">
-          {% if cl.has_filters or cl.search_fields %}
-            {% block aside %}
-              <aside class="c-1">
-                <header style="display:none"><h1>{% if cl.search_fields %}Search{% if cl.has_filters %} &amp;
-                {% endif %}{% endif %}{% if cl.has_filters %}Filters{% endif %}</h1></header>
-                <!-- SEARCH -->
-                {% if cl.search_fields %}
-                  {% block search %}
-                    <div id="search" class="g-d-6 g-d-f">
-                      {% search_form cl %}
-                    </div>
-                  {% endblock %}
-                {% endif %}
-                <!-- FILTERS -->
-                {% if cl.has_filters %}
-                  {% block filters %}
-                    <div id="grp-filters" class="g-d-6 g-d-l">
-                      <div class="grp-filter">
-                        <div class="grp-pulldown-container">
-                          <a href="javascript://" class="grp-button grp-pulldown-handler">{% trans 'Filter' %}</a>
-                          <div class="grp-pulldown-content" style="display: none;">
-                            {% for spec in cl.filter_specs %}{% admin_list_filter cl spec %}{% endfor %}
+  <div class="card card-dashed">
+    <div class="card-header grp-module">
+      <!--begin::Title-->
+      <h3 class="card-title align-items-start flex-column">
+        <span class="card-label fw-bold text-gray-800"></span>
+        <span class="text-gray-400 mt-1 fw-semibold fs-6">
+          {% block pagination_top %}
+            {% pagination cl %}
+          {% endblock %}
+        </span>
+      </h3>
+      <!--end::Title-->
+      <!--begin::Actions-->
+      <div class="card-toolbar grp-row">
+        {% if cl.has_filters or cl.search_fields %}
+          {% block aside %}
+            <aside class="d-flex flex-stack flex-wrap gap-4">
+              <header style="display:none"><h1>{% if cl.search_fields %}Search{% if cl.has_filters %} &amp;
+              {% endif %}{% endif %}{% if cl.has_filters %}Filters{% endif %}</h1></header>
+              {% if cl.search_fields %}
+                <!--begin::Search-->
+                {% block search %}
+                  <div id="search" class="d-flex align-items-center fw-bold">
+                    {% search_form cl %}
+                  </div>
+                {% endblock search %}
+                <!--end::Search-->
+              {% endif %}
+              <!-- FILTERS -->
+              {% if cl.has_filters %}
+                <!--begin::Filters-->
+                {% block filters %}
+                  <div id="grp-filters" class="d-flex align-items-center fw-bold">
+                    <div class="grp-filter">
+                      <div class="grp-pulldown-container">
+                        <a href="javascript://" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end"
+                           data-kt-menu-overflow="true"
+                           class="btn btn-icon btn-color-gray-500 btn-active-color-primary justify-content-end grp-button grp-pulldown-handler">
+                          <i class="ki-duotone ki-element-plus fs-1">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                            <span class="path3"></span>
+                            <span class="path4"></span>
+                            <span class="path5"></span>
+                          </i>
+                        </a>
+                        <div data-kt-menu="true"
+                             class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-300px"
+                        >
+                          <div class="grp-pulldown-content">
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-3">
+                              <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-4">{% trans 'Filters' %}</div>
+                            </div>
+                            <!--end::Menu item-->
+                            <!--begin::Menu separator-->
+                            <div class="separator mb-3 opacity-75"></div>
+                            <!--end::Menu separator-->
+
+                            {% for spec in cl.filter_specs %}
+                              {% admin_list_filter cl spec %}
+                            {% endfor %}
+
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-3">
+                              <div class="menu-content px-3 py-3">
+                              </div>
+                            </div>
+                            <!--end::Menu item-->
                           </div>
                         </div>
                       </div>
                     </div>
-                  {% endblock %}
-                {% endif %}
-              </aside>
-            {% endblock %}
-          {% endif %}
-          {% block pagination_top %}
-            <div class="c-2">
-              <!-- PAGINATION TOP -->
-              {% pagination cl %}
-            </div>
-          {% endblock %}
-
-        </div>
+                  </div>
+                {% endblock filters %}
+                <!--end::Filters-->
+              {% endif %}
+            </aside>
+          {% endblock aside %}
+        {% endif %}
       </div>
-      <!-- DATE HIERARCHY -->
+      <!--end::Actions-->
+
+      <!--begin::Date Hierarchy-->
       {% block date_hierarchy %}
-        {% if cl.date_hierarchy %}{% date_hierarchy cl %}{% endif %}
-      {% endblock %}
+        {% if cl.date_hierarchy %}
+          {% date_hierarchy cl %}
+        {% endif %}
+      {% endblock date_hierarchy %}
+      <!--begin::Date Hierarchy-->
     </div>
-    <form id="grp-changelist-form" action="" method="post"{% if cl.formset.is_multipart %}
-          enctype="multipart/form-data"{% endif %} novalidate>
-      {% csrf_token %}
-      <section id="grp-changelist" class="{% if cl.list_editable %} grp-editable{% endif %}">
-        <header style="display:none"><h1>Results</h1></header>
-        <!-- POPUP -->
-        {% if is_popup %}<input type="hidden" name="_popup" value="1"/>{% endif %}
-        <!-- ERRORS -->
-        {% if cl.formset.errors %}
-          <p class="errornote">
-            {% if cl.formset.total_error_count == 1 %}{% trans "Please correct the error below." %}{% else %}
-              {% trans "Please correct the errors below." %}{% endif %}
-          </p>
-          {{ cl.formset.non_form_errors }}
+
+    <div class="card-body">
+      <form id="grp-changelist-form" action="" method="post"
+            {% if cl.formset.is_multipart %}enctype="multipart/form-data"{% endif %} novalidate>
+        {% csrf_token %}
+        <div class="keep-grp">
+          <section id="grp-changelist" class="{% if cl.list_editable %} grp-editable{% endif %}">
+            <header style="display:none"><h1>Results</h1></header>
+            <!-- POPUP -->
+            {% if is_popup %}<input type="hidden" name="_popup" value="1"/>{% endif %}
+            <!-- ERRORS -->
+            {% if cl.formset.errors %}
+              <p class="errornote">
+                {% if cl.formset.total_error_count == 1 %}{% trans "Please correct the error below." %}{% else %}
+                  {% trans "Please correct the errors below." %}{% endif %}
+              </p>
+              {{ cl.formset.non_form_errors }}
+            {% endif %}
+            <!-- MANAGEMENT FORM -->
+            {% if cl.formset %}
+              {{ cl.formset.management_form }}
+            {% endif %}
+            <!-- CHANGELIST-RESULTS -->
+            {% block result_list %}
+              {% result_list cl %}
+            {% endblock %}
+          </section>
+        </div>
+
+        {% if cl.formset or action_form %}
+          <div class="app-footer keep-grp">
+            <footer id="submit" class="app-footer-primary grp-module grp-submit-row grp-fixed-footer">
+              <header style="display:none"><h1>Submit Options</h1></header>
+              <ul class="menu menu-gray-600 menu-hover-primary fw-semibold order-1">
+                {% if action_form %}
+                  <li class="menu-item grp-float-left grp-changelist-actions">{% admin_actions %}</li>{% endif %}
+
+                {% if cl.formset %}
+                  <li class="menu-item">
+                    <input type="submit" class="grp-button grp-default" name="_save" value="{% trans "Save" %}"/>
+                  </li>
+                {% endif %}
+
+              </ul>
+            </footer>
+          </div>
         {% endif %}
-        <!-- MANAGEMENT FORM -->
-        {% if cl.formset %}
-          {{ cl.formset.management_form }}
-        {% endif %}
-        <!-- CHANGELIST-RESULTS -->
-        {% block result_list %}
-          {% result_list cl %}
-        {% endblock %}
-      </section>
-      <!-- PAGINATION BOTTOM -->
-      {% if not cl.result_count == 0 %}
+      </form>
+    </div>
+
+    {% if not cl.result_count == 0 %}
+      <div class="card-footer">
         {% block pagination_bottom %}
           <div class="grp-module">
             <div class="grp-row">{% pagination cl %}</div>
           </div>
         {% endblock %}
-      {% endif %}
-      <!-- SUBMIT ROW -->
-      {% if cl.formset or action_form %}
-        <footer id="submit" class="grp-module grp-submit-row grp-fixed-footer">
-          <header style="display:none"><h1>Submit Options</h1></header>
-          <ul>
-            {% if action_form %}
-              <li class="grp-float-left grp-changelist-actions">{% admin_actions %}</li>{% endif %}
-            {% if cl.formset %}
-              <li><input type="submit" class="grp-button grp-default" name="_save" value="{% trans "Save" %}"/>
-              </li>{% endif %}
-          </ul>
-        </footer>
-      {% endif %}
-    </form>
+      </div>
+    {% endif %}
   </div>
 {% endblock content %}
+
+{% block footer %}
+  <!--begin::Footer-->
+  <div
+    class="align-items-center justify-content-center justify-content-md-between flex-column flex-md-row py-3 py-lg-6 h-80px">
+  </div>
+  <!--end::Footer-->
+{% endblock footer %}

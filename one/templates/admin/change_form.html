@@ -129,7 +129,14 @@
   </script>
 {% endblock extrahead %}
 
-{% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} grp-change-form{% endblock bodyclass %}
+{% block body-attrs %}
+  {{ block.super }}
+  data-kt-app-footer-fixed="true"
+{% endblock body-attrs %}
+
+{% block bodyclass %}
+  {{ opts.app_label }}-{{ opts.object_name.lower }} grp-change-form
+{% endblock bodyclass %}
 
 {% block breadcrumbs %}
   <ul class="breadcrumb breadcrumb-separatorless fw-semibold">
@@ -140,6 +147,7 @@
       </a>
     </li>
     <!--end::Item-->
+
     <!--begin::Item Group-->
     <!--begin::Item-->
     <li class="breadcrumb-item">
@@ -236,48 +244,45 @@
 {% endblock object-tools %}
 
 {% block content %}
-  <div class="keep-grp">
-    <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post"
-          id="{{ opts.model_name }}_form" novalidate>{% csrf_token %}{% block form_top %}{% endblock %}
-      <div>
-        <!-- Popup Hidden Field -->
-        {% if is_popup %}<input type="hidden" name="_popup" value="1"/>{% endif %}
+  <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post"
+        id="{{ opts.model_name }}_form" novalidate>
+    {% csrf_token %}
+    {% block form_top %}{% endblock form_top %}
+    {% if is_popup %}<input type="hidden" name="_popup" value="1"/>{% endif %}
 
-        <!-- No Submit-Row on Top -->
+    <div class="keep-grp">
+      {% block field_sets %}
+        {% for fieldset in adminform %}
+          {% include "admin/includes/fieldset.html" %}
+        {% endfor %}
+      {% endblock %}
 
-        <!-- Errors -->
-        {% if errors %}
-          <p class="errornote">{% if errors|length == 1 %}{% trans "Please correct the error below." %}{% else %}
-            {% trans "Please correct the errors below." %}{% endif %}</p>
-          <ul class="errorlist">{% for error in adminform.form.non_field_errors %}
-            <li>{{ error }}</li>{% endfor %}</ul>
-        {% endif %}
+      {% block after_field_sets %}{% endblock %}
 
-        <!-- Fieldsets -->
-        {% block field_sets %}
-          {% for fieldset in adminform %}
-            {% include "admin/includes/fieldset.html" %}
-          {% endfor %}
-        {% endblock %}
+      <!-- Inlines -->
+      {% block inline_field_sets %}
+        {% for inline_admin_formset in inline_admin_formsets %}
+          {% include inline_admin_formset.opts.template %}
+        {% endfor %}
+      {% endblock %}
 
-        {% block after_field_sets %}{% endblock %}
+      {% block after_related_objects %}{% endblock %}
+    </div>
 
-        <!-- Inlines -->
-        {% block inline_field_sets %}
-          {% for inline_admin_formset in inline_admin_formsets %}
-            {% include inline_admin_formset.opts.template %}
-          {% endfor %}
-        {% endblock %}
+    <div class="app-footer keep-grp">
+      {% block submit_buttons_bottom %}{% submit_row %}{% endblock submit_buttons_bottom %}
+    </div>
 
-        {% block after_related_objects %}{% endblock %}
+    <!-- JS for prepopulated fields -->
+    {% prepopulated_fields_js %}
 
-        <!-- Submit-Row -->
-        {% block submit_buttons_bottom %}{% submit_row %}{% endblock %}
-
-        <!-- JS for prepopulated fields -->
-        {% prepopulated_fields_js %}
-
-      </div>
-    </form>
-  </div>
+  </form>
 {% endblock content %}
+
+{% block footer %}
+  <!--begin::Footer-->
+  <div
+    class="align-items-center justify-content-center justify-content-md-between flex-column flex-md-row py-3 py-lg-6 h-80px">
+  </div>
+  <!--end::Footer-->
+{% endblock footer %}

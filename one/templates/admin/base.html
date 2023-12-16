@@ -183,7 +183,9 @@
                 <!--begin::Header secondary container-->
                 <div id="grp-context-navigation"
                      class="app-container  container-xxl d-flex flex-row flex-column-fluid py-3">
-                  <nav id="grp-breadcrumbs" class="app-header-menu app-header-mobile-drawer align-items-stretch flex-grow-1 {% block breadcrumbs-class %}{% endblock breadcrumbs-class %}">
+                  <nav id="grp-breadcrumbs"
+                       class="app-header-menu app-header-mobile-drawer align-items-stretch flex-grow-1
+                         {% block breadcrumbs-class %}{% endblock breadcrumbs-class %}">
                     {% block breadcrumbs %}
                       <ul class="breadcrumb breadcrumb-separatorless fw-semibold">
                         <!--begin::Item-->
@@ -272,7 +274,7 @@
 
               <!--layout-partial:layout/partials/_content.html-->
               <!--begin::Content-->
-              <div id="grp-content-container" class="app-content pb-0">
+              <div id="grp-content-container" class="app-content pt-lg-3 pt-0 pb-0">
                 {% block content %}
                   {{ content }}
                   {% block filters %}{% endblock filters %}
@@ -283,7 +285,9 @@
             <!--end::Content wrapper-->
 
             <!--layout-partial:layout/partials/_footer.html-->
-            {% include 'partials/footer/footer.html' %}
+            {% block footer %}
+              {% include 'partials/footer/footer.html' %}
+            {% endblock footer %}
           </div>
           <!--end:::Main-->
         </div>
