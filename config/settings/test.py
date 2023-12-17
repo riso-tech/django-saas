@@ -1,6 +1,8 @@
 """
 With these settings, tests run faster.
 """
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 from .base import *  # noqa
 from .base import env
@@ -43,6 +45,33 @@ MEDIA_URL = "http://media.testserver/"
 # ------------------------------------------------------------------------------
 INSTALLED_APPS += ["one.tests"]  # noqa: F405
 TENANT_APPS += ["one.tests"]  # noqa: F405
+
+# LOGGING
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#logging
+# See https://docs.djangoproject.com/en/dev/topics/logging for
+# more details on how to customize your logging configuration.
+
+LOGGING["handlers"]["celery_depth_handler"] = {"class": "logging.StreamHandler"}  # noqa
+
+LOGGING["loggers"] = {  # noqa
+    "django_guid.celery": {
+        "handlers": ["celery_depth_handler"],
+        "level": "DEBUG",
+        "propagate": False,
+    },
+}
+
+# Sentry
+# ------------------------------------------------------------------------------
+SENTRY_DSN = env("SENTRY_DSN", default="")
+
+sentry_sdk.init(
+    dsn=SENTRY_DSN,
+    integrations=[DjangoIntegration()],
+    environment=env("SENTRY_ENVIRONMENT", default="test"),
+    traces_sample_rate=env.float("SENTRY_TRACES_SAMPLE_RATE", default=0.0),
+)
 
 # Your stuff...
 # ------------------------------------------------------------------------------
