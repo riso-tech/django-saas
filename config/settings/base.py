@@ -153,8 +153,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#middleware
 MIDDLEWARE = [
-    "one.business.middlewares.TenantMainMiddleware",  # Must be first
     "one.libraries.guid.middleware.guid_middleware",  # noqa
+    "one.business.middlewares.TenantMainMiddleware",  # Must be first
     "django.middleware.security.SecurityMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",

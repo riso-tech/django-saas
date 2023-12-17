@@ -51,16 +51,62 @@ TENANT_APPS += ["one.tests"]  # noqa: F405
 # https://docs.djangoproject.com/en/dev/ref/settings/#logging
 # See https://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
-
-LOGGING["handlers"]["celery_depth_handler"] = {"class": "logging.StreamHandler"}  # noqa
-
-LOGGING["loggers"] = {  # noqa
-    "django_guid.celery": {
-        "handlers": ["celery_depth_handler"],
-        "level": "DEBUG",
-        "propagate": False,
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "filters": {
+        "correlation_id": {"()": "one.libraries.guid.log_filters.CorrelationId"},  # <-- Add correlation ID
+        "celery_tracing": {
+            "()": "one.libraries.guid.integrations.celery.log_filters.CeleryTracing"
+        },  # <-- Add celery IDs
+    },
+    "formatters": {
+        # Basic log format without django-guid filters
+        "basic_format": {"format": "%(levelname)s %(asctime)s %(name)s - %(message)s"},
+        # Format with correlation ID output to the console
+        "correlation_id_format": {"format": "%(levelname)s %(asctime)s [%(correlation_id)s] %(name)s - %(message)s"},
+        # Format with correlation ID plus a celery process' parent ID and a unique current ID that will
+        # become the parent ID of any child processes that are created (most likely you won't want to
+        # display these values in your formatter, but include them just as a filter)
+        "celery_depth_format": {
+            "format": "%(levelname)s [%(correlation_id)s] [%(celery_parent_id)s-%(celery_current_id)s] %(name)s - %(message)s"  # noqa
+        },
+    },
+    "handlers": {
+        "correlation_id_handler": {
+            "class": "logging.StreamHandler",
+            "formatter": "correlation_id_format",
+            # Here we include the filters on the handler - this means our IDs are included in the logger extra data
+            # and *can* be displayed in our log message if specified in the formatter - but it will be
+            # included in the logs whether shown in the message or not.
+            "filters": ["correlation_id", "celery_tracing"],
+        },
+        "celery_depth_handler": {
+            "class": "logging.StreamHandler",
+            "formatter": "celery_depth_format",
+            "filters": ["correlation_id", "celery_tracing"],
+        },
+    },
+    "loggers": {
+        "django": {"handlers": ["correlation_id_handler"], "level": "INFO"},
+        "demoproj": {"handlers": ["correlation_id_handler"], "level": "DEBUG"},
+        "django_guid": {
+            "handlers": ["correlation_id_handler"],
+            "level": "DEBUG",
+            "propagate": True,
+        },
+        "django_guid.celery": {
+            "handlers": ["celery_depth_handler"],
+            "level": "DEBUG",
+            "propagate": False,
+        },
+        "celery": {
+            "handlers": ["celery_depth_handler"],
+            "level": "INFO",
+        },
     },
 }
+
 
 # Sentry
 # ------------------------------------------------------------------------------

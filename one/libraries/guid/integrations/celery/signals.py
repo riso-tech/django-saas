@@ -10,7 +10,7 @@ from one.libraries.guid.utils import generate_guid
 from .context import celery_current, celery_parent
 
 if TYPE_CHECKING:
-    from celery import Task
+    from celery import Task  # pragma: no cover
 
 logger = logging.getLogger("django_guid.celery")
 
