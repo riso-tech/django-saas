@@ -26,13 +26,15 @@ License: MIT
 
  - [ ] Admin UI with Oswald
  - [x] Grappelli: Related Lookups, Autocomplete Lookups
- - [ ] Custom Actions
+ - [x] Custom Actions
 
 ##### User Profile
 
- - [ ] Overview Page
- - [ ] Profile Update
- - [ ] Email management
+ - [x] Overview Page
+ - [x] Profile Update
+ - [x] Email management
+ - [x] Facebook Login
+ - [x] Google Login
 
 
 ## Support this Project!

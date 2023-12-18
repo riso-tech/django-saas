@@ -1,0 +1,29 @@
+{% load i18n %}
+{% if show and choices|length %}
+  <div class="hover-scroll-x h-50px grp-row">
+    <nav id="date-hierarchy" class="align-items-start grp-date-hierarchy"
+         style="position: relative; z-index: 1 !important;">
+      <header style="display:none"><h1>Date Hierarchy</h1></header>
+      <ul class="flex-start pagination w-1000px"
+        {% with choices|length as choice_length %}
+          {% if choice_length > 10 %}style="width: {{ choice_length|add:3 }}00px !important;"{% endif %}
+        {% endwith %}
+      >
+        {% if back %}
+          <li class="page-item">
+            <a href="{{ back.link }}" class="page-link page-text grp-date-hierarchy-back">{{ back.title }}</a>
+          </li>
+        {% endif %}
+        {% for choice in choices %}
+          <li class="page-item">
+            {% if choice.link %}
+              <a href="{{ choice.link }}" class="page-link">{{ choice.title }}</a>
+            {% else %}
+              <span class="page-link">{{ choice.title }}</span>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </div>
+{% endif %}

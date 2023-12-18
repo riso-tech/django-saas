@@ -1,0 +1,139 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls %}
+
+{% block breadcrumbs %}
+  <ul class="breadcrumb breadcrumb-separatorless fw-semibold">
+    <!--begin::Item-->
+    <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
+      <a href="{% url 'admin:index' %}" class="text-gray-500 text-hover-primary">
+        <i class="ki-duotone ki-home fs-3 text-gray-400 me-n1"></i>
+      </a>
+    </li>
+    <!--end::Item-->
+
+    <!--begin::Item-->
+    <li class="breadcrumb-item">
+      <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1"></i>
+    </li>
+    <!--end::Item-->
+    <!--begin::Item-->
+    <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
+      <a href="{% url 'admin:app_list' app_label=opts.app_label %}"
+         class="text-gray-500 text-hover-primary">{{ opts.app_config.verbose_name }}</a>
+    </li>
+    <!--end::Item-->
+
+    <!--begin::Item-->
+    <li class="breadcrumb-item">
+      <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1"></i>
+    </li>
+    <!--end::Item-->
+    <!--begin::Item-->
+    <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
+      {% url opts|admin_urlname:'changelist' as changelist_url %}
+      <a href="{% add_preserved_filters changelist_url %}"
+         class="text-gray-500 text-hover-primary">{{ module_name }}</a>
+    </li>
+    <!--end::Item-->
+
+    <!--begin::Item-->
+    <li class="breadcrumb-item">
+      <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1"></i>
+    </li>
+    <!--end::Item-->
+    <!--begin::Item-->
+    <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
+      {% url opts|admin_urlname:'change' object.pk|admin_urlquote as object_url %}
+      <a href="{% add_preserved_filters object_url %}"
+         class="text-gray-500 text-hover-primary">{{ object|capfirst|truncatewords:"18" }}</a>
+    </li>
+    <!--end::Item-->
+
+    <!--begin::Item-->
+    <li class="breadcrumb-item">
+      <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1"></i>
+    </li>
+    <!--end::Item-->
+    <!--begin::Item-->
+    <li class="breadcrumb-item text-gray-500">
+      {% trans 'History' %}
+    </li>
+    <!--end::Item-->
+  </ul>
+{% endblock breadcrumbs %}
+
+{% block content %}
+  <!--begin::Timeline-->
+  <div class="card">
+    <!--begin::Card body-->
+    <div class="card-body">
+      <!--begin::Timeline-->
+      <div class="timeline timeline-border-dashed">
+        {% for action in action_list %}
+          <!--begin::Timeline item-->
+          <div class="timeline-item">
+            <!--begin::Timeline icon-->
+            <div class="timeline-icon">
+              {% if action.is_addition %}
+                <i class="ki-duotone ki-plus fs-2 text-gray-500"></i>
+              {% elif action.is_change %}
+                <i class="ki-duotone ki-pencil fs-2 text-gray-500">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                </i>
+              {% elif action.is_deletion %}
+                <i class="ki-duotone ki-basket fs-2 text-gray-500">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                  <span class="path3"></span>
+                  <span class="path4"></span>
+                </i>
+              {% else %}
+                <i class="ki-duotone ki-messages fs-2 text-gray-500">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                  <span class="path3"></span>
+                  <span class="path4"></span>
+                  <span class="path5"></span>
+                </i>
+              {% endif %}
+            </div>
+            <!--end::Timeline icon-->
+            <!--begin::Timeline content-->
+            <div class="timeline-content mt-n1">
+              <!--begin::Timeline heading-->
+              <div class="pe-3 mb-5">
+                <!--begin::Title-->
+                <div class="fs-5 fw-semibold mb-2">
+                  {{ action }}
+                </div>
+                <!--end::Title-->
+                <!--begin::Description-->
+                <div class="d-flex align-items-center mt-1 fs-6">
+                  <!--begin::Info-->
+                  <div class="text-muted me-2 fs-7">{{ action.action_time|date:_("DATETIME_FORMAT") }}</div>
+                  <!--end::Info-->
+                  <!--begin::User-->
+                  <a href="#" class="text-primary fw-bold me-1">
+                    {{ action.user.get_username }}{% if action.user.get_full_name %} (
+                      {{ action.user.get_full_name }}){% endif %}
+                  </a>
+                  <!--end::User-->
+                </div>
+                <!--end::Description-->
+              </div>
+              <!--end::Timeline heading-->
+            </div>
+            <!--end::Timeline content-->
+          </div>
+          <!--end::Timeline item-->
+        {% empty %}
+          <p>{% trans "This object doesn't have a change history. It probably wasn't added via this admin site." %}</p>
+        {% endfor %}
+      </div>
+      <!--end::Timeline-->
+    </div>
+    <!--end::Card body-->
+  </div>
+  <!--end::Timeline-->
+{% endblock content %}
