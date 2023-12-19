@@ -51,7 +51,7 @@ def _check_autocomplete_search_fields(model):
                     model=model._meta.model_name,  # noqa
                     failures=",".join(failures),
                 ),
-                hint="A QuerySet for {model} could not be constructed. Fix "
+                hint=f"A QuerySet for {model} could not be constructed. Fix "
                 "the autocomplete_search_fields on it to return valid "
                 "lookups.",
                 id="grappelli.E001",
