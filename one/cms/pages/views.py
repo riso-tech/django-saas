@@ -45,7 +45,7 @@ def flatpage(request, url):
         if not url.endswith("/") and settings.APPEND_SLASH:
             url += "/"
             f = get_object_or_404(FlatPage, url=url, sites=site_id)
-            return HttpResponsePermanentRedirect("%s/" % request.path)
+            return HttpResponsePermanentRedirect(f"{request.path}/")
         else:
             return homepage_not_found(request)
     return render_flatpage(request, f)
