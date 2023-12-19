@@ -8922,10 +8922,9 @@ button.toastr-close-button {
   box-sizing: border-box;
   display: grid;
   grid-template-areas: 'top-start     top            top-end' 'center-start  center         center-end' 'bottom-start  bottom-center  bottom-end';
-  grid-template-rows: minmax(-webkit-min-content, auto) minmax(
-      -webkit-min-content,
-      auto
-    ) minmax(-webkit-min-content, auto);
+  grid-template-rows:
+    minmax(-webkit-min-content, auto) minmax(-webkit-min-content, auto)
+    minmax(-webkit-min-content, auto);
   grid-template-rows: minmax(min-content, auto) minmax(min-content, auto) minmax(
       min-content,
       auto

@@ -19,22 +19,28 @@
             grappelli.initDateAndTimePicker();
             let prefix = "form";
             let related_lookup_fields_fk = {
-              % get_related_lookup_fields_fk cl.model_admin %
+              %
+              get_related_lookup_fields_fk cl.model_admin %
             };
             let related_lookup_fields_m2m = {
-              % get_related_lookup_fields_m2m cl.model_admin %
+              %
+              get_related_lookup_fields_m2m cl.model_admin %
             };
             let related_lookup_fields_generic = {
-              % get_related_lookup_fields_generic cl.model_admin %
+              %
+              get_related_lookup_fields_generic cl.model_admin %
             };
             let autocomplete_fields_fk = {
-              % get_autocomplete_lookup_fields_fk cl.model_admin %
+              %
+              get_autocomplete_lookup_fields_fk cl.model_admin %
             };
             let autocomplete_fields_m2m = {
-              % get_autocomplete_lookup_fields_m2m cl.model_admin %
+              %
+              get_autocomplete_lookup_fields_m2m cl.model_admin %
             };
             let autocomplete_fields_generic = {
-              % get_autocomplete_lookup_fields_generic cl.model_admin %
+              %
+              get_autocomplete_lookup_fields_generic cl.model_admin %
             };
             $.each(related_lookup_fields_fk, function() {
               $("div.grp-changelist-results")
@@ -115,7 +121,7 @@
                 $(this).find("a").remove();
                 let text = $(this).html();
                 text = text.replace(/^\w*: /, "");
-                text = text.replace(/<br / > .*: /, "");
+                text = text.replace(/<br / / > .*: /, "");
                   $(this).html(text);
                 });
               // HACK: remove input types

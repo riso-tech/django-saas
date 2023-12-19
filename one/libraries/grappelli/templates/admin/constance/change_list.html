@@ -32,7 +32,7 @@
                 $(this).find("a").remove();
                 var text = $(this).html();
                 text = text.replace(/^\w*: /, "");
-                text = text.replace(/<br / > .*: /, "");
+                text = text.replace(/<br / / > .*: /, "");
                   $(this).html(text);
                 }); $('#grp-changelist.grp-editable').on('click', '.reset-link', function(e) {
                 e.preventDefault();

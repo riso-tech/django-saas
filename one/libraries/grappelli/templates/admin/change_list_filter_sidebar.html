@@ -20,22 +20,28 @@
               grappelli.initDateAndTimePicker();
               var prefix = "form";
               var related_lookup_fields_fk = {
-                % get_related_lookup_fields_fk cl.model_admin %
+                %
+                get_related_lookup_fields_fk cl.model_admin %
               };
               var related_lookup_fields_m2m = {
-                % get_related_lookup_fields_m2m cl.model_admin %
+                %
+                get_related_lookup_fields_m2m cl.model_admin %
               };
               var related_lookup_fields_generic = {
-                % get_related_lookup_fields_generic cl.model_admin %
+                %
+                get_related_lookup_fields_generic cl.model_admin %
               };
               var autocomplete_fields_fk = {
-                % get_autocomplete_lookup_fields_fk cl.model_admin %
+                %
+                get_autocomplete_lookup_fields_fk cl.model_admin %
               };
               var autocomplete_fields_m2m = {
-                % get_autocomplete_lookup_fields_m2m cl.model_admin %
+                %
+                get_autocomplete_lookup_fields_m2m cl.model_admin %
               };
               var autocomplete_fields_generic = {
-                % get_autocomplete_lookup_fields_generic cl.model_admin %
+                %
+                get_autocomplete_lookup_fields_generic cl.model_admin %
               };
               $.each(related_lookup_fields_fk, function() {
                 $("div.grp-changelist-results")
@@ -116,7 +122,7 @@
                   $(this).find("a").remove();
                   var text = $(this).html();
                   text = text.replace(/^\w*: /, "");
-                  text = text.replace(/<br / > .*: /, "");
+                  text = text.replace(/<br / / > .*: /, "");
                     $(this).html(text);
                   });
                 // check result list overflow
@@ -188,9 +194,8 @@ endblocktrans %}</a>
 <div id="grp-filters" class="grp-module grp-filter">
 <h2>{% trans 'Filter' %}</h2>
 {% for spec in cl.filter_specs %}
-{% admin_list_filter cl spec %}
-{% endfor
-%}
+{% admin_list_filter cl spec %} {%
+endfor %}
 </div>
 {% endblock %}
 </div>
@@ -252,10 +257,7 @@ novalidate
 <h1>Results</h1>
 </header>
 <!-- POPUP -->
-{% if is_popup %}
-<input type="hidden" name="_popup" value="1" />
-{% endif
-%}
+{% if is_popup %}<input type="hidden" name="_popup" value="1" />{% endif %}
 <!-- ERRORS -->
 {% if cl.formset.errors %}
 <p class="errornote">
@@ -263,8 +265,8 @@ novalidate
 {% trans "Please correct the
 error below." %}
 {% else %}
-{% trans "Please correct the errors below."
-%}
+{% trans "Please correct the errors
+below." %}
 {% endif %}
 </p>
 {{ cl.formset.non_form_errors }}

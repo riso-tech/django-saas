@@ -42,12 +42,14 @@
             %
             if user.is_staff %
           } {
-            % get_content_types %
+            %
+            get_content_types %
           } {
             %
             else %
           } [] {
-            % endif %
+            %
+            endif %
           },
           DATE_FORMAT = "{% get_date_format %}",
           TIME_FORMAT = "{% get_time_format %}",
@@ -240,11 +242,13 @@
             }
             toastr.success('{{ message|safe }}', "{% trans 'Success' %}");
             {
-              % elif message.tags == "info" %
+              %
+              elif message.tags == "info" %
             }
             toastr.info('{{ message|safe }}', "{% trans 'Info' %}");
             {
-              % elif message.tags == "warning" %
+              %
+              elif message.tags == "warning" %
             }
             toastr.warning('{{ message|safe }}', "{% trans 'Warning' %}");
             {
@@ -253,7 +257,8 @@
             }
             toastr.error('{{ message|safe }}', "{% trans 'Error' %}");
             {
-              % endif %
+              %
+              endif %
             }
           });
         </script>

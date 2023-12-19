@@ -18,8 +18,9 @@
         {% for choice in choices %}
           <li>
             {% if choice.link %}
-              <a href="{{ choice.link }}">{{ choice.title }}</a>{%
-              else %}<span>{{ choice.title }}</span>
+              <a href="{{ choice.link }}">{{ choice.title }}</a>
+            {% else %}
+              <span>{{ choice.title }}</span>
             {% endif %}
           </li>
         {% endfor %}

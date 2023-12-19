@@ -161,22 +161,28 @@
 
       var prefix = "{{ inline_admin_formset.formset.prefix }}";
       var related_lookup_fields_fk = {
-        % get_related_lookup_fields_fk inline_admin_formset.opts %
+        %
+        get_related_lookup_fields_fk inline_admin_formset.opts %
       };
       var related_lookup_fields_m2m = {
-        % get_related_lookup_fields_m2m inline_admin_formset.opts %
+        %
+        get_related_lookup_fields_m2m inline_admin_formset.opts %
       };
       var related_lookup_fields_generic = {
-        % get_related_lookup_fields_generic inline_admin_formset.opts %
+        %
+        get_related_lookup_fields_generic inline_admin_formset.opts %
       };
       var autocomplete_fields_fk = {
-        % get_autocomplete_lookup_fields_fk inline_admin_formset.opts %
+        %
+        get_autocomplete_lookup_fields_fk inline_admin_formset.opts %
       };
       var autocomplete_fields_m2m = {
-        % get_autocomplete_lookup_fields_m2m inline_admin_formset.opts %
+        %
+        get_autocomplete_lookup_fields_m2m inline_admin_formset.opts %
       };
       var autocomplete_fields_generic = {
-        % get_autocomplete_lookup_fields_generic inline_admin_formset.opts %
+        %
+        get_autocomplete_lookup_fields_generic inline_admin_formset.opts %
       };
       $.each(related_lookup_fields_fk, function() {
         $("#{{ inline_admin_formset.formset.prefix }}-group > div.grp-table > div:not(.grp-empty-form)")
@@ -252,7 +258,8 @@
 
       $("#{{ inline_admin_formset.formset.prefix }}-group").grp_inline({
         {
-          % block grp_inline_options %
+          %
+          block grp_inline_options %
         }
         prefix: "{{ inline_admin_formset.formset.prefix }}",
         onBeforeAdded: function(inline) {},
@@ -325,7 +332,8 @@
               });
           });
         } {
-          % endblock %
+          %
+          endblock %
         }
       });
 
@@ -397,7 +405,8 @@
       $("#{{ opts.model_name }}_form").on("submit", function() {
         var sortable_field_name = "{{ inline_admin_formset.opts.sortable_field_name }}",
           sortable_excludes = {
-            % get_sortable_excludes inline_admin_formset.opts %
+            %
+            get_sortable_excludes inline_admin_formset.opts %
           },
           i = 0;
         $("#{{ inline_admin_formset.formset.prefix }}-group").find("div.grp-tbody.grp-dynamic-form").each(function() {
@@ -420,7 +429,8 @@
         });
       });
       {
-        % endif %
+        %
+        endif %
       }
 
     });

@@ -24,22 +24,28 @@
             }
           });
           let related_lookup_fields_fk = {
-            % get_related_lookup_fields_fk adminform.model_admin %
+            %
+            get_related_lookup_fields_fk adminform.model_admin %
           };
           let related_lookup_fields_m2m = {
-            % get_related_lookup_fields_m2m adminform.model_admin %
+            %
+            get_related_lookup_fields_m2m adminform.model_admin %
           };
           let related_lookup_fields_generic = {
-            % get_related_lookup_fields_generic adminform.model_admin %
+            %
+            get_related_lookup_fields_generic adminform.model_admin %
           };
           let autocomplete_fields_fk = {
-            % get_autocomplete_lookup_fields_fk adminform.model_admin %
+            %
+            get_autocomplete_lookup_fields_fk adminform.model_admin %
           };
           let autocomplete_fields_m2m = {
-            % get_autocomplete_lookup_fields_m2m adminform.model_admin %
+            %
+            get_autocomplete_lookup_fields_m2m adminform.model_admin %
           };
           let autocomplete_fields_generic = {
-            % get_autocomplete_lookup_fields_generic adminform.model_admin %
+            %
+            get_autocomplete_lookup_fields_generic adminform.model_admin %
           };
           $.each(related_lookup_fields_fk, function() {
             $("#id_" + this).grp_related_fk({
@@ -98,21 +104,24 @@
           });
           // HACK: get rid of currently/change with URL–fields. F**K!!!
           {
-            % block js_remove_url %
+            %
+            block js_remove_url %
           }
           $('p.url').each(function() {
               $(this).find("a").remove();
               let text = $(this).html();
               text = text.replace(/^\w*: /, "");
-              text = text.replace(/<br / > .*: /, "");
+              text = text.replace(/<br / / > .*: /, "");
                 $(this).html(text);
               });
             {
-              % endblock %
+              %
+              endblock %
             }
             // HACK: rearrange inlines
             {
-              % block js_rearrange_inlines %
+              %
+              block js_rearrange_inlines %
             }
             $('div.grp-group').each(function() {
               let placeholder = $("fieldset.placeholder." + $(this).attr("id"));
@@ -121,17 +130,20 @@
               }
             });
             {
-              % endblock %
+              %
+              endblock %
             }
             // HACK: remove input types
             {
-              % block js_clean_input_types %
+              %
+              block js_clean_input_types %
             }
             let clean_input_types = "{% grappelli_clean_input_types %}";
             if (clean_input_types === "True") {
               grappelli.cleanInputTypes();
             } {
-              % endblock %
+              %
+              endblock %
             }
           });
   </script>
@@ -154,7 +166,8 @@
         if adminform and add %
       }
       $('form#{{ opts.model_name }}_form :input:visible:enabled:first').focus() {
-        % endif %
+        %
+        endif %
       }
     });
   </script>
