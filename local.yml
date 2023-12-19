@@ -56,7 +56,7 @@ services:
     image: axllent/mailpit:latest
     container_name: one_local_mailpit
     ports:
-      - "8025:8025"
+      - '8025:8025'
 
   redis:
     image: redis:6

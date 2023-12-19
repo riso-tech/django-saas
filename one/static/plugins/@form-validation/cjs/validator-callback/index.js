@@ -9,14 +9,14 @@ var core = require('@form-validation/core');
  */
 var call = core.utils.call;
 function callback() {
-    return {
-        validate: function (input) {
-            var response = call(input.options.callback, [input]);
-            return 'boolean' === typeof response
-                ? { valid: response } // Deprecated
-                : response;
-        },
-    };
+  return {
+    validate: function (input) {
+      var response = call(input.options.callback, [input]);
+      return 'boolean' === typeof response
+        ? { valid: response } // Deprecated
+        : response;
+    },
+  };
 }
 
 exports.callback = callback;

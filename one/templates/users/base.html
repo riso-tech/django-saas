@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+
 {% load static i18n %}
 
 {% block content %}
@@ -10,9 +11,9 @@
         <!--begin: Pic-->
         <div class="me-7 mb-4">
           <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-            <img src="{% static 'media/avatars/300-3.jpg' %}" alt="image"/>
-            <div
-              class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-body h-20px w-20px"></div>
+            <img src="{% static 'media/avatars/300-3.jpg' %}" alt="image" />
+            <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-body h-20px w-20px">
+            </div>
           </div>
         </div>
         <!--end::Pic-->
@@ -25,13 +26,18 @@
               <!--begin::Name-->
               <div class="d-flex align-items-center mb-2">
                 <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">
-                  {% if user.name %}{{ user.name|title }}{% else %}{% trans 'User Name not available' %}{% endif %}
+                  {% if user.name %}
+                    {{ user.name|title }}
+                  {% else %}
+                    {% trans 'User Name not available' %}
+                  {% endif %}
                 </a>
               </div>
               <!--end::Name-->
               <!--begin::Info-->
               <div class="d-flex flex-wrap fw-semibold fs-6 mb-4 pe-2">
-                <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
+                <a href="#"
+                   class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
                   <i class="ki-duotone ki-sms fs-4 me-1"><span class="path1"></span><span class="path2"></span></i>
                   {{ user.primary_email }}
                 </a>
@@ -40,9 +46,7 @@
             </div>
             <!--end::User-->
             <!--begin::Actions-->
-            <div class="d-flex my-4">
-              {% trans 'ACTION SECTION' %}
-            </div>
+            <div class="d-flex my-4">{% trans 'ACTION SECTION' %}</div>
             <!--end::Actions-->
           </div>
           <!--end::Title-->
@@ -51,16 +55,12 @@
             <!--begin::Wrapper-->
             <div class="d-flex flex-column flex-grow-1 pe-8">
               <!--begin::Stats-->
-              <div class="d-flex flex-wrap">
-                {% trans 'User Stat Section' %}
-              </div>
+              <div class="d-flex flex-wrap">{% trans 'User Stat Section' %}</div>
               <!--end::Stats-->
             </div>
             <!--end::Wrapper-->
             <!--begin::Progress-->
-            <div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3">
-              {% trans 'User Process Section' %}
-            </div>
+            <div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3">{% trans 'User Process Section' %}</div>
             <!--end::Progress-->
           </div>
           <!--end::Stats-->
@@ -73,27 +73,22 @@
         <!--begin::Nav item-->
         <li class="nav-item mt-2">
           {% url 'users:detail' request.user.username as user_profile_path %}
-          <a
-            class="nav-link text-active-primary ms-0 me-10 py-5 {% if request.path == user_profile_path %}active{% endif %}"
-            href="{{ user_profile_path }}">
-            {% trans 'Overview' %}
-          </a>
+          <a class="nav-link text-active-primary ms-0 me-10 py-5 {% if request.path == user_profile_path %}active{% endif %}"
+             href="{{ user_profile_path }}">{% trans 'Overview' %}</a>
         </li>
         <!--end::Nav item-->
         <!--begin::Nav item-->
         <li class="nav-item mt-2">
           {% url 'users:update' as user_update_path %}
-          <a
-            class="nav-link text-active-primary ms-0 me-10 py-5 {% if request.path == user_update_path %}active{% endif %}"
-            href="{{ user_update_path }}">{% trans 'Profile Update' %}</a>
+          <a class="nav-link text-active-primary ms-0 me-10 py-5 {% if request.path == user_update_path %}active{% endif %}"
+             href="{{ user_update_path }}">{% trans 'Profile Update' %}</a>
         </li>
         <!--end::Nav item-->
         <!--begin::Nav item-->
         <li class="nav-item mt-2">
           {% url 'account_email' as account_email_path %}
-          <a
-            class="nav-link text-active-primary ms-0 me-10 py-5 {% if request.path == account_email_path %}active{% endif %}"
-            href="{{ account_email_path }}">{% trans 'Email' %}</a>
+          <a class="nav-link text-active-primary ms-0 me-10 py-5 {% if request.path == account_email_path %}active{% endif %}"
+             href="{{ account_email_path }}">{% trans 'Email' %}</a>
         </li>
         <!--end::Nav item-->
       </ul>
@@ -101,8 +96,6 @@
     </div>
   </div>
   <!--end::Navbar-->
-
   {% block inner %}
   {% endblock inner %}
-
 {% endblock content %}

@@ -9,35 +9,44 @@ var core = require('@form-validation/core');
  */
 var format = core.utils.format;
 function between() {
-    var formatValue = function (value) {
-        return parseFloat("".concat(value).replace(',', '.'));
-    };
-    return {
-        validate: function (input) {
-            var value = input.value;
-            if (value === '') {
-                return { valid: true };
-            }
-            var opts = Object.assign({}, { inclusive: true, message: '' }, input.options);
-            var minValue = formatValue(opts.min);
-            var maxValue = formatValue(opts.max);
-            return opts.inclusive
-                ? {
-                    message: format(input.l10n ? opts.message || input.l10n.between.default : opts.message, [
-                        "".concat(minValue),
-                        "".concat(maxValue),
-                    ]),
-                    valid: parseFloat(value) >= minValue && parseFloat(value) <= maxValue,
-                }
-                : {
-                    message: format(input.l10n ? opts.message || input.l10n.between.notInclusive : opts.message, [
-                        "".concat(minValue),
-                        "".concat(maxValue),
-                    ]),
-                    valid: parseFloat(value) > minValue && parseFloat(value) < maxValue,
-                };
-        },
-    };
+  var formatValue = function (value) {
+    return parseFloat(''.concat(value).replace(',', '.'));
+  };
+  return {
+    validate: function (input) {
+      var value = input.value;
+      if (value === '') {
+        return { valid: true };
+      }
+      var opts = Object.assign(
+        {},
+        { inclusive: true, message: '' },
+        input.options,
+      );
+      var minValue = formatValue(opts.min);
+      var maxValue = formatValue(opts.max);
+      return opts.inclusive
+        ? {
+            message: format(
+              input.l10n
+                ? opts.message || input.l10n.between.default
+                : opts.message,
+              [''.concat(minValue), ''.concat(maxValue)],
+            ),
+            valid:
+              parseFloat(value) >= minValue && parseFloat(value) <= maxValue,
+          }
+        : {
+            message: format(
+              input.l10n
+                ? opts.message || input.l10n.between.notInclusive
+                : opts.message,
+              [''.concat(minValue), ''.concat(maxValue)],
+            ),
+            valid: parseFloat(value) > minValue && parseFloat(value) < maxValue,
+          };
+    },
+  };
 }
 
 exports.between = between;

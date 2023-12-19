@@ -1,6 +1,11 @@
-define(['exports', '@form-validation/core', '@form-validation/plugin-framework'], (function (exports, core, pluginFramework) { 'use strict';
+define([
+  'exports',
+  '@form-validation/core',
+  '@form-validation/plugin-framework',
+], function (exports, core, pluginFramework) {
+  'use strict';
 
-    /******************************************************************************
+  /******************************************************************************
     Copyright (c) Microsoft Corporation.
 
     Permission to use, copy, modify, and/or distribute this software for any
@@ -14,57 +19,77 @@ define(['exports', '@form-validation/core', '@form-validation/plugin-framework']
     OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
     PERFORMANCE OF THIS SOFTWARE.
     ***************************************************************************** */
-    /* global Reflect, Promise */
+  /* global Reflect, Promise */
 
-    var extendStatics = function(d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
+  var extendStatics = function (d, b) {
+    extendStatics =
+      Object.setPrototypeOf ||
+      ({ __proto__: [] } instanceof Array &&
+        function (d, b) {
+          d.__proto__ = b;
+        }) ||
+      function (d, b) {
+        for (var p in b)
+          if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p];
+      };
+    return extendStatics(d, b);
+  };
 
-    function __extends(d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  function __extends(d, b) {
+    if (typeof b !== 'function' && b !== null)
+      throw new TypeError(
+        'Class extends value ' + String(b) + ' is not a constructor or null',
+      );
+    extendStatics(d, b);
+    function __() {
+      this.constructor = d;
     }
+    d.prototype =
+      b === null ? Object.create(b) : ((__.prototype = b.prototype), new __());
+  }
 
-    /**
-     * FormValidation (https://formvalidation.io)
-     * The best validation library for JavaScript
-     * (c) 2013 - 2023 Nguyen Huu Phuoc <me@phuoc.ng>
-     */
-    var classSet = core.utils.classSet;
-    // Support Turretcss framework (https://turretcss.com/)
-    var Turret = /** @class */ (function (_super) {
-        __extends(Turret, _super);
-        function Turret(opts) {
-            // See https://turretcss.com/docs/form/
-            return _super.call(this, Object.assign({}, {
-                formClass: 'fv-plugins-turret',
-                messageClass: 'form-message',
-                rowInvalidClass: 'fv-invalid-row',
-                rowPattern: /^field$/,
-                rowSelector: '.field',
-                rowValidClass: 'fv-valid-row',
-            }, opts)) || this;
-        }
-        Turret.prototype.onIconPlaced = function (e) {
-            var type = e.element.getAttribute('type');
-            var parent = e.element.parentElement;
-            if ('checkbox' === type || 'radio' === type) {
-                // Place it after the container of checkbox/radio
-                parent.parentElement.insertBefore(e.iconElement, parent.nextSibling);
-                classSet(e.iconElement, {
-                    'fv-plugins-icon-check': true,
-                });
-            }
-        };
-        return Turret;
-    }(pluginFramework.Framework));
+  /**
+   * FormValidation (https://formvalidation.io)
+   * The best validation library for JavaScript
+   * (c) 2013 - 2023 Nguyen Huu Phuoc <me@phuoc.ng>
+   */
+  var classSet = core.utils.classSet;
+  // Support Turretcss framework (https://turretcss.com/)
+  var Turret = /** @class */ (function (_super) {
+    __extends(Turret, _super);
+    function Turret(opts) {
+      // See https://turretcss.com/docs/form/
+      return (
+        _super.call(
+          this,
+          Object.assign(
+            {},
+            {
+              formClass: 'fv-plugins-turret',
+              messageClass: 'form-message',
+              rowInvalidClass: 'fv-invalid-row',
+              rowPattern: /^field$/,
+              rowSelector: '.field',
+              rowValidClass: 'fv-valid-row',
+            },
+            opts,
+          ),
+        ) || this
+      );
+    }
+    Turret.prototype.onIconPlaced = function (e) {
+      var type = e.element.getAttribute('type');
+      var parent = e.element.parentElement;
+      if ('checkbox' === type || 'radio' === type) {
+        // Place it after the container of checkbox/radio
+        parent.parentElement.insertBefore(e.iconElement, parent.nextSibling);
+        classSet(e.iconElement, {
+          'fv-plugins-icon-check': true,
+        });
+      }
+    };
+    return Turret;
+  })(pluginFramework.Framework);
 
-    exports.Turret = Turret;
-
-}));
+  exports.Turret = Turret;
+});

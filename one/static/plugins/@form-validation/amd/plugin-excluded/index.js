@@ -1,6 +1,7 @@
-define(['exports', '@form-validation/core'], (function (exports, core) { 'use strict';
+define(['exports', '@form-validation/core'], function (exports, core) {
+  'use strict';
 
-    /******************************************************************************
+  /******************************************************************************
     Copyright (c) Microsoft Corporation.
 
     Permission to use, copy, modify, and/or distribute this software for any
@@ -14,53 +15,80 @@ define(['exports', '@form-validation/core'], (function (exports, core) { 'use st
     OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
     PERFORMANCE OF THIS SOFTWARE.
     ***************************************************************************** */
-    /* global Reflect, Promise */
+  /* global Reflect, Promise */
 
-    var extendStatics = function(d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
+  var extendStatics = function (d, b) {
+    extendStatics =
+      Object.setPrototypeOf ||
+      ({ __proto__: [] } instanceof Array &&
+        function (d, b) {
+          d.__proto__ = b;
+        }) ||
+      function (d, b) {
+        for (var p in b)
+          if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p];
+      };
+    return extendStatics(d, b);
+  };
 
-    function __extends(d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  function __extends(d, b) {
+    if (typeof b !== 'function' && b !== null)
+      throw new TypeError(
+        'Class extends value ' + String(b) + ' is not a constructor or null',
+      );
+    extendStatics(d, b);
+    function __() {
+      this.constructor = d;
     }
+    d.prototype =
+      b === null ? Object.create(b) : ((__.prototype = b.prototype), new __());
+  }
 
-    /**
-     * FormValidation (https://formvalidation.io)
-     * The best validation library for JavaScript
-     * (c) 2013 - 2023 Nguyen Huu Phuoc <me@phuoc.ng>
-     */
-    var Excluded = /** @class */ (function (_super) {
-        __extends(Excluded, _super);
-        function Excluded(opts) {
-            var _this = _super.call(this, opts) || this;
-            _this.opts = Object.assign({}, { excluded: Excluded.defaultIgnore }, opts);
-            _this.ignoreValidationFilter = _this.ignoreValidation.bind(_this);
-            return _this;
-        }
-        Excluded.defaultIgnore = function (_field, element, _elements) {
-            var isVisible = !!(element.offsetWidth || element.offsetHeight || element.getClientRects().length);
-            var disabled = element.getAttribute('disabled');
-            return disabled === '' || disabled === 'disabled' || element.getAttribute('type') === 'hidden' || !isVisible;
-        };
-        Excluded.prototype.install = function () {
-            this.core.registerFilter('element-ignored', this.ignoreValidationFilter);
-        };
-        Excluded.prototype.uninstall = function () {
-            this.core.deregisterFilter('element-ignored', this.ignoreValidationFilter);
-        };
-        Excluded.prototype.ignoreValidation = function (field, element, elements) {
-            return this.opts.excluded.apply(this, [field, element, elements]);
-        };
-        return Excluded;
-    }(core.Plugin));
+  /**
+   * FormValidation (https://formvalidation.io)
+   * The best validation library for JavaScript
+   * (c) 2013 - 2023 Nguyen Huu Phuoc <me@phuoc.ng>
+   */
+  var Excluded = /** @class */ (function (_super) {
+    __extends(Excluded, _super);
+    function Excluded(opts) {
+      var _this = _super.call(this, opts) || this;
+      _this.opts = Object.assign(
+        {},
+        { excluded: Excluded.defaultIgnore },
+        opts,
+      );
+      _this.ignoreValidationFilter = _this.ignoreValidation.bind(_this);
+      return _this;
+    }
+    Excluded.defaultIgnore = function (_field, element, _elements) {
+      var isVisible = !!(
+        element.offsetWidth ||
+        element.offsetHeight ||
+        element.getClientRects().length
+      );
+      var disabled = element.getAttribute('disabled');
+      return (
+        disabled === '' ||
+        disabled === 'disabled' ||
+        element.getAttribute('type') === 'hidden' ||
+        !isVisible
+      );
+    };
+    Excluded.prototype.install = function () {
+      this.core.registerFilter('element-ignored', this.ignoreValidationFilter);
+    };
+    Excluded.prototype.uninstall = function () {
+      this.core.deregisterFilter(
+        'element-ignored',
+        this.ignoreValidationFilter,
+      );
+    };
+    Excluded.prototype.ignoreValidation = function (field, element, elements) {
+      return this.opts.excluded.apply(this, [field, element, elements]);
+    };
+    return Excluded;
+  })(core.Plugin);
 
-    exports.Excluded = Excluded;
-
-}));
+  exports.Excluded = Excluded;
+});

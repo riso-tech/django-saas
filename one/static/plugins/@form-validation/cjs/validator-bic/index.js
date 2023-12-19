@@ -12,13 +12,15 @@
  * @todo The 5 and 6 characters are an ISO 3166-1 country code, this could also be validated
  */
 function bic() {
-    return {
-        validate: function (input) {
-            return {
-                valid: input.value === '' || /^[a-zA-Z]{6}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?$/.test(input.value),
-            };
-        },
-    };
+  return {
+    validate: function (input) {
+      return {
+        valid:
+          input.value === '' ||
+          /^[a-zA-Z]{6}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?$/.test(input.value),
+      };
+    },
+  };
 }
 
 exports.bic = bic;

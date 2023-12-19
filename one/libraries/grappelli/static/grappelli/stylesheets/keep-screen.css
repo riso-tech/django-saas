@@ -118,7 +118,7 @@ Twitter: @rich_clark
 .keep-grp blockquote:after,
 .keep-grp q:before,
 .keep-grp q:after {
-  content: "";
+  content: '';
   content: none;
 }
 
@@ -190,12 +190,21 @@ Twitter: @rich_clark
 /*  TYPOGRAPHY
 ------------------------------------------------------------------------------------------------------ */
 /*  Font Family ............................................................ */
-.keep-grp .grp-font-family, .keep-grp body, .keep-grp .ui-autocomplete, .keep-grp #ui-timepicker, .keep-grp .ui-datepicker, .keep-grp a.grp-button, .keep-grp button.grp-button, .keep-grp input[type=button].grp-button,  .keep-grp .grp-button {
+.keep-grp .grp-font-family,
+.keep-grp body,
+.keep-grp .ui-autocomplete,
+.keep-grp #ui-timepicker,
+.keep-grp .ui-datepicker,
+.keep-grp a.grp-button,
+.keep-grp button.grp-button,
+.keep-grp input[type='button'].grp-button,
+.keep-grp .grp-button {
   font-family: Arial, sans-serif;
 }
 
 /*  Font Colors ............................................................ */
-.keep-grp .grp-font-color, .keep-grp body {
+.keep-grp .grp-font-color,
+.keep-grp body {
   color: #444;
 }
 
@@ -669,23 +678,34 @@ Twitter: @rich_clark
 
 /*  FONT-SIZES & LINE-HEIGHTS
 ------------------------------------------------------------------------------------------------------ */
-.keep-grp .grp-font-size-xl, .keep-grp h1, .keep-grp .h1 {
+.keep-grp .grp-font-size-xl,
+.keep-grp h1,
+.keep-grp .h1 {
   font-size: 20px;
 }
 
-.keep-grp .grp-font-size-l, .keep-grp h2 {
+.keep-grp .grp-font-size-l,
+.keep-grp h2 {
   font-size: 13px;
 }
 
-.keep-grp .grp-font-size-m, .keep-grp h3 {
+.keep-grp .grp-font-size-m,
+.keep-grp h3 {
   font-size: 12px;
 }
 
-.keep-grp .grp-font-size, .keep-grp body, .keep-grp a.grp-button, .keep-grp button.grp-button, .keep-grp input[type=button].grp-button,  .keep-grp .grp-button, .keep-grp h4 {
+.keep-grp .grp-font-size,
+.keep-grp body,
+.keep-grp a.grp-button,
+.keep-grp button.grp-button,
+.keep-grp input[type='button'].grp-button,
+.keep-grp .grp-button,
+.keep-grp h4 {
   font-size: 12px;
 }
 
-.keep-grp .grp-font-size-s, .keep-grp .grp-actions {
+.keep-grp .grp-font-size-s,
+.keep-grp .grp-actions {
   font-size: 11px;
 }
 
@@ -693,19 +713,30 @@ Twitter: @rich_clark
   font-size: 10px;
 }
 
-.keep-grp .grp-line-height-xl, .keep-grp h1, .keep-grp .h1 {
+.keep-grp .grp-line-height-xl,
+.keep-grp h1,
+.keep-grp .h1 {
   line-height: 24px;
 }
 
-.keep-grp .grp-line-height-l, .keep-grp h2 {
+.keep-grp .grp-line-height-l,
+.keep-grp h2 {
   line-height: 18px;
 }
 
-.keep-grp .grp-line-height-m, .keep-grp h3 {
+.keep-grp .grp-line-height-m,
+.keep-grp h3 {
   line-height: 16px;
 }
 
-.keep-grp .grp-line-height, .keep-grp body, .keep-grp a.grp-button, .keep-grp button.grp-button, .keep-grp input[type=button].grp-button,  .keep-grp .grp-button, .keep-grp .grp-actions, .keep-grp h4 {
+.keep-grp .grp-line-height,
+.keep-grp body,
+.keep-grp a.grp-button,
+.keep-grp button.grp-button,
+.keep-grp input[type='button'].grp-button,
+.keep-grp .grp-button,
+.keep-grp .grp-actions,
+.keep-grp h4 {
   line-height: 16px;
 }
 
@@ -890,17 +921,17 @@ Twitter: @rich_clark
   background: #f2f2e6;
 }
 .keep-grp body.grp-doc .grp-doc-dom span:before {
-  content: "<";
+  content: '<';
 }
 .keep-grp body.grp-doc .grp-doc-dom span:after {
-  content: ">";
+  content: '>';
 }
 .keep-grp body.grp-doc code {
   position: relative;
   display: inline-block;
   margin: 0 5px;
   padding: 0 10px 20px;
-  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
   font-size: 11px;
   border: 1px solid #d9d9c3;
   background: #f2f2e6;
@@ -1088,7 +1119,8 @@ Twitter: @rich_clark
 .keep-grp .grp-docutils code,
 .keep-grp .grp-docutils pre {
   font-size: 11px;
-  font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+  font-family: 'Bitstream Vera Sans Mono', Monaco, 'Courier New', Courier,
+    monospace;
 }
 .keep-grp .grp-docutils pre.literal-block {
   margin: 10px;
@@ -1122,7 +1154,8 @@ Twitter: @rich_clark
 }
 
 /*  Hide Images in Templates ........................................... */
-.keep-grp a.add-another img, .keep-grp a.related-lookup img {
+.keep-grp a.add-another img,
+.keep-grp a.related-lookup img {
   opacity: 0;
 }
 
@@ -1152,13 +1185,12 @@ Twitter: @rich_clark
 
 /*  FORM FIELDS
 ------------------------------------------------------------------------------------------------------ */
-.keep-grp input[type=text],
-.keep-grp input[type=password],
-.keep-grp input[type=url],
-.keep-grp input[type=email],
-.keep-grp input[type=number],
-
-.keep-grp input[type=reset],
+.keep-grp input[type='text'],
+.keep-grp input[type='password'],
+.keep-grp input[type='url'],
+.keep-grp input[type='email'],
+.keep-grp input[type='number'],
+.keep-grp input[type='reset'],
 .keep-grp textarea,
 .keep-grp select {
   margin: 0;
@@ -1177,19 +1209,36 @@ Twitter: @rich_clark
   overflow: hidden;
   vertical-align: middle;
 }
-.keep-grp input[type=text]:focus, .keep-grp input[type=text].grp-state-focus, .keep-grp input[type=password]:focus, .keep-grp input[type=password].grp-state-focus, .keep-grp input[type=url]:focus, .keep-grp input[type=url].grp-state-focus, .keep-grp input[type=email]:focus, .keep-grp input[type=email].grp-state-focus, .keep-grp input[type=number]:focus, .keep-grp input[type=number].grp-state-focus, .keep-grp input[type=submit]:focus, .keep-grp input[type=submit].grp-state-focus, .keep-grp input[type=reset]:focus, .keep-grp input[type=reset].grp-state-focus, .keep-grp textarea:focus, .keep-grp textarea.grp-state-focus, .keep-grp select:focus, .keep-grp select.grp-state-focus {
+.keep-grp input[type='text']:focus,
+.keep-grp input[type='text'].grp-state-focus,
+.keep-grp input[type='password']:focus,
+.keep-grp input[type='password'].grp-state-focus,
+.keep-grp input[type='url']:focus,
+.keep-grp input[type='url'].grp-state-focus,
+.keep-grp input[type='email']:focus,
+.keep-grp input[type='email'].grp-state-focus,
+.keep-grp input[type='number']:focus,
+.keep-grp input[type='number'].grp-state-focus,
+.keep-grp input[type='submit']:focus,
+.keep-grp input[type='submit'].grp-state-focus,
+.keep-grp input[type='reset']:focus,
+.keep-grp input[type='reset'].grp-state-focus,
+.keep-grp textarea:focus,
+.keep-grp textarea.grp-state-focus,
+.keep-grp select:focus,
+.keep-grp select.grp-state-focus {
   border: 1px solid #aaa;
   box-shadow: 0 0 6px #ccc;
   background: #fff;
   outline: 0;
 }
-.keep-grp .grp-errors input[type=text],
-.keep-grp .grp-errors input[type=password],
-.keep-grp .grp-errors input[type=url],
-.keep-grp .grp-errors input[type=email],
-.keep-grp .grp-errors input[type=number],
-.keep-grp .grp-errors input[type=submit],
-.keep-grp .grp-errors input[type=reset],
+.keep-grp .grp-errors input[type='text'],
+.keep-grp .grp-errors input[type='password'],
+.keep-grp .grp-errors input[type='url'],
+.keep-grp .grp-errors input[type='email'],
+.keep-grp .grp-errors input[type='number'],
+.keep-grp .grp-errors input[type='submit'],
+.keep-grp .grp-errors input[type='reset'],
 .keep-grp .grp-errors textarea,
 .keep-grp .grp-errors select {
   border-color: #bf3030;
@@ -1247,13 +1296,13 @@ Twitter: @rich_clark
 .keep-grp .grp-errors ul.checkboxlist.inline label {
   color: #444 !important;
 }
-.keep-grp .grp-errors input[type=text],
-.keep-grp .grp-errors input[type=password],
-.keep-grp .grp-errors input[type=url],
-.keep-grp .grp-errors input[type=email],
-.keep-grp .grp-errors input[type=number],
-.keep-grp .grp-errors input[type=submit],
-.keep-grp .grp-errors input[type=reset],
+.keep-grp .grp-errors input[type='text'],
+.keep-grp .grp-errors input[type='password'],
+.keep-grp .grp-errors input[type='url'],
+.keep-grp .grp-errors input[type='email'],
+.keep-grp .grp-errors input[type='number'],
+.keep-grp .grp-errors input[type='submit'],
+.keep-grp .grp-errors input[type='reset'],
 .keep-grp .grp-errors textarea,
 .keep-grp .grp-errors select {
   border-color: #bf3030 !important;
@@ -1278,10 +1327,10 @@ Twitter: @rich_clark
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   .keep-grp select,
-.keep-grp select:focus {
+  .keep-grp select:focus {
     padding: 4px 28px 4px 5px;
     -webkit-appearance: none;
-    background-image: url("../images/icons/form-select.png");
+    background-image: url('../images/icons/form-select.png');
     background-position: 100% 50%;
     background-repeat: no-repeat;
   }
@@ -1306,24 +1355,25 @@ Twitter: @rich_clark
 }
 
 .keep-grp fieldset.monospace textarea {
-  font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+  font-family: 'Bitstream Vera Sans Mono', Monaco, 'Courier New', Courier,
+    monospace;
 }
 
 /*  Checkboxes, Radiobuttons ................................................... */
-.keep-grp .grp-row input[type=checkbox],
-.keep-grp .grp-row input[type=radio] {
+.keep-grp .grp-row input[type='checkbox'],
+.keep-grp .grp-row input[type='radio'] {
   position: relative;
   top: 1px;
 }
-.keep-grp .grp-row input[type=checkbox] + label,
-.keep-grp .grp-row input[type=radio] + label {
+.keep-grp .grp-row input[type='checkbox'] + label,
+.keep-grp .grp-row input[type='radio'] + label {
   position: relative;
   margin: 0 0 0 5px;
 }
 
 /*  SEARCH
 ------------------------------------------------------------------------------------------------------ */
-.keep-grp input[type=text].grp-search-field {
+.keep-grp input[type='text'].grp-search-field {
   margin-right: -5px;
   padding-left: 10px;
   padding-right: 30px;
@@ -1479,12 +1529,12 @@ Twitter: @rich_clark
   border-top-right-radius: 3px;
   line-height: 25px;
   text-indent: 25px;
-  background: url("../images/icons/searchbox.png") 6px 50% no-repeat;
+  background: url('../images/icons/searchbox.png') 6px 50% no-repeat;
 }
 .keep-grp .selector .selector-filter label {
   display: none !important;
 }
-.keep-grp .selector .selector-filter input[type=text] {
+.keep-grp .selector .selector-filter input[type='text'] {
   position: relative;
   margin: 0;
   width: 326px !important;
@@ -1509,16 +1559,16 @@ Twitter: @rich_clark
   height: 235px !important;
 }
 .keep-grp .selector a.selector-add {
-  background-image: url("../images/icons/selector-add-m2m-horizontal.png");
+  background-image: url('../images/icons/selector-add-m2m-horizontal.png');
 }
 .keep-grp .selector a.selector-add:hover {
-  background-image: url("../images/icons/selector-add-m2m-horizontal_hover.png");
+  background-image: url('../images/icons/selector-add-m2m-horizontal_hover.png');
 }
 .keep-grp .selector a.selector-remove {
-  background-image: url("../images/icons/selector-remove-m2m-horizontal.png");
+  background-image: url('../images/icons/selector-remove-m2m-horizontal.png');
 }
 .keep-grp .selector a.selector-remove:hover {
-  background-image: url("../images/icons/selector-remove-m2m-horizontal_hover.png");
+  background-image: url('../images/icons/selector-remove-m2m-horizontal_hover.png');
 }
 .keep-grp .selector .list-footer-display {
   padding: 2px 7px;
@@ -1536,12 +1586,12 @@ Twitter: @rich_clark
 .keep-grp .selector.stacked .selector-chosen {
   width: 756px;
 }
-.keep-grp .selector.stacked .selector-filter input[type=text] {
+.keep-grp .selector.stacked .selector-filter input[type='text'] {
   width: 716px !important;
   max-width: 716px !important;
 }
 .keep-grp .selector.stacked .selector-chosen .selector-filter:after {
-  content: " " url("../images/icons/selector-add-m2m-vertical_hover.png");
+  content: ' ' url('../images/icons/selector-add-m2m-vertical_hover.png');
 }
 .keep-grp .selector.stacked select[multiple] {
   width: 758px !important;
@@ -1555,16 +1605,16 @@ Twitter: @rich_clark
   float: left;
 }
 .keep-grp .selector.stacked a.selector-add {
-  background-image: url("../images/icons/selector-add-m2m-vertical.png");
+  background-image: url('../images/icons/selector-add-m2m-vertical.png');
 }
 .keep-grp .selector.stacked a.selector-add:hover {
-  background-image: url("../images/icons/selector-add-m2m-vertical_hover.png");
+  background-image: url('../images/icons/selector-add-m2m-vertical_hover.png');
 }
 .keep-grp .selector.stacked a.selector-remove {
-  background-image: url("../images/icons/selector-remove-m2m-vertical.png");
+  background-image: url('../images/icons/selector-remove-m2m-vertical.png');
 }
 .keep-grp .selector.stacked a.selector-remove:hover {
-  background-image: url("../images/icons/selector-remove-m2m-vertical_hover.png");
+  background-image: url('../images/icons/selector-remove-m2m-vertical_hover.png');
 }
 .keep-grp .selector a.selector-add,
 .keep-grp .selector a.selector-remove {
@@ -1605,7 +1655,7 @@ Twitter: @rich_clark
   margin: -5px 0 0;
 }
 .keep-grp p.errornote + ul.errorlist:after {
-  content: " ";
+  content: ' ';
   display: block;
   height: 0;
   clear: both;
@@ -1627,7 +1677,7 @@ Twitter: @rich_clark
   white-space: normal;
 }
 .keep-grp ul.errorlist:after {
-  content: " ";
+  content: ' ';
   display: block;
   height: 0;
   clear: both;
@@ -1656,7 +1706,7 @@ Twitter: @rich_clark
   margin: 0;
 }
 .keep-grp .grp-row ul.errorlist:after {
-  content: " ";
+  content: ' ';
   display: block;
   height: 0;
   clear: both;
@@ -1687,7 +1737,7 @@ Twitter: @rich_clark
   margin: 5px 0 0;
 }
 .keep-grp .grp-tabular ul.errorlist:after {
-  content: " ";
+  content: ' ';
   display: block;
   height: 0;
   clear: both;
@@ -1713,7 +1763,7 @@ Twitter: @rich_clark
   margin: 0;
 }
 .keep-grp .grp-tabular .grp-td ul.errorlist:after {
-  content: " ";
+  content: ' ';
   display: block;
   height: 0;
   clear: both;
@@ -1745,7 +1795,7 @@ Twitter: @rich_clark
   margin: 3px 0;
 }
 .keep-grp .grp-stacked ul.errorlist:after {
-  content: " ";
+  content: ' ';
   display: block;
   height: 0;
   clear: both;
@@ -1771,7 +1821,7 @@ Twitter: @rich_clark
   border-bottom: 1px solid #ddd;
 }
 .keep-grp .grp-stacked h3 + * + ul.errorlist:after {
-  content: " ";
+  content: ' ';
   display: block;
   height: 0;
   clear: both;
@@ -1794,7 +1844,7 @@ Twitter: @rich_clark
   margin: 0;
 }
 .keep-grp .grp-stacked .grp-row ul.errorlist:after {
-  content: " ";
+  content: ' ';
   display: block;
   height: 0;
   clear: both;
@@ -1822,9 +1872,9 @@ Twitter: @rich_clark
 
 /*  FORM FIELDS: BASIC DIMENSIONS
 ------------------------------------------------------------------------------------------------------ */
-.keep-grp input[type=text],
-.keep-grp input[type=password],
-.keep-grp input[type=number],
+.keep-grp input[type='text'],
+.keep-grp input[type='password'],
+.keep-grp input[type='number'],
 .keep-grp .vDateField,
 .keep-grp .vTimeField,
 .keep-grp .vIntegerField,
@@ -1841,8 +1891,8 @@ Twitter: @rich_clark
   padding-right: 24px !important;
 }
 
-.keep-grp input[type=url],
-.keep-grp input[type=email],
+.keep-grp input[type='url'],
+.keep-grp input[type='email'],
 .keep-grp input.vTextField,
 .keep-grp input.vURLField,
 .keep-grp input.vFileBrowseField,
@@ -1862,8 +1912,8 @@ Twitter: @rich_clark
 
 /*  FORM FIELDS: LARGE DIMENSIONS
 ------------------------------------------------------------------------------------------------------ */
-.keep-grp .grp-row input[type=url],
-.keep-grp .grp-row input[type=email],
+.keep-grp .grp-row input[type='url'],
+.keep-grp .grp-row input[type='email'],
 .keep-grp .grp-row .vTextField,
 .keep-grp .grp-row .vURLField,
 .keep-grp .grp-row .vFileBrowseField,
@@ -1885,8 +1935,8 @@ Twitter: @rich_clark
 
 /*  FORM FIELDS: DIMENSION IN CHANGELIST TABLE & TABULAR GROUPS
 ------------------------------------------------------------------------------------------------------ */
-.keep-grp .grp-changelist-results table.grp-table input[type=url],
-.keep-grp .grp-changelist-results table.grp-table input[type=email],
+.keep-grp .grp-changelist-results table.grp-table input[type='url'],
+.keep-grp .grp-changelist-results table.grp-table input[type='email'],
 .keep-grp .grp-changelist-results table.grp-table .vTextField,
 .keep-grp .grp-changelist-results table.grp-table .vURLField,
 .keep-grp .grp-changelist-results table.grp-table .vFileBrowseField,
@@ -1915,11 +1965,11 @@ Twitter: @rich_clark
 
 /*  FORM FIELDS IN CELLS
 ------------------------------------------------------------------------------------------------------ */
-.keep-grp .grp-cell input[type=url],
-.keep-grp .grp-cell input[type=email],
-.keep-grp .grp-cell input[type=number],
-.keep-grp .grp-cell input[type=text],
-.keep-grp .grp-cell input[type=password],
+.keep-grp .grp-cell input[type='url'],
+.keep-grp .grp-cell input[type='email'],
+.keep-grp .grp-cell input[type='number'],
+.keep-grp .grp-cell input[type='text'],
+.keep-grp .grp-cell input[type='password'],
 .keep-grp .grp-cell select,
 .keep-grp .grp-cell input[readonly],
 .keep-grp .grp-cell input[disabled],
@@ -1960,13 +2010,23 @@ Twitter: @rich_clark
   overflow: hidden;
   vertical-align: middle;
 }
-.keep-grp .grp-autocomplete-wrapper-m2m:focus, .keep-grp .grp-autocomplete-wrapper-m2m.grp-state-focus, .keep-grp .grp-autocomplete-wrapper-fk input.ui-autocomplete-input:focus, .keep-grp .grp-autocomplete-wrapper-fk input.ui-autocomplete-input.grp-state-focus {
+.keep-grp .grp-autocomplete-wrapper-m2m:focus,
+.keep-grp .grp-autocomplete-wrapper-m2m.grp-state-focus,
+.keep-grp .grp-autocomplete-wrapper-fk input.ui-autocomplete-input:focus,
+.keep-grp
+  .grp-autocomplete-wrapper-fk
+  input.ui-autocomplete-input.grp-state-focus {
   border: 1px solid #aaa;
   box-shadow: 0 0 6px #ccc;
   background: #fff;
   outline: 0;
 }
-.keep-grp .grp-autocomplete-wrapper-m2m:focus, .keep-grp .grp-autocomplete-wrapper-m2m.grp-state-focus, .keep-grp .grp-autocomplete-wrapper-fk input.ui-autocomplete-input:focus, .keep-grp .grp-autocomplete-wrapper-fk input.ui-autocomplete-input.grp-state-focus {
+.keep-grp .grp-autocomplete-wrapper-m2m:focus,
+.keep-grp .grp-autocomplete-wrapper-m2m.grp-state-focus,
+.keep-grp .grp-autocomplete-wrapper-fk input.ui-autocomplete-input:focus,
+.keep-grp
+  .grp-autocomplete-wrapper-fk
+  input.ui-autocomplete-input.grp-state-focus {
   background-color: #e1f0f5;
 }
 
@@ -2004,35 +2064,52 @@ Twitter: @rich_clark
 }
 .keep-grp .grp-autocomplete-wrapper-m2m div.grp-loader,
 .keep-grp .grp-autocomplete-wrapper-fk div.grp-loader {
-  background: #fdfdfd url("../images/backgrounds/loading-small.gif") 50% 50% no-repeat scroll;
+  background: #fdfdfd url('../images/backgrounds/loading-small.gif') 50% 50%
+    no-repeat scroll;
 }
-.keep-grp .grp-autocomplete-wrapper-m2m.grp-autocomplete-preremove input.ui-autocomplete-input,
-.keep-grp .grp-autocomplete-wrapper-m2m.grp-autocomplete-preremove li.grp-repr a,
-.keep-grp .grp-autocomplete-wrapper-fk.grp-autocomplete-preremove input.ui-autocomplete-input,
-.keep-grp .grp-autocomplete-wrapper-fk.grp-autocomplete-preremove li.grp-repr a {
+.keep-grp
+  .grp-autocomplete-wrapper-m2m.grp-autocomplete-preremove
+  input.ui-autocomplete-input,
+.keep-grp
+  .grp-autocomplete-wrapper-m2m.grp-autocomplete-preremove
+  li.grp-repr
+  a,
+.keep-grp
+  .grp-autocomplete-wrapper-fk.grp-autocomplete-preremove
+  input.ui-autocomplete-input,
+.keep-grp
+  .grp-autocomplete-wrapper-fk.grp-autocomplete-preremove
+  li.grp-repr
+  a {
   color: #bf3030 !important;
   -webkit-text-decoration: line-through;
   text-decoration: line-through;
 }
-.keep-grp .grp-autocomplete-wrapper-m2m li.grp-repr.grp-autocomplete-preremove a,
-.keep-grp .grp-autocomplete-wrapper-fk li.grp-repr.grp-autocomplete-preremove a {
+.keep-grp
+  .grp-autocomplete-wrapper-m2m
+  li.grp-repr.grp-autocomplete-preremove
+  a,
+.keep-grp
+  .grp-autocomplete-wrapper-fk
+  li.grp-repr.grp-autocomplete-preremove
+  a {
   color: #bf3030 !important;
   -webkit-text-decoration: line-through;
   text-decoration: line-through;
 }
 
 .keep-grp .grp-autocomplete-wrapper-m2m li.grp-repr a:after {
-  content: ",";
+  content: ',';
 }
 .keep-grp .grp-autocomplete-wrapper-m2m li.grp-repr:nth-last-child(2) a:after {
-  content: "";
+  content: '';
 }
 
 .keep-grp .grp-autocomplete-wrapper-m2m li.grp-repr a:after {
-  content: ",";
+  content: ',';
 }
 .keep-grp .grp-autocomplete-wrapper-m2m li.grp-repr:nth-last-child(2) a:after {
-  content: "";
+  content: '';
 }
 
 /*  Autocomplete Wrappers Specific Styles ......................................... */
@@ -2067,7 +2144,11 @@ Twitter: @rich_clark
   font-weight: bold;
   line-height: 18px;
 }
-.keep-grp .grp-autocomplete-wrapper-m2m ul.grp-repr li.grp-repr a.grp-m2m-remove {
+.keep-grp
+  .grp-autocomplete-wrapper-m2m
+  ul.grp-repr
+  li.grp-repr
+  a.grp-m2m-remove {
   color: #555;
   padding-left: 5px;
 }
@@ -2076,7 +2157,11 @@ Twitter: @rich_clark
   margin-bottom: 1px;
   background: transparent;
 }
-.keep-grp .grp-autocomplete-wrapper-m2m ul.grp-repr li.grp-search input[type=text] {
+.keep-grp
+  .grp-autocomplete-wrapper-m2m
+  ul.grp-repr
+  li.grp-search
+  input[type='text'] {
   margin: 0 0 -1px;
   padding: 0 4px;
   width: 100px;
@@ -2093,7 +2178,10 @@ Twitter: @rich_clark
   top: -1px;
   right: -1px;
 }
-.keep-grp .grp-autocomplete-wrapper-m2m a.grp-related-remove + a.grp-related-lookup {
+.keep-grp
+  .grp-autocomplete-wrapper-m2m
+  a.grp-related-remove
+  + a.grp-related-lookup {
   border-bottom-left-radius: 0;
 }
 .keep-grp .grp-autocomplete-wrapper-m2m a.grp-related-remove,
@@ -2127,10 +2215,26 @@ Twitter: @rich_clark
 }
 
 /*  Autocompletes in Changelists ......................................... */
-.keep-grp #changelist table.grp-table div.autocomplete-wrapper-fk a.grp-related-remove,
-.keep-grp #changelist table.grp-table div.autocomplete-wrapper-m2m a.grp-related-remove,
-.keep-grp #changelist table.grp-table div.autocomplete-wrapper-fk div.grp-loader,
-.keep-grp #changelist table.grp-table div.autocomplete-wrapper-m2m div.grp-loader {
+.keep-grp
+  #changelist
+  table.grp-table
+  div.autocomplete-wrapper-fk
+  a.grp-related-remove,
+.keep-grp
+  #changelist
+  table.grp-table
+  div.autocomplete-wrapper-m2m
+  a.grp-related-remove,
+.keep-grp
+  #changelist
+  table.grp-table
+  div.autocomplete-wrapper-fk
+  div.grp-loader,
+.keep-grp
+  #changelist
+  table.grp-table
+  div.autocomplete-wrapper-m2m
+  div.grp-loader {
   top: -5px;
 }
 
@@ -2160,7 +2264,7 @@ Twitter: @rich_clark
   font-weight: bold;
 }
 .keep-grp .grp-actions .clearfix:after {
-  content: "";
+  content: '';
   display: table;
   clear: both;
 }
@@ -2171,7 +2275,8 @@ Twitter: @rich_clark
   padding-left: 5px;
   padding-right: 5px;
 }
-.keep-grp .grp-actions li:first-child, .keep-grp .grp-actions li.first {
+.keep-grp .grp-actions li:first-child,
+.keep-grp .grp-actions li.first {
   padding-left: 0;
 }
 .keep-grp .grp-actions li:last-child {
@@ -2210,7 +2315,8 @@ Twitter: @rich_clark
   background-position: 0px -4052px;
   background-repeat: no-repeat;
 }
-.keep-grp .grp-actions li.grp-delete-link a, .keep-grp .grp-actions li.grp-delete-link > span:first-child {
+.keep-grp .grp-actions li.grp-delete-link a,
+.keep-grp .grp-actions li.grp-delete-link > span:first-child {
   background-image: url(../images/spritesheet-1694777276.png);
   background-position: 0px -4486px;
   background-repeat: no-repeat;
@@ -2298,7 +2404,8 @@ Twitter: @rich_clark
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
 }
-.keep-grp .grp-group .grp-module > h3:only-child, .keep-grp .grp-group .grp-module > h3:last-child {
+.keep-grp .grp-group .grp-module > h3:only-child,
+.keep-grp .grp-group .grp-module > h3:last-child {
   border-bottom: 0;
 }
 
@@ -2349,7 +2456,7 @@ Twitter: @rich_clark
 .keep-grp .grp-collapse.grp-closed .grp-tools * {
   display: block !important;
 }
-.keep-grp .grp-collapse.grp-closed .grp-tools li *[style^="display: none"] {
+.keep-grp .grp-collapse.grp-closed .grp-tools li *[style^='display: none'] {
   display: none !important;
 }
 .keep-grp .grp-collapse .grp-collapse-handler {
@@ -2393,7 +2500,9 @@ Twitter: @rich_clark
   background-image: linear-gradient(#cee9f2, #e1f0f5);
 }
 
-.keep-grp .grp-collapse::-moz-selection, .keep-grp .grp-collapse .grp-row::-moz-selection, .keep-grp .grp-collapse-handler::-moz-selection {
+.keep-grp .grp-collapse::-moz-selection,
+.keep-grp .grp-collapse .grp-row::-moz-selection,
+.keep-grp .grp-collapse-handler::-moz-selection {
   background: transparent;
 }
 
@@ -2419,12 +2528,14 @@ Twitter: @rich_clark
   border-bottom-color: #f2d4d4;
   border-top-color: #fcf4f4;
 }
-.keep-grp .grp-module .grp-row:not(tr):first-child, .keep-grp .grp-module .grp-row:not(tr).grp-first {
+.keep-grp .grp-module .grp-row:not(tr):first-child,
+.keep-grp .grp-module .grp-row:not(tr).grp-first {
   border-top: 0;
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
 }
-.keep-grp .grp-module .grp-row:not(tr):last-of-type, .keep-grp .grp-module .grp-row:not(tr).grp-last {
+.keep-grp .grp-module .grp-row:not(tr):last-of-type,
+.keep-grp .grp-module .grp-row:not(tr).grp-last {
   border-bottom: 0;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
@@ -2515,7 +2626,8 @@ Twitter: @rich_clark
   background-position: 0px -4052px;
   background-repeat: no-repeat;
 }
-.keep-grp .grp-listing li.grp-delete-link a, .keep-grp .grp-listing li.grp-delete-link > span:first-child {
+.keep-grp .grp-listing li.grp-delete-link a,
+.keep-grp .grp-listing li.grp-delete-link > span:first-child {
   background-image: url(../images/spritesheet-1694777276.png);
   background-position: 0px -4486px;
   background-repeat: no-repeat;
@@ -2524,7 +2636,9 @@ Twitter: @rich_clark
 .keep-grp .grp-listing li.grp-icon > span:first-child {
   padding: 0 6px 0 6px;
 }
-.keep-grp .grp-listing li.grp-add-link, .keep-grp .grp-listing li.grp-change-link, .keep-grp .grp-listing li.grp-delete-link {
+.keep-grp .grp-listing li.grp-add-link,
+.keep-grp .grp-listing li.grp-change-link,
+.keep-grp .grp-listing li.grp-delete-link {
   padding-left: 25px;
 }
 .keep-grp .grp-listing li.grp-add-link a,
@@ -2580,7 +2694,8 @@ Twitter: @rich_clark
   background-position: 0px -4052px;
   background-repeat: no-repeat;
 }
-.keep-grp .grp-listing-small li.grp-delete-link a, .keep-grp .grp-listing-small li.grp-delete-link > span:first-child {
+.keep-grp .grp-listing-small li.grp-delete-link a,
+.keep-grp .grp-listing-small li.grp-delete-link > span:first-child {
   background-image: url(../images/spritesheet-1694777276.png);
   background-position: 0px -4486px;
   background-repeat: no-repeat;
@@ -2589,7 +2704,9 @@ Twitter: @rich_clark
 .keep-grp .grp-listing-small li.grp-icon > span:first-child {
   padding: 0 6px 0 6px;
 }
-.keep-grp .grp-listing-small li.grp-add-link, .keep-grp .grp-listing-small li.grp-change-link, .keep-grp .grp-listing-small li.grp-delete-link {
+.keep-grp .grp-listing-small li.grp-add-link,
+.keep-grp .grp-listing-small li.grp-change-link,
+.keep-grp .grp-listing-small li.grp-delete-link {
   padding-left: 25px;
 }
 .keep-grp .grp-listing-small li.grp-add-link a,
@@ -2753,12 +2870,24 @@ Twitter: @rich_clark
   border-left-color: #faf0f0;
   background: #f7e4e4;
 }
-.keep-grp .grp-tabular .grp-table .grp-tbody.grp-predelete .grp-th:first-of-type,
-.keep-grp .grp-tabular .grp-table .grp-tbody.grp-predelete .grp-td:first-of-type {
+.keep-grp
+  .grp-tabular
+  .grp-table
+  .grp-tbody.grp-predelete
+  .grp-th:first-of-type,
+.keep-grp
+  .grp-tabular
+  .grp-table
+  .grp-tbody.grp-predelete
+  .grp-td:first-of-type {
   border-left: 1px solid #d4d4d4;
 }
 .keep-grp .grp-tabular .grp-table .grp-tbody.grp-predelete .grp-th:last-of-type,
-.keep-grp .grp-tabular .grp-table .grp-tbody.grp-predelete .grp-td:last-of-type {
+.keep-grp
+  .grp-tabular
+  .grp-table
+  .grp-tbody.grp-predelete
+  .grp-td:last-of-type {
   border-right: 1px solid #d4d4d4;
 }
 .keep-grp .grp-tabular .grp-table .grp-tfoot {
@@ -2787,7 +2916,7 @@ Twitter: @rich_clark
   overflow: hidden;
 }
 .keep-grp .grp-horizontal-list-container .clearfix:after {
-  content: "";
+  content: '';
   display: table;
   clear: both;
 }
@@ -2799,7 +2928,7 @@ Twitter: @rich_clark
   overflow: hidden;
 }
 .keep-grp .grp-horizontal-list .clearfix:after {
-  content: "";
+  content: '';
   display: table;
   clear: both;
 }
@@ -2810,7 +2939,8 @@ Twitter: @rich_clark
   padding-left: 5px;
   padding-right: 5px;
 }
-.keep-grp .grp-horizontal-list li:first-child, .keep-grp .grp-horizontal-list li.first {
+.keep-grp .grp-horizontal-list li:first-child,
+.keep-grp .grp-horizontal-list li.first {
   padding-left: 0;
 }
 .keep-grp .grp-horizontal-list li:last-child {
@@ -2827,7 +2957,8 @@ Twitter: @rich_clark
   padding-left: 5px;
   padding-right: 5px;
 }
-.keep-grp .grp-horizontal-list-right > li:first-child, .keep-grp .grp-horizontal-list-right > li.first {
+.keep-grp .grp-horizontal-list-right > li:first-child,
+.keep-grp .grp-horizontal-list-right > li.first {
   padding-right: 0;
 }
 .keep-grp .grp-horizontal-list-right > li:last-child {
@@ -2871,13 +3002,45 @@ Twitter: @rich_clark
 
 /*  BUTTON STATES
 ------------------------------------------------------------------------------------------------------ */
-.keep-grp .button-state-blue, .keep-grp .grp-pulldown-container.grp-pulldown-state-open .grp-pulldown-handler:hover, .keep-grp .grp-pulldown-container.grp-pulldown-state-open .grp-pulldown-handler, .keep-grp .grp-pulldown-container .grp-pulldown-handler:hover, .keep-grp button.ui-datetime-now, .keep-grp button.ui-timepicker-trigger, .keep-grp button.ui-datepicker-trigger, .keep-grp .grp-autocomplete-wrapper-fk a.related-lookup, .keep-grp a.related-lookup.m2m, .keep-grp .grp-autocomplete-wrapper-m2m a.related-lookup, .keep-grp input[type=button], .keep-grp button, .keep-grp a.fb_show, .keep-grp a.related-lookup, .keep-grp body.tinyMCE input[name=src] + div a, .keep-grp body.tinyMCE input[name=href] + div a {
+.keep-grp .button-state-blue,
+.keep-grp
+  .grp-pulldown-container.grp-pulldown-state-open
+  .grp-pulldown-handler:hover,
+.keep-grp .grp-pulldown-container.grp-pulldown-state-open .grp-pulldown-handler,
+.keep-grp .grp-pulldown-container .grp-pulldown-handler:hover,
+.keep-grp button.ui-datetime-now,
+.keep-grp button.ui-timepicker-trigger,
+.keep-grp button.ui-datepicker-trigger,
+.keep-grp .grp-autocomplete-wrapper-fk a.related-lookup,
+.keep-grp a.related-lookup.m2m,
+.keep-grp .grp-autocomplete-wrapper-m2m a.related-lookup,
+.keep-grp input[type='button'],
+.keep-grp button,
+.keep-grp a.fb_show,
+.keep-grp a.related-lookup,
+.keep-grp body.tinyMCE input[name='src'] + div a,
+.keep-grp body.tinyMCE input[name='href'] + div a {
   color: #fff;
   border: 1px solid #ccc;
   background-color: #e1f0f5;
 }
 
-.keep-grp .button-state-grey, .keep-grp .grp-pulldown-container .grp-pulldown-content:hover, .keep-grp .grp-pulldown-container .grp-pulldown-content, .keep-grp .grp-pulldown-container .grp-pulldown-handler, .keep-grp button.ui-datetime-now:hover, .keep-grp button.ui-timepicker-trigger:hover, .keep-grp button.ui-datepicker-trigger:hover, .keep-grp .grp-autocomplete-wrapper-fk a.related-lookup:hover, .keep-grp a.related-lookup.m2m:hover, .keep-grp .grp-autocomplete-wrapper-m2m a.related-lookup:hover, .keep-grp input[type=button]:hover, .keep-grp button:hover, .keep-grp a.fb_show:hover, .keep-grp a.related-lookup:hover, .keep-grp body.tinyMCE input[name=src] + div a:hover, .keep-grp body.tinyMCE input[name=href] + div a:hover {
+.keep-grp .button-state-grey,
+.keep-grp .grp-pulldown-container .grp-pulldown-content:hover,
+.keep-grp .grp-pulldown-container .grp-pulldown-content,
+.keep-grp .grp-pulldown-container .grp-pulldown-handler,
+.keep-grp button.ui-datetime-now:hover,
+.keep-grp button.ui-timepicker-trigger:hover,
+.keep-grp button.ui-datepicker-trigger:hover,
+.keep-grp .grp-autocomplete-wrapper-fk a.related-lookup:hover,
+.keep-grp a.related-lookup.m2m:hover,
+.keep-grp .grp-autocomplete-wrapper-m2m a.related-lookup:hover,
+.keep-grp input[type='button']:hover,
+.keep-grp button:hover,
+.keep-grp a.fb_show:hover,
+.keep-grp a.related-lookup:hover,
+.keep-grp body.tinyMCE input[name='src'] + div a:hover,
+.keep-grp body.tinyMCE input[name='href'] + div a:hover {
   color: #444;
   border: 1px solid #ccc;
   background-color: #eee;
@@ -2890,7 +3053,9 @@ Twitter: @rich_clark
   background-color: #dbdbdb;
 }
 
-.keep-grp .button-state-white, .keep-grp a.grp-related-remove:hover, .keep-grp a.grp-related-remove {
+.keep-grp .button-state-white,
+.keep-grp a.grp-related-remove:hover,
+.keep-grp a.grp-related-remove {
   border: 1px solid #ccc;
   background-color: #fdfdfd;
 }
@@ -2934,8 +3099,8 @@ Twitter: @rich_clark
 .keep-grp button,
 .keep-grp a.fb_show,
 .keep-grp a.related-lookup,
-.keep-grp body.tinyMCE input[name=src] + div a,
-.keep-grp body.tinyMCE input[name=href] + div a {
+.keep-grp body.tinyMCE input[name='src'] + div a,
+.keep-grp body.tinyMCE input[name='href'] + div a {
   position: relative;
   display: inline-block;
   margin: 0 0 0 -25px;
@@ -2949,7 +3114,7 @@ Twitter: @rich_clark
   overflow: hidden;
   vertical-align: top;
 }
-.keep-grp input[type=button] {
+.keep-grp input[type='button'] {
   position: relative;
   display: inline-block;
   margin: 0 0 0 -25px;
@@ -2971,10 +3136,10 @@ Twitter: @rich_clark
   font-weight: bold;
   color: #309bbf;
 }
-.keep-grp input[type=button]:hover {
+.keep-grp input[type='button']:hover {
   color: #444;
 }
-.keep-grp input:focus + input[type=button] {
+.keep-grp input:focus + input[type='button'] {
   border: 1px solid #aaa;
 }
 
@@ -3003,17 +3168,35 @@ Twitter: @rich_clark
 }
 .keep-grp .grp-placeholder-related-fk .grp-placeholder-label:first-child *,
 .keep-grp .grp-placeholder-related-m2m .grp-placeholder-label:first-child *,
-.keep-grp .grp-placeholder-related-generic .grp-placeholder-label:first-child * {
+.keep-grp
+  .grp-placeholder-related-generic
+  .grp-placeholder-label:first-child
+  * {
   margin-top: -4px;
 }
 .keep-grp table .grp-placeholder-related-fk .grp-placeholder-label:first-child,
 .keep-grp table .grp-placeholder-related-m2m .grp-placeholder-label:first-child,
-.keep-grp table .grp-placeholder-related-generic .grp-placeholder-label:first-child {
+.keep-grp
+  table
+  .grp-placeholder-related-generic
+  .grp-placeholder-label:first-child {
   margin-top: 5px;
 }
-.keep-grp table .grp-placeholder-related-fk .grp-placeholder-label:first-child *,
-.keep-grp table .grp-placeholder-related-m2m .grp-placeholder-label:first-child *,
-.keep-grp table .grp-placeholder-related-generic .grp-placeholder-label:first-child * {
+.keep-grp
+  table
+  .grp-placeholder-related-fk
+  .grp-placeholder-label:first-child
+  *,
+.keep-grp
+  table
+  .grp-placeholder-related-m2m
+  .grp-placeholder-label:first-child
+  *,
+.keep-grp
+  table
+  .grp-placeholder-related-generic
+  .grp-placeholder-label:first-child
+  * {
   margin-top: -5px;
 }
 .keep-grp .grp-placeholder-related-fk img,
@@ -3029,7 +3212,7 @@ Twitter: @rich_clark
 .keep-grp .grp-placeholder-related-fk .grp-separator:after,
 .keep-grp .grp-placeholder-related-m2m .grp-separator:after,
 .keep-grp .grp-placeholder-related-generic .grp-separator:after {
-  content: ",";
+  content: ',';
   display: inline-block;
   padding-right: 4px;
 }
@@ -3037,8 +3220,8 @@ Twitter: @rich_clark
 /*  Filebrowser, Related Lookup, M2M, FK, Related Remove ......................................... */
 .keep-grp a.fb_show,
 .keep-grp a.related-lookup,
-.keep-grp body.tinyMCE input[name=src] + div a,
-.keep-grp body.tinyMCE input[name=href] + div a {
+.keep-grp body.tinyMCE input[name='src'] + div a,
+.keep-grp body.tinyMCE input[name='href'] + div a {
   display: inline-block;
   margin-bottom: -5px;
   background-image: url(../images/spritesheet-1694777276.png);
@@ -3194,8 +3377,8 @@ Twitter: @rich_clark
 .keep-grp input:focus + * + a.related-lookup,
 .keep-grp input:focus + a.add-another,
 .keep-grp .grp-state-focus a.related-lookup,
-.keep-grp body.tinyMCE input[name=src]:focus + div a,
-.keep-grp body.tinyMCE input[name=href]:focus + div a {
+.keep-grp body.tinyMCE input[name='src']:focus + div a,
+.keep-grp body.tinyMCE input[name='href']:focus + div a {
   border: 1px solid #aaa !important;
 }
 
@@ -3218,9 +3401,9 @@ Twitter: @rich_clark
 
 /*  UNKNOWN, YES, NO: REPLACING DJANGOS IMAGES
 ------------------------------------------------------------------------------------------------------ */
-.keep-grp img[src*="admin/img/icon-unknown"][src$=".gif"],
-.keep-grp img[src*="admin/img/icon-no"][src$=".gif"],
-.keep-grp img[src*="admin/img/icon-yes"][src$=".gif"] {
+.keep-grp img[src*='admin/img/icon-unknown'][src$='.gif'],
+.keep-grp img[src*='admin/img/icon-no'][src$='.gif'],
+.keep-grp img[src*='admin/img/icon-yes'][src$='.gif'] {
   position: relative;
   height: 0;
   width: 0;
@@ -3230,19 +3413,19 @@ Twitter: @rich_clark
   font-size: 0;
 }
 
-.keep-grp img[src*="admin/img/icon-unknown"][src$=".gif"] {
+.keep-grp img[src*='admin/img/icon-unknown'][src$='.gif'] {
   background-image: url(../images/spritesheet-1694777276.png);
   background-position: 0px -2754px;
   background-repeat: no-repeat;
 }
 
-.keep-grp img[src*="admin/img/icon-no"][src$=".gif"] {
+.keep-grp img[src*='admin/img/icon-no'][src$='.gif'] {
   background-image: url(../images/spritesheet-1694777276.png);
   background-position: 0px -2539px;
   background-repeat: no-repeat;
 }
 
-.keep-grp img[src*="admin/img/icon-yes"][src$=".gif"] {
+.keep-grp img[src*='admin/img/icon-yes'][src$='.gif'] {
   background-image: url(../images/spritesheet-1694777276.png);
   background-position: 0px -2969px;
   background-repeat: no-repeat;
@@ -3261,7 +3444,7 @@ Twitter: @rich_clark
   margin: 0 0 -40px;
 }
 .keep-grp .grp-object-tools .clearfix:after {
-  content: "";
+  content: '';
   display: table;
   clear: both;
 }
@@ -3272,7 +3455,8 @@ Twitter: @rich_clark
   padding-left: 5px;
   padding-right: 5px;
 }
-.keep-grp .grp-object-tools li:first-child, .keep-grp .grp-object-tools li.first {
+.keep-grp .grp-object-tools li:first-child,
+.keep-grp .grp-object-tools li.first {
   padding-left: 0;
 }
 .keep-grp .grp-object-tools li:last-child {
@@ -3301,17 +3485,27 @@ Twitter: @rich_clark
 }
 .keep-grp .grp-object-tools a.grp-add-link {
   padding-left: 28px;
-  background: url(../images/spritesheet-1694777276.png) 0px -17933px no-repeat, linear-gradient(#666, #444);
+  background:
+    url(../images/spritesheet-1694777276.png) 0px -17933px no-repeat,
+    linear-gradient(#666, #444);
 }
 .keep-grp .grp-object-tools a.grp-add-link:hover {
-  background: url(../images/spritesheet-1694777276.png) 0px -17933px no-repeat, linear-gradient(#36b0d9, #309bbf);
+  background:
+    url(../images/spritesheet-1694777276.png) 0px -17933px no-repeat,
+    linear-gradient(#36b0d9, #309bbf);
 }
-.keep-grp .grp-object-tools a.grp-viewsite-link, .keep-grp .grp-object-tools a[target=_blank] {
+.keep-grp .grp-object-tools a.grp-viewsite-link,
+.keep-grp .grp-object-tools a[target='_blank'] {
   padding-left: 28px;
-  background: url(../images/spritesheet-1694777276.png) 0px -18157px no-repeat, linear-gradient(#999, #888);
+  background:
+    url(../images/spritesheet-1694777276.png) 0px -18157px no-repeat,
+    linear-gradient(#999, #888);
 }
-.keep-grp .grp-object-tools a.grp-viewsite-link:hover, .keep-grp .grp-object-tools a[target=_blank]:hover {
-  background: url(../images/spritesheet-1694777276.png) 0px -18157px no-repeat, linear-gradient(#36b0d9, #309bbf);
+.keep-grp .grp-object-tools a.grp-viewsite-link:hover,
+.keep-grp .grp-object-tools a[target='_blank']:hover {
+  background:
+    url(../images/spritesheet-1694777276.png) 0px -18157px no-repeat,
+    linear-gradient(#36b0d9, #309bbf);
 }
 /*  TOOLS
 ------------------------------------------------------------------------------------------------------ */
@@ -3329,7 +3523,7 @@ Twitter: @rich_clark
   white-space: nowrap;
 }
 .keep-grp .grp-tools .clearfix:after {
-  content: "";
+  content: '';
   display: table;
   clear: both;
 }
@@ -3340,7 +3534,8 @@ Twitter: @rich_clark
   padding-left: 1px;
   padding-right: 1px;
 }
-.keep-grp .grp-tools li:first-child, .keep-grp .grp-tools li.first {
+.keep-grp .grp-tools li:first-child,
+.keep-grp .grp-tools li.first {
   padding-left: 0;
 }
 .keep-grp .grp-tools li:last-child {
@@ -3359,14 +3554,20 @@ Twitter: @rich_clark
   width: 24px;
   height: 24px;
 }
-.keep-grp .grp-tools a.grp-icon-text, .keep-grp .grp-tools a.grp-text, .keep-grp .grp-tools span.grp-icon-text, .keep-grp .grp-tools span.grp-text {
+.keep-grp .grp-tools a.grp-icon-text,
+.keep-grp .grp-tools a.grp-text,
+.keep-grp .grp-tools span.grp-icon-text,
+.keep-grp .grp-tools span.grp-text {
   padding-left: 24px;
   padding-right: 6px;
   width: auto;
   line-height: 24px;
   color: #444;
 }
-.keep-grp .grp-tools a.grp-icon-text:hover, .keep-grp .grp-tools a.grp-text:hover, .keep-grp .grp-tools span.grp-icon-text:hover, .keep-grp .grp-tools span.grp-text:hover {
+.keep-grp .grp-tools a.grp-icon-text:hover,
+.keep-grp .grp-tools a.grp-text:hover,
+.keep-grp .grp-tools span.grp-icon-text:hover,
+.keep-grp .grp-tools span.grp-text:hover {
   color: #309bbf;
 }
 .keep-grp .grp-tools a.grp-text,
@@ -3587,7 +3788,9 @@ Twitter: @rich_clark
   top: 0;
   margin: 0;
 }
-.keep-grp .radiolist + .grp-tools.grp-related-widget-tools, .keep-grp .checkboxlist + .grp-tools.grp-related-widget-tools, .keep-grp .grp-related-widget + .grp-tools.grp-related-widget-tools {
+.keep-grp .radiolist + .grp-tools.grp-related-widget-tools,
+.keep-grp .checkboxlist + .grp-tools.grp-related-widget-tools,
+.keep-grp .grp-related-widget + .grp-tools.grp-related-widget-tools {
   position: relative;
   display: flex;
   float: right;
@@ -3596,7 +3799,8 @@ Twitter: @rich_clark
   margin-right: 0;
   margin-left: 5px;
 }
-.keep-grp .radiolist + .grp-tools.grp-related-widget-tools, .keep-grp .checkboxlist + .grp-tools.grp-related-widget-tools {
+.keep-grp .radiolist + .grp-tools.grp-related-widget-tools,
+.keep-grp .checkboxlist + .grp-tools.grp-related-widget-tools {
   top: 2px;
   margin-left: 20px;
 }
@@ -3674,11 +3878,15 @@ Twitter: @rich_clark
   font-size: 12px;
   font-weight: bold;
 }
-.keep-grp table.grp-table tbody tr.grp-row-even td, .keep-grp table.grp-table tbody tr.grp-row-even th, .keep-grp table.grp-table tbody tr.grp-alt td, .keep-grp table.grp-table tbody tr.grp-alt th {
+.keep-grp table.grp-table tbody tr.grp-row-even td,
+.keep-grp table.grp-table tbody tr.grp-row-even th,
+.keep-grp table.grp-table tbody tr.grp-alt td,
+.keep-grp table.grp-table tbody tr.grp-alt th {
   border-left: 1px solid #e0e0e0;
   background: #f4f4f4;
 }
-.keep-grp table.grp-table tbody tr.grp-row-odd td, .keep-grp table.grp-table tbody tr.grp-row-odd th {
+.keep-grp table.grp-table tbody tr.grp-row-odd td,
+.keep-grp table.grp-table tbody tr.grp-row-odd th {
   background: #fff;
 }
 .keep-grp table.grp-table tbody tr.grp-selected {
@@ -3721,56 +3929,56 @@ Twitter: @rich_clark
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   .keep-grp table.grp-table td > a:first-child,
-.keep-grp table.grp-table th > a:first-child {
+  .keep-grp table.grp-table th > a:first-child {
     position: relative;
     top: 1px;
   }
 }
-.keep-grp table.grp-table td > input[type=checkbox],
-.keep-grp table.grp-table td > input[type=radio],
-.keep-grp table.grp-table th > input[type=checkbox],
-.keep-grp table.grp-table th > input[type=radio] {
+.keep-grp table.grp-table td > input[type='checkbox'],
+.keep-grp table.grp-table td > input[type='radio'],
+.keep-grp table.grp-table th > input[type='checkbox'],
+.keep-grp table.grp-table th > input[type='radio'] {
   margin: 0;
 }
-.keep-grp table.grp-table td > input[type=file],
-.keep-grp table.grp-table td > input[type=checkbox],
-.keep-grp table.grp-table td > input[type=radio],
+.keep-grp table.grp-table td > input[type='file'],
+.keep-grp table.grp-table td > input[type='checkbox'],
+.keep-grp table.grp-table td > input[type='radio'],
 .keep-grp table.grp-table td > select,
-.keep-grp table.grp-table td p input[type=text],
-.keep-grp table.grp-table th > input[type=file],
-.keep-grp table.grp-table th > input[type=checkbox],
-.keep-grp table.grp-table th > input[type=radio],
+.keep-grp table.grp-table td p input[type='text'],
+.keep-grp table.grp-table th > input[type='file'],
+.keep-grp table.grp-table th > input[type='checkbox'],
+.keep-grp table.grp-table th > input[type='radio'],
 .keep-grp table.grp-table th > select,
-.keep-grp table.grp-table th p input[type=text] {
+.keep-grp table.grp-table th p input[type='text'] {
   position: relative;
   margin-top: -7px !important;
   margin-bottom: -5px !important;
 }
-.keep-grp table.grp-table td > input[type=text],
-.keep-grp table.grp-table td > input[type=password],
-.keep-grp table.grp-table td > input[type=url],
-.keep-grp table.grp-table td > input[type=email],
-.keep-grp table.grp-table td > input[type=number],
-.keep-grp table.grp-table td > input[type=button],
+.keep-grp table.grp-table td > input[type='text'],
+.keep-grp table.grp-table td > input[type='password'],
+.keep-grp table.grp-table td > input[type='url'],
+.keep-grp table.grp-table td > input[type='email'],
+.keep-grp table.grp-table td > input[type='number'],
+.keep-grp table.grp-table td > input[type='button'],
 .keep-grp table.grp-table td > select,
-.keep-grp table.grp-table td p input[type=text],
-.keep-grp table.grp-table td p input[type=url],
-.keep-grp table.grp-table td p input[type=email],
-.keep-grp table.grp-table td p input[type=number],
-.keep-grp table.grp-table td p > input[type=button],
+.keep-grp table.grp-table td p input[type='text'],
+.keep-grp table.grp-table td p input[type='url'],
+.keep-grp table.grp-table td p input[type='email'],
+.keep-grp table.grp-table td p input[type='number'],
+.keep-grp table.grp-table td p > input[type='button'],
 .keep-grp table.grp-table td div.grp-related-widget-wrapper,
-.keep-grp table.grp-table th > input[type=text],
-.keep-grp table.grp-table th > input[type=password],
-.keep-grp table.grp-table th > input[type=url],
-.keep-grp table.grp-table th > input[type=email],
-.keep-grp table.grp-table th > input[type=number],
-.keep-grp table.grp-table th > input[type=button],
+.keep-grp table.grp-table th > input[type='text'],
+.keep-grp table.grp-table th > input[type='password'],
+.keep-grp table.grp-table th > input[type='url'],
+.keep-grp table.grp-table th > input[type='email'],
+.keep-grp table.grp-table th > input[type='number'],
+.keep-grp table.grp-table th > input[type='button'],
 .keep-grp table.grp-table th > select,
-.keep-grp table.grp-table th p input[type=text],
-.keep-grp table.grp-table th p input[type=url],
-.keep-grp table.grp-table th p input[type=email],
-.keep-grp table.grp-table th p input[type=number],
-.keep-grp table.grp-table th p > input[type=button],
+.keep-grp table.grp-table th p input[type='text'],
+.keep-grp table.grp-table th p input[type='url'],
+.keep-grp table.grp-table th p input[type='email'],
+.keep-grp table.grp-table th p input[type='number'],
+.keep-grp table.grp-table th p > input[type='button'],
 .keep-grp table.grp-table th div.grp-related-widget-wrapper {
   vertical-align: top;
   margin-top: -5px !important;
@@ -3844,7 +4052,13 @@ Twitter: @rich_clark
   padding: 6px 10px;
   white-space: nowrap;
 }
-.keep-grp table.grp-table.grp-sortable thead th div.grp-text span input[type=checkbox] {
+.keep-grp
+  table.grp-table.grp-sortable
+  thead
+  th
+  div.grp-text
+  span
+  input[type='checkbox'] {
   margin: -6px 0 !important;
 }
 .keep-grp table.grp-table.grp-sortable thead th.sortable {
@@ -3880,30 +4094,72 @@ Twitter: @rich_clark
   margin: 0;
   padding: 0;
 }
-.keep-grp table.grp-table.grp-sortable thead th.sortable .grp-sortoptions a.grp-sortremove, .keep-grp table.grp-table.grp-sortable thead th.sortable .grp-sortoptions a.grp-ascending, .keep-grp table.grp-table.grp-sortable thead th.sortable .grp-sortoptions a.grp-descending {
+.keep-grp
+  table.grp-table.grp-sortable
+  thead
+  th.sortable
+  .grp-sortoptions
+  a.grp-sortremove,
+.keep-grp
+  table.grp-table.grp-sortable
+  thead
+  th.sortable
+  .grp-sortoptions
+  a.grp-ascending,
+.keep-grp
+  table.grp-table.grp-sortable
+  thead
+  th.sortable
+  .grp-sortoptions
+  a.grp-descending {
   width: 21px;
   height: 24px;
 }
-.keep-grp table.grp-table.grp-sortable thead th.sortable .grp-sortoptions a.grp-sortremove {
+.keep-grp
+  table.grp-table.grp-sortable
+  thead
+  th.sortable
+  .grp-sortoptions
+  a.grp-sortremove {
   visibility: hidden;
   background-image: url(../images/spritesheet-1694777276.png);
   background-position: 0px -14582px;
   background-repeat: no-repeat;
 }
-.keep-grp table.grp-table.grp-sortable thead th.sortable .grp-sortoptions a.grp-ascending {
+.keep-grp
+  table.grp-table.grp-sortable
+  thead
+  th.sortable
+  .grp-sortoptions
+  a.grp-ascending {
   background-image: url(../images/spritesheet-1694777276.png);
   background-position: 0px -14805px;
   background-repeat: no-repeat;
 }
-.keep-grp table.grp-table.grp-sortable thead th.sortable .grp-sortoptions a.grp-descending {
+.keep-grp
+  table.grp-table.grp-sortable
+  thead
+  th.sortable
+  .grp-sortoptions
+  a.grp-descending {
   background-image: url(../images/spritesheet-1694777276.png);
   background-position: 0px -15028px;
   background-repeat: no-repeat;
 }
-.keep-grp table.grp-table.grp-sortable thead th.sortable .grp-sortoptions:hover a.grp-sortremove {
+.keep-grp
+  table.grp-table.grp-sortable
+  thead
+  th.sortable
+  .grp-sortoptions:hover
+  a.grp-sortremove {
   visibility: visible;
 }
-.keep-grp table.grp-table.grp-sortable thead th.sortable .grp-sortoptions span.grp-sortpriority {
+.keep-grp
+  table.grp-table.grp-sortable
+  thead
+  th.sortable
+  .grp-sortoptions
+  span.grp-sortpriority {
   position: relative;
   float: right;
   display: block;
@@ -3917,13 +4173,19 @@ Twitter: @rich_clark
 .keep-grp table.grp-table.grp-sortable thead th.sortable.sorted.ascending {
   background-image: linear-gradient(#e0e0e0, #eee);
 }
-.keep-grp table.grp-table.grp-sortable thead th.sortable.sorted.ascending:hover {
+.keep-grp
+  table.grp-table.grp-sortable
+  thead
+  th.sortable.sorted.ascending:hover {
   background-image: linear-gradient(#eee, #e0e0e0);
 }
 .keep-grp table.grp-table.grp-sortable thead th.sortable.sorted.descending {
   background-image: linear-gradient(#eee, #e0e0e0);
 }
-.keep-grp table.grp-table.grp-sortable thead th.sortable.sorted.descending:hover {
+.keep-grp
+  table.grp-table.grp-sortable
+  thead
+  th.sortable.sorted.descending:hover {
   background-image: linear-gradient(#e0e0e0, #eee);
 }
 .keep-grp table.grp-table.grp-sortable thead th.sortable.sorted a {
@@ -3961,7 +4223,7 @@ Twitter: @rich_clark
 
 .keep-grp table.grp-table.orderable tbody tr td:first-child {
   padding-left: 14px;
-  background-image: url("../images/backgrounds/nav-grabber.gif");
+  background-image: url('../images/backgrounds/nav-grabber.gif');
   background-repeat: repeat-y;
 }
 
@@ -4006,7 +4268,7 @@ Twitter: @rich_clark
   overflow: hidden;
 }
 .keep-grp .grp-pagination ul .clearfix:after {
-  content: "";
+  content: '';
   display: table;
   clear: both;
 }
@@ -4017,7 +4279,8 @@ Twitter: @rich_clark
   padding-left: 0;
   padding-right: 0;
 }
-.keep-grp .grp-pagination ul li:first-child, .keep-grp .grp-pagination ul li.first {
+.keep-grp .grp-pagination ul li:first-child,
+.keep-grp .grp-pagination ul li.first {
   padding-left: 0;
 }
 .keep-grp .grp-pagination ul li:last-child {
@@ -4148,7 +4411,9 @@ Twitter: @rich_clark
   clear: both;
   box-shadow: 0 10px 50px #333;
 }
-.keep-grp .grp-pulldown-container.grp-pulldown-state-open .grp-pulldown-handler {
+.keep-grp
+  .grp-pulldown-container.grp-pulldown-state-open
+  .grp-pulldown-handler {
   color: #444;
   text-shadow: 0 1px 0 #fff;
   border-bottom-left-radius: 0 !important;
@@ -4158,13 +4423,17 @@ Twitter: @rich_clark
   background-position: 100% -18605px;
   background-repeat: no-repeat;
 }
-.keep-grp .grp-pulldown-container.grp-pulldown-state-open .grp-pulldown-handler:hover {
+.keep-grp
+  .grp-pulldown-container.grp-pulldown-state-open
+  .grp-pulldown-handler:hover {
   color: #444;
   background-image: url(../images/spritesheet-1694777276.png);
   background-position: 100% -18605px;
   background-repeat: no-repeat;
 }
-.keep-grp .grp-pulldown-container.grp-pulldown-state-open .grp-pulldown-content {
+.keep-grp
+  .grp-pulldown-container.grp-pulldown-state-open
+  .grp-pulldown-content {
   float: left;
   clear: both;
 }
@@ -4252,7 +4521,7 @@ Twitter: @rich_clark
   opacity: 1;
 }
 .keep-grp .grp-filter:after {
-  content: " ";
+  content: ' ';
   display: block;
   height: 0;
   clear: both;
@@ -4271,7 +4540,7 @@ Twitter: @rich_clark
   float: left;
   margin: 1px 5px 0 0;
 }
-.keep-grp li.grp-changelist-actions button[type=submit] {
+.keep-grp li.grp-changelist-actions button[type='submit'] {
   float: right;
 }
 .keep-grp li.grp-changelist-actions .grp-horizontal-list {
@@ -4282,7 +4551,7 @@ Twitter: @rich_clark
   margin: -1px 0;
 }
 .keep-grp li.grp-changelist-actions .grp-horizontal-list .clearfix:after {
-  content: "";
+  content: '';
   display: table;
   clear: both;
 }
@@ -4293,7 +4562,8 @@ Twitter: @rich_clark
   padding-left: 0;
   padding-right: 0;
 }
-.keep-grp li.grp-changelist-actions .grp-horizontal-list li:first-child, .keep-grp li.grp-changelist-actions .grp-horizontal-list li.first {
+.keep-grp li.grp-changelist-actions .grp-horizontal-list li:first-child,
+.keep-grp li.grp-changelist-actions .grp-horizontal-list li.first {
   padding-left: 0;
 }
 .keep-grp li.grp-changelist-actions .grp-horizontal-list li:last-child {
@@ -4341,7 +4611,8 @@ Twitter: @rich_clark
 /*  RESULTS
 ------------------------------------------------------------------------------------------------------ */
 .keep-grp .grp-changelist-results {
-  background: #eee url("../images/backgrounds/changelist-results.png") repeat scroll !important;
+  background: #eee url('../images/backgrounds/changelist-results.png') repeat
+    scroll !important;
 }
 .keep-grp .grp-result-overflow-scroll .grp-changelist-results {
   overflow: auto;
@@ -4406,7 +4677,12 @@ Twitter: @rich_clark
   margin: 0;
   border: 0;
 }
-.keep-grp body.grp-delete-confirmation ul.grp-nested-list > li .grp-module + .grp-module {
+.keep-grp
+  body.grp-delete-confirmation
+  ul.grp-nested-list
+  > li
+  .grp-module
+  + .grp-module {
   border-top: 1px solid #d9d9d9;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
@@ -4427,17 +4703,40 @@ Twitter: @rich_clark
   border-top: 1px solid #fff;
   border-bottom: 1px solid #ddd;
 }
-.keep-grp body.grp-delete-confirmation ul.grp-nested-list > li > ul > li:last-child {
+.keep-grp
+  body.grp-delete-confirmation
+  ul.grp-nested-list
+  > li
+  > ul
+  > li:last-child {
   padding-bottom: 0;
   border-bottom: 0;
 }
 .keep-grp body.grp-delete-confirmation ul.grp-nested-list > li > ul > li > ul {
   margin-top: 8px;
 }
-.keep-grp body.grp-delete-confirmation ul.grp-nested-list > li > ul > li > ul > li {
+.keep-grp
+  body.grp-delete-confirmation
+  ul.grp-nested-list
+  > li
+  > ul
+  > li
+  > ul
+  > li {
   font-weight: bold;
 }
-.keep-grp body.grp-delete-confirmation ul.grp-nested-list > li > ul > li > ul > li > ul li ul li {
+.keep-grp
+  body.grp-delete-confirmation
+  ul.grp-nested-list
+  > li
+  > ul
+  > li
+  > ul
+  > li
+  > ul
+  li
+  ul
+  li {
   color: #888;
 }
 
@@ -4495,7 +4794,7 @@ Twitter: @rich_clark
 }
 
 .keep-grp .ui-widget-content .ui-state-default {
-  background: #CEE9F2;
+  background: #cee9f2;
 }
 
 .keep-grp .ui-state-hover,
@@ -4533,7 +4832,8 @@ Twitter: @rich_clark
 }
 .keep-grp .ui-sortable .grp-module.ui-sortable-placeholder {
   border: 1px solid #ccc !important;
-  background: transparent url("../images/backgrounds/ui-sortable-placeholder.png") 0 0 repeat scroll !important;
+  background: transparent
+    url('../images/backgrounds/ui-sortable-placeholder.png') 0 0 repeat scroll !important;
 }
 
 .keep-grp .grp-group.grp-stacked .ui-sortable-placeholder {
@@ -4543,11 +4843,22 @@ Twitter: @rich_clark
   margin-top: 0;
 }
 
-.keep-grp .grp-group.grp-tabular .ui-sortable .grp-module.ui-sortable-placeholder {
+.keep-grp
+  .grp-group.grp-tabular
+  .ui-sortable
+  .grp-module.ui-sortable-placeholder {
   overflow: hidden;
 }
-.keep-grp .grp-group.grp-tabular .ui-sortable .grp-module.ui-sortable-placeholder .grp-th,
-.keep-grp .grp-group.grp-tabular .ui-sortable .grp-module.ui-sortable-placeholder .grp-td {
+.keep-grp
+  .grp-group.grp-tabular
+  .ui-sortable
+  .grp-module.ui-sortable-placeholder
+  .grp-th,
+.keep-grp
+  .grp-group.grp-tabular
+  .ui-sortable
+  .grp-module.ui-sortable-placeholder
+  .grp-td {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
   background: transparent !important;
@@ -4555,8 +4866,16 @@ Twitter: @rich_clark
 .keep-grp .grp-group.grp-tabular .ui-sortable .grp-module.ui-sortable-helper {
   border-top: 0 !important;
 }
-.keep-grp .grp-group.grp-tabular .ui-sortable .grp-module.ui-sortable-helper .grp-th,
-.keep-grp .grp-group.grp-tabular .ui-sortable .grp-module.ui-sortable-helper .grp-td {
+.keep-grp
+  .grp-group.grp-tabular
+  .ui-sortable
+  .grp-module.ui-sortable-helper
+  .grp-th,
+.keep-grp
+  .grp-group.grp-tabular
+  .ui-sortable
+  .grp-module.ui-sortable-helper
+  .grp-td {
   background: #ffffcc !important;
 }
 
@@ -4565,10 +4884,22 @@ Twitter: @rich_clark
 .keep-grp .grp-group.grp-stacked .ui-sortable-helper h2,
 .keep-grp .grp-group.grp-stacked .ui-sortable-helper h3,
 .keep-grp .grp-group.grp-stacked .ui-sortable-helper h4,
-.keep-grp .grp-group.grp-stacked .grp-collapse.grp-predelete.ui-sortable-helper > h3.grp-collapse-handler,
-.keep-grp .grp-group.grp-stacked .grp-collapse.grp-open.predelete.ui-sortable-helper > h3.grp-collapse-handler,
-.keep-grp .grp-group.grp-stacked .grp-collapse.grp-predelete.ui-sortable-helper h4.grp-collapse-handler,
-.keep-grp .grp-group.grp-stacked .grp-collapse.grp-open.grp-predelete.ui-sortable-helper h4.grp-collapse-handler {
+.keep-grp
+  .grp-group.grp-stacked
+  .grp-collapse.grp-predelete.ui-sortable-helper
+  > h3.grp-collapse-handler,
+.keep-grp
+  .grp-group.grp-stacked
+  .grp-collapse.grp-open.predelete.ui-sortable-helper
+  > h3.grp-collapse-handler,
+.keep-grp
+  .grp-group.grp-stacked
+  .grp-collapse.grp-predelete.ui-sortable-helper
+  h4.grp-collapse-handler,
+.keep-grp
+  .grp-group.grp-stacked
+  .grp-collapse.grp-open.grp-predelete.ui-sortable-helper
+  h4.grp-collapse-handler {
   background: #ffffcc !important;
 }
 
@@ -4622,7 +4953,14 @@ Twitter: @rich_clark
   overflow: hidden;
   vertical-align: middle;
 }
-.keep-grp .ui-datepicker input:focus, .keep-grp .ui-datepicker input.grp-state-focus, .keep-grp .ui-datepicker select:focus, .keep-grp .ui-datepicker select.grp-state-focus, .keep-grp .ui-datepicker textarea:focus, .keep-grp .ui-datepicker textarea.grp-state-focus, .keep-grp .ui-datepicker button:focus, .keep-grp .ui-datepicker button.grp-state-focus {
+.keep-grp .ui-datepicker input:focus,
+.keep-grp .ui-datepicker input.grp-state-focus,
+.keep-grp .ui-datepicker select:focus,
+.keep-grp .ui-datepicker select.grp-state-focus,
+.keep-grp .ui-datepicker textarea:focus,
+.keep-grp .ui-datepicker textarea.grp-state-focus,
+.keep-grp .ui-datepicker button:focus,
+.keep-grp .ui-datepicker button.grp-state-focus {
   border: 1px solid #aaa;
   box-shadow: 0 0 6px #ccc;
   background: #fff;
@@ -4701,7 +5039,8 @@ Twitter: @rich_clark
 .keep-grp .ui-datepicker .ui-datepicker-title select.ui-datepicker-month-year {
   width: 100%;
 }
-.keep-grp .ui-datepicker .ui-datepicker-title select.ui-datepicker-month, .keep-grp .ui-datepicker .ui-datepicker-title select.ui-datepicker-year {
+.keep-grp .ui-datepicker .ui-datepicker-title select.ui-datepicker-month,
+.keep-grp .ui-datepicker .ui-datepicker-title select.ui-datepicker-year {
   width: 49%;
 }
 .keep-grp .ui-datepicker .ui-datepicker-title select.ui-datepicker-year {
@@ -4709,10 +5048,10 @@ Twitter: @rich_clark
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   .keep-grp .ui-datepicker .ui-datepicker-title select,
-.keep-grp .ui-datepicker .ui-datepicker-title select:focus {
+  .keep-grp .ui-datepicker .ui-datepicker-title select:focus {
     padding: 4px 28px 4px 5px;
     -webkit-appearance: none;
-    background-image: url("../images/icons/form-select.png");
+    background-image: url('../images/icons/form-select.png');
     background-position: 100% 50%;
     background-repeat: no-repeat;
   }
@@ -4796,14 +5135,20 @@ Twitter: @rich_clark
   box-shadow: none;
   cursor: pointer;
 }
-.keep-grp .ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current {
+.keep-grp
+  .ui-datepicker
+  .ui-datepicker-buttonpane
+  button.ui-datepicker-current {
   float: right;
   opacity: 1 !important;
   color: #444;
   font-weight: bold;
   background: #cee9f2;
 }
-.keep-grp .ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current.ui-state-hover {
+.keep-grp
+  .ui-datepicker
+  .ui-datepicker-buttonpane
+  button.ui-datepicker-current.ui-state-hover {
   color: #fff !important;
   border-color: #444 !important;
   background: #444 !important;
@@ -4818,13 +5163,19 @@ Twitter: @rich_clark
   width: 95%;
   margin: 0 auto 0.4em;
 }
-.keep-grp .ui-datepicker.ui-datepicker-multi .ui-datepicker-group-first .ui-datepicker-title {
+.keep-grp
+  .ui-datepicker.ui-datepicker-multi
+  .ui-datepicker-group-first
+  .ui-datepicker-title {
   margin-right: 5px !important;
 }
 .keep-grp .ui-datepicker.ui-datepicker-multi .ui-datepicker-group-first table {
   margin-right: 5px !important;
 }
-.keep-grp .ui-datepicker.ui-datepicker-multi .ui-datepicker-group-middle .ui-datepicker-title {
+.keep-grp
+  .ui-datepicker.ui-datepicker-multi
+  .ui-datepicker-group-middle
+  .ui-datepicker-title {
   margin-right: 5px !important;
   margin-left: 5px !important;
 }
@@ -4832,7 +5183,10 @@ Twitter: @rich_clark
   margin-right: 5px !important;
   margin-left: 3px !important;
 }
-.keep-grp .ui-datepicker.ui-datepicker-multi .ui-datepicker-group-last .ui-datepicker-title {
+.keep-grp
+  .ui-datepicker.ui-datepicker-multi
+  .ui-datepicker-group-last
+  .ui-datepicker-title {
   margin-left: 5px !important;
 }
 .keep-grp .ui-datepicker.ui-datepicker-multi .ui-datepicker-group-last table {
@@ -4916,7 +5270,14 @@ Twitter: @rich_clark
   overflow: hidden;
   vertical-align: middle;
 }
-.keep-grp #ui-timepicker input:focus, .keep-grp #ui-timepicker input.grp-state-focus, .keep-grp #ui-timepicker select:focus, .keep-grp #ui-timepicker select.grp-state-focus, .keep-grp #ui-timepicker textarea:focus, .keep-grp #ui-timepicker textarea.grp-state-focus, .keep-grp #ui-timepicker button:focus, .keep-grp #ui-timepicker button.grp-state-focus {
+.keep-grp #ui-timepicker input:focus,
+.keep-grp #ui-timepicker input.grp-state-focus,
+.keep-grp #ui-timepicker select:focus,
+.keep-grp #ui-timepicker select.grp-state-focus,
+.keep-grp #ui-timepicker textarea:focus,
+.keep-grp #ui-timepicker textarea.grp-state-focus,
+.keep-grp #ui-timepicker button:focus,
+.keep-grp #ui-timepicker button.grp-state-focus {
   border: 1px solid #aaa;
   box-shadow: 0 0 6px #ccc;
   background: #fff;
@@ -5015,7 +5376,10 @@ Twitter: @rich_clark
   background: #cee9f2;
   cursor: pointer;
 }
-.keep-grp .ui-menu li.ui-menu-item a:hover, .keep-grp .ui-menu li.ui-menu-item a.ui-state-hover, .keep-grp .ui-menu li.ui-menu-item a.ui-state-focus, .keep-grp .ui-menu li.ui-menu-item a.ui-state-active {
+.keep-grp .ui-menu li.ui-menu-item a:hover,
+.keep-grp .ui-menu li.ui-menu-item a.ui-state-hover,
+.keep-grp .ui-menu li.ui-menu-item a.ui-state-focus,
+.keep-grp .ui-menu li.ui-menu-item a.ui-state-active {
   color: #fff;
   border: 1px solid #333;
   background: #444;
@@ -5062,7 +5426,14 @@ Twitter: @rich_clark
   overflow: hidden;
   vertical-align: middle;
 }
-.keep-grp .ui-autocomplete input:focus, .keep-grp .ui-autocomplete input.grp-state-focus, .keep-grp .ui-autocomplete select:focus, .keep-grp .ui-autocomplete select.grp-state-focus, .keep-grp .ui-autocomplete textarea:focus, .keep-grp .ui-autocomplete textarea.grp-state-focus, .keep-grp .ui-autocomplete button:focus, .keep-grp .ui-autocomplete button.grp-state-focus {
+.keep-grp .ui-autocomplete input:focus,
+.keep-grp .ui-autocomplete input.grp-state-focus,
+.keep-grp .ui-autocomplete select:focus,
+.keep-grp .ui-autocomplete select.grp-state-focus,
+.keep-grp .ui-autocomplete textarea:focus,
+.keep-grp .ui-autocomplete textarea.grp-state-focus,
+.keep-grp .ui-autocomplete button:focus,
+.keep-grp .ui-autocomplete button.grp-state-focus {
   border: 1px solid #aaa;
   box-shadow: 0 0 6px #ccc;
   background: #fff;
@@ -5090,36 +5461,68 @@ Twitter: @rich_clark
   width: 1px;
 }
 
-.keep-grp body[class*=grp] select.admin-autocomplete {
+.keep-grp body[class*='grp'] select.admin-autocomplete {
   width: 758px;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete.select2-container {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete.select2-container {
   min-height: 25px;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-selection--single {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-selection--single {
   height: 25px;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-selection--single,
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-selection--multiple {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-selection--single,
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-selection--multiple {
   min-height: 25px;
   padding: 0;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete.select2-container--focus .select2-selection,
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete.select2-container--open .select2-selection {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete.select2-container--focus
+  .select2-selection,
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete.select2-container--open
+  .select2-selection {
   border: 1px solid #aaa;
   outline: 0;
   box-shadow: 0 0 6px #ccc !important;
   min-height: 25px;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete.select2-container--focus .select2-selection.select2-selection--single,
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete.select2-container--open .select2-selection.select2-selection--single {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete.select2-container--focus
+  .select2-selection.select2-selection--single,
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete.select2-container--open
+  .select2-selection.select2-selection--single {
   padding: 0;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete.select2-container--focus .select2-selection.select2-selection--multiple,
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete.select2-container--open .select2-selection.select2-selection--multiple {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete.select2-container--focus
+  .select2-selection.select2-selection--multiple,
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete.select2-container--open
+  .select2-selection.select2-selection--multiple {
   padding: 0;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-selection--single {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-selection--single {
   font-family: Arial, sans-serif;
   font-size: 12px;
   line-height: 14px;
@@ -5133,17 +5536,29 @@ Twitter: @rich_clark
   overflow: hidden;
   vertical-align: middle;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-selection--single .select2-selection__rendered {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-selection--single
+  .select2-selection__rendered {
   padding: 5px 40px 0 5px;
   font-size: 12px;
   line-height: 14px;
   font-weight: bold;
   color: #555;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete[dir=rtl] .select2-selection--single .select2-selection__rendered {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete[dir='rtl']
+  .select2-selection--single
+  .select2-selection__rendered {
   padding: 5px 5px 0 40px;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-selection--single .select2-selection__clear {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-selection--single
+  .select2-selection__clear {
   cursor: pointer;
   float: right;
   top: -4px;
@@ -5155,19 +5570,35 @@ Twitter: @rich_clark
   background-position: 0px -9694px;
   background-repeat: no-repeat;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-selection--single .select2-selection__clear:hover {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-selection--single
+  .select2-selection__clear:hover {
   background-image: url(../images/spritesheet-1694777276.png);
   background-position: 0px -9694px;
   background-repeat: no-repeat;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete[dir=rtl] .select2-selection--single .select2-selection__clear {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete[dir='rtl']
+  .select2-selection--single
+  .select2-selection__clear {
   left: -24px;
   right: auto;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-selection--single .select2-selection__placeholder {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-selection--single
+  .select2-selection__placeholder {
   color: #9a9a9a;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-selection--single .select2-selection__arrow {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-selection--single
+  .select2-selection__arrow {
   position: absolute;
   top: 3px;
   right: 4px;
@@ -5177,24 +5608,47 @@ Twitter: @rich_clark
   background-position: 0px -3835px;
   background-repeat: no-repeat;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-selection--single .select2-selection__arrow b {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-selection--single
+  .select2-selection__arrow
+  b {
   display: none;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete[dir=rtl] .select2-selection--single .select2-selection__clear {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete[dir='rtl']
+  .select2-selection--single
+  .select2-selection__clear {
   float: left;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete[dir=rtl] .select2-selection--single .select2-selection__arrow {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete[dir='rtl']
+  .select2-selection--single
+  .select2-selection__arrow {
   left: 1px;
   right: auto;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete.select2-container--disabled .select2-selection--single {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete.select2-container--disabled
+  .select2-selection--single {
   background-color: #eee;
   cursor: default;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete.select2-container--disabled .select2-selection--single .select2-selection__clear {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete.select2-container--disabled
+  .select2-selection--single
+  .select2-selection__clear {
   display: none;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-selection--multiple {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-selection--multiple {
   font-family: Arial, sans-serif;
   font-size: 12px;
   line-height: 14px;
@@ -5208,26 +5662,47 @@ Twitter: @rich_clark
   overflow: hidden;
   vertical-align: middle;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-selection--multiple .select2-selection__rendered {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-selection--multiple
+  .select2-selection__rendered {
   box-sizing: border-box;
   list-style: none;
   margin: 0;
   padding: 0 2px 2px;
   width: 100%;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-selection--multiple .select2-selection__rendered li {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-selection--multiple
+  .select2-selection__rendered
+  li {
   list-style: none;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-selection--multiple .select2-selection__placeholder {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-selection--multiple
+  .select2-selection__placeholder {
   color: #9a9a9a;
   margin-top: 5px;
   float: left;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-selection--multiple .select2-selection__rendered {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-selection--multiple
+  .select2-selection__rendered {
   padding-right: 40px;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-selection--multiple .select2-selection__rendered:after {
-  content: " ";
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-selection--multiple
+  .select2-selection__rendered:after {
+  content: ' ';
   position: absolute;
   top: 3px;
   right: 4px;
@@ -5238,15 +5713,27 @@ Twitter: @rich_clark
   background-position: 0px -3618px;
   background-repeat: no-repeat;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete[dir=rtl] .select2-selection--multiple .select2-selection__rendered {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete[dir='rtl']
+  .select2-selection--multiple
+  .select2-selection__rendered {
   padding-left: 40px;
   padding-right: 0;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete[dir=rtl] .select2-selection--multiple .select2-selection__rendered:after {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete[dir='rtl']
+  .select2-selection--multiple
+  .select2-selection__rendered:after {
   left: 2px;
   right: auto;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-selection--multiple .select2-selection__clear {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-selection--multiple
+  .select2-selection__clear {
   cursor: pointer;
   float: right;
   font-weight: bold;
@@ -5258,17 +5745,29 @@ Twitter: @rich_clark
   background-position: 0px -9694px;
   background-repeat: no-repeat;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-selection--multiple .select2-selection__clear:hover {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-selection--multiple
+  .select2-selection__clear:hover {
   background-image: url(../images/spritesheet-1694777276.png);
   background-position: 0px -9911px;
   background-repeat: no-repeat;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete[dir=rtl] .select2-selection--multiple .select2-selection__clear {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete[dir='rtl']
+  .select2-selection--multiple
+  .select2-selection__clear {
   position: absolute;
   left: 0;
   margin: 2px auto 5px 17px;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-selection--multiple .select2-selection__choice {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-selection--multiple
+  .select2-selection__choice {
   cursor: default;
   float: left;
   margin: 2px 2px 0 0;
@@ -5282,7 +5781,11 @@ Twitter: @rich_clark
   border: 1px solid #ccc;
   border-radius: 3px;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-selection--multiple .select2-selection__choice__remove {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-selection--multiple
+  .select2-selection__choice__remove {
   position: relative;
   top: -4px;
   left: -8px;
@@ -5297,68 +5800,122 @@ Twitter: @rich_clark
   background-position: 0px -9694px;
   background-repeat: no-repeat;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-selection--multiple .select2-selection__choice__remove:hover {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-selection--multiple
+  .select2-selection__choice__remove:hover {
   color: transparent;
   background-image: url(../images/spritesheet-1694777276.png);
   background-position: 0px -9911px;
   background-repeat: no-repeat;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete[dir=rtl] .select2-selection--multiple .select2-selection__choice,
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete[dir=rtl] .select2-selection--multiple .select2-selection__placeholder,
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete[dir=rtl] .select2-selection--multiple .select2-search--inline {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete[dir='rtl']
+  .select2-selection--multiple
+  .select2-selection__choice,
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete[dir='rtl']
+  .select2-selection--multiple
+  .select2-selection__placeholder,
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete[dir='rtl']
+  .select2-selection--multiple
+  .select2-search--inline {
   float: right;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete[dir=rtl] .select2-selection--multiple .select2-selection__choice__remove {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete[dir='rtl']
+  .select2-selection--multiple
+  .select2-selection__choice__remove {
   right: -4px;
   margin-left: -7px;
   left: auto;
   margin-right: auto;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete.select2-container--focus .select2-selection--multiple {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete.select2-container--focus
+  .select2-selection--multiple {
   border: solid #9a9a9a 1px;
   outline: 0;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete.select2-container--disabled .select2-selection--multiple {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete.select2-container--disabled
+  .select2-selection--multiple {
   background-color: #eee;
   cursor: default;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete.select2-container--disabled .select2-selection__choice__remove {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete.select2-container--disabled
+  .select2-selection__choice__remove {
   display: none;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete.select2-container--open.select2-container--above .select2-selection--single,
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete.select2-container--open.select2-container--above .select2-selection--multiple {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete.select2-container--open.select2-container--above
+  .select2-selection--single,
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete.select2-container--open.select2-container--above
+  .select2-selection--multiple {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete.select2-container--open.select2-container--below .select2-selection--single,
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete.select2-container--open.select2-container--below .select2-selection--multiple {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete.select2-container--open.select2-container--below
+  .select2-selection--single,
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete.select2-container--open.select2-container--below
+  .select2-selection--multiple {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
-.keep-grp body[class*=grp] .select2-container--open .select2-dropdown {
+.keep-grp body[class*='grp'] .select2-container--open .select2-dropdown {
   overflow: hidden;
   border-radius: 3px;
   border: 1px solid #aaa;
   background-color: #fff;
   background-color: #eee;
 }
-.keep-grp body[class*=grp] .select2-container--open .select2-dropdown.select2-dropdown--above {
+.keep-grp
+  body[class*='grp']
+  .select2-container--open
+  .select2-dropdown.select2-dropdown--above {
   border-bottom: 0;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   box-shadow: 0 0px 50px rgba(51, 51, 51, 0.3);
 }
-.keep-grp body[class*=grp] .select2-container--open .select2-dropdown.select2-dropdown--below {
+.keep-grp
+  body[class*='grp']
+  .select2-container--open
+  .select2-dropdown.select2-dropdown--below {
   border-top: 0;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   box-shadow: 0 20px 50px rgba(51, 51, 51, 0.3);
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-search--dropdown {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-search--dropdown {
   padding: 8px 4px 4px;
   background-color: #eee;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-search--dropdown .select2-search__field {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-search--dropdown
+  .select2-search__field {
   margin: 0;
   padding: 2px 5px;
   height: 25px;
@@ -5375,16 +5932,33 @@ Twitter: @rich_clark
   overflow: hidden;
   vertical-align: middle;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-search--dropdown .select2-search__field:focus, .keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-search--dropdown .select2-search__field.grp-state-focus {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-search--dropdown
+  .select2-search__field:focus,
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-search--dropdown
+  .select2-search__field.grp-state-focus {
   border: 1px solid #aaa;
   box-shadow: 0 0 6px #ccc;
   background: #fff;
   outline: 0;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-search--dropdown .select2-search__field:focus {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-search--dropdown
+  .select2-search__field:focus {
   box-shadow: 0 1px 3px 0 #eee inset;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-search--inline .select2-search__field {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-search--inline
+  .select2-search__field {
   position: relative;
   top: -1px;
   padding: 0 5px;
@@ -5397,101 +5971,207 @@ Twitter: @rich_clark
   box-shadow: none;
   -webkit-appearance: textfield;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-search--inline .select2-search__field:focus {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-search--inline
+  .select2-search__field:focus {
   background: transparent;
   border: none;
   outline: 0;
   box-shadow: none;
   -webkit-appearance: textfield;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-results {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-results {
   padding: 4px;
   background-color: #fff;
   background-color: #eee;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-results > .select2-results__options {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-results
+  > .select2-results__options {
   max-height: 200px;
   overflow-y: auto;
   background-color: #fff;
   background-color: #eee;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-results .select2-results__option {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-results
+  .select2-results__option {
   padding: 4px 5px;
   font-weight: bold;
   color: #555;
   border-radius: 3px;
   border: 1px solid #ccc;
   background-color: #e1f0f5;
-  transition: color 0.125s ease-in-out, border 0.125s ease-in-out, background 0.125s ease-in-out;
+  transition:
+    color 0.125s ease-in-out,
+    border 0.125s ease-in-out,
+    background 0.125s ease-in-out;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-results .select2-results__option + .select2-results__option {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-results
+  .select2-results__option
+  + .select2-results__option {
   margin-top: 2px;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-results .select2-results__option.loading-results {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-results
+  .select2-results__option.loading-results {
   border-color: transparent;
   background: transparent;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-results .select2-results__option.select2-results__message {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-results
+  .select2-results__option.select2-results__message {
   border-color: transparent;
   background: transparent;
 }
-.keep-grp body[class*=grp] .select2-results .select2-results__options .select2-results__option.loading-results {
+.keep-grp
+  body[class*='grp']
+  .select2-results
+  .select2-results__options
+  .select2-results__option.loading-results {
   margin-top: -4px;
 }
-.keep-grp body[class*=grp] .select2-results .select2-results__options .select2-results__option.select2-results__message {
+.keep-grp
+  body[class*='grp']
+  .select2-results
+  .select2-results__options
+  .select2-results__option.select2-results__message {
   margin-top: -4px;
 }
-.keep-grp body[class*=grp] .select2-results .select2-results__options[aria-multiselectable=true] .select2-results__option.loading-results {
+.keep-grp
+  body[class*='grp']
+  .select2-results
+  .select2-results__options[aria-multiselectable='true']
+  .select2-results__option.loading-results {
   margin-top: 0;
 }
-.keep-grp body[class*=grp] .select2-results .select2-results__options[aria-multiselectable=true] .select2-results__option.select2-results__message {
+.keep-grp
+  body[class*='grp']
+  .select2-results
+  .select2-results__options[aria-multiselectable='true']
+  .select2-results__option.select2-results__message {
   margin-top: 0;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-results__option[role=group] {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-results__option[role='group'] {
   padding: 0;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-results__option[aria-disabled=true] {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-results__option[aria-disabled='true'] {
   color: #9a9a9a;
   border-color: #ccc;
   background-color: #eee;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-results__option[aria-selected=true] {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-results__option[aria-selected='true'] {
   color: #fff;
   border-color: #1a1a1a;
   background-color: #333;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-results__option .select2-results__option {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-results__option
+  .select2-results__option {
   padding-left: 1em;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-results__option .select2-results__option .select2-results__group {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-results__option
+  .select2-results__option
+  .select2-results__group {
   padding-left: 0;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-results__option .select2-results__option .select2-results__option {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-results__option
+  .select2-results__option
+  .select2-results__option {
   margin-left: -1em;
   padding-left: 2em;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-results__option .select2-results__option .select2-results__option .select2-results__option {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-results__option
+  .select2-results__option
+  .select2-results__option
+  .select2-results__option {
   margin-left: -2em;
   padding-left: 3em;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-results__option
+  .select2-results__option
+  .select2-results__option
+  .select2-results__option
+  .select2-results__option {
   margin-left: -3em;
   padding-left: 4em;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-results__option
+  .select2-results__option
+  .select2-results__option
+  .select2-results__option
+  .select2-results__option
+  .select2-results__option {
   margin-left: -4em;
   padding-left: 5em;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-results__option
+  .select2-results__option
+  .select2-results__option
+  .select2-results__option
+  .select2-results__option
+  .select2-results__option
+  .select2-results__option {
   margin-left: -5em;
   padding-left: 6em;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-results__option--highlighted[aria-selected] {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-results__option--highlighted[aria-selected] {
   color: #fff;
   border-color: #267a96;
   background-color: #309bbf;
 }
-.keep-grp body[class*=grp] .select2-container--admin-autocomplete .select2-results__group {
+.keep-grp
+  body[class*='grp']
+  .select2-container--admin-autocomplete
+  .select2-results__group {
   cursor: default;
   display: block;
   padding: 4px;
@@ -5515,7 +6195,7 @@ Twitter: @rich_clark
   -moz-osx-font-smoothing: grayscale;
 }
 .keep-grp body .clearfix:after {
-  content: "";
+  content: '';
   display: table;
   clear: both;
 }
@@ -5621,7 +6301,11 @@ Twitter: @rich_clark
   border-top: 1px solid #ce3b3b;
   box-sizing: content-box;
 }
-.keep-grp body.grp-login .grp-module-login .grp-module .grp-row.grp-error-row:first-child {
+.keep-grp
+  body.grp-login
+  .grp-module-login
+  .grp-module
+  .grp-row.grp-error-row:first-child {
   margin-top: -1px;
   border-top: 0;
   border-top-left-radius: 0;
@@ -5692,7 +6376,7 @@ Twitter: @rich_clark
   overflow: visible;
 }
 .keep-grp #grp-navigation .clearfix:after {
-  content: "";
+  content: '';
   display: table;
   clear: both;
 }
@@ -5769,7 +6453,8 @@ Twitter: @rich_clark
   border-left: 1px solid #343434;
   border-right: 1px solid #090909;
 }
-.keep-grp #grp-user-tools > li:first-child, .keep-grp #grp-user-tools > li.first {
+.keep-grp #grp-user-tools > li:first-child,
+.keep-grp #grp-user-tools > li.first {
   padding-left: 0;
 }
 .keep-grp #grp-user-tools > li:last-child {
@@ -5808,7 +6493,7 @@ Twitter: @rich_clark
   box-sizing: border-box;
 }
 .keep-grp #grp-content:after {
-  content: " ";
+  content: ' ';
   display: table;
   clear: both;
 }
@@ -5845,7 +6530,7 @@ Twitter: @rich_clark
   text-shadow: 0 1px 0 #f5f5f5;
 }
 .keep-grp #grp-breadcrumbs > ul .clearfix:after {
-  content: "";
+  content: '';
   display: table;
   clear: both;
 }
@@ -5856,7 +6541,8 @@ Twitter: @rich_clark
   padding-left: 5px;
   padding-right: 5px;
 }
-.keep-grp #grp-breadcrumbs > ul li:first-child, .keep-grp #grp-breadcrumbs > ul li.first {
+.keep-grp #grp-breadcrumbs > ul li:first-child,
+.keep-grp #grp-breadcrumbs > ul li.first {
   padding-left: 0;
 }
 .keep-grp #grp-breadcrumbs > ul li:last-child {
@@ -5897,7 +6583,7 @@ Twitter: @rich_clark
   overflow: visible;
 }
 .keep-grp #grp-page-tools ul .clearfix:after {
-  content: "";
+  content: '';
   display: table;
   clear: both;
 }
@@ -5908,7 +6594,8 @@ Twitter: @rich_clark
   padding-left: 5px;
   padding-right: 5px;
 }
-.keep-grp #grp-page-tools ul li:first-child, .keep-grp #grp-page-tools ul li.first {
+.keep-grp #grp-page-tools ul li:first-child,
+.keep-grp #grp-page-tools ul li.first {
   padding-left: 0;
 }
 .keep-grp #grp-page-tools ul li:last-child {
@@ -5988,7 +6675,7 @@ Twitter: @rich_clark
   overflow: visible;
 }
 .keep-grp .grp-submit-row > ul .clearfix:after {
-  content: "";
+  content: '';
   display: table;
   clear: both;
 }
@@ -6001,7 +6688,8 @@ Twitter: @rich_clark
   margin-left: 10px;
   border-radius: 7px;
 }
-.keep-grp .grp-submit-row > ul > li:first-child, .keep-grp .grp-submit-row > ul > li.first {
+.keep-grp .grp-submit-row > ul > li:first-child,
+.keep-grp .grp-submit-row > ul > li.first {
   padding-right: 0;
 }
 .keep-grp .grp-submit-row > ul > li:last-child {
@@ -6014,7 +6702,7 @@ Twitter: @rich_clark
   margin-left: 0;
   margin-right: 10px;
 }
-.keep-grp .grp-submit-row input[type=button] {
+.keep-grp .grp-submit-row input[type='button'] {
   margin: 0;
   width: auto;
   display: block;
@@ -6029,7 +6717,12 @@ Twitter: @rich_clark
 .keep-grp .grp-submit-row button.grp-button.grp-default {
   opacity: 1;
 }
-.keep-grp .grp-submit-row input.grp-button:hover, .keep-grp .grp-submit-row input.grp-button:focus, .keep-grp .grp-submit-row a.grp-button:hover, .keep-grp .grp-submit-row a.grp-button:focus, .keep-grp .grp-submit-row button.grp-button:hover, .keep-grp .grp-submit-row button.grp-button:focus {
+.keep-grp .grp-submit-row input.grp-button:hover,
+.keep-grp .grp-submit-row input.grp-button:focus,
+.keep-grp .grp-submit-row a.grp-button:hover,
+.keep-grp .grp-submit-row a.grp-button:focus,
+.keep-grp .grp-submit-row button.grp-button:hover,
+.keep-grp .grp-submit-row button.grp-button:focus {
   opacity: 1;
 }
 .keep-grp .grp-submit-row button.grp-button {

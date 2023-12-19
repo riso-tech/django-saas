@@ -7,7 +7,7 @@ or an
 Possible values are `grp-collapse grp-open` and
 `grp-collapse grp-closed`:
 
-``` python
+```python
 class ModelOptions(admin.ModelAdmin):
     fieldsets = (
         ('', {
@@ -36,7 +36,7 @@ an additional property `inline_classes` is available to define the
 default collapsible state of inline items (as opposed to the inline
 group):
 
-``` python
+```python
 class StackedItemInline(admin.StackedInline):
     classes = ('grp-collapse grp-open',)
     inline_classes = ('grp-collapse grp-open',)
@@ -47,7 +47,7 @@ class StackedItemInline(admin.StackedInline):
 For using drag/drop with inlines, you need to add a
 `PositiveIntegerField` to your Model:
 
-``` python
+```python
 class MyInlineModel(models.Model):
     mymodel = models.ForeignKey(MyModel)
     # position field
@@ -58,7 +58,7 @@ class MyInlineModel(models.Model):
 
 Now, define the `sortable_field_name` with your `InlineModelAdmin`:
 
-``` python
+```python
 class MyInlineModelOptions(admin.TabularInline):
     fields = (... , "position",)
     # define the sortable
@@ -91,7 +91,7 @@ to hide the PositionField. Please note that this Mixin works with a
 default `sortable_field_name = "position"`. Therefore, you only need to
 explicitly define the `sortable_field_name` if it\'s named differently.
 
-``` python
+```python
 from grappelli.forms import GrappelliSortableHiddenMixin
 
 class MyInlineModelOptions(GrappelliSortableHiddenMixin, admin.TabularInline):
@@ -112,7 +112,7 @@ field. With the example below, the fields `field_1` and `field_2` have
 default values (so they are not empty with a new inline row). If we do
 not exclude this fields, the position field is updated for empty rows:
 
-``` python
+```python
 class MyInlineModelOptions(admin.TabularInline):
     fields = (... , "position",)
     # define the sortable
@@ -127,7 +127,7 @@ Sometimes it might make sense to not show inlines at the bottom of the
 page/form, but somewhere in--between. In order to achieve this, you need
 to define a placeholder with your fields/fieldsets in admin.py:
 
-``` python
+```python
 ("Some Fieldset", {
     "classes": ("grp-collapse grp-open",),
     "fields": ("whatever",)
@@ -150,7 +150,7 @@ inline--group.
 With Grappelli, you\'re able to add the representation of an object
 beneath the input field (for fk-- and m2m--fields):
 
-``` python
+```python
 class MyModel(models.Model):
     related_fk = models.ForeignKey(RelatedModel, verbose_name=u"Related Lookup (FK)")
     related_m2m = models.ManyToManyField(RelatedModel, verbose_name=u"Related Lookup (M2M)")
@@ -167,7 +167,7 @@ class MyModelOptions(admin.ModelAdmin):
 
 With generic relations, related lookups are defined like this:
 
-``` python
+```python
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
@@ -192,7 +192,7 @@ class MyModelOptions(admin.ModelAdmin):
 If your generic relation points to a model using a custom primary key,
 you need to add a property `id`:
 
-``` python
+```python
 class RelationModel(models.Model):
     cpk  = models.IntegerField(primary_key=True, unique=True, editable=False)
 
@@ -204,14 +204,13 @@ class RelationModel(models.Model):
 For the representation of an object, we first check for a callable
 `related_label`.
 
-``` python
+```python
 def __str__(self):
     return "%s" % self.name
 
 def related_label(self):
     return "%s (%s)" % (self.name, self.id)
 ```
-
 
 In order to use related lookups, you need to register both ends (models)
 of the relationship with your `admin.site`.
@@ -224,7 +223,7 @@ keys, many--to-many relations and generic relations).
 Add the staticmethod `autocomplete_search_fields` to all models you want
 to search for:
 
-``` python
+```python
 class MyModel(models.Model):
     name = models.CharField(u"Name", max_length=50)
 
@@ -236,7 +235,7 @@ class MyModel(models.Model):
 If the staticmethod is not given, `GRAPPELLI_AUTOCOMPLETE_SEARCH_FIELDS`
 will be used if the app/model is defined:
 
-``` python
+```python
 GRAPPELLI_AUTOCOMPLETE_SEARCH_FIELDS = {
     "myapp": {
         "mymodel": ("id__iexact", "name__icontains",)
@@ -246,7 +245,7 @@ GRAPPELLI_AUTOCOMPLETE_SEARCH_FIELDS = {
 
 Defining autocomplete lookups is very similar to related lookups:
 
-``` python
+```python
 class MyModel(models.Model):
     related_fk = models.ForeignKey(RelatedModel, verbose_name=u"Related Lookup (FK)")
     related_m2m = models.ManyToManyField(RelatedModel, verbose_name=u"Related Lookup (M2M)")
@@ -263,7 +262,7 @@ class MyModelOptions(admin.ModelAdmin):
 
 This also works with generic relations:
 
-``` python
+```python
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
@@ -288,7 +287,7 @@ class MyModelOptions(admin.ModelAdmin):
 If your generic relation points to a model using a custom primary key,
 you need to add a property `id`:
 
-``` python
+```python
 class RelationModel(models.Model):
     cpk  = models.IntegerField(primary_key=True, unique=True, editable=False)
 
@@ -303,7 +302,7 @@ format (e.g. date as integer timestamp), add a staticmethod
 `autocomplete_term_adjust` to the corresponding model with the
 appropriate transformation and perform the lookup on the indexed field:
 
-``` python
+```python
 class MyModel(models.Model):
     text = models.TextField(u"Long text")
     text_hash = models.CharField(u"Text hash", max_length=40, unique=True)
@@ -320,7 +319,7 @@ class MyModel(models.Model):
 For the representation of an object, we first check for a callable
 `related_label`.
 
-``` python
+```python
 def __str__(self):
     return "%s" % self.name
 
@@ -330,7 +329,6 @@ def related_label(self):
 
 In order to use autocompletes, you need to register both ends (models)
 of the relationship with your `admin.site`.
-
 
 ## Using TinyMCE
 
@@ -342,7 +340,7 @@ the necessary javascripts to your ModelAdmin definition (see [ModelAdmin
 asset
 definitions](https://docs.djangoproject.com/en/1.11/ref/contrib/admin/#modeladmin-asset-definitions)):
 
-``` python
+```python
 class Media:
     js = [
         '/static/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js',
@@ -367,7 +365,6 @@ ModelAdmin setup (paths to js--files).
 TinyMCE will be removed with version 3.0 of Grappelli, because TinyMCE
 version 4.x comes with a decent skin.
 
-
 ## Changelist Templates
 
 Grappelli comes with different change--list templates. To use the
@@ -380,7 +377,7 @@ The default template shows filters as a drop--down, selecting a single
 filter immediately applies the filter. This template supports use cases
 where single filters should be quickly applicable.
 
-``` python
+```python
 class MyModelOptions(admin.ModelAdmin):
     change_list_template = "admin/change_list.html"
 ```
@@ -392,7 +389,7 @@ applied manually by clicking an \"Apply\" button. This template supports
 use cases where multiple filters have to be selected and applied at the
 same time.
 
-``` python
+```python
 class MyModelOptions(admin.ModelAdmin):
     change_list_template = "admin/change_list_filter_confirm.html"
 ```
@@ -403,7 +400,7 @@ This template shows filters in a sidebar, selecting a single filter
 immediately applies the filter. This template supports use cases where
 single filters should be quickly applicable.
 
-``` python
+```python
 class MyModelOptions(admin.ModelAdmin):
     change_list_template = "admin/change_list_filter_sidebar.html"
 ```
@@ -415,7 +412,7 @@ applied manually by clicking an \"Apply\" button. This template supports
 use cases where multiple filters have to be selected and applied at the
 same time.
 
-``` python
+```python
 class MyModelOptions(admin.ModelAdmin):
     change_list_template = "admin/change_list_filter_confirm_sidebar.html"
 ```
@@ -428,7 +425,7 @@ filters are selects, the alternative filters are list of options
 you need to add `change_list_filter_template` to your ModelAdmin
 definition:
 
-``` python
+```python
 class MyModelOptions(admin.ModelAdmin):
     change_list_filter_template = "admin/filter_listing.html"
 ```

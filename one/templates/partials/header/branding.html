@@ -1,4 +1,5 @@
 {% load i18n static %}
+
 <!--begin::Logo and search-->
 <div class="d-flex flex-grow-1 flex-lg-grow-0">
   <!--begin::Logo wrapper-->
@@ -10,9 +11,14 @@
     </button>
     <!--end::Header toggle-->
     <!--begin::Logo-->
-    <a href="{% url 'home' %}" class="d-flex align-items-center mb-1 mb-lg-0 pt-lg-1">
-      <img alt="Logo" src="{% static 'media/logos/default-small.svg' %}" class="d-block d-sm-none"/>
-      <img alt="Logo" src="{% static 'media/logos/default.svg' %}" class="d-none d-sm-block"/>
+    <a href="{% url 'home' %}"
+       class="d-flex align-items-center mb-1 mb-lg-0 pt-lg-1">
+      <img alt="Logo"
+           src="{% static 'media/logos/default-small.svg' %}"
+           class="d-block d-sm-none" />
+      <img alt="Logo"
+           src="{% static 'media/logos/default.svg' %}"
+           class="d-none d-sm-block" />
     </a>
     <!--end::Logo-->
   </div>

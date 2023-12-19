@@ -14,28 +14,27 @@ License: MIT
 
 ##### SaaS Multi Tenant
 
- - [x] Initial first business process
- - [ ] New business tenant registration
+- [x] Initial first business process
+- [ ] New business tenant registration
 
 ##### Drag-Drop CMS
 
- - [x] Theme management
- - [ ] GrapeJS
+- [x] Theme management
+- [ ] GrapeJS
 
 ##### Custom Grappelli Admin
 
- - [ ] Admin UI with Oswald
- - [x] Grappelli: Related Lookups, Autocomplete Lookups
- - [x] Custom Actions
+- [ ] Admin UI with Oswald
+- [x] Grappelli: Related Lookups, Autocomplete Lookups
+- [x] Custom Actions
 
 ##### User Profile
 
- - [x] Overview Page
- - [x] Profile Update
- - [x] Email management
- - [x] Facebook Login
- - [x] Google Login
-
+- [x] Overview Page
+- [x] Profile Update
+- [x] Email management
+- [x] Facebook Login
+- [x] Google Login
 
 ## Support this Project!
 
@@ -46,8 +45,11 @@ Bin Nguyễn, Project Lead ([GitHub](https://github.com/riso-tech)): expertise i
 ## Special Thanks!
 
 ##### [Django Cookiecutter](https://github.com/cookiecutter/cookiecutter-django)
+
 ##### [GrapeJS](https://grapesjs.com/)
+
 ##### [Django Tenants](https://django-tenants.readthedocs.io/en/latest/)
+
 ##### [Keen Themes Team](https://keenthemes.com/): [Template Oswald](https://keenthemes.com/products/oswald-html-free)
 
     Thank you to KeenThemes for granting us a custom license to use their amazing Template Oswald for Django-SaaS UI

@@ -1,6 +1,5 @@
 # Business of Django Tenant
 
-
 ### Settings
 
 ```python

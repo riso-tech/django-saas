@@ -1,22 +1,24 @@
-define(['exports'], (function (exports) { 'use strict';
+define(['exports'], function (exports) {
+  'use strict';
 
-    /**
-     * FormValidation (https://formvalidation.io)
-     * The best validation library for JavaScript
-     * (c) 2013 - 2023 Nguyen Huu Phuoc <me@phuoc.ng>
-     */
-    function notEmpty() {
+  /**
+   * FormValidation (https://formvalidation.io)
+   * The best validation library for JavaScript
+   * (c) 2013 - 2023 Nguyen Huu Phuoc <me@phuoc.ng>
+   */
+  function notEmpty() {
+    return {
+      validate: function (input) {
+        var trim = !!input.options && !!input.options.trim;
+        var value = input.value;
         return {
-            validate: function (input) {
-                var trim = !!input.options && !!input.options.trim;
-                var value = input.value;
-                return {
-                    valid: (!trim && value !== '') || (trim && value !== '' && value.trim() !== ''),
-                };
-            },
+          valid:
+            (!trim && value !== '') ||
+            (trim && value !== '' && value.trim() !== ''),
         };
-    }
+      },
+    };
+  }
 
-    exports.notEmpty = notEmpty;
-
-}));
+  exports.notEmpty = notEmpty;
+});

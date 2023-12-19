@@ -1,6 +1,7 @@
-define(['exports', '@form-validation/core'], (function (exports, core) { 'use strict';
+define(['exports', '@form-validation/core'], function (exports, core) {
+  'use strict';
 
-    /******************************************************************************
+  /******************************************************************************
     Copyright (c) Microsoft Corporation.
 
     Permission to use, copy, modify, and/or distribute this software for any
@@ -14,50 +15,74 @@ define(['exports', '@form-validation/core'], (function (exports, core) { 'use st
     OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
     PERFORMANCE OF THIS SOFTWARE.
     ***************************************************************************** */
-    /* global Reflect, Promise */
+  /* global Reflect, Promise */
 
-    var extendStatics = function(d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
+  var extendStatics = function (d, b) {
+    extendStatics =
+      Object.setPrototypeOf ||
+      ({ __proto__: [] } instanceof Array &&
+        function (d, b) {
+          d.__proto__ = b;
+        }) ||
+      function (d, b) {
+        for (var p in b)
+          if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p];
+      };
+    return extendStatics(d, b);
+  };
 
-    function __extends(d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  function __extends(d, b) {
+    if (typeof b !== 'function' && b !== null)
+      throw new TypeError(
+        'Class extends value ' + String(b) + ' is not a constructor or null',
+      );
+    extendStatics(d, b);
+    function __() {
+      this.constructor = d;
     }
+    d.prototype =
+      b === null ? Object.create(b) : ((__.prototype = b.prototype), new __());
+  }
 
-    /**
-     * FormValidation (https://formvalidation.io)
-     * The best validation library for JavaScript
-     * (c) 2013 - 2023 Nguyen Huu Phuoc <me@phuoc.ng>
-     */
-    var Transformer = /** @class */ (function (_super) {
-        __extends(Transformer, _super);
-        function Transformer(opts) {
-            var _this = _super.call(this, opts) || this;
-            _this.valueFilter = _this.getElementValue.bind(_this);
-            return _this;
-        }
-        Transformer.prototype.install = function () {
-            this.core.registerFilter('field-value', this.valueFilter);
-        };
-        Transformer.prototype.uninstall = function () {
-            this.core.deregisterFilter('field-value', this.valueFilter);
-        };
-        Transformer.prototype.getElementValue = function (defaultValue, field, element, validator) {
-            if (this.opts[field] && this.opts[field][validator] && 'function' === typeof this.opts[field][validator]) {
-                return this.opts[field][validator].apply(this, [field, element, validator]);
-            }
-            return defaultValue;
-        };
-        return Transformer;
-    }(core.Plugin));
+  /**
+   * FormValidation (https://formvalidation.io)
+   * The best validation library for JavaScript
+   * (c) 2013 - 2023 Nguyen Huu Phuoc <me@phuoc.ng>
+   */
+  var Transformer = /** @class */ (function (_super) {
+    __extends(Transformer, _super);
+    function Transformer(opts) {
+      var _this = _super.call(this, opts) || this;
+      _this.valueFilter = _this.getElementValue.bind(_this);
+      return _this;
+    }
+    Transformer.prototype.install = function () {
+      this.core.registerFilter('field-value', this.valueFilter);
+    };
+    Transformer.prototype.uninstall = function () {
+      this.core.deregisterFilter('field-value', this.valueFilter);
+    };
+    Transformer.prototype.getElementValue = function (
+      defaultValue,
+      field,
+      element,
+      validator,
+    ) {
+      if (
+        this.opts[field] &&
+        this.opts[field][validator] &&
+        'function' === typeof this.opts[field][validator]
+      ) {
+        return this.opts[field][validator].apply(this, [
+          field,
+          element,
+          validator,
+        ]);
+      }
+      return defaultValue;
+    };
+    return Transformer;
+  })(core.Plugin);
 
-    exports.Transformer = Transformer;
-
-}));
+  exports.Transformer = Transformer;
+});

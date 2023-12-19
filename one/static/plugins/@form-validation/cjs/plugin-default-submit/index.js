@@ -18,19 +18,31 @@ PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
 /* global Reflect, Promise */
 
-var extendStatics = function(d, b) {
-    extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-    return extendStatics(d, b);
+var extendStatics = function (d, b) {
+  extendStatics =
+    Object.setPrototypeOf ||
+    ({ __proto__: [] } instanceof Array &&
+      function (d, b) {
+        d.__proto__ = b;
+      }) ||
+    function (d, b) {
+      for (var p in b)
+        if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p];
+    };
+  return extendStatics(d, b);
 };
 
 function __extends(d, b) {
-    if (typeof b !== "function" && b !== null)
-        throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-    extendStatics(d, b);
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  if (typeof b !== 'function' && b !== null)
+    throw new TypeError(
+      'Class extends value ' + String(b) + ' is not a constructor or null',
+    );
+  extendStatics(d, b);
+  function __() {
+    this.constructor = d;
+  }
+  d.prototype =
+    b === null ? Object.create(b) : ((__.prototype = b.prototype), new __());
 }
 
 /**
@@ -42,29 +54,31 @@ function __extends(d, b) {
  * This plugin will submit the form if all fields are valid after validating
  */
 var DefaultSubmit = /** @class */ (function (_super) {
-    __extends(DefaultSubmit, _super);
-    function DefaultSubmit() {
-        var _this = _super.call(this, {}) || this;
-        _this.onValidHandler = _this.onFormValid.bind(_this);
-        return _this;
+  __extends(DefaultSubmit, _super);
+  function DefaultSubmit() {
+    var _this = _super.call(this, {}) || this;
+    _this.onValidHandler = _this.onFormValid.bind(_this);
+    return _this;
+  }
+  DefaultSubmit.prototype.install = function () {
+    var form = this.core.getFormElement();
+    if (form.querySelectorAll('[type="submit"][name="submit"]').length) {
+      throw new Error(
+        'Do not use `submit` for the name attribute of submit button',
+      );
     }
-    DefaultSubmit.prototype.install = function () {
-        var form = this.core.getFormElement();
-        if (form.querySelectorAll('[type="submit"][name="submit"]').length) {
-            throw new Error('Do not use `submit` for the name attribute of submit button');
-        }
-        this.core.on('core.form.valid', this.onValidHandler);
-    };
-    DefaultSubmit.prototype.uninstall = function () {
-        this.core.off('core.form.valid', this.onValidHandler);
-    };
-    DefaultSubmit.prototype.onFormValid = function () {
-        var form = this.core.getFormElement();
-        if (form instanceof HTMLFormElement) {
-            form.submit();
-        }
-    };
-    return DefaultSubmit;
-}(core.Plugin));
+    this.core.on('core.form.valid', this.onValidHandler);
+  };
+  DefaultSubmit.prototype.uninstall = function () {
+    this.core.off('core.form.valid', this.onValidHandler);
+  };
+  DefaultSubmit.prototype.onFormValid = function () {
+    var form = this.core.getFormElement();
+    if (form instanceof HTMLFormElement) {
+      form.submit();
+    }
+  };
+  return DefaultSubmit;
+})(core.Plugin);
 
 exports.DefaultSubmit = DefaultSubmit;

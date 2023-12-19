@@ -1,22 +1,25 @@
 {% extends "admin/base_site.html" %}
+
 {% load i18n grp_tags log %}
 
-
-{% block bodyclass %}dashboard{% endblock bodyclass %}
-{% block content-class %}content-grid{% endblock content-class %}
-
+{% block bodyclass %}
+  dashboard
+{% endblock bodyclass %}
+{% block content-class %}
+  content-grid
+{% endblock content-class %}
 {% block breadcrumbs %}
   <ul class="breadcrumb breadcrumb-separatorless fw-semibold">
     <!--begin::Item-->
     <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
-      <a href="{% url 'admin:index' %}" class="text-gray-500 text-hover-primary">
+      <a href="{% url 'admin:index' %}"
+         class="text-gray-500 text-hover-primary">
         <i class="ki-duotone ki-home fs-3 text-gray-400 me-n1"></i>
       </a>
     </li>
     <!--end::Item-->
   </ul>
 {% endblock breadcrumbs %}
-
 {% block content %}
   <!--begin::Layout-->
   <div class="d-flex flex-column flex-xl-row">
@@ -57,15 +60,20 @@
                       {% endif %}
                       {% if entry.is_deletion %}
                         <span class="text-warning py-3 fw-semibold fw-6">{% trans 'Delete' %}</span>
-                        <span>{% filter capfirst %}{% trans entry.content_type.name %}{% endfilter %}</span>
+                        <span>
+                          {% filter capfirst %}
+                            {% trans entry.content_type.name %}
+                          {% endfilter %}
+                        </span>
                         {{ entry.object_repr }}
                       {% else %}
                         <span>
-                          {% filter capfirst %}{% trans entry.content_type.name %}{% endfilter %}
+                          {% filter capfirst %}
+                            {% trans entry.content_type.name %}
+                          {% endfilter %}
                         </span>
-                        <a href="{{ entry.get_admin_url }}" class="text-gray-800 fw-bold text-hover-primary fs-6">
-                          {{ entry.object_repr }}
-                        </a>
+                        <a href="{{ entry.get_admin_url }}"
+                           class="text-gray-800 fw-bold text-hover-primary fs-6">{{ entry.object_repr }}</a>
                       {% endif %}
                     </div>
                     <!--end::Content-->
@@ -86,24 +94,25 @@
       <!--end::List widget 23-->
     </div>
     <!--end::Sidebar-->
-
     <!--begin::Content-->
     <div class="flex-lg-row-fluid ms-lg-15">
       <!--begin:::Tabs-->
       <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-8">
         <!--begin:::Tab item-->
         <li class="nav-item">
-          <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab"
+          <a class="nav-link text-active-primary pb-4 active"
+             data-bs-toggle="tab"
              href="#kt_applications_tab">{% trans 'Applications' %}</a>
         </li>
         <!--end:::Tab item-->
       </ul>
       <!--end:::Tabs-->
-
       <!--begin:::Tab content-->
       <div class="tab-content">
         <!--begin:::Tab pane-->
-        <div class="tab-pane fade show active" id="kt_applications_tab" role="tabpanel">
+        <div class="tab-pane fade show active"
+             id="kt_applications_tab"
+             role="tabpanel">
           <!--begin::Row-->
           <div class="row g-6 g-xl-9">
             <!--begin::Col-->
@@ -115,17 +124,16 @@
                   <div class="card-header min-h-50px">
                     <!--begin::Title-->
                     <h3 class="card-title align-items-start flex-column m-0 h-50px">
-                    <span class="card-label fw-bold text-gray-800 {% if False %}grp-module{% endif %}">
-                      <a href="{{ app.app_url }}"
-                         class="text-gray-500 text-hover-primary {% if False %}grp-section{% endif %}">
-                        {% trans app.name %}
-                      </a>
-                    </span>
+                      <span class="card-label fw-bold text-gray-800 {% if False %}grp-module{% endif %}">
+                        <a href="{{ app.app_url }}"
+                           class="text-gray-500 text-hover-primary {% if False %}grp-section{% endif %}">
+                          {% trans app.name %}
+                        </a>
+                      </span>
                     </h3>
                     <!--end::Title-->
                   </div>
                   <!--end::Header-->
-
                   <!--begin::Body-->
                   <div class="card-body pt-0 pb-0">
                     <!--begin::Table container-->
@@ -134,28 +142,26 @@
                       <table class="table table-row-dashed align-middle gs-0 gy-4 my-0">
                         <!--begin::Table body-->
                         <tbody>
-                        {% for model in app.models %}
-                          <tr class="grp-row" id="model-{{ model.object_name|lower }}">
-                            <td>
-                              {% if model.admin_url %}
-                                <a href="{{ model.admin_url }}"
-                                   class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">
-                                  {{ model.name }}
-                                </a>
-                              {% else %}
-                                <span class="text-gray-400 fw-semibold d-block fs-7">{{ model.name }}</span>
-                              {% endif %}
-                            </td>
-                            <td class="text-end">
-                              {% if model.add_url %}
-                                <a class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary w-25px h-25px"
-                                   href="{{ model.add_url }}">
-                                  <i class="ki-duotone ki-plus fs-2 text-gray-500"></i>
-                                </a>
-                              {% endif %}
-                            </td>
-                          </tr>
-                        {% endfor %}
+                          {% for model in app.models %}
+                            <tr class="grp-row" id="model-{{ model.object_name|lower }}">
+                              <td>
+                                {% if model.admin_url %}
+                                  <a href="{{ model.admin_url }}"
+                                     class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">{{ model.name }}</a>
+                                {% else %}
+                                  <span class="text-gray-400 fw-semibold d-block fs-7">{{ model.name }}</span>
+                                {% endif %}
+                              </td>
+                              <td class="text-end">
+                                {% if model.add_url %}
+                                  <a class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary w-25px h-25px"
+                                     href="{{ model.add_url }}">
+                                    <i class="ki-duotone ki-plus fs-2 text-gray-500"></i>
+                                  </a>
+                                {% endif %}
+                              </td>
+                            </tr>
+                          {% endfor %}
                         </tbody>
                         <!--end::Table body-->
                       </table>
@@ -164,7 +170,6 @@
                     <!--end::Table container-->
                   </div>
                   <!--end::Body-->
-
                 </div>
                 <!--end::{{ app.name|upper }}-->
               </div>

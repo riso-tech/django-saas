@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
-{% load static i18n %}
 
+{% load static i18n %}
 
 {% block body-attrs %}
   id="kt_body" class="app-blank"
 {% endblock body-attrs %}
-
-{% block body-wrapper %}
+{% block body-wrapper
+  %}
   <!--begin::App-->
   <div class="d-flex flex-column flex-root bg-primary">
     <div class="d-flex flex-column flex-center flex-column-fluid p-10">
@@ -22,15 +22,18 @@
           {% if exception %}
             {{ exception }}
           {% else %}
-            {% blocktrans %}Your domain does not exist in our system please contact us via
-              <a href="https://{{ default_url }}" class="text-warning">{{ default_name }}</a>{% endblocktrans %}
+            {% blocktrans %}Your
+        domain does not exist in our system please contact us via
+        <a href="https://{{ default_url }}" class="text-warning">{{ default_name }}</a>{% endblocktrans %}
           {% endif %}
         </p>
         <!--end::Description-->
       </div>
       <!--end::Header-->
       <!--begin::Illustration-->
-      <img src="{% static 'media/illustrations/sketchy-1/18.png' %}" alt="" class="mw-100 mb-10 h-lg-450px">
+      <img src="{% static 'media/illustrations/sketchy-1/18.png' %}"
+           alt=""
+           class="mw-100 mb-10 h-lg-450px" />
       <!--end::Illustration-->
     </div>
   </div>

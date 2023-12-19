@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 //
 // Markdown Initialization

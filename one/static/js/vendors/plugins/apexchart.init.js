@@ -1,7 +1,7 @@
 Apex.xaxis = {
-    labels: {
-        style: {
-           fontFamily: 'Montserrat'
-        }
-    }
- }
+  labels: {
+    style: {
+      fontFamily: 'Montserrat',
+    },
+  },
+};

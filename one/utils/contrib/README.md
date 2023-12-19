@@ -174,7 +174,6 @@ def get_change_actions(self, request, object_id, form_url):
 
 The same is true for changelist actions with `get_changelist_actions`.
 
-
 ## More Examples
 
 Making an action that links off-site:

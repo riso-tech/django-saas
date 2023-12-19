@@ -19,19 +19,31 @@ PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
 /* global Reflect, Promise */
 
-var extendStatics = function(d, b) {
-    extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-    return extendStatics(d, b);
+var extendStatics = function (d, b) {
+  extendStatics =
+    Object.setPrototypeOf ||
+    ({ __proto__: [] } instanceof Array &&
+      function (d, b) {
+        d.__proto__ = b;
+      }) ||
+    function (d, b) {
+      for (var p in b)
+        if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p];
+    };
+  return extendStatics(d, b);
 };
 
 function __extends(d, b) {
-    if (typeof b !== "function" && b !== null)
-        throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-    extendStatics(d, b);
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  if (typeof b !== 'function' && b !== null)
+    throw new TypeError(
+      'Class extends value ' + String(b) + ' is not a constructor or null',
+    );
+  extendStatics(d, b);
+  function __() {
+    this.constructor = d;
+  }
+  d.prototype =
+    b === null ? Object.create(b) : ((__.prototype = b.prototype), new __());
 }
 
 /**
@@ -41,9 +53,14 @@ function __extends(d, b) {
  */
 var classSet = core.utils.classSet;
 var UiKit = /** @class */ (function (_super) {
-    __extends(UiKit, _super);
-    function UiKit(opts) {
-        return _super.call(this, Object.assign({}, {
+  __extends(UiKit, _super);
+  function UiKit(opts) {
+    return (
+      _super.call(
+        this,
+        Object.assign(
+          {},
+          {
             formClass: 'fv-plugins-uikit',
             // See https://getuikit.com/docs/text#text-color
             messageClass: 'uk-text-danger',
@@ -52,19 +69,23 @@ var UiKit = /** @class */ (function (_super) {
             rowSelector: '.uk-margin',
             // See https://getuikit.com/docs/form
             rowValidClass: 'uk-form-success',
-        }, opts)) || this;
+          },
+          opts,
+        ),
+      ) || this
+    );
+  }
+  UiKit.prototype.onIconPlaced = function (e) {
+    var type = e.element.getAttribute('type');
+    if ('checkbox' === type || 'radio' === type) {
+      var parent_1 = e.element.parentElement;
+      classSet(e.iconElement, {
+        'fv-plugins-icon-check': true,
+      });
+      parent_1.parentElement.insertBefore(e.iconElement, parent_1.nextSibling);
     }
-    UiKit.prototype.onIconPlaced = function (e) {
-        var type = e.element.getAttribute('type');
-        if ('checkbox' === type || 'radio' === type) {
-            var parent_1 = e.element.parentElement;
-            classSet(e.iconElement, {
-                'fv-plugins-icon-check': true,
-            });
-            parent_1.parentElement.insertBefore(e.iconElement, parent_1.nextSibling);
-        }
-    };
-    return UiKit;
-}(pluginFramework.Framework));
+  };
+  return UiKit;
+})(pluginFramework.Framework);
 
 exports.UiKit = UiKit;

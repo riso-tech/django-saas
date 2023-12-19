@@ -19,19 +19,31 @@ PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
 /* global Reflect, Promise */
 
-var extendStatics = function(d, b) {
-    extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-    return extendStatics(d, b);
+var extendStatics = function (d, b) {
+  extendStatics =
+    Object.setPrototypeOf ||
+    ({ __proto__: [] } instanceof Array &&
+      function (d, b) {
+        d.__proto__ = b;
+      }) ||
+    function (d, b) {
+      for (var p in b)
+        if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p];
+    };
+  return extendStatics(d, b);
 };
 
 function __extends(d, b) {
-    if (typeof b !== "function" && b !== null)
-        throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-    extendStatics(d, b);
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  if (typeof b !== 'function' && b !== null)
+    throw new TypeError(
+      'Class extends value ' + String(b) + ' is not a constructor or null',
+    );
+  extendStatics(d, b);
+  function __() {
+    this.constructor = d;
+  }
+  d.prototype =
+    b === null ? Object.create(b) : ((__.prototype = b.prototype), new __());
 }
 
 /**
@@ -41,29 +53,38 @@ function __extends(d, b) {
  */
 var classSet = core.utils.classSet;
 var Tachyons = /** @class */ (function (_super) {
-    __extends(Tachyons, _super);
-    function Tachyons(opts) {
-        return _super.call(this, Object.assign({}, {
+  __extends(Tachyons, _super);
+  function Tachyons(opts) {
+    return (
+      _super.call(
+        this,
+        Object.assign(
+          {},
+          {
             formClass: 'fv-plugins-tachyons',
             messageClass: 'small',
             rowInvalidClass: 'red',
             rowPattern: /^(.*)fl(.*)$/,
             rowSelector: '.fl',
             rowValidClass: 'green',
-        }, opts)) || this;
+          },
+          opts,
+        ),
+      ) || this
+    );
+  }
+  Tachyons.prototype.onIconPlaced = function (e) {
+    var type = e.element.getAttribute('type');
+    var parent = e.element.parentElement;
+    if ('checkbox' === type || 'radio' === type) {
+      // Place it after the container of checkbox/radio
+      parent.parentElement.insertBefore(e.iconElement, parent.nextSibling);
+      classSet(e.iconElement, {
+        'fv-plugins-icon-check': true,
+      });
     }
-    Tachyons.prototype.onIconPlaced = function (e) {
-        var type = e.element.getAttribute('type');
-        var parent = e.element.parentElement;
-        if ('checkbox' === type || 'radio' === type) {
-            // Place it after the container of checkbox/radio
-            parent.parentElement.insertBefore(e.iconElement, parent.nextSibling);
-            classSet(e.iconElement, {
-                'fv-plugins-icon-check': true,
-            });
-        }
-    };
-    return Tachyons;
-}(pluginFramework.Framework));
+  };
+  return Tachyons;
+})(pluginFramework.Framework);
 
 exports.Tachyons = Tachyons;

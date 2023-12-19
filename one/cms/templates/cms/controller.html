@@ -1,10 +1,11 @@
 {% load static i18n %}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet">
-<link href="{% static 'keenicons/fonts/duotone/style.css' %}" rel="stylesheet">
 
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet" />
+<link href="{% static 'keenicons/fonts/duotone/style.css' %}"
+      rel="stylesheet" />
 {% if request.user.is_superuser %}
   <script>
     var csrf_token = '{{csrf_token}}';
@@ -31,41 +32,36 @@
                height="24"
                viewBox="0 0 24 24"
                fill="none">
-            <path opacity="0.3" class="permanent" g=""
-                  d="M22.1 11.5V12.6C22.1 13.2 21.7 13.6 21.2 13.7L19.9 13.9C19.7 14.7 19.4 15.5 18.9 16.2L19.7 17.2999C20 17.6999 20 18.3999 19.6 18.7999L18.8 19.6C18.4 20 17.8 20 17.3 19.7L16.2 18.9C15.5 19.3 14.7 19.7 13.9 19.9L13.7 21.2C13.6 21.7 13.1 22.1 12.6 22.1H11.5C10.9 22.1 10.5 21.7 10.4 21.2L10.2 19.9C9.4 19.7 8.6 19.4 7.9 18.9L6.8 19.7C6.4 20 5.7 20 5.3 19.6L4.5 18.7999C4.1 18.3999 4.1 17.7999 4.4 17.2999L5.2 16.2C4.8 15.5 4.4 14.7 4.2 13.9L2.9 13.7C2.4 13.6 2 13.1 2 12.6V11.5C2 10.9 2.4 10.5 2.9 10.4L4.2 10.2C4.4 9.39995 4.7 8.60002 5.2 7.90002L4.4 6.79993C4.1 6.39993 4.1 5.69993 4.5 5.29993L5.3 4.5C5.7 4.1 6.3 4.10002 6.8 4.40002L7.9 5.19995C8.6 4.79995 9.4 4.39995 10.2 4.19995L10.4 2.90002C10.5 2.40002 11 2 11.5 2H12.6C13.2 2 13.6 2.40002 13.7 2.90002L13.9 4.19995C14.7 4.39995 15.5 4.69995 16.2 5.19995L17.3 4.40002C17.7 4.10002 18.4 4.1 18.8 4.5L19.6 5.29993C20 5.69993 20 6.29993 19.7 6.79993L18.9 7.90002C19.3 8.60002 19.7 9.39995 19.9 10.2L21.2 10.4C21.7 10.5 22.1 11 22.1 11.5ZM12.1 8.59998C10.2 8.59998 8.6 10.2 8.6 12.1C8.6 14 10.2 15.6 12.1 15.6C14 15.6 15.6 14 15.6 12.1C15.6 10.2 14 8.59998 12.1 8.59998Z"
-                  fill="currentColor"/>
-            <path class="permanent" g=""
-                  d="M17.1 12.1C17.1 14.9 14.9 17.1 12.1 17.1C9.30001 17.1 7.10001 14.9 7.10001 12.1C7.10001 9.29998 9.30001 7.09998 12.1 7.09998C14.9 7.09998 17.1 9.29998 17.1 12.1ZM12.1 10.1C11 10.1 10.1 11 10.1 12.1C10.1 13.2 11 14.1 12.1 14.1C13.2 14.1 14.1 13.2 14.1 12.1C14.1 11 13.2 10.1 12.1 10.1Z"
-                  fill="currentColor"/>
+            <path opacity="0.3" class="permanent" g="" d="M22.1 11.5V12.6C22.1 13.2 21.7 13.6 21.2 13.7L19.9 13.9C19.7 14.7 19.4 15.5 18.9 16.2L19.7 17.2999C20 17.6999 20 18.3999 19.6 18.7999L18.8 19.6C18.4 20 17.8 20 17.3 19.7L16.2 18.9C15.5 19.3 14.7 19.7 13.9 19.9L13.7 21.2C13.6 21.7 13.1 22.1 12.6 22.1H11.5C10.9 22.1 10.5 21.7 10.4 21.2L10.2 19.9C9.4 19.7 8.6 19.4 7.9 18.9L6.8 19.7C6.4 20 5.7 20 5.3 19.6L4.5 18.7999C4.1 18.3999 4.1 17.7999 4.4 17.2999L5.2 16.2C4.8 15.5 4.4 14.7 4.2 13.9L2.9 13.7C2.4 13.6 2 13.1 2 12.6V11.5C2 10.9 2.4 10.5 2.9 10.4L4.2 10.2C4.4 9.39995 4.7 8.60002 5.2 7.90002L4.4 6.79993C4.1 6.39993 4.1 5.69993 4.5 5.29993L5.3 4.5C5.7 4.1 6.3 4.10002 6.8 4.40002L7.9 5.19995C8.6 4.79995 9.4 4.39995 10.2 4.19995L10.4 2.90002C10.5 2.40002 11 2 11.5 2H12.6C13.2 2 13.6 2.40002 13.7 2.90002L13.9 4.19995C14.7 4.39995 15.5 4.69995 16.2 5.19995L17.3 4.40002C17.7 4.10002 18.4 4.1 18.8 4.5L19.6 5.29993C20 5.69993 20 6.29993 19.7 6.79993L18.9 7.90002C19.3 8.60002 19.7 9.39995 19.9 10.2L21.2 10.4C21.7 10.5 22.1 11 22.1 11.5ZM12.1 8.59998C10.2 8.59998 8.6 10.2 8.6 12.1C8.6 14 10.2 15.6 12.1 15.6C14 15.6 15.6 14 15.6 12.1C15.6 10.2 14 8.59998 12.1 8.59998Z" fill="currentColor" />
+            <path class="permanent" g="" d="M17.1 12.1C17.1 14.9 14.9 17.1 12.1 17.1C9.30001 17.1 7.10001 14.9 7.10001 12.1C7.10001 9.29998 9.30001 7.09998 12.1 7.09998C14.9 7.09998 17.1 9.29998 17.1 12.1ZM12.1 10.1C11 10.1 10.1 11 10.1 12.1C10.1 13.2 11 14.1 12.1 14.1C13.2 14.1 14.1 13.2 14.1 12.1C14.1 11 13.2 10.1 12.1 10.1Z" fill="currentColor" />
           </svg>
         </span>
       </button>
     </div>
-
-    <div class="widget-bottom position-fixed bottom-0 start-0 end-0" style="display: none;">
+    <div class="widget-bottom position-fixed bottom-0 start-0 end-0"
+         style="display: none">
       <div class="d-flex py-2 px-2 bg-white">
         <div class="flex-grow-1">
           <div class="d-flex justify-content-between">
             <button type="button"
                     class="btn btn-sm btn-circle bg-info text-white mb-2"
                     id="cms_btn_advance_drawer">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                   class="bi bi-chevron-up" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                      d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   width="16"
+                   height="16"
+                   fill="currentColor"
+                   class="bi bi-chevron-up"
+                   viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
               </svg>
             </button>
-            <button type="button"
-                    class="btn btn-sm btn-primary mb-2"
-                    id="cms_btn_save">
+            <button type="button" class="btn btn-sm btn-primary mb-2" id="cms_btn_save">
               <span class="fw-bolder">Save</span>
             </button>
-
           </div>
         </div>
       </div>
     </div>
-
     <!--begin::Drawer-->
     <div id="kt_drawer_example_basic"
          class="bg-white"
@@ -101,13 +97,9 @@
                      height="24px"
                      viewBox="0 0 24 24"
                      version="1.1">
-                  <g
-                    transform="translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(4.000000, 4.000000)"
-                    fill="#000000">
-                  <rect fill="#000000" x="0" y="7" width="16" height="2" rx="1"/>
-                  <rect fill="#000000" opacity="0.5"
-                        transform="translate(8.000000, 8.000000) rotate(-270.000000) translate(-8.000000, -8.000000)"
-                        x="0" y="7" width="16" height="2" rx="1"/>
+                  <g transform="translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(4.000000, 4.000000)" fill="#000000">
+                  <rect fill="#000000" x="0" y="7" width="16" height="2" rx="1" />
+                  <rect fill="#000000" opacity="0.5" transform="translate(8.000000, 8.000000) rotate(-270.000000) translate(-8.000000, -8.000000)" x="0" y="7" width="16" height="2" rx="1" />
                   </g>
                 </svg>
               </span>
@@ -123,15 +115,17 @@
           <div id="theme_list"></div>
         </div>
         <div class="card-footer">
-          {#          <button class="btn btn-sm btn-primary" form="form_new_page">Confirm</button>#}
+          {#
+        <button class="btn btn-sm btn-primary" form="form_new_page">
+          Confirm</button
+        >#}
         </div>
         <!--end::Card body-->
       </div>
       <!--end::Card-->
     </div>
     <!--end::Drawer-->
-
-    {#  START MODAL NEW PAGE  #}
+    {# START MODAL NEW PAGE #}
     <div class="modal fade" tabindex="-1" id="modal_new_page">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -145,7 +139,7 @@
                        data-bs-original-title="Michael Eberon"
                        data-kt-initialized="1">
                     <img alt="Pic"
-                         src="https://preview.keenthemes.com/metronic8/demo1/assets/media/avatars/300-11.jpg"/>
+                         src="https://preview.keenthemes.com/metronic8/demo1/assets/media/avatars/300-11.jpg" />
                   </div>
                 </div>
                 <div class="col-10">
@@ -159,7 +153,7 @@
                              type="text"
                              class="form-control form-control-solid"
                              placeholder="Enter title"
-                             required/>
+                             required />
                     </div>
                     <div class="align-self-center">
                       <label for="form_url" class="form-label">URL</label>
@@ -168,7 +162,7 @@
                              type="text"
                              class="form-control form-control-solid"
                              placeholder="Enter url"
-                             required/>
+                             required />
                     </div>
                     <div class="align-self-center">
                       <button class="btn btn-sm btn-primary" type="submit">
@@ -183,7 +177,7 @@
                   </div>
                 </div>
               </div>
-              <div id="div_advance" class="mb-4" style="display: none;">
+              <div id="div_advance" class="mb-4" style="display: none">
                 <div class="row">
                   <div class="col-4">
                     <label for="form_qq" class="form-label">Q</label>
@@ -191,7 +185,7 @@
                            name="qq"
                            type="text"
                            class="form-control form-control-solid"
-                           placeholder="Enter qq"/>
+                           placeholder="Enter qq" />
                   </div>
                   <div class="col-4">
                     <label for="form_qq2" class="form-label">Q2</label>
@@ -199,7 +193,7 @@
                            name="qq2"
                            type="text"
                            class="form-control form-control-solid"
-                           placeholder="Enter qq"/>
+                           placeholder="Enter qq" />
                   </div>
                   <div class="col-4">
                     <label for="form_qq3" class="form-label">Q3</label>
@@ -207,63 +201,89 @@
                            name="qq3"
                            type="text"
                            class="form-control form-control-solid"
-                           placeholder="Enter qq"/>
+                           placeholder="Enter qq" />
                   </div>
                 </div>
               </div>
               <div id="div_image">
                 <img alt=""
                      src="https://preview.keenthemes.com/metronic8/demo1/assets/media/stock/600x600/img-65.jpg"
-                     class="w-100"/>
+                     class="w-100" />
                 <img alt=""
                      src="https://preview.keenthemes.com/metronic8/demo1/assets/media/stock/600x600/img-65.jpg"
-                     class="w-100"/>
+                     class="w-100" />
                 <img alt=""
                      src="https://preview.keenthemes.com/metronic8/demo1/assets/media/stock/600x600/img-65.jpg"
-                     class="w-100"/>
+                     class="w-100" />
               </div>
             </div>
           </form>
           <div class="modal-footer">
-            {#            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>#}
-            {#            <button type="button" class="btn btn-primary">Save changes</button>#}
+            {#
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+            Close</button
+>#} {#
+          <button type="button" class="btn btn-primary">Save changes</button>#}
           </div>
         </div>
       </div>
     </div>
-    {#  END MODAL NEW PAGE  #}
-
-    {# START MODAL ADVANCE SEO CONTENT  #}
-    <div class="modal fade" id="modal_advance_seo" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+    {# END MODAL NEW PAGE #} {# START MODAL ADVANCE SEO CONTENT #}
+    <div class="modal fade"
+         id="modal_advance_seo"
+         aria-hidden="true"
+         aria-labelledby="exampleModalToggleLabel2"
          tabindex="-1">
       <div class="modal-dialog modal-bottom modal-xl">
         <div class="modal-content">
-          <a href="#" id="kt_app_engage_toggle_off"
+          <a href="#"
+             id="kt_app_engage_toggle_off"
              class="app-engage-btn app-engage-btn-toggle-off text-hover-primary p-0">
-            <i class="ki-duotone ki-cross fs-2x"><span class="path1"></span><span class="path2"></span></i> </a>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
+            <i class="ki-duotone ki-cross fs-2x"><span class="path1"></span><span class="path2"></span></i>
+          </a>
+          <button type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"></button>
           <div class="modal-body">
             <form id="form_advance_seo">
               <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
-                          type="button" role="tab" aria-controls="home" aria-selected="true">Group1
-                  </button>
+                  <button class="nav-link active"
+                          id="home-tab"
+                          data-bs-toggle="tab"
+                          data-bs-target="#home"
+                          type="button"
+                          role="tab"
+                          aria-controls="home"
+                          aria-selected="true">Group1</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
-                          role="tab" aria-controls="profile" aria-selected="false">Group2
-                  </button>
+                  <button class="nav-link"
+                          id="profile-tab"
+                          data-bs-toggle="tab"
+                          data-bs-target="#profile"
+                          type="button"
+                          role="tab"
+                          aria-controls="profile"
+                          aria-selected="false">Group2</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button"
-                          role="tab" aria-controls="contact" aria-selected="false">Group3
-                  </button>
+                  <button class="nav-link"
+                          id="contact-tab"
+                          data-bs-toggle="tab"
+                          data-bs-target="#contact"
+                          type="button"
+                          role="tab"
+                          aria-controls="contact"
+                          aria-selected="false">Group3</button>
                 </li>
               </ul>
               <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="tab-pane fade show active"
+                     id="home"
+                     role="tabpanel"
+                     aria-labelledby="home-tab">
                   <div class="row">
                     <div class="col-3">
                       <label for="form_seo1" class="form-label">Seo1</label>
@@ -272,8 +292,7 @@
                              type="text"
                              class="form-control form-control-solid"
                              placeholder="Enter title"
-                             required/>
-
+                             required />
                     </div>
                     <div class="col-3">
                       <label for="form_seo2" class="form-label">Seo2</label>
@@ -282,25 +301,26 @@
                              type="text"
                              class="form-control form-control-solid"
                              placeholder="Enter title"
-                             required/>
+                             required />
                     </div>
                     <div class="col-3"></div>
                     <div class="col-3"></div>
                   </div>
                 </div>
-                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                <div class="tab-pane fade"
+                     id="profile"
+                     role="tabpanel"
+                     aria-labelledby="profile-tab">...</div>
+                <div class="tab-pane fade"
+                     id="contact"
+                     role="tabpanel"
+                     aria-labelledby="contact-tab">...</div>
               </div>
-
             </form>
           </div>
-
-
         </div>
       </div>
     </div>
-    {# END MODAL ADVANCE SEO CONTENT  #}
-
-    {#END WIDGET#}
+    {# END MODAL ADVANCE SEO CONTENT #} {#END WIDGET#}
   </div>
 {% endif %}
