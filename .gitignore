@@ -311,15 +311,18 @@ dump.rdb
 ### Project template
 one/media/
 
+certs/
+
 .pytest_cache/
 .ipython/
-project.css
-project.min.css
-vendors.js
-*.min.js
-*.min.js.map
 .env
 .envs/*/*
 !.envs/**/*.example
 !.envs/.local/.django
 !.envs/.local/.postgres
+
+# Keenthemes
+vendors.bundle.css
+vendors.bundle.js
+theme.bundle.css
+theme.bundle.js

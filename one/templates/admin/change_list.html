@@ -1,0 +1,361 @@
+{% extends "admin/base_site.html" %}
+{% load i18n grp_tags admin_urls static admin_list %}
+
+
+{% block stylesheets %}
+  {{ block.super }}
+  {{ media.css }}
+{% endblock %}
+
+{% block javascripts %}
+  {{ block.super }}
+  {{ media.js }}
+  {% if cl.formset or action_form %}
+    {% url 'admin:jsi18n' as jsi18nurl %}
+    <script type="text/javascript" src="{{ jsi18nurl|default:'../../jsi18n/' }}"></script>
+  {% endif %}
+  {% if cl.formset %}
+    <script type="text/javascript" charset="utf-8">
+      $(document).ready(function () {
+        grappelli.initDateAndTimePicker();
+        let prefix = "form";
+        let related_lookup_fields_fk = {% get_related_lookup_fields_fk cl.model_admin %};
+        let related_lookup_fields_m2m = {% get_related_lookup_fields_m2m cl.model_admin %};
+        let related_lookup_fields_generic = {% get_related_lookup_fields_generic cl.model_admin %};
+        let autocomplete_fields_fk = {% get_autocomplete_lookup_fields_fk cl.model_admin %};
+        let autocomplete_fields_m2m = {% get_autocomplete_lookup_fields_m2m cl.model_admin %};
+        let autocomplete_fields_generic = {% get_autocomplete_lookup_fields_generic cl.model_admin %};
+        $.each(related_lookup_fields_fk, function () {
+          $("div.grp-changelist-results")
+            .find("input[name^='" + prefix + "'][name$='-" + this + "']")
+            .grp_related_fk({lookup_url: "{% url 'grp_related_lookup' %}"});
+        });
+        $.each(related_lookup_fields_m2m, function () {
+          $("div.grp-changelist-results")
+            .find("input[name^='" + prefix + "'][name$='-" + this + "']")
+            .grp_related_m2m({lookup_url: "{% url 'grp_m2m_lookup' %}"});
+        });
+        $.each(related_lookup_fields_generic, function () {
+          let content_type = this[0],
+            object_id = this[1];
+          $("div.grp-changelist-results")
+            .find("input[name^='" + prefix + "'][name$='-" + this[1] + "']")
+            .each(function () {
+              let ct_id = "#id_" + prefix + "-" + $(this).attr("id").split("-")[1] + "-" + content_type,
+                obj_id = "#id_" + prefix + "-" + $(this).attr("id").split("-")[1] + "-" + object_id;
+              $(this).grp_related_generic({
+                content_type: ct_id,
+                object_id: obj_id,
+                lookup_url: "{% url 'grp_related_lookup' %}"
+              });
+            });
+        });
+        $.each(autocomplete_fields_fk, function () {
+          $("div.grp-changelist-results")
+            .find("input[name^='" + prefix + "'][name$='-" + this + "']")
+            .each(function () {
+              $(this).grp_autocomplete_fk({
+                lookup_url: "{% url 'grp_related_lookup' %}",
+                autocomplete_lookup_url: "{% url 'grp_autocomplete_lookup' %}"
+              });
+            });
+        });
+        $.each(autocomplete_fields_m2m, function () {
+          $("div.grp-changelist-results")
+            .find("input[name^='" + prefix + "'][name$='-" + this + "']")
+            .each(function () {
+              $(this).grp_autocomplete_m2m({
+                lookup_url: "{% url 'grp_m2m_lookup' %}",
+                autocomplete_lookup_url: "{% url 'grp_autocomplete_lookup' %}"
+              });
+            });
+        });
+        $.each(autocomplete_fields_generic, function () {
+          let content_type = this[0],
+            object_id = this[1];
+          $("div.grp-changelist-results")
+            .find("input[name^='" + prefix + "'][name$='-" + this[1] + "']")
+            .each(function () {
+              let i = $(this).attr("id").match(/-\d+-/);
+              if (i) {
+                let ct_id = "#id_" + prefix + i[0] + content_type,
+                  obj_id = "#id_" + prefix + i[0] + object_id;
+                $(this).grp_autocomplete_generic({
+                  content_type: ct_id,
+                  object_id: obj_id,
+                  lookup_url: "{% url 'grp_related_lookup' %}",
+                  autocomplete_lookup_url: "{% url 'grp_autocomplete_lookup' %}"
+                });
+              }
+            });
+        });
+        // reset actions select box
+        $('.grp-changelist-actions select').val(-1);
+        // find errors and move (because errors should be below form elements)
+        $("ul.errorlist").each(function () {
+          $(this).parents("td").append($(this));
+        });
+        // HACK: get rid of currently/change with URL–fields. F**K!!!
+        $('p.url').each(function () {
+          $(this).find("a").remove();
+          let text = $(this).html();
+          text = text.replace(/^\w*: /, "");
+          text = text.replace(/<br>.*: /, "");
+          $(this).html(text);
+        });
+        // HACK: remove input types
+        let clean_input_types = "{% grappelli_clean_input_types %}";
+        if (clean_input_types == "True") {
+          grappelli.cleanInputTypes();
+        }
+      });
+    </script>
+  {% endif %}
+  <script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+      grappelli.initSearchbar();
+      grappelli.initFilter();
+      $('.add-another').on("click", function (e) {
+        e.preventDefault();
+        showAddAnotherPopup(this);
+      });
+      $('.related-lookup').on("click", function (e) {
+        e.preventDefault();
+        showRelatedObjectLookupPopup(this);
+      });
+    });
+  </script>
+{% endblock %}
+
+{% block body-attrs %}
+  {{ block.super }}
+  data-kt-app-footer-fixed="true"
+{% endblock body-attrs %}
+
+{% block bodyclass %}grp-change-list{% endblock bodyclass %}
+
+{% block breadcrumbs %}
+  <ul class="breadcrumb breadcrumb-separatorless fw-semibold">
+    <!--begin::Item-->
+    <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
+      <a href="{% url 'admin:index' %}" class="text-gray-500 text-hover-primary">
+        <i class="ki-duotone ki-home fs-3 text-gray-400 me-n1"></i>
+      </a>
+    </li>
+    <!--end::Item-->
+    <!--begin::Item-->
+    <li class="breadcrumb-item">
+      <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1"></i>
+    </li>
+    <!--end::Item-->
+    <!--begin::Item-->
+    <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
+      <a href="{% url 'admin:app_list' app_label=cl.opts.app_label %}" class="text-gray-500 text-hover-primary">
+        {{ cl.opts.app_config.verbose_name }}
+      </a>
+    </li>
+    <!--end::Item-->
+
+    <!--begin::Item-->
+    <li class="breadcrumb-item">
+      <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1"></i>
+    </li>
+    <!--end::Item-->
+    <!--begin::Item-->
+    <li class="breadcrumb-item text-gray-500">
+      {{ cl.opts.verbose_name_plural|capfirst }}
+    </li>
+    <!--end::Item-->
+  </ul>
+{% endblock %}
+
+{% block content_title %}
+  <h2 class="fs-2 fw-semibold my-2">
+    {{ cl.opts.verbose_name_plural|capfirst }}
+  </h2>
+{% endblock content_title %}
+
+{% block object-tools %}
+  {% block object-tools-items %}
+    {% for tool in objectactions %}
+      {% url tools_view_name tool=tool.name as action_url %}
+      <a href="{% add_preserved_filters action_url %}" title="{{ tool.standard_attrs.title }}"
+         class="btn btn-flex btn-center btn-dark btn-sm px-4 grp-add-link grp-state-focus {{ tool.standard_attrs.class }}"
+        {{ tool.custom_attrs|custom_attrs_to_html }}>
+        {{ tool.label|capfirst }}
+      </a>
+    {% endfor %}
+
+    {% if has_add_permission %}
+      {% url cl.opts|admin_urlname:'add' as add_url %}
+      <!--begin::Add button-->
+      <a href="{% add_preserved_filters add_url is_popup to_field %}"
+         class="btn btn-flex btn-center btn-success btn-sm px-4 grp-add-link grp-state-focus">
+        {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
+      </a>
+      <!--end::Add button-->
+    {% endif %}
+  {% endblock object-tools-items %}
+{% endblock object-tools %}
+
+{% block content %}
+  <div class="card card-dashed">
+    <div class="card-header grp-module">
+      <!--begin::Title-->
+      <h3 class="card-title align-items-start flex-column">
+        <span class="card-label fw-bold text-gray-800"></span>
+        <span class="text-gray-400 mt-1 fw-semibold fs-6">
+          {% block pagination_top %}
+            {% pagination cl %}
+          {% endblock %}
+        </span>
+      </h3>
+      <!--end::Title-->
+      <!--begin::Actions-->
+      <div class="card-toolbar grp-row">
+        {% if cl.has_filters or cl.search_fields %}
+          {% block aside %}
+            <aside class="d-flex flex-stack flex-wrap gap-4">
+              <header style="display:none"><h1>{% if cl.search_fields %}Search{% if cl.has_filters %} &amp;
+              {% endif %}{% endif %}{% if cl.has_filters %}Filters{% endif %}</h1></header>
+              {% if cl.search_fields %}
+                <!--begin::Search-->
+                {% block search %}
+                  <div id="search" class="d-flex align-items-center fw-bold">
+                    {% search_form cl %}
+                  </div>
+                {% endblock search %}
+                <!--end::Search-->
+              {% endif %}
+              <!-- FILTERS -->
+              {% if cl.has_filters %}
+                <!--begin::Filters-->
+                {% block filters %}
+                  <div id="grp-filters" class="d-flex align-items-center fw-bold">
+                    <div class="grp-filter">
+                      <div class="grp-pulldown-container">
+                        <a href="javascript://" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end"
+                           data-kt-menu-overflow="true"
+                           class="btn btn-icon btn-color-gray-500 btn-active-color-primary justify-content-end grp-button grp-pulldown-handler">
+                          <i class="ki-duotone ki-element-plus fs-1">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                            <span class="path3"></span>
+                            <span class="path4"></span>
+                            <span class="path5"></span>
+                          </i>
+                        </a>
+                        <div data-kt-menu="true"
+                             class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-300px"
+                        >
+                          <div class="grp-pulldown-content">
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-3">
+                              <div class="menu-content fs-6 text-gray-900 fw-bold px-3 py-4">{% trans 'Filters' %}</div>
+                            </div>
+                            <!--end::Menu item-->
+                            <!--begin::Menu separator-->
+                            <div class="separator mb-3 opacity-75"></div>
+                            <!--end::Menu separator-->
+
+                            {% for spec in cl.filter_specs %}
+                              {% admin_list_filter cl spec %}
+                            {% endfor %}
+
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-3">
+                              <div class="menu-content px-3 py-3">
+                              </div>
+                            </div>
+                            <!--end::Menu item-->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {% endblock filters %}
+                <!--end::Filters-->
+              {% endif %}
+            </aside>
+          {% endblock aside %}
+        {% endif %}
+      </div>
+      <!--end::Actions-->
+
+      <!--begin::Date Hierarchy-->
+      {% block date_hierarchy %}
+        {% if cl.date_hierarchy %}
+          {% date_hierarchy cl %}
+        {% endif %}
+      {% endblock date_hierarchy %}
+      <!--begin::Date Hierarchy-->
+    </div>
+
+    <div class="card-body">
+      <form id="grp-changelist-form" action="" method="post"
+            {% if cl.formset.is_multipart %}enctype="multipart/form-data"{% endif %} novalidate>
+        {% csrf_token %}
+        <div class="keep-grp">
+          <section id="grp-changelist" class="{% if cl.list_editable %} grp-editable{% endif %}">
+            <header style="display:none"><h1>Results</h1></header>
+            <!-- POPUP -->
+            {% if is_popup %}<input type="hidden" name="_popup" value="1"/>{% endif %}
+            <!-- ERRORS -->
+            {% if cl.formset.errors %}
+              <p class="errornote">
+                {% if cl.formset.total_error_count == 1 %}{% trans "Please correct the error below." %}{% else %}
+                  {% trans "Please correct the errors below." %}{% endif %}
+              </p>
+              {{ cl.formset.non_form_errors }}
+            {% endif %}
+            <!-- MANAGEMENT FORM -->
+            {% if cl.formset %}
+              {{ cl.formset.management_form }}
+            {% endif %}
+            <!-- CHANGELIST-RESULTS -->
+            {% block result_list %}
+              {% result_list cl %}
+            {% endblock %}
+          </section>
+        </div>
+
+        {% if cl.formset or action_form %}
+          <div class="app-footer keep-grp">
+            <footer id="submit" class="app-footer-primary grp-module grp-submit-row grp-fixed-footer">
+              <header style="display:none"><h1>Submit Options</h1></header>
+              <ul class="menu menu-gray-600 menu-hover-primary fw-semibold order-1">
+                {% if action_form %}
+                  <li class="menu-item grp-float-left grp-changelist-actions">{% admin_actions %}</li>{% endif %}
+
+                {% if cl.formset %}
+                  <li class="menu-item">
+                    <input type="submit" class="grp-button grp-default" name="_save" value="{% trans "Save" %}"/>
+                  </li>
+                {% endif %}
+
+              </ul>
+            </footer>
+          </div>
+        {% endif %}
+      </form>
+    </div>
+
+    {% if not cl.result_count == 0 %}
+      <div class="card-footer">
+        {% block pagination_bottom %}
+          <div class="grp-module">
+            <div class="grp-row">{% pagination cl %}</div>
+          </div>
+        {% endblock %}
+      </div>
+    {% endif %}
+  </div>
+{% endblock content %}
+
+{% block footer %}
+  <!--begin::Footer-->
+  <div
+    class="align-items-center justify-content-center justify-content-md-between flex-column flex-md-row py-3 py-lg-6 h-80px">
+  </div>
+  <!--end::Footer-->
+{% endblock footer %}

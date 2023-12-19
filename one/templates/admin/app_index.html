@@ -1,0 +1,103 @@
+{% extends "admin/index.html" %}
+{% load i18n grp_tags %}
+
+{% block breadcrumbs %}
+  <ul class="breadcrumb breadcrumb-separatorless fw-semibold">
+    <!--begin::Item-->
+    <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
+      <a href="{% url 'admin:index' %}" class="text-gray-500 text-hover-primary">
+        <i class="ki-duotone ki-home fs-3 text-gray-400 me-n1"></i>
+      </a>
+    </li>
+    <!--end::Item-->
+    {% for app in app_list %}
+      <!--begin::Item-->
+      <li class="breadcrumb-item">
+        <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1"></i>
+      </li>
+      <!--end::Item-->
+      {% if forloop.last %}
+        <!--begin::Item-->
+        <li class="breadcrumb-item text-gray-500">
+          {% blocktrans with app.name as name %}{{ name }}{% endblocktrans %}
+        </li>
+        <!--end::Item-->
+      {% else %}
+        <!--begin::Item-->
+        <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
+          {% blocktrans with app.name as name %}{{ name }}{% endblocktrans %}
+        </li>
+        <!--end::Item-->
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endblock breadcrumbs %}
+
+{% block content %}
+  <!--begin::Row-->
+  <div class="row g-5 g-xl-10" id="apps_init">
+    {% for app in app_list %}
+      <!--begin::Col-->
+      <div class="col-xl-4 {% if False %}grp-module{% endif %}" id="app_{{ app.name|lower }}">
+        <!--begin::{{ app.name|upper }}-->
+        <div class="card card-flush {% if not forloop.first %}mt-5{% endif %}">
+          <!--begin::Header-->
+          <div class="card-header min-h-50px">
+            <!--begin::Title-->
+            <h3 class="card-title align-items-start flex-column m-0 h-50px">
+              <span class="card-label fw-bold text-gray-800">
+                  {% trans app.name %}
+              </span>
+            </h3>
+            <!--end::Title-->
+          </div>
+          <!--end::Header-->
+
+          <!--begin::Body-->
+          <div class="card-body pt-0 pb-0">
+            <!--begin::Table container-->
+            <div class="table-responsive">
+              <!--begin::Table-->
+              <table class="table table-row-dashed align-middle gs-0 gy-4 my-0">
+                <!--begin::Table body-->
+                <tbody>
+                {% for model in app.models %}
+                  <tr class="grp-row" id="model-{{ model.object_name|lower }}">
+                    <td>
+                      {% if model.admin_url %}
+                        <a href="{{ model.admin_url }}" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">
+                          {{ model.name }}
+                        </a>
+                      {% else %}
+                        <span class="text-gray-400 fw-semibold d-block fs-7">{{ model.name }}</span>
+                      {% endif %}
+                    </td>
+                    <td class="text-end">
+                      {% if model.add_url %}
+                        <a class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary w-25px h-25px"
+                           href="{{ model.add_url }}">
+                          <i class="ki-duotone ki-plus fs-2 text-gray-500"></i>
+                        </a>
+                      {% endif %}
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+                <!--end::Table body-->
+              </table>
+              <!--end::Table-->
+            </div>
+            <!--end::Table container-->
+          </div>
+          <!--end::Body-->
+
+        </div>
+        <!--end::{{ app.name|upper }}-->
+      </div>
+      <!--end::Col-->
+    {% empty %}
+      <p>{% trans "You don´t have permission to edit anything." %}</p>
+    {% endfor %}
+  </div>
+  <!--end::Row-->
+{% endblock content %}

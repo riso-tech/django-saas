@@ -20,14 +20,14 @@ python << END
 import sys
 import time
 
-import psycopg
+import psycopg2
 
 suggest_unrecoverable_after = 30
 start = time.time()
 
 while True:
     try:
-        psycopg.connect(
+        psycopg2.connect(
             dbname="${POSTGRES_DB}",
             user="${POSTGRES_USER}",
             password="${POSTGRES_PASSWORD}",
@@ -35,7 +35,7 @@ while True:
             port="${POSTGRES_PORT}",
         )
         break
-    except psycopg.OperationalError as error:
+    except psycopg2.OperationalError as error:
         sys.stderr.write("Waiting for PostgreSQL to become available...\n")
 
         if time.time() - start > suggest_unrecoverable_after:

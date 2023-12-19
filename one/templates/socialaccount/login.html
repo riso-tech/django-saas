@@ -1,0 +1,61 @@
+{% extends "account/base.html" %}
+{% load i18n allauth %}
+
+{% block inner %}
+  <div class="d-flex flex-center flex-column flex-column-fluid">
+    <!--begin::Wrapper-->
+    <div class="w-lg-500px p-10 p-lg-15 mx-auto">
+      <!--begin::Form-->
+      <form class="form w-100" method="post" action>
+        {% csrf_token %}
+        {% if process == "connect" %}
+          <!--begin::Heading-->
+          <div class="text-center mb-10">
+            <!--begin::Title-->
+            <h1 class="text-dark mb-3">{% blocktrans with provider.name as provider %}Connect
+              {{ provider }}{% endblocktrans %}</h1>
+            <!--end::Title-->
+            <!--begin::Link-->
+            <div class="text-gray-400 fw-semibold fs-4">
+              {% blocktrans with provider.name as provider %}You are about to connect a new third-party account from
+                {{ provider }}.{% endblocktrans %}
+            </div>
+            <!--end::Link-->
+          </div>
+          <!--begin::Heading-->
+        {% else %}
+          <!--begin::Heading-->
+          <div class="text-center mb-10">
+            <!--begin::Title-->
+            <h1 class="text-dark mb-3">
+              {% blocktrans with provider.name as provider %}Sign In Via {{ provider }}{% endblocktrans %}
+            </h1>
+            <!--end::Title-->
+            <!--begin::Link-->
+            <div class="text-gray-400 fw-semibold fs-4">
+              {% blocktrans with provider.name as provider %}You are about to sign in using a third-party account from
+                {{ provider }}.{% endblocktrans %}
+            </div>
+            <!--end::Link-->
+          </div>
+          <!--begin::Heading-->
+        {% endif %}
+
+        <!--begin::Actions-->
+        <div class="text-center">
+          <!--begin::Submit button-->
+          <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
+            <span class="indicator-label">{% translate "Process" %}</span>
+            <span class="indicator-progress">{% translate "Please wait" %}...
+              <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </span>
+          </button>
+          <!--end::Submit button-->
+        </div>
+        <!--end::Actions-->
+      </form>
+      <!--end::Form-->
+    </div>
+    <!--end::Wrapper-->
+  </div>
+{% endblock inner %}

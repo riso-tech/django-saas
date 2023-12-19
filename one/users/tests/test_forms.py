@@ -3,16 +3,21 @@ Module for all Form Tests.
 """
 from django.utils.translation import gettext_lazy as _
 
+from one.tests.tests.cases import FastTenantTestCase as TestCase
 from one.users.forms import UserAdminCreationForm
 from one.users.models import User
 
 
-class TestUserAdminCreationForm:
+class TestUserAdminCreationForm(TestCase):
     """
     Test class for all tests related to the UserAdminCreationForm
     """
 
-    def test_username_validation_error_msg(self, user: User):
+    def setUp(self):
+        super().setUp()  # required
+        self.user = User.objects.create_user(username="test", password="test")
+
+    def test_username_validation_error_msg(self):
         """
         Tests UserAdminCreation Form's unique validator functions correctly by testing:
             1) A new user with an existing username cannot be added.
@@ -24,9 +29,9 @@ class TestUserAdminCreationForm:
         # hence cannot be created.
         form = UserAdminCreationForm(
             {
-                "username": user.username,
-                "password1": user.password,
-                "password2": user.password,
+                "username": self.user.username,
+                "password1": self.user.password,
+                "password2": self.user.password,
             }
         )
 

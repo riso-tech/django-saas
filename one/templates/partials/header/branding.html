@@ -1,0 +1,21 @@
+{% load i18n static %}
+<!--begin::Logo and search-->
+<div class="d-flex flex-grow-1 flex-lg-grow-0">
+  <!--begin::Logo wrapper-->
+  <div class="d-flex align-items-center" id="kt_app_header_logo_wrapper">
+    <!--begin::Header toggle-->
+    <button class="d-lg-none btn btn-icon btn-color-white btn-active-color-primary ms-n4 me-sm-2"
+            id="kt_app_header_menu_toggle">
+      <i class="ki-duotone ki-abstract-14 fs-1"><span class="path1"></span><span class="path2"></span></i>
+    </button>
+    <!--end::Header toggle-->
+    <!--begin::Logo-->
+    <a href="{% url 'home' %}" class="d-flex align-items-center mb-1 mb-lg-0 pt-lg-1">
+      <img alt="Logo" src="{% static 'media/logos/default-small.svg' %}" class="d-block d-sm-none"/>
+      <img alt="Logo" src="{% static 'media/logos/default.svg' %}" class="d-none d-sm-block"/>
+    </a>
+    <!--end::Logo-->
+  </div>
+  <!--end::Logo wrapper-->
+</div>
+<!--end::Logo and search-->

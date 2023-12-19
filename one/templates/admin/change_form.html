@@ -1,0 +1,288 @@
+{% extends "admin/base_site.html" %}
+{% load static i18n admin_modify admin_urls grp_tags %}
+
+
+{% block javascripts %}
+  {{ block.super }}
+  {% url 'admin:jsi18n' as jsi18nurl %}
+  <script type="text/javascript" src="{{ jsi18nurl|default:'../../../jsi18n/' }}"></script>
+  <script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+      grappelli.initDateAndTimePicker();
+      $("#grp-content-container .grp-group").grp_collapsible_group();
+      $("#grp-content-container .grp-collapse").grp_collapsible({
+        on_init: function (elem, options) {
+          // open collapse (and all collapse parents) in case of errors
+          if (elem.find("ul.errorlist").length > 0) {
+            elem.removeClass("grp-closed")
+              .addClass("grp-open");
+            elem.parents(".grp-collapse")
+              .removeClass("grp-closed")
+              .addClass("grp-open");
+          }
+        }
+      });
+      let related_lookup_fields_fk = {% get_related_lookup_fields_fk adminform.model_admin %};
+      let related_lookup_fields_m2m = {% get_related_lookup_fields_m2m adminform.model_admin %};
+      let related_lookup_fields_generic = {% get_related_lookup_fields_generic adminform.model_admin %};
+      let autocomplete_fields_fk = {% get_autocomplete_lookup_fields_fk adminform.model_admin %};
+      let autocomplete_fields_m2m = {% get_autocomplete_lookup_fields_m2m adminform.model_admin %};
+      let autocomplete_fields_generic = {% get_autocomplete_lookup_fields_generic adminform.model_admin %};
+      $.each(related_lookup_fields_fk, function () {
+        $("#id_" + this).grp_related_fk({lookup_url: "{% url 'grp_related_lookup' %}"});
+      });
+      $.each(related_lookup_fields_m2m, function () {
+        $("#id_" + this).grp_related_m2m({lookup_url: "{% url 'grp_m2m_lookup' %}"});
+      });
+      $.each(related_lookup_fields_generic, function () {
+        let content_type = "#id_" + this[0],
+          object_id = "#id_" + this[1];
+        $(object_id).grp_related_generic({
+          content_type: content_type,
+          object_id: object_id,
+          lookup_url: "{% url 'grp_related_lookup' %}"
+        });
+      });
+      $.each(autocomplete_fields_fk, function () {
+        $("#id_" + this).grp_autocomplete_fk({
+          lookup_url: "{% url 'grp_related_lookup' %}",
+          autocomplete_lookup_url: "{% url 'grp_autocomplete_lookup' %}"
+        });
+      });
+      $.each(autocomplete_fields_m2m, function () {
+        $("#id_" + this).grp_autocomplete_m2m({
+          lookup_url: "{% url 'grp_m2m_lookup' %}",
+          autocomplete_lookup_url: "{% url 'grp_autocomplete_lookup' %}"
+        });
+      });
+      $.each(autocomplete_fields_generic, function () {
+        let content_type = "#id_" + this[0],
+          object_id = "#id_" + this[1];
+        $(object_id).grp_autocomplete_generic({
+          content_type: content_type,
+          object_id: object_id,
+          lookup_url: "{% url 'grp_related_lookup' %}",
+          autocomplete_lookup_url: "{% url 'grp_autocomplete_lookup' %}"
+        });
+      });
+      $("a#grp-open-all").on("click", function () {
+        $("a#grp-open-all").addClass("d-none");
+        $("a#grp-close-all").removeClass("d-none");
+        $("#grp-content .grp-collapse-handler").each(function () {
+          $(this).parent(".grp-collapse").removeClass("grp-closed").addClass("grp-open");
+        });
+      });
+      $("a#grp-close-all").on("click", function () {
+        $("a#grp-close-all").addClass("d-none");
+        $("a#grp-open-all").removeClass("d-none");
+        $("#grp-content .grp-collapse-handler").each(function () {
+          $(this).parent(".grp-collapse").removeClass("grp-open").addClass("grp-closed");
+        });
+      });
+      // HACK: get rid of currently/change with URL–fields. F**K!!!
+      {% block js_remove_url %}
+        $('p.url').each(function () {
+          $(this).find("a").remove();
+          let text = $(this).html();
+          text = text.replace(/^\w*: /, "");
+          text = text.replace(/<br>.*: /, "");
+          $(this).html(text);
+        });
+      {% endblock %}
+      // HACK: rearrange inlines
+      {% block js_rearrange_inlines %}
+        $('div.grp-group').each(function () {
+          let placeholder = $("fieldset.placeholder." + $(this).attr("id"));
+          if (placeholder.length) {
+            $(placeholder).replaceWith($(this));
+          }
+        });
+      {% endblock %}
+      // HACK: remove input types
+      {% block js_clean_input_types %}
+        let clean_input_types = "{% grappelli_clean_input_types %}";
+        if (clean_input_types === "True") {
+          grappelli.cleanInputTypes();
+        }
+      {% endblock %}
+    });
+  </script>
+  {{ media }}
+{% endblock javascripts %}
+
+{% block extrahead %}
+  {{ block.super }}
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('.add-another').on("click", function (e) {
+        e.preventDefault();
+        showAddAnotherPopup(this);
+      });
+      $('.related-lookup').on("click", function (e) {
+        e.preventDefault();
+        showRelatedObjectLookupPopup(this);
+      });
+      {% if adminform and add %}
+        $('form#{{ opts.model_name }}_form :input:visible:enabled:first').focus()
+      {% endif %}
+    });
+  </script>
+{% endblock extrahead %}
+
+{% block body-attrs %}
+  {{ block.super }}
+  data-kt-app-footer-fixed="true"
+{% endblock body-attrs %}
+
+{% block bodyclass %}
+  {{ opts.app_label }}-{{ opts.object_name.lower }} grp-change-form
+{% endblock bodyclass %}
+
+{% block breadcrumbs %}
+  <ul class="breadcrumb breadcrumb-separatorless fw-semibold">
+    <!--begin::Item-->
+    <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
+      <a href="{% url 'admin:index' %}" class="text-gray-500 text-hover-primary">
+        <i class="ki-duotone ki-home fs-3 text-gray-400 me-n1"></i>
+      </a>
+    </li>
+    <!--end::Item-->
+
+    <!--begin::Item Group-->
+    <!--begin::Item-->
+    <li class="breadcrumb-item">
+      <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1"></i>
+    </li>
+    <!--end::Item-->
+    <!--begin::Item-->
+    <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
+      <a href="{% url 'admin:app_list' app_label=opts.app_label %}" class="text-gray-500 text-hover-primary">
+        {{ opts.app_config.verbose_name }}
+      </a>
+    </li>
+    <!--end::Item-->
+    <!--end::Item Group-->
+
+    <!--begin::Item Group-->
+    <!--begin::Item-->
+    <li class="breadcrumb-item">
+      <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1"></i>
+    </li>
+    <!--end::Item-->
+    <!--begin::Item-->
+    <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
+      {% if has_view_permission %}
+        {% url opts|admin_urlname:'changelist' as changelist_url %}
+        <a href="{% add_preserved_filters changelist_url %}"
+           class="text-gray-500 text-hover-primary">{{ opts.verbose_name_plural|capfirst }}</a>
+      {% else %}
+        {{ opts.verbose_name_plural|capfirst }}
+      {% endif %}
+    </li>
+    <!--end::Item-->
+    <!--end::Item Group-->
+
+    <!--begin::Item Group-->
+    <!--begin::Item-->
+    <li class="breadcrumb-item">
+      <i class="ki-duotone ki-right fs-4 text-gray-700 mx-n1"></i>
+    </li>
+    <!--end::Item-->
+    <!--begin::Item-->
+    <li class="breadcrumb-item text-gray-500">
+      {% if add %}{% trans "Add" %} {{ opts.verbose_name|capfirst }}{% else %}
+        {{ original|capfirst|truncatewords:"18" }}{% endif %}
+    </li>
+    <!--end::Item-->
+    <!--end::Item Group-->
+  </ul>
+{% endblock breadcrumbs %}
+
+{% block page-tools %}
+  {% if not is_popup %}
+    <a href="javascript://" id="grp-open-all" title="{% trans 'Open All Items' %}"
+       class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary w-25px h-25px grp-tool">
+      <i class="ki-duotone ki-down fs-2 text-gray-500"></i>
+    </a>
+    <a href="javascript://" id="grp-close-all" title="{% trans 'Close All Items' %}"
+       class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary w-25px h-25px grp-tool d-none">
+      <i class="ki-duotone ki-up fs-2 text-gray-500"></i>
+    </a>
+  {% endif %}
+{% endblock page-tools %}
+
+{% block object-tools %}
+  {% if change %}
+    {% if not is_popup %}
+      {% block object-tools-items %}
+        {% for tool in objectactions %}
+          {% url tools_view_name pk=object_id tool=tool.name as action_url %}
+          <a href="{% add_preserved_filters action_url %}" title="{{ tool.standard_attrs.title }}"
+             class="btn btn-flex btn-center btn-dark btn-sm px-4 grp-add-link grp-state-focus {{ tool.standard_attrs.class }}"
+            {{ tool.custom_attrs|custom_attrs_to_html }}>
+            {{ tool.label|capfirst }}
+          </a>
+        {% endfor %}
+
+        <!--begin::History button-->
+        {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
+        <a href="{% add_preserved_filters history_url %}"
+           class="btn btn-flex btn-center btn-dark btn-sm px-4 grp-add-link grp-state-focus">
+          {% trans "History" %}
+        </a>
+        <!--end::History button-->
+
+        {% if has_absolute_url %}
+          <a href="{{ absolute_url }}"
+             class="btn btn-flex btn-center btn-dark btn-sm px-4 grp-add-link grp-state-focus">
+            {% trans "View on site" %}
+          </a>
+        {% endif %}
+      {% endblock object-tools-items %}
+    {% endif %}
+  {% endif %}
+{% endblock object-tools %}
+
+{% block content %}
+  <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post"
+        id="{{ opts.model_name }}_form" novalidate>
+    {% csrf_token %}
+    {% block form_top %}{% endblock form_top %}
+    {% if is_popup %}<input type="hidden" name="_popup" value="1"/>{% endif %}
+
+    <div class="keep-grp">
+      {% block field_sets %}
+        {% for fieldset in adminform %}
+          {% include "admin/includes/fieldset.html" %}
+        {% endfor %}
+      {% endblock %}
+
+      {% block after_field_sets %}{% endblock %}
+
+      <!-- Inlines -->
+      {% block inline_field_sets %}
+        {% for inline_admin_formset in inline_admin_formsets %}
+          {% include inline_admin_formset.opts.template %}
+        {% endfor %}
+      {% endblock %}
+
+      {% block after_related_objects %}{% endblock %}
+    </div>
+
+    <div class="app-footer keep-grp">
+      {% block submit_buttons_bottom %}{% submit_row %}{% endblock submit_buttons_bottom %}
+    </div>
+
+    <!-- JS for prepopulated fields -->
+    {% prepopulated_fields_js %}
+
+  </form>
+{% endblock content %}
+
+{% block footer %}
+  <!--begin::Footer-->
+  <div
+    class="align-items-center justify-content-center justify-content-md-between flex-column flex-md-row py-3 py-lg-6 h-80px">
+  </div>
+  <!--end::Footer-->
+{% endblock footer %}
