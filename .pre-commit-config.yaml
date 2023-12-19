@@ -1,5 +1,8 @@
-exclude: '^docs/|/migrations/'
+exclude: '^docs/|/migrations/|devcontainer.json'
 default_stages: [commit]
+
+default_language_version:
+  python: python3.11
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -17,12 +20,12 @@ repos:
       - id: check-docstring-first
       - id: detect-private-key
 
-#  - repo: https://github.com/pre-commit/mirrors-prettier
-#    rev: v3.0.3
-#    hooks:
-#      - id: prettier
-#        args: ['--tab-width', '2', '--single-quote']
-#        exclude: '*/templates/*'
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v4.0.0-alpha.4
+    hooks:
+      - id: prettier
+        args: ['--tab-width', '2', '--single-quote']
+        exclude: 'one/templates/'
 
   - repo: https://github.com/adamchainz/django-upgrade
     rev: '1.15.0'
@@ -37,12 +40,12 @@ repos:
         args: [--py311-plus]
 
   - repo: https://github.com/psf/black
-    rev: 23.11.0
+    rev: 23.12.0
     hooks:
       - id: black
 
   - repo: https://github.com/PyCQA/isort
-    rev: 5.12.0
+    rev: 5.13.2
     hooks:
       - id: isort
 
@@ -51,11 +54,11 @@ repos:
     hooks:
       - id: flake8
 
-#  - repo: https://github.com/Riverside-Healthcare/djLint
-#    rev: v1.34.0
-#    hooks:
-#      - id: djlint-reformat-django
-#      - id: djlint-django
+  - repo: https://github.com/Riverside-Healthcare/djLint
+    rev: v1.34.0
+    hooks:
+      - id: djlint-reformat-django
+      - id: djlint-django
 
 # sets up .pre-commit-ci.yaml to ensure pre-commit dependencies stay up to date
 ci:

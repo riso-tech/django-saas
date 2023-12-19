@@ -109,7 +109,7 @@
     "sass": "^1.43.4"
   },
   "engines": {
-    "node": "18"
+    "node": "20"
   },
   "browserslist": [
     "last 2 versions"
