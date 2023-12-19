@@ -9,7 +9,6 @@ from django.http import HttpRequest
 
 if typing.TYPE_CHECKING:
     from allauth.socialaccount.models import SocialLogin
-
     from one.users.models import User
 
 
@@ -28,11 +27,12 @@ class SocialAccountAdapter(DefaultSocialAccountAdapter):
 
         See: https://django-allauth.readthedocs.io/en/latest/advanced.html?#creating-and-populating-user-instances
         """
-        user = sociallogin.user
-        if name := data.get("name"):
-            user.name = name
-        elif first_name := data.get("first_name"):
-            user.name = first_name
-            if last_name := data.get("last_name"):
-                user.name += f" {last_name}"
-        return super().populate_user(request, sociallogin, data)
+        user = super().populate_user(request, sociallogin, data)
+        if not user.name:
+            if name := data.get("name"):
+                user.name = name
+            elif first_name := data.get("first_name"):
+                user.name = first_name
+                if last_name := data.get("last_name"):
+                    user.name += f" {last_name}"
+        return user

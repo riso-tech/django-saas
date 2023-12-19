@@ -10,7 +10,7 @@ from .base import env
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = env(
     "DJANGO_SECRET_KEY",
-    default="QFoR5XA5TbHg7bQ3bTWOhRYwsWxmApH4wKM9yNedAMmtOUoAHNhEJtIR9hXVkA6O",
+    default="tjB4Ej7JeZ2vzTjPAY0g9Ep0dkPs3Znjvk5bvai1NDQEStQFDuOlPeXWaihdfDPn",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#test-runner
 TEST_RUNNER = "django.test.runner.DiscoverRunner"
@@ -32,6 +32,6 @@ TEMPLATES[0]["OPTIONS"]["debug"] = True  # type: ignore # noqa: F405
 # MEDIA
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-url
-MEDIA_URL = "http://media.testserver"
+MEDIA_URL = 'http://media.testserver'
 # Your stuff...
 # ------------------------------------------------------------------------------

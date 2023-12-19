@@ -53,10 +53,10 @@ services:
     command: /start-docs
 
   mailpit:
-    image: axllent/mailpit:v1.8
+    image: axllent/mailpit:latest
     container_name: one_local_mailpit
     ports:
-      - '8025:8025'
+      - "8025:8025"
 
   redis:
     image: redis:6
