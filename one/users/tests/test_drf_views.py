@@ -1,36 +1,35 @@
+import pytest
 from rest_framework.test import APIRequestFactory
 
-from one.tests.tests.cases import FastTenantTestCase as TestCase
 from one.users.api.views import UserViewSet
 from one.users.models import User
 
 
-class TestUserViewSet(TestCase):
-    def setUp(self):
-        super().setUp()  # required
-        self.user = User.objects.create_user(username="test", password="test")
-        self.api_rf = APIRequestFactory()
+class TestUserViewSet:
+    @pytest.fixture
+    def api_rf(self) -> APIRequestFactory:
+        return APIRequestFactory()
 
-    def test_get_queryset(self):
+    def test_get_queryset(self, user: User, api_rf: APIRequestFactory):
         view = UserViewSet()
-        request = self.api_rf.get("/fake-url/")
-        request.user = self.user
+        request = api_rf.get("/fake-url/")
+        request.user = user
 
         view.request = request
 
-        assert self.user in view.get_queryset()
+        assert user in view.get_queryset()
 
-    def test_me(self):
+    def test_me(self, user: User, api_rf: APIRequestFactory):
         view = UserViewSet()
-        request = self.api_rf.get("/fake-url/")
-        request.user = self.user
+        request = api_rf.get("/fake-url/")
+        request.user = user
 
         view.request = request
 
         response = view.me(request)  # type: ignore
 
         assert response.data == {
-            "username": self.user.username,
-            "url": f"http://testserver/api/users/{self.user.username}/",
-            "name": self.user.name,
+            "username": user.username,
+            "url": f"http://testserver/api/users/{user.username}/",
+            "name": user.name,
         }

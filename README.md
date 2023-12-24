@@ -6,36 +6,12 @@ Django Software as a Service
 [![Code Coverage](https://scrutinizer-ci.com/g/riso-tech/django-saas/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/riso-tech/django-saas/?branch=main)
 [![Build Status](https://scrutinizer-ci.com/g/riso-tech/django-saas/badges/build.png?b=main)](https://scrutinizer-ci.com/g/riso-tech/django-saas/build-status/main)
 [![Code Intelligence Status](https://scrutinizer-ci.com/g/riso-tech/django-saas/badges/code-intelligence.svg?b=main)](https://scrutinizer-ci.com/code-intelligence)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/riso-tech/django-saas/main.svg)](https://results.pre-commit.ci/latest/github/riso-tech/django-saas/main)
+
+[![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter-django/)
 [![Black code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
 License: MIT
-
-## Features
-
-##### SaaS Multi Tenant
-
- - [x] Initial first business process
- - [ ] New business tenant registration
-
-##### Drag-Drop CMS
-
- - [x] Theme management
- - [ ] GrapeJS
-
-##### Custom Grappelli Admin
-
- - [ ] Admin UI with Oswald
- - [x] Grappelli: Related Lookups, Autocomplete Lookups
- - [x] Custom Actions
-
-##### User Profile
-
- - [x] Overview Page
- - [x] Profile Update
- - [x] Email management
- - [x] Facebook Login
- - [x] Google Login
-
 
 ## Support this Project!
 
@@ -46,8 +22,11 @@ Bin Nguyễn, Project Lead ([GitHub](https://github.com/riso-tech)): expertise i
 ## Special Thanks!
 
 ##### [Django Cookiecutter](https://github.com/cookiecutter/cookiecutter-django)
+
 ##### [GrapeJS](https://grapesjs.com/)
+
 ##### [Django Tenants](https://django-tenants.readthedocs.io/en/latest/)
+
 ##### [Keen Themes Team](https://keenthemes.com/): [Template Oswald](https://keenthemes.com/products/oswald-html-free)
 
     Thank you to KeenThemes for granting us a custom license to use their amazing Template Oswald for Django-SaaS UI

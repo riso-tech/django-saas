@@ -1,4 +1,4 @@
-FROM node:18-bullseye-slim as client-builder
+FROM node:20-bookworm-slim as client-builder
 
 ARG APP_HOME=/app
 WORKDIR ${APP_HOME}
@@ -8,7 +8,7 @@ RUN npm install && npm cache clean --force
 COPY . ${APP_HOME}
 RUN npm run build
 # define an alias for the specific python version used in this file.
-FROM python:3.11.6-slim-bullseye as python
+FROM python:3.11.7-slim-bookworm as python
 
 # Python build stage
 FROM python as python-build-stage
@@ -73,11 +73,15 @@ RUN chmod +x /entrypoint
 COPY --chown=django:django ./compose/production/django/start /start
 RUN sed -i 's/\r$//g' /start
 RUN chmod +x /start
-
-
 COPY --chown=django:django ./compose/production/django/celery/worker/start /start-celeryworker
 RUN sed -i 's/\r$//g' /start-celeryworker
 RUN chmod +x /start-celeryworker
+
+
+COPY --chown=django:django ./compose/production/django/celery/beat/start /start-celerybeat
+RUN sed -i 's/\r$//g' /start-celerybeat
+RUN chmod +x /start-celerybeat
+
 
 COPY --chown=django:django ./compose/production/django/celery/flower/start /start-flower
 RUN sed -i 's/\r$//g' /start-flower

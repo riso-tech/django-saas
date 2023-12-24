@@ -5,8 +5,6 @@ from pathlib import Path
 
 import environ
 
-from one.libraries.guid.integrations import CeleryIntegration as CorrelationCeleryIntegration
-
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 # one/
 APPS_DIR = BASE_DIR / "one"
@@ -47,21 +45,10 @@ LOCALE_PATHS = [str(BASE_DIR / "locale")]
 # DATABASES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
-DATABASES = {
-    "default": {
-        "ENGINE": "django_tenants.postgresql_backend",
-        "NAME": env("POSTGRES_DB"),
-        "USER": env("POSTGRES_USER"),
-        "PASSWORD": env("POSTGRES_PASSWORD"),
-        "HOST": env("POSTGRES_HOST"),
-        "PORT": env("POSTGRES_PORT"),
-        "ATOMIC_REQUESTS": True,
-    }
-}
+DATABASES = {"default": env.db("DATABASE_URL")}
+DATABASES["default"]["ATOMIC_REQUESTS"] = True
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-# https://docs.djangoproject.com/en/4.2/ref/settings/#std-setting-DATABASE_ROUTERS
-DATABASE_ROUTERS = ("django_tenants.routers.TenantSyncRouter",)
 
 # URLS
 # ------------------------------------------------------------------------------
@@ -72,50 +59,41 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 # APPS
 # ------------------------------------------------------------------------------
-SHARED_APPS = [
-    # Override django.contrib.admin
-    "one.libraries.grappelli",
-    # Shared apps
-    "django_tenants",
-    "one.business",
-]
-
-TENANT_APPS = [
-    # Django apps
+DJANGO_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django.contrib.humanize",  # Handy template tags
+    # "django.contrib.humanize", # Handy template tags
     "django.contrib.admin",
     "django.forms",
-    "django.contrib.flatpages",
-    # Third party apps
+]
+THIRD_PARTY_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "allauth.socialaccount.providers.google",
-    "allauth.socialaccount.providers.facebook",
+    "django_celery_beat",
     "rest_framework",
     "rest_framework.authtoken",
     "corsheaders",
     "drf_spectacular",
-    "meta",
-    # Custom Apps
-    "one.libraries.guid",
+]
+
+LOCAL_APPS = [
     "one.users",
-    "one.gateways.payments",
-    "one.cms",
-    "one.cms.ui",
-    "one.cms.pages",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
+# MIGRATIONS
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
+MIGRATION_MODULES = {"sites": "one.contrib.sites.migrations"}
 
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
@@ -153,8 +131,6 @@ AUTH_PASSWORD_VALIDATORS = [
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#middleware
 MIDDLEWARE = [
-    "one.libraries.guid.middleware.guid_middleware",  # noqa
-    "one.business.middlewares.TenantMainMiddleware",  # Must be first
     "django.middleware.security.SecurityMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -312,14 +288,11 @@ CELERY_TASK_TIME_LIMIT = 5 * 60
 # TODO: set to whatever value is adequate in your circumstances
 CELERY_TASK_SOFT_TIME_LIMIT = 60
 # https://docs.celeryq.dev/en/stable/userguide/configuration.html#beat-scheduler
-CELERY_BEAT_SCHEDULER = "tenant_schemas_celery.scheduler.TenantAwareScheduler"
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 # https://docs.celeryq.dev/en/stable/userguide/configuration.html#worker-send-task-events
 CELERY_WORKER_SEND_TASK_EVENTS = True
 # https://docs.celeryq.dev/en/stable/userguide/configuration.html#std-setting-task_send_sent_event
 CELERY_TASK_SEND_SENT_EVENT = True
-# https://docs.celeryq.dev/en/stable/userguide/configuration.html#std-setting-task_default_queue
-CELERY_TASK_DEFAULT_QUEUE = env.str("CELERY_TASK_DEFAULT_QUEUE", "celery")
-
 # django-allauth
 # ------------------------------------------------------------------------------
 ACCOUNT_ALLOW_REGISTRATION = env.bool("DJANGO_ACCOUNT_ALLOW_REGISTRATION", True)
@@ -337,75 +310,6 @@ ACCOUNT_FORMS = {"signup": "one.libraries.allauth.forms.UserSignupForm"}
 SOCIALACCOUNT_ADAPTER = "one.libraries.allauth.adapters.SocialAccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
 SOCIALACCOUNT_FORMS = {"signup": "one.libraries.allauth.forms.UserSocialSignupForm"}
-# https://django-allauth.readthedocs.io/en/stable/advanced.html#admin
-DJANGO_ADMIN_FORCE_ALLAUTH = True
-# https://docs.allauth.org/en/latest/socialaccount/providers/index.html
-ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
-
-SOCIALACCOUNT_PROVIDERS = {
-    "google": {
-        "SCOPE": [
-            "profile",
-            "email",
-            "https://www.googleapis.com/auth/adwords",
-        ],
-        "AUTH_PARAMS": {
-            "access_type": "offline",
-        },
-    },
-    "facebook": {
-        "METHOD": "oauth2",
-        "SDK_URL": "//connect.facebook.net/{locale}/sdk.js",
-        "SCOPE": [
-            "user_birthday",
-            "user_hometown",
-            "user_location",
-            "user_likes",
-            "user_events",
-            "user_photos",
-            "user_videos",
-            "user_friends",
-            "user_status",
-            "user_tagged_places",
-            "user_posts",
-            "user_gender",
-            "user_link",
-            "user_age_range",
-            "email",
-            "read_insights",
-            "publish_video",
-            "catalog_management",
-            "manage_pages",
-            "pages_manage_cta",
-            "pages_manage_instant_articles",
-            "pages_show_list",
-            "publish_pages",
-            "read_page_mailboxes",
-            "ads_management",
-            "ads_read",
-            "business_management",
-            "pages_messaging",
-            "pages_messaging_phone_number",
-            "pages_messaging_subscriptions",
-            "instagram_basic",
-            "instagram_manage_comments",
-            "instagram_manage_insights",
-            "publish_to_groups",
-            "groups_access_member_info",
-            "leads_retrieval",
-            "whatsapp_business_management",
-            "attribution_read",
-            "public_profile",
-        ],
-        "AUTH_PARAMS": {"auth_type": "reauthenticate"},
-        "INIT_PARAMS": {"cookie": True},
-        "FIELDS": ["id", "first_name", "last_name", "middle_name", "name", "name_format", "picture", "short_name"],
-        "EXCHANGE_TOKEN": True,
-        "LOCALE_FUNC": lambda request: "en_US",
-        "VERIFIED_EMAIL": False,
-        "VERSION": "v18.0",
-    },
-}
 
 # django-rest-framework
 # -------------------------------------------------------------------------------
@@ -417,11 +321,6 @@ REST_FRAMEWORK = {
     ),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-    "DEFAULT_RENDERER_CLASSES": [
-        "one.utils.rest_framework.renderers.JSONRenderer",
-        "one.utils.rest_framework.renderers.BrowsableAPIRenderer",
-    ],
-    "EXCEPTION_HANDLER": "one.utils.rest_framework.exceptions.drf_exception_handler",
 }
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
@@ -435,27 +334,5 @@ SPECTACULAR_SETTINGS = {
     "VERSION": "1.0.0",
     "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
 }
-# Django Tenants
-# ------------------------------------------------------------------------------
-TENANT_MODEL = "business.Business"
-TENANT_DOMAIN_MODEL = "business.Domain"
-SHOW_PUBLIC_IF_NO_TENANT_FOUND = True
-
-# Flatpage
-# ------------------------------------------------------------------------------
-APPEND_SLASH = True
-CMS_ENABLED = False
-
-# GUID
-# ------------------------------------------------------------------------------
-DJANGO_GUID = {
-    "INTEGRATIONS": [
-        CorrelationCeleryIntegration(
-            log_parent=True,
-        )
-    ],
-}
-
-
 # Your stuff...
 # ------------------------------------------------------------------------------

@@ -1,19 +1,15 @@
-{% extends 'base.html' %}
-{% load static i18n %}
+{% extends "base.html" %}
 
-
-{% block body-attrs %}
-  id="kt_body" class="app-blank"
-{% endblock body-attrs %}
-
-{% block body-wrapper %}
-  <!--begin::App-->
-  <div class="d-flex flex-column flex-root bg-primary">
-    <div class="d-flex flex-column flex-center flex-column-fluid p-10">
-      <!--begin::Illustration-->
-      <img src="{% static 'media/illustrations/sketchy-1/18.png' %}" alt="" class="mw-100 mb-10 h-lg-450px">
-      <!--end::Illustration-->
-    </div>
-  </div>
-  <!--end::App-->
-{% endblock body-wrapper %}
+{% block title %}
+  Page not found
+{% endblock title %}
+{% block content %}
+  <h1>Page not found</h1>
+  <p>
+    {% if exception %}
+      {{ exception }}
+    {% else %}
+      This is not the page you were looking for.
+    {% endif %}
+  </p>
+{% endblock content %}

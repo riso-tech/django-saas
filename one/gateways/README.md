@@ -1,9 +1,0 @@
-# Gateway
-
-
-## Payment
-
-#### Paypal
-
-
-#### Stripe

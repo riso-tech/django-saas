@@ -1,151 +1,52 @@
 {% extends "account/base.html" %}
 
-{% load static i18n %}
+{% load i18n %}
 {% load account socialaccount %}
+{% load crispy_forms_tags %}
 
 {% block head_title %}
   {% translate "Sign In" %}
 {% endblock head_title %}
-
 {% block inner %}
-  <div class="d-flex flex-center flex-column flex-column-fluid">
-    <!--begin::Wrapper-->
-    <div class="w-lg-500px p-10 p-lg-15 mx-auto">
-      <!--begin::Form-->
-      <form id="kt_sign_in_form" method="post" action="{% url 'account_login' %}" novalidate="novalidate"
-            class="form w-100">
-        {% csrf_token %}
-        <!--begin::Heading-->
-        <div class="text-center mb-10">
-          <!--begin::Title-->
-          <h1 class="text-dark mb-3">{% trans 'Sign In to Django-SaaS' %}</h1>
-          <!--end::Title-->
-          {% if ACCOUNT_ALLOW_REGISTRATION %}
-            <!--begin::Link-->
-            <div class="text-gray-400 fw-semibold fs-4">{% trans 'New Here' %}?
-              <a href="{{ signup_url }}" class="link-primary fw-bold">{% trans 'Create an Account' %}</a>
-            </div>
-            <!--end::Link-->
-          {% endif %}
-        </div>
-        <!--begin::Heading-->
-
-        <!--begin::Input group-->
-        {% if redirect_field_value %}
-          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-        {% endif %}
-        <!--end::Input group-->
-
-        <!--begin::Input group-->
-        <div class="fv-row mb-10">
-          <!--begin::Label-->
-          <label class="form-label fs-6 fw-bold text-dark">{{ form.login.label }}</label>
-          <!--end::Label-->
-          <!--begin::Input-->
-          <input type="text" name="login" id="id_login" autocomplete="off" required
-                 class="form-control form-control-lg form-control-solid"/>
-          <!--end::Input-->
-        </div>
-        <!--end::Input group-->
-        <!--begin::Input group-->
-        <div class="fv-row mb-10">
-          <!--begin::Wrapper-->
-          <div class="d-flex flex-stack mb-2">
-            <!--begin::Label-->
-            <label class="form-label fw-bold text-dark fs-6 mb-0">{{ form.password.label }}</label>
-            <!--end::Label-->
-            <!--begin::Link-->
-            <a href="{% url 'account_reset_password' %}" class="link-primary fs-6 fw-bold">
-              {% trans 'Forgot Password' %} ?
-            </a>
-            <!--end::Link-->
-          </div>
-          <!--end::Wrapper-->
-          <!--begin::Input-->
-          <input type="password" name="password" id="id_password" autocomplete="off" required
-                 class="form-control form-control-lg form-control-solid"/>
-          <!--end::Input-->
-        </div>
-        <!--end::Input group-->
-
-        <!--begin::Input group=-->
-        <div class="fv-row mb-10">
-          <div class="form-check form-check-custom form-check-solid form-check-inline">
-            <input type="checkbox" name="remember" id="id_remember" class="form-check-input"/>
-            <label class="form-check-label fw-semibold text-gray-700 fs-6">{{ form.remember.label }}</label>
-          </div>
-        </div>
-        <!--end::Input group=-->
-
-        <!--begin::Actions-->
-        <div class="text-center">
-          <!--begin::Submit button-->
-          <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
-            <span class="indicator-label">{% trans 'Continue' %}</span>
-            <span class="indicator-progress">{% trans 'Please wait' %}...
-              <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-            </span>
-          </button>
-          <!--end::Submit button-->
-
-          {% get_providers as socialaccount_providers %}
-          {% if socialaccount_providers %}
-            <!--begin::Separator-->
-            <div class="text-center text-muted text-uppercase fw-bold mb-5">{% trans 'or' %}</div>
-            <!--end::Separator-->
-            <div class="socialaccount_ballot">
-              <ul class="socialaccount_providers">
-                {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-              </ul>
-            </div>
-            {% include "socialaccount/snippets/login_extra.html" %}
-          {% endif %}
-        </div>
-        <!--end::Actions-->
-      </form>
-      <!--end::Form-->
+  <h1>{% translate "Sign In" %}</h1>
+  {% get_providers as socialaccount_providers %}
+  {% if socialaccount_providers %}
+    <p>
+      {% translate "Please sign in with one of your existing third party accounts:" %}
+      {% if ACCOUNT_ALLOW_REGISTRATION %}
+        {% blocktranslate trimmed %}
+          Or, <a href="{{ signup_url }}">sign up</a>
+          for a {{ site_name }} account and sign in below:
+        {% endblocktranslate %}
+      {% endif %}
+    </p>
+    <div class="socialaccount_ballot">
+      <ul class="socialaccount_providers">
+        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+      </ul>
+      <div class="login-or">{% translate "or" %}</div>
     </div>
-    <!--end::Wrapper-->
-  </div>
+    {% include "socialaccount/snippets/login_extra.html" %}
+  {% else %}
+    {% if ACCOUNT_ALLOW_REGISTRATION %}
+      <p>
+        {% blocktranslate trimmed %}
+          If you have not created an account yet, then please
+          <a href="{{ signup_url }}">sign up</a> first.
+        {% endblocktranslate %}
+      </p>
+    {% endif %}
+  {% endif %}
+  <form class="login" method="post" action="{% url 'account_login' %}">
+    {% csrf_token %}
+    {{ form|crispy }}
+    {% if redirect_field_value %}
+      <input type="hidden"
+             name="{{ redirect_field_name }}"
+             value="{{ redirect_field_value }}" />
+    {% endif %}
+    <a class="button secondaryAction"
+       href="{% url 'account_reset_password' %}">{% translate "Forgot Password?" %}</a>
+    <button class="primaryAction btn btn-primary" type="submit">{% translate "Sign In" %}</button>
+  </form>
 {% endblock inner %}
-
-
-{% block inline_javascript %}
-  <script>
-    let form;
-    let validator;
-
-    let initValidation = function () {
-      form = document.querySelector('#kt_sign_in_form');
-      validator = FormValidation.formValidation(
-        form,
-        {
-          fields: {
-            'login': {
-              validators: {
-                notEmpty: {
-                  message: "{% trans 'Field is required' %}"
-                }
-              }
-            },
-            'password': {
-              validators: {
-                notEmpty: {
-                  message: "{% trans 'Field is required' %}"
-                }
-              }
-            }
-          },
-          plugins: {
-            trigger: new FormValidation.plugins.Trigger(),
-            bootstrap: new FormValidation.plugins.Bootstrap5({
-              rowSelector: '.fv-row',
-              eleValidClass: '' // comment to enable valid state icons
-            })
-          }
-        }
-      );
-    }
-    initValidation();
-  </script>
-{% endblock inline_javascript %}

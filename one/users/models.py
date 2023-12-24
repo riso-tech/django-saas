@@ -16,13 +16,6 @@ class User(AbstractUser):
     first_name = None  # type: ignore
     last_name = None  # type: ignore
 
-    @property
-    def primary_email(self):
-        primary_email = self.emailaddress_set.filter(primary=True).first()
-        if primary_email:
-            return primary_email
-        return self.email
-
     def get_absolute_url(self) -> str:
         """Get URL for user's detail view.
 

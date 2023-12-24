@@ -56,6 +56,11 @@ services:
     image: one_production_celeryworker
     command: /start-celeryworker
 
+  celerybeat:
+    <<: *django
+    image: one_production_celerybeat
+    command: /start-celerybeat
+
   flower:
     <<: *django
     image: one_production_flower

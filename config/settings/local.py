@@ -8,12 +8,10 @@ DEBUG = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = env(
     "DJANGO_SECRET_KEY",
-    default="WAuLokTS31FEz0Qgn3OTl5YCfeS72VVJpex5lECsgGgFmySKntDl0KZuqT31MJ7q",
+    default="Je92jXZtaHdFvqadRirMBgUhHAOgF6LZ7yhsZhqOqD4wqYqLAceeeyQCKXsymtAG",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ["*"]
-# https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-trusted-origins
-CSRF_TRUSTED_ORIGINS = ["https://example.com"]
+ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
 
 # CACHES
 # ------------------------------------------------------------------------------
@@ -50,7 +48,7 @@ DEBUG_TOOLBAR_CONFIG = {
     "SHOW_TEMPLATE_CONTEXT": True,
 }
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#internal-ips
-INTERNAL_IPS = ["127.0.0.1", "10.0.2.2", "localhost", "example.com", "172.18.0.7"]
+INTERNAL_IPS = ["127.0.0.1", "10.0.2.2"]
 if env("USE_DOCKER") == "yes":
     import socket
 
@@ -72,6 +70,5 @@ INSTALLED_APPS += ["django_extensions"]  # noqa: F405
 
 # https://docs.celeryq.dev/en/stable/userguide/configuration.html#task-eager-propagates
 CELERY_TASK_EAGER_PROPAGATES = True
-
 # Your stuff...
 # ------------------------------------------------------------------------------

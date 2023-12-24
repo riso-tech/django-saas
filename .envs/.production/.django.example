@@ -2,8 +2,8 @@
 # ------------------------------------------------------------------------------
 # DJANGO_READ_DOT_ENV_FILE=True
 DJANGO_SETTINGS_MODULE=config.settings.production
-DJANGO_SECRET_KEY=ENCO1Qt7RSCiMEOXeziFNxWLy7J1hZWqRJIGsD3fASm42oUnP8db1i3sWsDtFufG
-DJANGO_ADMIN_URL=es7F9TsPkqoEBNqh5LHd4NS3lwdiqGuM/
+DJANGO_SECRET_KEY=lmsapmEGKS4gF2FLIGaR0wz3YytQ2qEtYlaX5MB130HYQCc7N7wSVaSe5vvo76vj
+DJANGO_ADMIN_URL=KyJzB1lpci8rKbx6VLxOA618fBNZaLdv/
 DJANGO_ALLOWED_HOSTS=.saas.risotech.vn
 
 # Security
@@ -40,5 +40,5 @@ REDIS_URL=redis://redis:6379/0
 # ------------------------------------------------------------------------------
 
 # Flower
-CELERY_FLOWER_USER=oJArvDrNoSLxDWhTmSutOyQsfEqEwsXm
-CELERY_FLOWER_PASSWORD=FLmlPueou4zVZokcedEggwrqGpR3LSwyXkqqQbLSyz3p9QLQVSsCZDVGuJqnZWeR
+CELERY_FLOWER_USER=tqCAELvTlozbumyQCkmlsHKTRDvzvJKI
+CELERY_FLOWER_PASSWORD=sRWqEARRC7GPhySktzFesGMRqadZhVo5xVPgZxY2RQa7EjtBrZRtZZDxUSgTeEOf

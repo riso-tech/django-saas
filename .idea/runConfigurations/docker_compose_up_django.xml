@@ -8,7 +8,7 @@
           <list>
             <option value="django" />
             <option value="celeryworker" />
-            <option value="node" />
+            <option value="celerybeat" />
           </list>
         </option>
         <option name="sourceFilePath" value="local.yml" />

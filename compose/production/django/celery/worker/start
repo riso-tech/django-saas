@@ -5,4 +5,4 @@ set -o pipefail
 set -o nounset
 
 
-exec celery -A config.celery_app worker -l INFO -Q "${CELERY_TASK_DEFAULT_QUEUE:-celery}"
+exec celery -A config.celery_app worker -l INFO
