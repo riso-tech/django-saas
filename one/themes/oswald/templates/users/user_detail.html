@@ -1,0 +1,197 @@
+{% extends "users/base.html" %}
+{% load static i18n allauth socialaccount %}
+
+
+{% block inner %}
+  <!--begin::details View-->
+  <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+    <!--begin::Card header-->
+    <div class="card-header cursor-pointer">
+      <!--begin::Card title-->
+      <div class="card-title m-0">
+        <h3 class="fw-bold m-0">{% trans 'Profile Details' %}</h3>
+      </div>
+      <!--end::Card title-->
+      <!--begin::Action-->
+      <a href="{% url 'users:update' %}" class="btn btn-sm btn-primary align-self-center">{% trans 'Edit Profile' %}</a>
+      <!--end::Action-->
+    </div>
+    <!--begin::Card header-->
+    <!--begin::Card body-->
+    <div class="card-body p-9">
+      <!--begin::Row-->
+      <div class="row mb-7">
+        <!--begin::Label-->
+        <label class="col-lg-4 fw-semibold text-muted">{% trans 'Full Name' %}</label>
+        <!--end::Label-->
+        <!--begin::Col-->
+        <div class="col-lg-8">
+          <span class="fw-bold fs-6 text-gray-800">
+            {% if user.name %}{{ user.name|title }}{% else %}{% trans 'User Name not available' %}{% endif %}
+          </span>
+        </div>
+        <!--end::Col-->
+      </div>
+      <!--end::Row-->
+      <!--begin::Row-->
+      <div class="row mb-7">
+        <!--begin::Label-->
+        <label class="col-lg-4 fw-semibold text-muted">{% trans 'Username' %}</label>
+        <!--end::Label-->
+        <!--begin::Col-->
+        <div class="col-lg-8">
+          <span class="fw-bold fs-6 text-gray-800">
+            {{ user.username }}
+          </span>
+        </div>
+        <!--end::Col-->
+      </div>
+      <!--end::Row-->
+    </div>
+    <!--end::Card body-->
+  </div>
+  <!--end::details View-->
+
+  <!--begin::Connected Accounts-->
+  <div class="card mb-5 mb-xl-10">
+    <!--begin::Card header-->
+    <div class="card-header border-0">
+      <!--begin::Card title-->
+      <div class="card-title m-0">
+        <h3 class="fw-bold m-0">Connected Accounts</h3>
+      </div>
+      <!--end::Card title-->
+      <!--begin::Action-->
+      <div class="d-flex my-4">
+        {% get_providers as socialaccount_providers %}
+        {% if socialaccount_providers %}
+          {% for provider in socialaccount_providers %}
+            {% provider_login_url provider process=process scope=scope auth_params=auth_params as href %}
+            {% if provider.id == "facebook" %}
+              <!--begin::Facebook link-->
+              <a href="{{ href }}"
+                 class="btn btn-sm btn-primary align-self-center{% if not forloop.last %} me-5{% endif %}">
+                <img alt="Logo" src="{% static 'media/svg/brand-logos/facebook-4.svg' %}" class="h-20px me-3"/>
+                {% trans 'Facebook Account' %}
+              </a>
+              <!--end::Facebook link-->
+            {% elif provider.id == "google" %}
+              <!--begin::Google link-->
+              <a href="{{ href }}"
+                 class="btn btn-sm btn-primary align-self-center{% if not forloop.last %} me-5{% endif %}">
+                <img alt="Logo" src="{% static 'media/svg/brand-logos/google-icon.svg' %}" class="h-20px me-3"/>
+                {% trans 'Google Account' %}
+              </a>
+              <!--end::Google link-->
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </div>
+      <!--end::Action-->
+    </div>
+    <!--end::Card header-->
+    <!--begin::Content-->
+    <div id="kt_account_settings_connected_accounts" class="collapse show">
+      <!--begin::Card body-->
+      <div class="card-body border-top p-9">
+        {% for socialaccount in user.socialaccount_set.all %}
+          <!--begin::Items-->
+          <div class="py-2">
+            <!--begin::Item-->
+            <div class="d-flex flex-stack">
+              <div class="d-flex">
+                <img class="w-50px me-6" alt="" src="{{ socialaccount.get_avatar_url }}"/>
+                <div class="d-flex flex-column">
+                  <a href="#" class="fs-5 text-dark text-hover-primary fw-bold">{{ socialaccount.extra_data.name }}</a>
+                  <div class="fs-6 fw-semibold text-gray-400">{{ socialaccount.provider|title }} {{ socialaccount.uid }}</div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-end">
+{#                <div class="form-check form-check-solid form-check-custom form-switch">#}
+{#                  <input class="form-check-input w-45px h-30px" type="checkbox" id="googleswitch" checked="checked"/>#}
+{#                  <label class="form-check-label" for="googleswitch"></label>#}
+{#                </div>#}
+              </div>
+            </div>
+            <!--end::Item-->
+            <div class="separator separator-dashed my-5"></div>
+          </div>
+          <!--end::Items-->
+        {% endfor %}
+      </div>
+      <!--end::Card body-->
+    </div>
+    <!--end::Content-->
+  </div>
+  <!--end::Connected Accounts-->
+
+  <!--begin::Deactivate Account-->
+  <div class="card">
+    <!--begin::Card header-->
+    <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse"
+         data-bs-target="#kt_account_deactivate" aria-expanded="true" aria-controls="kt_account_deactivate">
+      <div class="card-title m-0">
+        <h3 class="fw-bold m-0">Deactivate Account (Not Development yet)</h3>
+      </div>
+    </div>
+    <!--end::Card header-->
+    <!--begin::Content-->
+    <div id="kt_account_settings_deactivate" class="collapse show">
+      <!--begin::Form-->
+      <form id="kt_account_deactivate_form" class="form">
+        <!--begin::Card body-->
+        <div class="card-body border-top p-9">
+          <!--begin::Notice-->
+          <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed mb-9 p-6">
+            <!--begin::Icon-->
+            <i class="ki-duotone ki-information fs-2tx text-warning me-4">
+              <span class="path1"></span>
+              <span class="path2"></span>
+              <span class="path3"></span>
+            </i>
+            <!--end::Icon-->
+            <!--begin::Wrapper-->
+            <div class="d-flex flex-stack flex-grow-1">
+              <!--begin::Content-->
+              <div class="fw-semibold">
+                <h4 class="text-gray-900 fw-bold">You Are Deactivating Your Account</h4>
+                <div class="fs-6 text-gray-700">
+                  For extra security, this requires you to confirm your email or phone number when you reset yousignr
+                  password.
+                  <br/>
+                  <a class="fw-bold" href="#">Learn more</a>
+                </div>
+              </div>
+              <!--end::Content-->
+            </div>
+            <!--end::Wrapper-->
+          </div>
+          <!--end::Notice-->
+          <!--begin::Form input row-->
+          <div class="form-check form-check-solid fv-row">
+            <input name="deactivate" class="form-check-input" type="checkbox" value="" id="deactivate"/>
+            <label class="form-check-label fw-semibold ps-2 fs-6" for="deactivate">I confirm my account
+              deactivation</label>
+          </div>
+          <!--end::Form input row-->
+        </div>
+        <!--end::Card body-->
+        <!--begin::Card footer-->
+        <div class="card-footer d-flex justify-content-end py-6 px-9">
+          <button id="kt_account_deactivate_account_submit" type="submit" class="btn btn-danger fw-semibold">Deactivate
+            Account
+          </button>
+        </div>
+        <!--end::Card footer-->
+      </form>
+      <!--end::Form-->
+    </div>
+    <!--end::Content-->
+  </div>
+  <!--end::Deactivate Account-->
+{% endblock inner %}
+
+{% block inline_javascript %}
+  {{ block.super }}
+  {% providers_media_js %}
+{% endblock inline_javascript %}

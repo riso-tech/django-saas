@@ -1,0 +1,221 @@
+{% extends "users/base.html" %}
+{% load i18n %}
+
+{% block head_title %}
+  {% translate "Account" %}
+{% endblock head_title %}
+
+{% block inner %}
+  <!--begin::Email Address-->
+  <div class="card mb-5 mb-xl-10">
+    <!--begin::Card header-->
+    <div class="card-header border-0">
+      <!--begin::Title-->
+      <h3 class="card-title align-items-start flex-column">
+        <span class="card-label fw-bold text-gray-800">{% trans 'Email Address' %}</span>
+        <span class="text-gray-400 mt-1 fw-semibold fs-6">
+          {% translate "The following e-mail addresses are associated with your account:" %}
+        </span>
+      </h3>
+      <!--end::Title-->
+    </div>
+    <!--end::Card header-->
+    <!--begin::Card body-->
+    <div class="card-body border-top p-9">
+
+      {% if user.emailaddress_set.all %}
+        <form action="{% url 'account_email' %}" class="email_list" method="post">
+          {% csrf_token %}
+          <!--begin::Table container-->
+          <div class="table-responsive">
+            <!--begin::Table-->
+            <table class="table table-row-dashed align-middle gs-0 gy-3 my-0">
+              <!--begin::Table head-->
+              <thead>
+              <tr class="fs-7 fw-bold text-gray-400 border-bottom-0">
+                <th class="p-0 pb-3 min-w-175px text-start">{% trans 'E-mail' %}</th>
+                <th class="p-0 pb-3 min-w-175px text-end pe-12">{% trans 'Status' %}</th>
+                <th class="p-0 pb-3 w-125px text-end pe-7">{% trans 'Is Primary' %}</th>
+                <th class="p-0 pb-3 w-500px text-end">
+                  <button class="secondaryAction btn btn-sm btn-primary" type="submit" name="action_primary">
+                    {% translate "Make Primary" %}
+                  </button>
+                  <button class="secondaryAction btn btn-sm btn-primary" type="submit" name="action_send">
+                    {% translate "Re-send Verification" %}
+                  </button>
+                  <button class="primaryAction btn btn-sm btn-primary" type="submit" name="action_remove">
+                    {% translate "Remove" %}
+                  </button>
+                </th>
+              </tr>
+              </thead>
+              <!--end::Table head-->
+              <!--begin::Table body-->
+              <tbody>
+              {% for emailaddress in user.emailaddress_set.all %}
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="d-flex justify-content-start flex-column">
+                        <a href="#" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">
+                          {{ emailaddress.email }}
+                        </a>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="text-end pe-12">
+                    {% if emailaddress.verified %}
+                      <span class="badge py-3 px-4 fs-7 badge-light-primary">{% translate "Verified" %}</span>
+                    {% else %}
+                      <span class="badge py-3 px-4 fs-7 badge-light-warning">{% translate "Unverified" %}</span>
+                    {% endif %}
+                  </td>
+                  <td class="text-end pe-0">
+                    {% if emailaddress.primary %}
+                      <span class="badge py-3 px-4 fs-7 badge-light-primary">{% translate "Primary" %}</span>
+                    {% endif %}
+                  </td>
+                  <td class="text-end">
+                    <input id="email_radio_{{ forloop.counter }}" class="form-check-input"
+                           type="radio" name="email" value="{{ emailaddress.email }}"
+                           {% if emailaddress.primary or user.emailaddress_set.count == 1 %}checked="checked"{% endif %}/>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+              <!--end::Table body-->
+            </table>
+          </div>
+          <!--end::Table-->
+        </form>
+      {% else %}
+        <!--begin::Notice-->
+        <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed p-6">
+          <!--begin::Icon-->
+          <i class="ki-duotone ki-shield-tick fs-2tx text-primary me-4">
+            <span class="path1"></span>
+            <span class="path2"></span>
+          </i>
+          <!--end::Icon-->
+          <!--begin::Wrapper-->
+          <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
+            <!--begin::Content-->
+            <div class="mb-3 mb-md-0 fw-semibold">
+              <h4 class="text-gray-900 fw-bold">{% translate "Warning:" %}</h4>
+              <div class="fs-6 text-gray-700 pe-7">
+                {% translate "You currently do not have any e-mail address set up. You should really add an e-mail address so you can receive notifications, reset your password, etc." %}
+              </div>
+            </div>
+            <!--end::Content-->
+          </div>
+          <!--end::Wrapper-->
+        </div>
+        <!--end::Notice-->
+      {% endif %}
+
+
+      <!--begin::Separator-->
+      <div class="separator separator-dashed my-6"></div>
+      <!--end::Separator-->
+      <!--begin::New Email Address-->
+      <form class="form fv-plugins-bootstrap5 fv-plugins-framework" id="kt_new_email_address_form"
+            method="post" action="{% url 'account_email' %}">
+        {% csrf_token %}
+        {% for field in form %}
+          <!--begin::Input group-->
+          <div class="row mb-6">
+            <!--begin::Label-->
+            <label
+              class="col-lg-4 col-form-label fw-semibold fs-6{% if field.field.required %} required{% endif %}">
+              {{ field.label }}
+            </label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8 fv-row">
+              <!--begin::Row-->
+              <div class="row">
+                <!--begin::Col-->
+                <div class="col-lg-10 fv-row fv-plugins-icon-container">
+                  <!--begin::Input-->
+                  <input type="email" name="{{ field.name }}" maxlength="320" id="id_email"
+                         placeholder="{% trans 'Email address' %}" required
+                         class="form-control form-control-lg form-control-solid">
+                  <!--end::Input-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-lg-2 fv-row fv-plugins-icon-container">
+                  <button type="submit" class="btn btn-primary" name="action_add">{% translate "Add E-mail" %}</button>
+                </div>
+                <!--end::Col-->
+              </div>
+              <!--end::Row-->
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+        {% endfor %}
+      </form>
+      <!--end::New Email Address-->
+
+    </div>
+    <!--end::Card body-->
+  </div>
+  <!--end::Email Address-->
+{% endblock inner %}
+
+{% block inline_javascript %}
+  {{ block.super }}
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', function () {
+      const message = "{% translate 'Do you really want to remove the selected e-mail address?' %}";
+      const actions = document.getElementsByName('action_remove');
+      if (actions.length) {
+        actions[0].addEventListener("click", function (e) {
+          if (!confirm(message)) {
+            e.preventDefault();
+          }
+        });
+      }
+      Array.from(document.getElementsByClassName('form-group')).forEach(x => x.classList.remove('row'));
+    });
+  </script>
+  <script>
+    let form = document.querySelector('#kt_new_email_address_form');
+    let validator;
+
+    let initValidation = function () {
+      validator = FormValidation.formValidation(
+        form,
+        {
+          fields: {
+            'email': {
+              validators: {
+                regexp: {
+                  regexp: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: 'The value is not a valid email address',
+                },
+                notEmpty: {
+                  message: "Field is required"
+                }
+              }
+            }
+          },
+          plugins: {
+            trigger: new FormValidation.plugins.Trigger({
+              event: {
+                password: false
+              }
+            }),
+            bootstrap: new FormValidation.plugins.Bootstrap5({
+              rowSelector: '.fv-row',
+              eleValidClass: '' // comment to enable valid state icons
+            })
+          }
+        }
+      );
+
+    }
+    initValidation();
+  </script>
+{% endblock inline_javascript %}

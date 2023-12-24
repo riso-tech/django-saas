@@ -1,0 +1,232 @@
+{% load static i18n %}
+<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
+<!--begin::Head-->
+<head>
+  <title>{% block title %}Django Software as a Service{% endblock title %}</title>
+  <meta charset="utf-8"/>
+  {% block blockbots %}
+    <meta name="robots" content="NONE,NOARCHIVE"/>
+  {% endblock blockbots %}
+
+  <link rel="shortcut icon" href="{% static 'media/logos/favicon.ico' %}"/>
+  <!--begin::Fonts(mandatory for all pages)-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"/>
+  <!--end::Fonts-->
+
+  <!--begin::Stylesheet-->
+  <!--begin::Vendor Stylesheets(used for this page only)-->
+  {% block stylesheets %}
+    <link href="{% static 'css/vendors.bundle.min.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/theme.bundle.min.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/project.min.css' %}" rel="stylesheet" type="text/css"/>
+  {% endblock stylesheets %}
+  <!--end::Vendor Stylesheets-->
+  <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+  {% block extrastyle %}{% endblock extrastyle %}
+  <!--end::Global Stylesheets Bundle-->
+  <!--end::Stylesheet-->
+
+  <!--begin::Javascript-->
+  <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+  {% block javascripts %}
+    <script src="{% static 'js/vendors.bundle.min.js' %}"></script>
+    <script src="{% static 'js/theme.bundle.min.js' %}"></script>
+    <script src="{% static 'js/project.min.js' %}"></script>
+  {% endblock javascripts %}
+  <!--end::Global Javascript Bundle-->
+  <!--begin::Vendors Javascript(used for this page only)-->
+  {% block extrahead %}
+    <script>
+      // Frame-busting to prevent site from being loaded within a frame without permission (click-jacking)
+      if (window.top !== window.self) {
+        window.top.location.replace(window.self.location.href);
+      }
+    </script>
+  {% endblock extrahead %}
+  <!--end::Vendors Javascript-->
+  <!--end::Javascript-->
+</head>
+<!--end::Head-->
+<!--begin::Body-->
+<body
+  {% block body-attrs %}
+    id="kt_body"
+    data-kt-app-header-stacked="true"
+    data-kt-app-header-primary-enabled="true"
+    data-kt-app-header-secondary-enabled="false"
+    data-kt-app-toolbar-enabled="true"
+    class="app-default"
+  {% endblock body-attrs %}
+>
+{% block body-wrapper %}
+  <!--layout-partial:partials/theme-mode/_init.html-->
+  {% include 'partials/theme-mode/init.html' %}
+
+  <!--begin::App-->
+  <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
+    <!--begin::Page-->
+    <div class="app-page flex-column flex-column-fluid " id="kt_app_page">
+
+      <!--layout-partial:layout/partials/_header.html-->
+      <!--begin::Header-->
+      <div id="kt_app_header" class="app-header ">
+        <!--begin::Header primary-->
+        <div class="app-header-primary "
+             data-kt-sticky="true" data-kt-sticky-name="app-header-primary-sticky"
+             data-kt-sticky-offset="{default: 'false', lg: '300px'}"
+        >
+          <!--begin::Header primary container-->
+          <div class="app-container container-xxl d-flex align-items-stretch justify-content-between "
+               id="kt_app_header_primary_container">
+            <!--layout-partial:partials/header/branding.html-->
+            {% include 'partials/header/branding.html' %}
+
+            <!--layout-partial:partials/header/topbar.html-->
+            <!--begin::Navbar-->
+            <div class="app-navbar">
+              {% include 'partials/header/topbar.html' %}
+            </div>
+            <!--end::Navbar-->
+          </div>
+          <!--end::Header primary container-->
+        </div>
+        <!--end::Header primary-->
+        {% include 'partials/header/secondary.html' %}
+      </div>
+      <!--end::Header-->
+
+      <!--begin::Wrapper-->
+      <div class="app-wrapper flex-column flex-row-fluid " id="kt_app_wrapper">
+        <!--begin::Wrapper container-->
+        <div class="app-container  container-xxl d-flex flex-row flex-column-fluid ">
+          <!--begin::Main-->
+          <div class="app-main flex-column flex-row-fluid " id="kt_app_main">
+            <!--begin::Content wrapper-->
+            <div class="d-flex flex-column flex-column-fluid">
+              <!--layout-partial:layout/partials/_toolbar.html-->
+
+              <!--layout-partial:layout/partials/_content.html-->
+              <!--begin::Content-->
+              <div id="kt_app_content" class="app-content pb-0">
+                {% block content %}
+                {% endblock content %}
+              </div>
+              <!--end::Content-->
+
+            </div>
+            <!--end::Content wrapper-->
+
+            <!--layout-partial:layout/partials/_footer.html-->
+            {% include 'partials/footer/footer.html' %}
+          </div>
+          <!--end:::Main-->
+        </div>
+        <!--end::Wrapper container-->
+      </div>
+      <!--end::Wrapper-->
+    </div>
+    <!--end::Page-->
+  </div>
+  <!--end::App-->
+  <!--layout-partial:partials/_drawers.html-->
+{% endblock body-wrapper %}
+
+<!--begin::Modals-->
+{% block modal %}
+  <!--layout-partial:partials/modals/_upgrade-plan.html-->
+  <!--layout-partial:partials/modals/_invite-friends.html-->
+  <!--layout-partial:partials/modals/create-project/_main.html-->
+  <!--layout-partial:partials/modals/users-search/_main.html-->
+{% endblock modal %}
+<!--end::Modals-->
+
+<!--begin::Javascript-->
+
+<!--begin::Global Custom Javascript Bundle(mandatory for all pages)-->
+{% block global_javascript %}
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toastr-top-center",
+        "preventDuplicates": false,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+      };
+
+      $(function () {
+        $(document).ajaxError(function (event, jqXHR, settings, errorThrown) {
+          toastr.error(`${jqXHR.status}`, `${errorThrown}`);
+        });
+      });
+    });
+  </script>
+
+  {% if messages %}
+    {% for message in messages %}
+      <script>
+        window.addEventListener('DOMContentLoaded', () => {
+          {% if message.tags == "success" %}
+            toastr.success('{{ message|safe }}', "{% trans 'Success' %}");
+          {% elif message.tags == "info" %}
+            toastr.info('{{ message|safe }}', "{% trans 'Info' %}");
+          {% elif message.tags == "warning" %}
+            toastr.warning('{{ message|safe }}', "{% trans 'Warning' %}");
+          {% else %}
+            toastr.error('{{ message|safe }}', "{% trans 'Error' %}");
+          {% endif %}
+        });
+      </script>
+    {% endfor %}
+  {% endif %}
+
+  {% if form.errors %}
+    <script id="id_form_error" type="application/json">
+      {{ form.errors.as_json }}
+    </script>
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        const form_errors = JSON.parse(document.getElementById('id_form_error').textContent.replaceAll('&quot;', '"'));
+        $.each(form_errors, function (key, value) {
+          $.each(value, function (index, _value) {
+            if (key === "__all__") {
+              toastr.error(_value.message, "{% translate 'Error' %}");
+            } else {
+              toastr.error(_value.message, key);
+            }
+          });
+        });
+      });
+    </script>
+  {% endif %}
+{% endblock global_javascript %}
+<!--end::Global Javascript Bundle-->
+
+<!--begin::Custom Javascript(used for this page only)-->
+{% block inline_javascript %}
+  {% comment %}
+    Script tags with only code, no src (defer by default). To run
+    with a "defer" so that you run inline code:
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            /* Run whatever you want */
+        });
+    </script>
+    {% endcomment %}
+{% endblock inline_javascript %}
+<!--end::Custom Javascript-->
+<!--end::Javascript-->
+</body>
+<!--end::Body-->
+</html>

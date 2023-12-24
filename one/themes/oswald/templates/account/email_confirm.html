@@ -1,0 +1,62 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account %}
+
+{% block head_title %}
+  {% translate "Confirm E-mail Address" %}
+{% endblock head_title %}
+
+{% block inner %}
+  <div class="d-flex flex-center flex-column flex-column-fluid">
+    <!--begin::Wrapper-->
+    <div class="w-lg-500px p-10 p-lg-15 mx-auto">
+      <!--begin::Form-->
+      <form class="form w-100"
+            {% if confirmation %}method="post" action="{% url 'account_confirm_email' confirmation.key %}"{% endif %}
+      >
+        {% csrf_token %}
+        <!--begin::Heading-->
+        <div class="text-center mb-10">
+          <!--begin::Title-->
+          <h1 class="text-dark mb-3">{% translate "Confirm E-mail Address" %}</h1>
+          <!--end::Title-->
+          <!--begin::Link-->
+          {% if confirmation %}
+            {% user_display confirmation.email_address.user as user_display %}
+            <div class="text-gray-400 fw-semibold fs-4">
+              {% blocktranslate with confirmation.email_address.email as email %}Please confirm that
+                <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}
+                .{% endblocktranslate %}
+            </div>
+          {% else %}
+            {% url 'account_email' as email_url %}
+            <div class="text-gray-400 fw-semibold fs-4">
+              {% blocktranslate %}This e-mail confirmation link expired or is invalid. Please
+                <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktranslate %}
+            </div>
+          {% endif %}
+          <!--end::Link-->
+        </div>
+        <!--begin::Heading-->
+
+        {% if confirmation %}
+          <!--begin::Actions-->
+          <div class="text-center">
+            <!--begin::Submit button-->
+            <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
+              <span class="indicator-label">{% translate "Confirm" %}</span>
+              <span class="indicator-progress">{% translate "Please wait" %}...
+              <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </span>
+            </button>
+            <!--end::Submit button-->
+          </div>
+          <!--end::Actions-->
+        {% endif %}
+      </form>
+      <!--end::Form-->
+    </div>
+    <!--end::Wrapper-->
+  </div>
+{% endblock inner %}

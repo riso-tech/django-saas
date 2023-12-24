@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+
+{% block body-attrs %}
+  id="kt_body" class="app-blank"
+{% endblock body-attrs %}
+
+{% block body-wrapper %}
+  <!--begin::App-->
+  <div class="d-flex flex-column flex-root bg-light">
+    <div class="d-flex flex-column flex-center flex-column-fluid p-10">
+      <!--begin::Header-->
+      <div class="d-flex flex-row-fluid flex-column text-center p-5 p-lg-10 pt-lg-20">
+        <!--begin::Title-->
+        <h1 class="fw-bold fs-2qx text-gray-800 mb-7">
+          {% blocktrans %}Ooops!!! 500{% endblocktrans %}
+        </h1>
+        <!--end::Title-->
+        <!--begin::Description-->
+        <p class="fs-3 fw-semibold text-muted mb-10">
+          {% if exception %}
+            {{ exception }}
+          {% else %}
+            {% blocktrans %}Looks like something went wrong!
+              </br>
+              We track these errors automatically, but if the problem persists feel free to contact us.
+              </br>
+            {% endblocktrans %}
+            {% trans 'Back to' %} <a href="{% url 'home' %}" class="link-primary fw-bold">{% trans 'Homepage' %}</a>
+          {% endif %}
+        </p>
+        <!--end::Description-->
+      </div>
+      <!--end::Header-->
+      <!--begin::Illustration-->
+      <img src="{% static 'media/illustrations/sketchy-1/9.png' %}" alt="" class="mw-100 mb-10 h-lg-450px">
+      <!--end::Illustration-->
+    </div>
+  </div>
+  <!--end::App-->
+{% endblock body-wrapper %}

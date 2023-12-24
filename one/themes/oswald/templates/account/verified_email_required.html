@@ -1,0 +1,54 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}
+  {% translate "Verify Your E-mail Address" %}
+{% endblock head_title %}
+
+{% block inner %}
+  <div class="d-flex flex-center flex-column flex-column-fluid">
+    <!--begin::Wrapper-->
+    <div class="w-lg-500px p-10 p-lg-15 mx-auto">
+      <!--begin::Form-->
+      <form class="form w-100">
+        <!--begin::Heading-->
+        <div class="text-center mb-10">
+          <!--begin::Title-->
+          <h1 class="text-dark mb-3">{% translate "Verify Your E-mail Address" %}</h1>
+          <!--end::Title-->
+          <!--begin::Link-->
+          <div class="text-gray-400 fw-semibold fs-4">
+            {% blocktranslate %}This part of the site requires us to verify that
+              you are who you claim to be. For this purpose, we require that you
+              verify ownership of your e-mail address. {% endblocktranslate %}
+          </div>
+          <!--end::Link-->
+        </div>
+        <!--begin::Heading-->
+        <!--begin::Alert-->
+        <div class="alert alert-primary d-flex align-items-center p-5">
+          <!--begin::Wrapper-->
+          <div class="d-flex flex-column">
+            <!--begin::Title-->
+            <h4 class="mb-1 text-primary">{% trans 'Note' %}:</h4>
+            <!--end::Title-->
+            <!--begin::Content-->
+            <span>
+              {% url 'account_email' as email_url %}
+              {% blocktranslate %}We have sent an e-mail to you for verification. Please click on the link inside this
+                e-mail. Please contact us if you do not receive it within a few minutes.{% endblocktranslate %}
+              {% blocktranslate %}You can still
+                <strong><a href="{{ email_url }}">change your e-mail address</a></strong>.{% endblocktranslate %}
+            </span>
+            <!--end::Content-->
+          </div>
+          <!--end::Wrapper-->
+        </div>
+        <!--end::Alert-->
+      </form>
+      <!--end::Form-->
+    </div>
+    <!--end::Wrapper-->
+  </div>
+{% endblock inner %}

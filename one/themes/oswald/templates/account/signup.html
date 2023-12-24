@@ -1,0 +1,245 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}
+  {% translate "Signup" %}
+{% endblock head_title %}
+
+{% block inner %}
+  <div class="d-flex flex-center flex-column flex-column-fluid">
+    <!--begin::Wrapper-->
+    <div class="w-lg-500px p-10 p-lg-15 mx-auto">
+      <!--begin::Form-->
+      <form class="form w-100" id="kt_sign_up_form"
+            method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        <!--begin::Heading-->
+        <div class="text-center mb-10">
+          <!--begin::Title-->
+          <h1 class="text-dark mb-3">{% translate "Sign Up" %}</h1>
+          <!--end::Title-->
+          <!--begin::Link-->
+          <div class="text-gray-400 fw-semibold fs-4">
+            {% blocktranslate %}
+              Already have an account? Then please <a href="{{ login_url }}">sign in</a>.
+            {% endblocktranslate %}
+          </div>
+          <!--end::Link-->
+        </div>
+        <!--begin::Heading-->
+
+        <!--begin::Input group-->
+        {% if redirect_field_value %}
+          <input type="hidden"
+                 name="{{ redirect_field_name }}"
+                 value="{{ redirect_field_value }}"/>
+        {% endif %}
+        <!--end::Input group-->
+
+        <!--begin::Email-->
+        <div class="fv-row mb-10">
+          <!--begin::Label-->
+          <label class="form-label fs-6 fw-bold text-dark">{{ form.email.label }}</label>
+          <!--end::Label-->
+          <!--begin::Input-->
+          <input type="email" name="email" id="id_email" autocomplete="off" maxlength="320"
+                 class="form-control form-control-lg form-control-solid"/>
+          <!--end::Input-->
+        </div>
+        <!--end::Email-->
+        <!--begin::Username-->
+        <div class="fv-row mb-10">
+          <!--begin::Label-->
+          <label class="form-label fs-6 fw-bold text-dark">{{ form.username.label }}</label>
+          <!--end::Label-->
+          <!--begin::Input-->
+          <input type="text" name="username" id="id_username" autocomplete="off" minlength="1" maxlength="150"
+                 class="form-control form-control-lg form-control-solid"/>
+          <!--end::Input-->
+        </div>
+        <!--end::Username-->
+        <!--begin::Password-->
+        <div class="mb-10 fv-row" data-kt-password-meter="true">
+          <!--begin::Wrapper-->
+          <div class="mb-1">
+            <!--begin::Label-->
+            <label class="form-label fw-bold text-dark fs-6">{{ form.password1.label }}</label>
+            <!--end::Label-->
+            <!--begin::Input wrapper-->
+            <div class="position-relative mb-3">
+              <input type="password" placeholder="" name="password1" id="id_password1" autocomplete="off"
+                     class="form-control form-control-lg form-control-solid"/>
+              <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2"
+                    data-kt-password-meter-control="visibility">
+                <i class="ki-duotone ki-eye-slash fs-2">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                  <span class="path3"></span>
+                  <span class="path4"></span>
+                </i>
+                <i class="ki-duotone ki-eye fs-2 d-none">
+                  <span class="path1"></span>
+                   <span class="path2"></span>
+                   <span class="path3"></span>
+                </i>
+              </span>
+            </div>
+            <!--end::Input wrapper-->
+            <!--begin::Meter-->
+            <div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight">
+              <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+              <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+              <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+              <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px"></div>
+            </div>
+            <!--end::Meter-->
+          </div>
+          <!--end::Wrapper-->
+          <!--begin::Hint-->
+          {{ form.password1.help_text|safe }}
+          <!--end::Hint-->
+        </div>
+        <!--end::Password=-->
+        <!--begin::Confirm Password=-->
+        <div class="fv-row mb-10">
+          <label class="form-label fw-bold text-dark fs-6">{{ form.password2.label }}</label>
+          <input type="password" placeholder="" name="password2" id="id_password2" autocomplete="off"
+                 class="form-control form-control-lg form-control-solid"/>
+        </div>
+        <!--end::Confirm Password=-->
+
+        <!--begin::Terms and conditions=-->
+        <div class="fv-row mb-10">
+          <div class="form-check form-check-custom form-check-solid form-check-inline">
+            <input class="form-check-input" type="checkbox" name="toc" id="id_toc"/>
+            <label class="form-check-label fw-semibold text-gray-700 fs-6">
+              I Agree & <a href="#" class="ms-1 link-primary">Terms and conditions</a>.
+            </label>
+          </div>
+        </div>
+        <!--end::Terms and conditions=-->
+
+        <!--begin::Actions-->
+        <div class="text-center">
+          <!--begin::Submit button-->
+          <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
+            <span class="indicator-label">{% translate "Sign Up" %}</span>
+            <span class="indicator-progress">{% translate "Please wait" %}...
+              <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </span>
+          </button>
+          <!--end::Submit button-->
+        </div>
+        <!--end::Actions-->
+      </form>
+      <!--end::Form-->
+    </div>
+    <!--end::Wrapper-->
+  </div>
+{% endblock inner %}
+
+{% block inline_javascript %}
+  <script>
+    let form = document.querySelector('#kt_sign_up_form');
+    let validator;
+    let passwordMeter = KTPasswordMeter.getInstance(form.querySelector('[data-kt-password-meter="true"]'));
+    let toc = document.querySelector('#id_toc');
+
+    let validatePassword = function () {
+      return (passwordMeter.getScore() > 50);
+    }
+
+    let validateToc = function () {
+      return toc.checked
+    }
+
+    let initValidation = function () {
+      validator = FormValidation.formValidation(
+        form,
+        {
+          fields: {
+            'email': {
+              validators: {
+                regexp: {
+                  regexp: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: 'The value is not a valid email address',
+                },
+                notEmpty: {
+                  message: "Field is required"
+                }
+              }
+            },
+            'username': {
+              validators: {
+                notEmpty: {
+                  message: "Field is required"
+                }
+              }
+            },
+            'password1': {
+              validators: {
+                notEmpty: {
+                  message: 'The password is required'
+                },
+                callback: {
+                  message: 'Please enter valid password',
+                  callback: function (input) {
+                    if (input.value.length > 0) {
+                      return validatePassword();
+                    }
+                  }
+                }
+              }
+            },
+            'password2': {
+              validators: {
+                notEmpty: {
+                  message: 'The password confirmation is required'
+                },
+                identical: {
+                  compare: function () {
+                    return form.querySelector('[name="password1"]').value;
+                  },
+                  message: 'The password and its confirm are not the same'
+                }
+              }
+            },
+            'toc': {
+              validators: {
+                callback: {
+                  message: 'You must accept the terms and conditions',
+                  callback: function () {
+                    return validateToc();
+                  }
+                }
+              }
+            }
+          },
+          plugins: {
+            trigger: new FormValidation.plugins.Trigger({
+              event: {
+                password: false
+              }
+            }),
+            bootstrap: new FormValidation.plugins.Bootstrap5({
+              rowSelector: '.fv-row',
+              eleValidClass: '' // comment to enable valid state icons
+            })
+          }
+        }
+      );
+
+    }
+    initValidation();
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      validator.validate().then(function (status) {
+        if (status === 'Valid') {
+          form.submit();
+        }
+      });
+    })
+  </script>
+{% endblock inline_javascript %}
